@@ -70,8 +70,8 @@ input, select {
 
 body {
   text-align: center;
-  background: url("images/lh_logo.png") no-repeat center #eee;
+  background: url("images/lh_logo.png") no-repeat center #dedede;
   background-size: 360px 96px;
-  color: #eee;
+  color: #dedede;
   font-size: 2em;
 }
