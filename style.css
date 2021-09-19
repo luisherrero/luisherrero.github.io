@@ -11985,7 +11985,7 @@ form button {
   padding-top: 0;
 }
 .sec-portfolio .subhero {
-  background: url("portfolio/hero.jpg") no-repeat;
+  background: url("/portfolio/hero.jpg") no-repeat;
   background-size: cover;
 }
 .sec-portfolio iframe {
@@ -12006,7 +12006,7 @@ form button {
   padding-top: 0;
 }
 .sec-mentoring .subhero {
-  background: url("mentoring/hero.jpg") no-repeat;
+  background: url("/mentoring/hero.jpg") no-repeat;
   background-size: cover;
 }
 .sec-mentoring .description a {
@@ -12024,7 +12024,7 @@ form button {
 .sec-motion .subhero {
   position: relative;
   /*
-  background: url('mentoring/hero.jpg') no-repeat;
+  background: url('/mentoring/hero.jpg') no-repeat;
   background-size: cover;
   */
   overflow: hidden;
@@ -12057,7 +12057,7 @@ form button {
   color: #90c9d7;
 }
 .plex .subhero {
-  background: url("plex/hero.jpg") no-repeat;
+  background: url("/plex/hero.jpg") no-repeat;
   background-size: cover;
 }
 
@@ -12068,7 +12068,7 @@ form button {
   color: #cbc79e;
 }
 .ishows .subhero {
-  background: url("ishows/hero.jpg") no-repeat center;
+  background: url("/ishows/hero.jpg") no-repeat center;
   background-size: cover;
 }
 .ishows .statistics-title {
@@ -12079,13 +12079,13 @@ form button {
 }
 
 .futurenature .shade {
-  background: #202030 url("images/bg-fn-body.png");
+  background: #202030 url("/images/bg-fn-body.png");
 }
 .futurenature .description h2 {
   color: #d93e3e;
 }
 .futurenature .subhero {
-  background: url("future-nature/hero.jpg") no-repeat center;
+  background: url("/future-nature/hero.jpg") no-repeat center;
   background-size: cover;
 }
 .futurenature iframe {
@@ -12100,7 +12100,7 @@ form button {
   color: #f4e9df;
 }
 .moomios .subhero {
-  background: url("moomios/hero.jpg") no-repeat;
+  background: url("/moomios/hero.jpg") no-repeat;
   background-size: cover;
 }
 
@@ -12110,7 +12110,7 @@ form button {
  * 
 ************************************************************************/
 .sec-about {
-  background: url("images/bg-about.jpg") no-repeat;
+  background: url("/images/bg-about.jpg") no-repeat;
   background-size: cover;
 }
 .sec-about .main-content {
