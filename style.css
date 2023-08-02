@@ -627,6 +627,16 @@ iframe {
   transform: scale(1.05);
 }
 
+@media all and (max-width: 960px) {
+  .work-item .frame {
+    height: 320px;
+  }
+}
+@media all and (max-width: 720px) {
+  .work-item .frame {
+    height: 200px;
+  }
+}
 /*****************************************************************************************************************
 
  MOTION
