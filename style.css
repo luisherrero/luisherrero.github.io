@@ -507,6 +507,7 @@ iframe {
   color: #FFF;
   font-weight: 200;
   width: 50%;
+  z-index: 50;
 }
 
 @media all and (max-width: 960px) {
@@ -529,6 +530,25 @@ iframe {
     width: 80%;
   }
 }
+.front {
+  background: url(images/fr-home.png) no-repeat center;
+  background-size: cover;
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#particles-js {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /*****************************************************************************************************************
 
  ABOUT ME
