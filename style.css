@@ -102,6 +102,18 @@ a:hover {
   text-decoration: underline;
 }
 
+.heading {
+  margin: 2em 0 2em;
+  font-size: 1.5em;
+  text-indent: 0.5em;
+  border-left: 1px solid #1586aa;
+}
+
+.video .heading {
+  color: rgba(252, 252, 252, 0.8);
+  border-left: 1px solid rgba(252, 252, 252, 0.8);
+}
+
 /*****************************************************************************************************************
 
  MAIN NAVIGATION 
@@ -493,13 +505,13 @@ iframe {
 .hero-home {
   background: url(images/bg-home.png) no-repeat center;
   background-size: cover;
-  height: 720px;
+  height: 800px;
 }
 .hero-home .middle {
   position: relative;
   height: inherit;
 }
-.hero-home p {
+.hero-home .content {
   position: absolute;
   bottom: 5em;
   left: 2em;
@@ -509,25 +521,35 @@ iframe {
   width: 50%;
   z-index: 50;
 }
+.hero-home .content .bio {
+  padding: 1em 0 0;
+  font-size: 0.5em;
+  font-weight: 400;
+  color: #A6C6D9;
+}
 
 @media all and (max-width: 960px) {
   .hero-home {
     height: 480px;
   }
-  .hero-home p {
-    font-size: 1.5em;
+  .hero-home .content {
+    font-size: 1.75em;
+    bottom: 2em;
     width: 50%;
   }
 }
 @media all and (max-width: 720px) {
   .hero-home {
-    height: 400px;
+    height: 440px;
   }
-  .hero-home p {
-    bottom: 3em;
+  .hero-home .content {
+    bottom: 1em;
     left: 1em;
-    font-size: 1.25em;
+    font-size: 1.5em;
     width: 80%;
+  }
+  .hero-home .content .bio {
+    font-size: 0.6em;
   }
 }
 .front {
