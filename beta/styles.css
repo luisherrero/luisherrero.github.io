@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /****************************************************************************************************************************
 
 	IMPORTS
@@ -226,7 +227,7 @@ input, select {
 
 ****************************************************************************************************************************/
 html {
-  background: #CBCFD0;
+  background: #E0E7E8;
   font-family: "Instrument Sans", serif;
   font-style: normal;
   box-sizing: border-box;
@@ -241,13 +242,33 @@ a {
   text-decoration: none;
 }
 
+.bg-intro {
+  background: #e0e7e8;
+}
+
+.bg-work {
+  background: #5e6a6e;
+}
+
+.bg-experience {
+  background: #6d7678;
+}
+
+.bg-references {
+  background: #bfc4c7;
+}
+
+.bg-about {
+  background: #cbcfd0;
+}
+
 /****************************************************************************************************************************
 
 	INTRO
 
 */
 #intro .wrapper {
-  padding: 120px 40px 400px;
+  padding: 120px 40px 240px;
   position: relative;
 }
 #intro .logo {
@@ -292,7 +313,7 @@ a {
   height: 988px;
   position: absolute;
   right: 80px;
-  bottom: -240px;
+  bottom: -400px;
 }
 #intro .carousel .device {
   position: absolute;
@@ -303,7 +324,17 @@ a {
   width: inherit;
   background: url("images/iphone.png") no-repeat center;
   background-size: cover;
-  filter: drop-shadow(0px -4px 32px rgba(0, 0, 0, 0.6));
+  border-radius: 80px;
+}
+#intro .carousel .device::before {
+  content: "";
+  width: 472px;
+  margin: 0 auto;
+  border-radius: 80px;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  box-shadow: 0px -16px 48px rgba(0, 0, 0, 0.32);
 }
 #intro .carousel .app-window {
   position: absolute;
@@ -321,8 +352,10 @@ a {
   top: 0;
   height: 108px;
   width: 436px;
+  border-radius: 52px 52px 0 0;
   background: url("images/app-content.png") no-repeat top center;
   background-size: cover;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.6));
 }
 #intro .carousel #app-content {
   height: 1440px;
@@ -332,17 +365,95 @@ a {
   margin-top: -1px;
 }
 
+@media all and (max-width: 1100px) {
+  #intro .wrapper {
+    padding: 120px 40px 240px;
+  }
+  #intro h2 {
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -1px;
+    line-height: 52px;
+    width: 780px;
+    margin-bottom: 80px;
+  }
+  #intro h2 span {
+    display: block;
+    font-size: 38px;
+    font-weight: 600;
+    letter-spacing: 0px;
+  }
+  #intro .info {
+    font-size: 20px;
+    max-width: 528px;
+    width: 40%;
+    line-height: 36px;
+  }
+  #intro .info p {
+    padding: 0 0 40px;
+  }
+  #intro .carousel {
+    transform: scale(0.8);
+    right: 16px;
+    bottom: -160px;
+  }
+}
+@media all and (max-width: 800px) {
+  #intro .wrapper {
+    padding: 120px 40px 0px !important;
+    overflow: hidden;
+  }
+  #intro h2 {
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -1px;
+    line-height: 40px;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  #intro h2 span {
+    display: block;
+    font-size: 38px;
+    font-weight: 600;
+    letter-spacing: 0px;
+  }
+  #intro .info {
+    font-size: 18px;
+    max-width: 100%;
+    width: 100%;
+    line-height: 28px;
+  }
+  #intro .info p {
+    padding: 0 0 24px;
+  }
+  #intro .deviceContainer {
+    height: 640px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+  }
+  #intro .carousel {
+    transform: scale(0.6);
+    position: relative !important;
+    bottom: 180px !important;
+    height: 988px;
+    left: 50%;
+    margin: 0 0 0 -240px;
+  }
+}
 /****************************************************************************************************************************
 
 	WORK
 
 */
+#work {
+  overflow: hidden;
+}
 #work .wrapper {
-  padding: 80px 40px 80px;
+  padding: 160px 40px 80px;
   position: relative;
 }
 #work .description {
-  float: right;
   width: 48%;
   color: #FFFFFF;
 }
@@ -357,12 +468,12 @@ a {
 }
 #work .work-sample {
   position: relative;
-  height: 1200px;
+  height: 880px;
 }
 #work .work-sample img {
-  width: 90%;
+  width: 100%;
   position: absolute;
-  left: -15%;
+  left: 0%;
   bottom: 0;
 }
 #work .case-list {
@@ -374,7 +485,7 @@ a {
 }
 #work .case a {
   height: 400px;
-  padding: 24px 16px;
+  padding: 24px 24px;
   background: #2D3639;
   border-radius: 8px;
   display: flex;
@@ -428,8 +539,8 @@ a {
   gap: 8px;
   align-items: stretch;
   box-sizing: border-box;
-  background: rgba(54, 62, 67, 0.4);
-  border-radius: 16px;
+  background: #363e43;
+  border-radius: 8px;
   padding: 48px 32px 48px 16px;
   overflow: hidden;
   margin: 40px 0 40px;
@@ -482,6 +593,47 @@ a {
   background-image: url(images/logo-personal.png);
 }
 
+@media all and (max-width: 900px) {
+  #experience .company {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 24px 32px 48px 32px;
+  }
+  #experience .company h1 {
+    height: 60px;
+    background: no-repeat -8px center;
+    background-size: 140px;
+    text-indent: -2000px;
+  }
+  #experience .company h2 {
+    font-size: 20px;
+  }
+  #experience .company .date {
+    font-size: 20px;
+  }
+}
+@media all and (max-width: 780px) {
+  #experience .description {
+    width: auto;
+  }
+  #experience .companies {
+    padding: 24px 0 0;
+  }
+}
+@media all and (max-width: 500px) {
+  #experience .wrapper {
+    padding: 240px 16px 240px;
+    position: relative;
+    overflow: hidden;
+  }
+  #experience .company {
+    padding: 32px 24px 32px 24px;
+  }
+  #experience .company .date {
+    font-size: 18px;
+    top: -60px;
+  }
+}
 /****************************************************************************************************************************
 
 	REFERENCES
@@ -494,7 +646,7 @@ a {
 }
 #references .description {
   width: 46%;
-  color: #FFFFFF;
+  color: #293840;
 }
 #references .description p {
   font-size: 20px;
@@ -503,7 +655,7 @@ a {
 }
 #references .title {
   font-size: 44px;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #293840;
 }
 #references .colleagues {
   padding: 80px 0 0;
@@ -513,17 +665,18 @@ a {
   align-items: stretch;
 }
 #references .referal {
-  background: #f1f3f1;
+  background: #fcfbfa;
   padding: 20px;
   border-radius: 4px;
-  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.16));
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.16);
 }
 #references .referal p {
   font-size: 18px;
   line-height: 24px;
+  margin-bottom: 8px;
 }
 #references .referal h2 {
-  padding: 32px 0 0;
+  padding: 32px 0 8px;
   position: relative;
   font-size: 18px;
   line-height: 24px;
@@ -550,7 +703,85 @@ a {
 #references .clients img {
   width: 100%;
 }
+#references .clientList {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 16px;
+  /* Espacio entre ítems */
+  box-sizing: border-box;
+  padding: 160px 16px;
+  align-items: stretch;
+}
+#references .clientList div {
+  height: auto;
+}
+#references .clientList div img {
+  width: 100%;
+}
 
+@media all and (max-width: 900px) {
+  #references .clientList {
+    padding: 80px 16px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, auto);
+  }
+  #references .clientList div:nth-child(16) {
+    grid-column: 2/3;
+    grid-row: 4;
+  }
+  #references .clientList div:nth-child(17) {
+    grid-column: 3/4;
+    grid-row: 4;
+  }
+  #references .clientList div:nth-child(18) {
+    grid-column: 4/5;
+    grid-row: 4;
+  }
+}
+@media all and (max-width: 680px) {
+  #references .clientList {
+    padding: 80px 0px 0;
+    gap: 0;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, auto);
+    justify-items: center;
+  }
+  #references .clientList div:nth-child(16), #references .clientList div:nth-child(17), #references .clientList div:nth-child(18) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+@media all and (max-width: 800px) {
+  #references .wrapper {
+    padding: 240px 16px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  #references .description {
+    width: 100%;
+  }
+  #references .colleagues {
+    padding: 40px 0 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: stretch;
+  }
+  #references .referal {
+    background: #fcfbfa;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.16);
+  }
+  #references .referal p {
+    font-size: 18px;
+  }
+  #references .referal h2 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
 /****************************************************************************************************************************
 
 	ABOUT
