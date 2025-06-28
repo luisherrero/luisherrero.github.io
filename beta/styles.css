@@ -81,147 +81,6 @@ input, select {
 ****************************************************************************************************************************/
 /****************************************************************************************************************************
 
-	THE GRID
-
-****************************************************************************************************************************/
-.col1 {
-  width: 5.3333333333%;
-  float: left;
-}
-
-.col2 {
-  width: 13.6666666667%;
-  float: left;
-}
-
-.col3 {
-  width: 22%;
-  float: left;
-}
-
-.col4 {
-  width: 30.3333333333%;
-  float: left;
-}
-
-.col5 {
-  width: 38.6666666667%;
-  float: left;
-}
-
-.col6 {
-  width: 47%;
-  float: left;
-}
-
-.col7 {
-  width: 55.3333333333%;
-  float: left;
-}
-
-.col8 {
-  width: 63.6666666667%;
-  float: left;
-}
-
-.col9 {
-  width: 72%;
-  float: left;
-}
-
-.col10 {
-  width: 80.3333333333%;
-  float: left;
-}
-
-.col11 {
-  width: 88.6666666667%;
-  float: left;
-}
-
-.col12 {
-  width: 97%;
-  float: left;
-}
-
-.col1:before, .col1:after {
-  height: 10px;
-  content: "";
-  display: block;
-}
-
-.col2:before, .col2:after {
-  height: 10px;
-  content: "";
-  display: block;
-}
-
-.col3:before, .col3:after {
-  height: 10px;
-  content: "";
-  display: block;
-}
-
-.col4:before, .col4:after {
-  height: 10px;
-  content: "";
-  display: block;
-}
-
-.col5:before, .col5:after {
-  height: 10px;
-  content: "";
-  display: block;
-}
-
-.col6:before, .col6:after {
-  height: 10px;
-  content: "";
-  display: block;
-}
-
-.col7:before, .col7:after {
-  height: 10px;
-  content: "";
-  display: block;
-}
-
-.col8:before, .col8:after {
-  height: 10px;
-  content: "";
-  display: block;
-}
-
-.col9:before, .col9:after {
-  height: 10px;
-  content: "";
-  display: block;
-}
-
-.col10:before, .col10:after {
-  height: 10px;
-  content: "";
-  display: block;
-}
-
-.col11:before, .col11:after {
-  height: 10px;
-  content: "";
-  display: block;
-}
-
-.col12:before, .col12:after {
-  height: 10px;
-  content: "";
-  display: block;
-}
-
-.row {
-  overflow: hidden;
-}
-
-/****************************************************************************************************************************
-
 	STYLES
 
 ****************************************************************************************************************************/
@@ -318,16 +177,60 @@ a {
   /*box-shadow: 4px 0px 4px rgba(0,0,0,0.04);*/
 }
 
+.mobileNav {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  z-index: 99999;
+  left: 24px;
+  top: 24px;
+  display: none;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.mobileNav > div {
+  width: 20px;
+  height: 2px;
+  background: #2D2B2B;
+  position: absolute;
+  transform-origin: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.bar1 {
+  transform: translate(10px, 16px);
+}
+
+.bar2 {
+  transform: translate(10px, 22px);
+}
+
+.aCerrar .bar1 {
+  transform: translate(10px, 20px) rotate(45deg);
+}
+.aCerrar .bar2 {
+  transform: translate(10px, 20px) rotate(-45deg);
+}
+
+.muestra {
+  display: block !important;
+}
+
 @media all and (max-width: 700px) {
+  .mobileNav {
+    display: block;
+  }
+
   .sidebar {
     height: 100%;
     width: 100%;
-    display: none;
     background: rgba(255, 255, 255, 0.85);
+    display: none;
     backdrop-filter: blur(12px);
   }
   .sidebar .logo {
-    margin: 80px auto 0;
+    display: none;
   }
   .sidebar nav {
     margin: 80px auto 0;
@@ -360,13 +263,26 @@ a {
 }
 
 @media all and (max-width: 920px) {
+  .logoMobile {
+    display: none;
+  }
+
   .introduction {
     margin: 0px 40px 0 28%;
   }
 }
 @media all and (max-width: 700px) {
   #intro .wrapper {
-    padding: 80px 0 0;
+    padding: 0;
+  }
+
+  .logoMobile {
+    height: 70px;
+    width: 48px;
+    margin: 60px auto;
+    background: url("images/logo-lh.svg") no-repeat center;
+    background-size: cover;
+    display: block;
   }
 
   .introduction {

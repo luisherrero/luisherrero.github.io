@@ -15,10 +15,14 @@
 <body>
 
 
+<div class="mobileNav">
+	<div class="bar1"></div>
+	<div class="bar2"></div>
+</div>
 
 <div class="sidebar">
 
-	<h1 class="logo"><a href="#">Luis Herrero</a></h1>
+	<h1 class="logo">Luis Herrero</h1>
 
 	<nav class="menu">
 		<div class="indicator"></div>
@@ -48,6 +52,8 @@
 
 
 <section id="intro"><div class="wrapper">
+
+		<div class="logoMobile"></div>
 
 		<div class="introduction">
 			<h2>Hi, my name is Luis Herrero</h2>
@@ -297,6 +303,7 @@ var scrollingNow = false;
 var sections = ['#intro','#works','#experience','#referrals','#about'];
 var positions;
 var $menuLinks;
+var mobileMenuOpen = false;
 
 $.when( $.ready ).then(function() {
 
@@ -309,7 +316,26 @@ $.when( $.ready ).then(function() {
 
     var textoEmail = $(".mail").text();
     $(".mail").html("<a href='mailto:luis.hj@gmail.com' target='_blank'>" + textoEmail + "</a>")
+    $('.mobileNav').on("click", toggleMobileMenu);
 });
+
+
+function toggleMobileMenu() {
+  
+  if(!mobileMenuOpen){
+    $(".sidebar").addClass("muestra");
+    $(".mobileNav").addClass("aCerrar");
+  }else{
+    $(".sidebar").removeClass("muestra");
+    $(".mobileNav").removeClass("aCerrar");
+  }
+  mobileMenuOpen = !mobileMenuOpen;
+
+}
+
+
+
+
 
 
 function getPosYSections() {
@@ -334,6 +360,12 @@ function goToSection() {
   pagePosY = Math.round( $(section).position().top );
   $("html, body").animate({ scrollTop: pagePosY, easing: "easeInOut"}, 800);
   //
+  
+  var isMobile = $('.mobileNav').css("display")
+  if(isMobile != "none"){
+    toggleMobileMenu()
+  }
+
   // Disable click
   return false;
 }
@@ -353,9 +385,13 @@ function checkSection() {
   $menuLinks.removeClass('selected').eq(currentIndex).addClass('selected');
   indicatorPosY = 4 + (step*currentIndex);
   $(".indicator").css( "top", indicatorPosY );
-
 }
 
+
+function checkMobile() {
+  var isMobile = $('.mobileNav').css("display")
+  alert(isMobile)
+}
 
 
 </script>
