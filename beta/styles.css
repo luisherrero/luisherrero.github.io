@@ -1,10 +1,9 @@
-@charset "UTF-8";
 /****************************************************************************************************************************
 
 	IMPORTS
 
 ****************************************************************************************************************************/
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Lato:wght@300;400;700&display=swap");
 /**
  * html5doctor.com Reset Stylesheet v1.6.1 (http://html5doctor.com/html-5-reset-stylesheet/)
  * Richard Clark (http://richclarkdesign.com)
@@ -227,8 +226,10 @@ input, select {
 
 ****************************************************************************************************************************/
 html {
-  background: #E0E7E8;
-  font-family: "Instrument Sans", serif;
+  background: #F7F8F8;
+  color: #2D2B2B;
+  font-family: "Geist", sans-serif;
+  font-optical-sizing: auto;
   font-style: normal;
   box-sizing: border-box;
 }
@@ -242,565 +243,584 @@ a {
   text-decoration: none;
 }
 
-.bg-intro {
-  background: #e0e7e8;
+.hilite {
+  color: #3B82A6;
 }
 
-.bg-work {
-  background: #5e6a6e;
+/****************************************************************************************************************************
+
+	SIDEBAR
+
+****************************************************************************************************************************/
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 26%;
+  display: block;
+  z-index: 999;
+  transition: all 0.3s ease-in-out;
+}
+.sidebar .logo {
+  height: 94px;
+  width: 64px;
+  margin: 160px auto;
+  background: url("images/logo-lh.svg") no-repeat center;
+  background-size: cover;
+  text-indent: -1000px;
+}
+.sidebar .logo a {
+  display: block;
+  width: inherit;
+  height: inherit;
+}
+.sidebar nav {
+  width: 140px;
+  margin: 160px auto;
+  padding: 0 0 0 48px;
+  position: relative;
+}
+.sidebar nav li {
+  padding: 4px 0;
+}
+.sidebar nav a {
+  transition: all 0.2s ease-in-out;
+  color: #2D2B2B;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 24px;
+  display: block;
+}
+.sidebar nav a:hover {
+  text-indent: 2px;
+}
+.sidebar nav .indicator {
+  transition: all 0.4s ease-in-out;
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  top: 4px;
+  left: 20px;
+  background: url("images/caret--right.svg") center no-repeat;
+  background-size: cover;
+}
+.sidebar nav .selected {
+  color: #F90E0E;
 }
 
-.bg-experience {
-  background: #6d7678;
+.sidebar:hover {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  /*box-shadow: 4px 0px 4px rgba(0,0,0,0.04);*/
 }
 
-.bg-references {
-  background: #bfc4c7;
+@media all and (max-width: 700px) {
+  .sidebar {
+    height: 100%;
+    width: 100%;
+    display: none;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+  }
+  .sidebar .logo {
+    margin: 80px auto 0;
+  }
+  .sidebar nav {
+    margin: 80px auto 0;
+  }
 }
-
-.bg-about {
-  background: #cbcfd0;
-}
-
 /****************************************************************************************************************************
 
 	INTRO
 
-*/
+/***************************************************************************************************************************/
 #intro .wrapper {
-  padding: 120px 40px 240px;
-  position: relative;
-}
-#intro .logo {
-  height: 88px;
-  width: 60px;
-  background: url("images/logo-lh.svg") no-repeat center;
-  background-size: cover;
-  margin-bottom: 120px;
-  overflow: hidden;
-  text-indent: -1000px;
-}
-#intro .logo a {
-  display: block;
-  width: inherit;
-  height: inherit;
-}
-#intro h2 {
-  font-size: 36px;
-  font-weight: 400;
-  letter-spacing: -1px;
-  line-height: 52px;
-  width: 780px;
-  margin-bottom: 80px;
-}
-#intro h2 span {
-  display: block;
-  font-size: 38px;
-  font-weight: 600;
-  letter-spacing: 0px;
-}
-#intro .info {
-  font-size: 23px;
-  max-width: 528px;
-  width: 48%;
-  line-height: 36px;
-}
-#intro .info p {
-  padding: 0 0 40px;
-}
-#intro .carousel {
-  width: 480px;
-  height: 988px;
-  position: absolute;
-  right: 80px;
-  bottom: -400px;
-}
-#intro .carousel .device {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  height: inherit;
-  width: inherit;
-  background: url("images/iphone.png") no-repeat center;
-  background-size: cover;
-  border-radius: 80px;
-}
-#intro .carousel .device::before {
-  content: "";
-  width: 472px;
-  margin: 0 auto;
-  border-radius: 80px;
-  height: 100%;
-  display: block;
-  z-index: 0;
-  box-shadow: 0px -16px 48px rgba(0, 0, 0, 0.32);
-}
-#intro .carousel .app-window {
-  position: absolute;
-  top: 17px;
-  left: 23px;
-  height: 948px;
-  width: 436px;
-  border-radius: 52px;
-  overflow: hidden;
-  z-index: 10;
-}
-#intro .carousel .app-fixed {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 108px;
-  width: 436px;
-  border-radius: 52px 52px 0 0;
-  background: url("images/app-content.png") no-repeat top center;
-  background-size: cover;
-  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.6));
-}
-#intro .carousel #app-content {
-  height: 1440px;
-  width: 436px;
-  background: url("images/app-content.png") no-repeat top center;
-  background-size: cover;
-  margin-top: -1px;
+  padding: 400px 0;
 }
 
-@media all and (max-width: 1100px) {
-  #intro .wrapper {
-    padding: 120px 40px 240px;
-  }
-  #intro h2 {
-    font-size: 32px;
-    font-weight: 400;
-    letter-spacing: -1px;
-    line-height: 52px;
-    width: 780px;
-    margin-bottom: 80px;
-  }
-  #intro h2 span {
-    display: block;
-    font-size: 38px;
-    font-weight: 600;
-    letter-spacing: 0px;
-  }
-  #intro .info {
-    font-size: 20px;
-    max-width: 528px;
-    width: 40%;
-    line-height: 36px;
-  }
-  #intro .info p {
-    padding: 0 0 40px;
-  }
-  #intro .carousel {
-    transform: scale(0.8);
-    right: 16px;
-    bottom: -160px;
+.introduction {
+  margin: 0px 104px 0 312px;
+}
+.introduction h2 {
+  font-size: 48px;
+  letter-spacing: -1.5px;
+  font-weight: 600;
+  padding: 0 0 40px;
+}
+.introduction p {
+  font-size: 36px;
+  letter-spacing: -1.2px;
+  font-weight: 350;
+  line-height: 56px;
+  padding: 0 0 40px;
+}
+
+@media all and (max-width: 920px) {
+  .introduction {
+    margin: 0px 40px 0 28%;
   }
 }
-@media all and (max-width: 800px) {
+@media all and (max-width: 700px) {
   #intro .wrapper {
-    padding: 120px 40px 0px !important;
-    overflow: hidden;
+    padding: 80px 0 0;
   }
-  #intro h2 {
-    font-size: 28px;
-    font-weight: 400;
-    letter-spacing: -1px;
-    line-height: 40px;
-    width: 100%;
-    margin-bottom: 40px;
+
+  .introduction {
+    margin: 0px 24px 0px;
+    padding: 0 0 80px;
   }
-  #intro h2 span {
-    display: block;
-    font-size: 38px;
-    font-weight: 600;
-    letter-spacing: 0px;
+  .introduction h2 {
+    font-size: 36px;
   }
-  #intro .info {
-    font-size: 18px;
-    max-width: 100%;
-    width: 100%;
-    line-height: 28px;
-  }
-  #intro .info p {
-    padding: 0 0 24px;
-  }
-  #intro .deviceContainer {
-    height: 640px;
-    width: 100%;
-    position: relative;
-    text-align: center;
-  }
-  #intro .carousel {
-    transform: scale(0.6);
-    position: relative !important;
-    bottom: 180px !important;
-    height: 988px;
-    left: 50%;
-    margin: 0 0 0 -240px;
+  .introduction p {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.6px;
   }
 }
 /****************************************************************************************************************************
 
-	WORK
+	WORKS
 
-*/
-#work {
-  overflow: hidden;
+/***************************************************************************************************************************/
+.link h3 {
+  font-size: 40px;
+  line-height: 40px;
+  font-weight: 300;
+  line-height: 60px;
 }
-#work .wrapper {
-  padding: 160px 40px 80px;
+.link a {
   position: relative;
-}
-#work .description {
-  width: 48%;
-  color: #FFFFFF;
-}
-#work .description p {
-  font-size: 20px;
+  display: block;
+  color: #2D2B2B;
+  text-transform: uppercase;
+  font-size: 18px;
   line-height: 32px;
-  padding-top: 40px;
+  font-weight: 300;
+  width: 140px;
 }
-#work .title {
-  font-size: 44px;
-  border-bottom: 1px solid #fff;
-}
-#work .work-sample {
-  position: relative;
-  height: 880px;
-}
-#work .work-sample img {
-  width: 100%;
+.link a:before {
+  content: "";
+  display: block;
   position: absolute;
-  left: 0%;
-  bottom: 0;
-}
-#work .case-list {
-  padding: 80px 0 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  align-items: stretch;
-}
-#work .case a {
-  height: 400px;
-  padding: 24px 24px;
-  background: #2D3639;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-#work .case h2 {
-  color: #FFF;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 400;
-}
-#work .case p {
-  color: #6BBCCC;
-  font-size: 20px;
-  line-height: 32px;
+  width: 32px;
+  height: 32px;
+  right: 0;
+  top: 0;
+  background: url("images/bg_more.svg") no-repeat center;
+  background: cover;
 }
 
+#showpal {
+  position: relative;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 60%);
+}
+#showpal .wrapper {
+  height: 1200px;
+  background: url("images/bg_showpal.png") no-repeat 20% 60%;
+  background-size: 100%;
+}
+#showpal .link {
+  position: absolute;
+  right: 26%;
+  top: 320px;
+}
+#showpal .link a {
+  left: 80px;
+}
+
+#qvc {
+  padding: 12% 0 64%;
+  background: url("images/bg_qvc.png") no-repeat right bottom, linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 40%);
+  background-size: 84%;
+}
+#qvc .link {
+  margin: 0 auto 0;
+  width: 520px;
+  padding: 0 0 0 80px;
+}
+#qvc .link a {
+  float: right;
+}
+
+#plex {
+  height: 1000px;
+  padding: 200px 0 0;
+  background: url("images/bg_plex.png") no-repeat center bottom, linear-gradient(-20deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 40%);
+  background-size: 100%;
+}
+#plex .link {
+  overflow: hidden;
+  display: block;
+  margin: 0 120px 0 0;
+  text-align: right;
+}
+#plex .link a {
+  float: right;
+  padding: 0 40px 0 0;
+}
+
+@media all and (max-width: 700px) {
+  .link h3 {
+    font-size: 24px;
+  }
+
+  #qvc {
+    padding: 40px 0 420px;
+    background: url("images/bg_qvc.png") no-repeat right bottom, linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 40%);
+    background-size: 120%;
+  }
+  #qvc .link {
+    padding: 0 0 0 24px;
+    width: auto;
+  }
+  #qvc .link a {
+    float: none;
+  }
+
+  #plex {
+    height: 200px;
+    padding: 40px 0 280px;
+    background: url("images/bg_plex.png") no-repeat center bottom, linear-gradient(-20deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 40%);
+    background-size: 120%;
+  }
+  #plex .link {
+    overflow: hidden;
+    display: block;
+    margin: 0 24px 0 0;
+    text-align: right;
+  }
+  #plex .link a {
+    float: right;
+    padding: 0 40px 0 0;
+  }
+
+  #showpal .wrapper {
+    height: 520px;
+    background: url("images/bg_showpal.png") no-repeat center bottom;
+    background-size: 120%;
+  }
+  #showpal .link {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin: 40px 0 0 24px;
+  }
+  #showpal .link a {
+    left: 0px;
+  }
+}
 /****************************************************************************************************************************
 
 	EXPERIENCE
 
-*/
+/***************************************************************************************************************************/
 #experience {
-  /*background: #5E6A6E;*/
+  background: #DEDFDF;
 }
+
 #experience .wrapper {
-  padding: 240px 40px 240px;
-  position: relative;
+  padding: 0 0 160px;
+}
+
+.job {
+  padding: 200px 104px 0px 312px;
+}
+.job .header {
   overflow: hidden;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #3B82A6;
 }
-#experience .description {
-  width: 46%;
-  color: #FFFFFF;
-}
-#experience .description p {
-  font-size: 20px;
-  line-height: 32px;
-  padding-top: 40px;
-}
-#experience .title {
-  font-size: 44px;
-  border-bottom: 1px solid #fff;
-}
-#experience .companies {
-  padding: 40px 0 0;
-}
-#experience .company {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  gap: 8px;
-  align-items: stretch;
-  box-sizing: border-box;
-  background: #363e43;
-  border-radius: 8px;
-  padding: 48px 32px 48px 16px;
+.job .logo {
+  width: 168px;
+  height: 48px;
+  text-indent: -999px;
   overflow: hidden;
-  margin: 40px 0 40px;
+  margin: 0 0 16px;
 }
-#experience .company h1 {
-  height: 80px;
-  background: no-repeat center -12px;
-  background-size: 180px;
-  text-indent: -2000px;
+.job .logo-adevinta {
+  background: url("images/logo_adevinta.svg") no-repeat center;
+  background-size: cover;
 }
-#experience .company .details {
-  position: relative;
+.job .logo-tewke {
+  background: url("images/logo_tewke.svg") no-repeat center;
+  background-size: cover;
 }
-#experience .company h2 {
-  color: #6BBCCC;
-  font-size: 22px;
-  line-height: 40px;
-  font-weight: 500;
+.job .logo-mews {
+  background: url("images/logo_mews.svg") no-repeat center;
+  background-size: cover;
 }
-#experience .company .date {
-  color: #FFF;
-  font-size: 22px;
-  line-height: 40px;
+.job .logo-axonista {
+  background: url("images/logo_axonista.svg") no-repeat center;
+  background-size: cover;
+}
+.job .logo-plex {
+  background: url("images/logo_plex.svg") no-repeat center;
+  background-size: cover;
+}
+.job .role {
+  color: #3B82A6;
+  font-family: "Lato", sans-serif;
+  font-size: 24px;
   font-weight: 400;
-  position: absolute;
-  top: 0px;
-  right: 0px;
+  text-transform: uppercase;
+  letter-spacing: 0.85px;
+  float: left;
 }
-#experience .company .role {
-  display: block;
-  color: #FFF;
-  font-size: 18px;
-  line-height: 32px;
+.job .year {
+  font-family: "Lato", sans-serif;
+  font-size: 24px;
   font-weight: 400;
-  margin: 16px 0 0;
+  letter-spacing: 1.5px;
+  float: right;
 }
-#experience .company .tewke {
-  background-image: url(images/logo-tewke.png);
-}
-#experience .company .mews {
-  background-image: url(images/logo-mews.png);
-}
-#experience .company .axonista {
-  background-image: url(images/logo-axonista.png);
-}
-#experience .company .plex {
-  background-image: url(images/logo-plex.png);
-}
-#experience .company .personal {
-  background-image: url(images/logo-personal.png);
+.job .description {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  padding: 24px 0 0;
+  line-height: 40px;
 }
 
 @media all and (max-width: 900px) {
-  #experience .company {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    padding: 24px 32px 48px 32px;
-  }
-  #experience .company h1 {
-    height: 60px;
-    background: no-repeat -8px center;
-    background-size: 140px;
-    text-indent: -2000px;
-  }
-  #experience .company h2 {
-    font-size: 20px;
-  }
-  #experience .company .date {
-    font-size: 20px;
+  .job {
+    padding: 120px 40px 120px 200px;
   }
 }
-@media all and (max-width: 780px) {
-  #experience .description {
-    width: auto;
-  }
-  #experience .companies {
-    padding: 24px 0 0;
-  }
-}
-@media all and (max-width: 500px) {
+@media all and (max-width: 700px) {
   #experience .wrapper {
-    padding: 240px 16px 240px;
-    position: relative;
-    overflow: hidden;
+    padding: 0 0 40px;
   }
-  #experience .company {
-    padding: 32px 24px 32px 24px;
+
+  .job {
+    padding: 40px 24px;
   }
-  #experience .company .date {
+  .job .role {
     font-size: 18px;
-    top: -60px;
+  }
+  .job .year {
+    font-size: 18px;
+  }
+  .job .description {
+    font-size: 20px;
+    line-height: 32px;
   }
 }
 /****************************************************************************************************************************
 
-	REFERENCES
+	REFERRALS
 
-*/
-#references .wrapper {
-  padding: 80px 40px 80px;
-  position: relative;
-  overflow: hidden;
+/***************************************************************************************************************************/
+#referrals .wrapper {
+  padding: 80px 0 160px;
 }
-#references .description {
-  width: 46%;
-  color: #293840;
-}
-#references .description p {
-  font-size: 20px;
-  line-height: 32px;
-  padding-top: 40px;
-}
-#references .title {
-  font-size: 44px;
-  border-bottom: 1px solid #293840;
-}
-#references .colleagues {
-  padding: 80px 0 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-  align-items: stretch;
-}
-#references .referal {
-  background: #fcfbfa;
-  padding: 20px;
+
+.comment {
+  margin: 80px 104px 0px 312px;
+  background: #FFF;
+  padding: 80px 40px 40px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.06);
   border-radius: 4px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.16);
-}
-#references .referal p {
-  font-size: 18px;
-  line-height: 24px;
-  margin-bottom: 8px;
-}
-#references .referal h2 {
-  padding: 32px 0 8px;
   position: relative;
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 600;
 }
-#references .referal h2 span {
-  color: #3B82A6;
+.comment p {
+  font-size: 24px;
   font-weight: 400;
-  margin: 0 0 0 6px;
+  letter-spacing: -0.5px;
+  padding: 24px 0 0;
+  line-height: 32px;
 }
-#references .referal h2::before {
+.comment .credits {
+  position: relative;
+  line-height: 32px;
+  text-align: left;
+  letter-spacing: 0.5px;
+  margin: 24px 0 0;
+}
+.comment .credits span {
+  color: #3B82A6;
+  font-weight: 300;
+  margin-left: 8px;
+}
+.comment .credits:after {
   content: "";
   position: absolute;
-  left: 0;
-  top: 16px;
-  width: 80px;
   display: block;
+  left: 0;
+  top: 0;
+  width: 120px;
+  background: #2D2B2B;
   height: 1px;
-  background: #000;
 }
-#references .clients {
-  padding: 160px 0;
-}
-#references .clients img {
-  width: 100%;
-}
-#references .clientList {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(3, auto);
-  gap: 16px;
-  /* Espacio entre ítems */
-  box-sizing: border-box;
-  padding: 160px 16px;
-  align-items: stretch;
-}
-#references .clientList div {
-  height: auto;
-}
-#references .clientList div img {
-  width: 100%;
+
+.comment:after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 40px;
+  top: 32px;
+  width: 44px;
+  height: 38px;
+  opacity: 0.6;
+  background: url("images/deco.svg") no-repeat center;
 }
 
 @media all and (max-width: 900px) {
-  #references .clientList {
-    padding: 80px 16px;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(4, auto);
-  }
-  #references .clientList div:nth-child(16) {
-    grid-column: 2/3;
-    grid-row: 4;
-  }
-  #references .clientList div:nth-child(17) {
-    grid-column: 3/4;
-    grid-row: 4;
-  }
-  #references .clientList div:nth-child(18) {
-    grid-column: 4/5;
-    grid-row: 4;
+  .comment {
+    margin: 60px 40px 0px 200px;
   }
 }
-@media all and (max-width: 680px) {
-  #references .clientList {
-    padding: 80px 0px 0;
-    gap: 0;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(6, auto);
-    justify-items: center;
+@media all and (max-width: 700px) {
+  #referrals .wrapper {
+    padding: 40px 0;
   }
-  #references .clientList div:nth-child(16), #references .clientList div:nth-child(17), #references .clientList div:nth-child(18) {
-    grid-column: auto;
-    grid-row: auto;
+
+  .comment {
+    margin: 40px 16px;
+    padding: 60px 20px 20px;
   }
-}
-@media all and (max-width: 800px) {
-  #references .wrapper {
-    padding: 240px 16px 80px;
-    position: relative;
-    overflow: hidden;
-  }
-  #references .description {
-    width: 100%;
-  }
-  #references .colleagues {
-    padding: 40px 0 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    align-items: stretch;
-  }
-  #references .referal {
-    background: #fcfbfa;
-    padding: 20px;
-    border-radius: 4px;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.16);
-  }
-  #references .referal p {
-    font-size: 18px;
-  }
-  #references .referal h2 {
-    font-size: 18px;
-    line-height: 24px;
+  .comment p {
+    font-size: 20px;
+    line-height: 32px;
   }
 }
 /****************************************************************************************************************************
 
 	ABOUT
 
-*/
+/***************************************************************************************************************************/
+#about {
+  background: url("images/bg_about.png") no-repeat right bottom, linear-gradient(0deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0) 60%);
+  background-size: 60%;
+}
 #about .wrapper {
-  padding: 80px 40px 480px;
+  padding: 80px 0;
+}
+#about .content {
+  margin: 80px 104px 120px 312px;
+}
+#about .content h2 {
+  font-size: 48px;
+  letter-spacing: -1.5px;
+  font-weight: 600;
+}
+#about .content p {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  padding: 40px 0 0;
+  line-height: 40px;
+}
+#about .role {
+  color: #3B82A6;
+  font-family: "Lato", sans-serif;
+  padding: 0 0 8px;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.85px;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #3B82A6;
+}
+#about .otherWorks {
+  list-style: none;
+  padding: 40px 0;
+}
+#about .otherWorks li {
+  padding: 0 0 24px;
+}
+#about .otherWorks a {
   position: relative;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-indent: 48px;
+  line-height: 32px;
+  display: block;
+  color: #2D2B2B;
+}
+#about .otherWorks a:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  left: 0;
+  top: 0;
+  background: url("images/bg_more.svg") no-repeat center;
+  background: cover;
+}
+#about .contactContainer {
+  margin: 400px 104px 500px 312px;
+}
+#about .contactContainer h3 {
+  font-size: 48px;
+  line-height: 40px;
+  font-weight: 300;
+  line-height: 60px;
+  color: #3B82A6;
+}
+#about .contactContainer p {
+  font-size: 20px;
+  line-height: 40px;
+}
+#about .contactContainer a {
+  color: #2D2B2B;
+}
+#about .contactContainer .linkedin {
+  line-height: 40px;
+  position: relative;
+  top: 12px;
+  background: url("images/logo_linkedin.svg") no-repeat center;
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  text-indent: -9999px;
   overflow: hidden;
 }
-#about .description {
-  width: 46%;
+
+@media all and (max-width: 900px) {
+  #about .content {
+    margin: 80px 80px 120px 240px;
+  }
+  #about .contactContainer {
+    margin: 200px 0px 360px 240px;
+  }
 }
-#about .description p {
-  font-size: 20px;
-  line-height: 32px;
-  padding-top: 40px;
-}
-#about .title {
-  font-size: 44px;
-  border-bottom: 1px solid #000;
+@media all and (max-width: 700px) {
+  #about .wrapper {
+    padding: 0;
+  }
+  #about .content {
+    margin: 20px 20px 20px;
+  }
+  #about .content h2 {
+    font-size: 32px;
+  }
+  #about .content p {
+    font-size: 20px;
+    line-height: 32px;
+  }
+  #about .contactContainer {
+    margin: 100px 20px 0;
+    padding: 0 0 200px;
+  }
+  #about .contactContainer h3 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  #about .contactContainer p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  #about .otherWorks a {
+    font-size: 14px;
+  }
 }
