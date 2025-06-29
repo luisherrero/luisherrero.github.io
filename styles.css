@@ -848,19 +848,19 @@ a {
 }
 
 .footerQVC {
-  background: #622223 url("images/bg_qvc.png") no-repeat bottom right;
+  background: #643A3A url("images/bg_qvc.png") no-repeat bottom right;
   background-size: contain;
   padding: 0 0 75%;
 }
 
 .footerPlex {
-  background: #622223 url("images/bg_plex.png") no-repeat bottom center;
+  background: #643A3A url("images/bg_plex.png") no-repeat bottom center;
   background-size: contain;
   padding: 0 0 65%;
 }
 
 .footerShowpal {
-  background: #622223;
+  background: #643A3A;
   padding: 0 0 120px;
 }
 
