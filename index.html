@@ -62,7 +62,7 @@
 
 		<div class="introduction">
 			<h2>Hi, my name is Luis Herrero</h2>
-			<p>I'm a <span class="carousel">product</span> designer who loves to craft delightful experiences for users.</p>
+			<p>I'm a <span class="carousel"><span class="sub"></span><span class="roleText">product</span></span> designer who loves to craft delightful experiences for users.</p>
 			<p>For over 10 years, I've designed experiences at startups and scale-ups in various industries, thriving in agile design teams that build user-centric solutions.</p>
 		</div>
 
@@ -305,13 +305,24 @@ var indicatorPosY;
 var pagePosY;
 var currentIndex = 0;
 var scrollingNow = false;
+var rolesIndex = 0;
+var roles = ["product", "motion", "interaction"];
 var sections = ['#intro','#works','#experience','#referrals','#about'];
+var $carrusel;
+var $subrayado;
+var $contentRole;
+var anchoSub;
+var timeoutID;
 var positions;
 var $menuLinks;
 var mobileMenuOpen = false;
 
 $.when( $.ready ).then(function() {
 
+    $carrusel = $('.carousel');
+    $subrayado = $('.carousel .sub');
+    $contentRole = $('.carousel .roleText');
+    timeoutID = setTimeout(updateCarousel, 4000);
     getPosYSections();
   
     $(window).on("scroll", checkSection);
@@ -323,6 +334,31 @@ $.when( $.ready ).then(function() {
     $(".mail").html("<a href='mailto:luis.hj@gmail.com' target='_blank'>" + textoEmail + "</a>")
     $('.mobileNav').on("click", toggleMobileMenu);
 });
+
+
+
+function updateCarousel() {
+
+  clearTimeout(timeoutID)
+  
+  if ( rolesIndex < (roles.length-1) ){
+    rolesIndex++
+  } else{
+    rolesIndex = 0;
+  } 
+
+  $carrusel.fadeTo(300, 0, function(){
+
+    $contentRole.text(roles[rolesIndex]);
+    anchoSub = $(this).width();
+    $subrayado.css("width","0px").animate({ "width": anchoSub+"px"}, 300);
+
+  }).fadeTo(300,1)
+
+  timeoutID = setTimeout(updateCarousel, 4000);
+
+}
+
 
 
 function toggleMobileMenu() {

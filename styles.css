@@ -275,6 +275,20 @@ a {
   padding: 0 0 40px;
 }
 
+.carousel {
+  color: #F90E0E;
+  position: relative;
+}
+.carousel .sub {
+  width: 100%;
+  height: 2px;
+  background: #F90E0E;
+  position: absolute;
+  display: block;
+  bottom: 2px;
+  left: 0;
+}
+
 @media all and (max-width: 920px) {
   .logoMobile {
     display: none;
