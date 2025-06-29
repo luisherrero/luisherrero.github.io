@@ -79,6 +79,7 @@ input, select {
 	VARIABLES
 
 ****************************************************************************************************************************/
+/*#481C1C;*/
 /****************************************************************************************************************************
 
 	STYLES
@@ -821,6 +822,7 @@ a {
 
 #process {
   padding: 0 0 160px;
+  background: no-repeat right bottom, linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 20%);
 }
 
 #gallery {
@@ -835,30 +837,31 @@ a {
   border-radius: 12px;
 }
 
-#results .header {
-  border-bottom: 1px solid #D98888;
+#results .spacer {
+  height: 80px;
 }
-#results .role {
-  color: #D98888;
-}
-#results p {
-  color: #EAE2E2;
+#results .destacado {
+  padding: 40px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
 }
 
 .footerQVC {
-  background: #481C1C url("images/bg_qvc.png") no-repeat bottom right;
+  background: #DEDFDF url("images/bg_qvc.png") no-repeat bottom right;
   background-size: contain;
   padding: 0 0 75%;
 }
 
 .footerPlex {
-  background: #481C1C url("images/bg_plex.png") no-repeat bottom center;
+  background: #DEDFDF url("images/bg_plex.png") no-repeat bottom center;
   background-size: contain;
   padding: 0 0 65%;
 }
 
 .footerShowpal {
-  background: #481C1C;
+  background: #DEDFDF;
   padding: 0 0 120px;
 }
 
@@ -936,5 +939,9 @@ a {
   #gallery .wrapper {
     margin: 0 24px;
     padding: 0 0 40px;
+  }
+
+  #results .destacado {
+    padding: 24px;
   }
 }
