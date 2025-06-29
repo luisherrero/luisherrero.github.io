@@ -522,6 +522,8 @@ a {
   font-weight: 400;
   letter-spacing: -0.5px;
   line-height: 40px;
+  margin-left: 20px;
+  list-style-position: outside;
 }
 
 @media all and (max-width: 900px) {
@@ -833,34 +835,30 @@ a {
   border-radius: 12px;
 }
 
-.job li {
-  list-style-position: outside;
-}
-
 #results .header {
-  border-bottom: 1px solid #FFD092;
+  border-bottom: 1px solid #D98888;
 }
 #results .role {
-  color: #FFD092;
+  color: #D98888;
 }
 #results p {
   color: #EAE2E2;
 }
 
 .footerQVC {
-  background: #643A3A url("images/bg_qvc.png") no-repeat bottom right;
+  background: #481C1C url("images/bg_qvc.png") no-repeat bottom right;
   background-size: contain;
   padding: 0 0 75%;
 }
 
 .footerPlex {
-  background: #643A3A url("images/bg_plex.png") no-repeat bottom center;
+  background: #481C1C url("images/bg_plex.png") no-repeat bottom center;
   background-size: contain;
   padding: 0 0 65%;
 }
 
 .footerShowpal {
-  background: #643A3A;
+  background: #481C1C;
   padding: 0 0 120px;
 }
 
