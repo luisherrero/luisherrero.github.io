@@ -1,0 +1,917 @@
+/****************************************************************************************************************************
+
+	IMPORTS
+
+****************************************************************************************************************************/
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Lato:wght@300;400;700&display=swap");
+/**
+ * html5doctor.com Reset Stylesheet v1.6.1 (http://html5doctor.com/html-5-reset-stylesheet/)
+ * Richard Clark (http://richclarkdesign.com)
+ * http://cssreset.com
+ */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i, a,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+ul, ol {
+  list-style-position: inside;
+}
+
+nav ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input, select {
+  vertical-align: middle;
+}
+
+/****************************************************************************************************************************
+
+	VARIABLES
+
+****************************************************************************************************************************/
+/****************************************************************************************************************************
+
+	STYLES
+
+****************************************************************************************************************************/
+html {
+  background: #F7F8F8;
+  color: #2D2B2B;
+  font-family: "Geist", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+.hilite {
+  color: #F90E0E;
+}
+
+/****************************************************************************************************************************
+
+	SIDEBAR
+
+****************************************************************************************************************************/
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 26%;
+  display: block;
+  z-index: 999;
+  transition: all 0.3s ease-in-out;
+}
+.sidebar .logo {
+  height: 94px;
+  width: 64px;
+  margin: 160px auto;
+  background: url("images/logo-lh.svg") no-repeat center;
+  background-size: cover;
+  text-indent: -1000px;
+}
+.sidebar .logo a {
+  display: block;
+  width: inherit;
+  height: inherit;
+}
+.sidebar nav {
+  width: 140px;
+  margin: 160px auto;
+  padding: 0 0 0 48px;
+  position: relative;
+}
+.sidebar nav li {
+  padding: 4px 0;
+}
+.sidebar nav a {
+  transition: all 0.2s ease-in-out;
+  color: #2D2B2B;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 24px;
+  display: block;
+}
+.sidebar nav a:hover {
+  text-indent: 2px;
+}
+.sidebar nav .indicator {
+  transition: all 0.4s ease-in-out;
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  top: 4px;
+  left: 20px;
+  background: url("images/caret--right.svg") center no-repeat;
+  background-size: cover;
+}
+.sidebar nav .selected {
+  color: #F90E0E;
+}
+
+.sidebar:hover {
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  /*box-shadow: 4px 0px 4px rgba(0,0,0,0.04);*/
+}
+
+.mobileNav {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  z-index: 99999;
+  right: 24px;
+  top: 24px;
+  display: none;
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.mobileNav > div {
+  width: 20px;
+  height: 2px;
+  background: #2D2B2B;
+  position: absolute;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.bar1 {
+  -webkit-transform: translate(10px, 16px);
+  transform: translate(10px, 16px);
+}
+
+.bar2 {
+  -webkit-transform: translate(10px, 22px);
+  transform: translate(10px, 22px);
+}
+
+.aCerrar .bar1 {
+  -webkit-transform: translate(10px, 20px) rotate(45deg);
+  transform: translate(10px, 20px) rotate(45deg);
+}
+.aCerrar .bar2 {
+  -webkit-transform: translate(10px, 20px) rotate(-45deg);
+  transform: translate(10px, 20px) rotate(-45deg);
+}
+
+.muestra {
+  display: block !important;
+}
+
+@media all and (max-width: 700px) {
+  .mobileNav {
+    display: block;
+  }
+
+  .sidebar {
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    display: none;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+  .sidebar .logo {
+    display: none;
+  }
+  .sidebar nav {
+    margin: 80px auto 0;
+    width: 160px;
+    padding: 0;
+  }
+  .sidebar nav li {
+    padding: 16px 0;
+  }
+  .sidebar nav a {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .sidebar nav .indicator {
+    display: none;
+  }
+}
+/****************************************************************************************************************************
+
+	INTRO
+
+/***************************************************************************************************************************/
+#intro .wrapper {
+  padding: 400px 0;
+}
+
+.introduction {
+  margin: 0px 104px 0 312px;
+}
+.introduction h2 {
+  font-size: 48px;
+  letter-spacing: -1.5px;
+  font-weight: 600;
+  padding: 0 0 40px;
+}
+.introduction p {
+  font-size: 36px;
+  letter-spacing: -1.2px;
+  font-weight: 350;
+  line-height: 56px;
+  padding: 0 0 40px;
+}
+
+@media all and (max-width: 920px) {
+  .logoMobile {
+    display: none;
+  }
+
+  .introduction {
+    margin: 0px 40px 0 28%;
+  }
+}
+@media all and (max-width: 700px) {
+  #intro .wrapper {
+    padding: 0;
+  }
+
+  .logoMobile {
+    height: 70px;
+    width: 48px;
+    margin: 60px auto;
+    background: url("images/logo-lh.svg") no-repeat center;
+    background-size: cover;
+    display: block;
+  }
+
+  .introduction {
+    margin: 0px 24px 0px;
+    padding: 0 0 80px;
+  }
+  .introduction h2 {
+    font-size: 36px;
+  }
+  .introduction p {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.6px;
+  }
+}
+/****************************************************************************************************************************
+
+	WORKS
+
+/***************************************************************************************************************************/
+.link h3 {
+  font-size: 40px;
+  line-height: 40px;
+  font-weight: 300;
+  line-height: 60px;
+}
+.link a {
+  position: relative;
+  display: block;
+  color: #2D2B2B;
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: 300;
+  width: 140px;
+}
+.link a:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  right: 0;
+  top: 0;
+  background: url("images/bg_more.svg") no-repeat center;
+  background: cover;
+}
+
+#showpal {
+  position: relative;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 60%);
+}
+#showpal .wrapper {
+  height: 1200px;
+  background: url("images/bg_showpal.png") no-repeat 20% 60%;
+  background-size: 100%;
+}
+#showpal .link {
+  position: absolute;
+  right: 26%;
+  top: 320px;
+}
+#showpal .link a {
+  left: 80px;
+}
+
+#qvc {
+  padding: 12% 0 64%;
+  background: url("images/bg_qvc.png") no-repeat right bottom, linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 40%);
+  background-size: 84%;
+}
+#qvc .link {
+  margin: 0 auto 0;
+  width: 520px;
+  padding: 0 0 0 80px;
+}
+#qvc .link a {
+  float: right;
+}
+
+#plex {
+  height: 1000px;
+  padding: 200px 0 0;
+  background: url("images/bg_plex.png") no-repeat center bottom, linear-gradient(-20deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 40%);
+  background-size: 100%;
+}
+#plex .link {
+  overflow: hidden;
+  display: block;
+  margin: 0 120px 0 0;
+  text-align: right;
+}
+#plex .link a {
+  float: right;
+  padding: 0 40px 0 0;
+}
+
+@media all and (max-width: 700px) {
+  .link h3 {
+    font-size: 24px;
+  }
+
+  #qvc {
+    padding: 40px 0 420px;
+    background: url("images/bg_qvc.png") no-repeat right bottom, linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 40%);
+    background-size: 120%;
+  }
+  #qvc .link {
+    padding: 0 0 0 24px;
+    width: auto;
+  }
+  #qvc .link a {
+    float: none;
+  }
+
+  #plex {
+    height: 200px;
+    padding: 40px 0 280px;
+    background: url("images/bg_plex.png") no-repeat center bottom, linear-gradient(-20deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 40%);
+    background-size: 120%;
+  }
+  #plex .link {
+    overflow: hidden;
+    display: block;
+    margin: 0 24px 0 0;
+    text-align: right;
+  }
+  #plex .link a {
+    float: right;
+    padding: 0 40px 0 0;
+  }
+
+  #showpal .wrapper {
+    height: 520px;
+    background: url("images/bg_showpal.png") no-repeat center bottom;
+    background-size: 120%;
+  }
+  #showpal .link {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin: 40px 0 0 24px;
+  }
+  #showpal .link a {
+    left: 0px;
+  }
+}
+/****************************************************************************************************************************
+
+	EXPERIENCE
+
+/***************************************************************************************************************************/
+#experience {
+  background: #DEDFDF;
+}
+
+#experience .wrapper {
+  padding: 0 0 160px;
+}
+
+.job {
+  padding: 200px 104px 0px 312px;
+}
+.job .header {
+  overflow: hidden;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #F90E0E;
+}
+.job .logo {
+  width: 168px;
+  height: 48px;
+  text-indent: -999px;
+  overflow: hidden;
+  margin: 0 0 16px;
+}
+.job .logo a {
+  display: block;
+  height: inherit;
+}
+.job .logo-adevinta {
+  background: url("images/logo_adevinta.svg") no-repeat center;
+  background-size: cover;
+}
+.job .logo-tewke {
+  background: url("images/logo_tewke.svg") no-repeat center;
+  background-size: cover;
+}
+.job .logo-mews {
+  background: url("images/logo_mews.svg") no-repeat center;
+  background-size: cover;
+}
+.job .logo-axonista {
+  background: url("images/logo_axonista.svg") no-repeat center;
+  background-size: cover;
+}
+.job .logo-plex {
+  background: url("images/logo_plex.svg") no-repeat center;
+  background-size: cover;
+}
+.job .role {
+  color: #F90E0E;
+  font-family: "Lato", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.85px;
+  float: left;
+}
+.job .year {
+  font-family: "Lato", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  float: right;
+}
+.job .description {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  padding: 24px 0 0;
+  line-height: 40px;
+}
+.job li {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  line-height: 40px;
+}
+
+@media all and (max-width: 900px) {
+  .job {
+    padding: 120px 40px 120px 200px;
+  }
+}
+@media all and (max-width: 700px) {
+  #experience .wrapper {
+    padding: 0 0 40px;
+  }
+
+  .job {
+    padding: 40px 24px;
+  }
+  .job .role {
+    font-size: 18px;
+  }
+  .job .year {
+    font-size: 18px;
+  }
+  .job .description {
+    font-size: 20px;
+    line-height: 32px;
+  }
+}
+/****************************************************************************************************************************
+
+	REFERRALS
+
+/***************************************************************************************************************************/
+#referrals .wrapper {
+  padding: 80px 0 160px;
+}
+
+.comment {
+  margin: 80px 104px 0px 312px;
+  background: #FFF;
+  padding: 80px 40px 40px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  position: relative;
+}
+.comment p {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  padding: 24px 0 0;
+  line-height: 32px;
+}
+.comment .credits {
+  position: relative;
+  line-height: 32px;
+  text-align: left;
+  letter-spacing: 0.5px;
+  margin: 24px 0 0;
+}
+.comment .credits span {
+  color: #F90E0E;
+  font-weight: 300;
+  margin-left: 8px;
+}
+.comment .credits:after {
+  content: "";
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  width: 120px;
+  background: #2D2B2B;
+  height: 1px;
+}
+
+.comment:after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 40px;
+  top: 32px;
+  width: 44px;
+  height: 38px;
+  opacity: 0.6;
+  background: url("images/deco.svg") no-repeat center;
+}
+
+@media all and (max-width: 900px) {
+  .comment {
+    margin: 60px 40px 0px 200px;
+  }
+}
+@media all and (max-width: 700px) {
+  #referrals .wrapper {
+    padding: 40px 0;
+  }
+
+  .comment {
+    margin: 40px 16px;
+    padding: 60px 20px 20px;
+  }
+  .comment p {
+    font-size: 20px;
+    line-height: 32px;
+  }
+}
+/****************************************************************************************************************************
+
+	ABOUT
+
+/***************************************************************************************************************************/
+#about {
+  background: url("images/bg_about.png") no-repeat right bottom, linear-gradient(0deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0) 60%);
+  background-size: 60%;
+}
+#about .wrapper {
+  padding: 80px 0;
+}
+#about .content {
+  margin: 80px 104px 120px 312px;
+}
+#about .content h2 {
+  font-size: 48px;
+  letter-spacing: -1.5px;
+  font-weight: 600;
+}
+#about .content p {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  padding: 40px 0 0;
+  line-height: 40px;
+}
+#about .role {
+  color: #F90E0E;
+  font-family: "Lato", sans-serif;
+  padding: 0 0 8px;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.85px;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #F90E0E;
+}
+#about .otherWorks {
+  list-style: none;
+  padding: 40px 0;
+}
+#about .otherWorks li {
+  padding: 0 0 24px;
+}
+#about .otherWorks a {
+  position: relative;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-indent: 48px;
+  line-height: 32px;
+  display: block;
+  color: #2D2B2B;
+}
+#about .otherWorks a:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  left: 0;
+  top: 0;
+  background: url("images/bg_more.svg") no-repeat center;
+  background: cover;
+}
+#about .contactContainer {
+  margin: 400px 104px 500px 312px;
+}
+#about .contactContainer h3 {
+  font-size: 48px;
+  line-height: 40px;
+  font-weight: 300;
+  line-height: 60px;
+  color: #F90E0E;
+}
+#about .contactContainer p {
+  font-size: 20px;
+  line-height: 40px;
+}
+#about .contactContainer a {
+  color: #2D2B2B;
+}
+#about .contactContainer .linkedin {
+  line-height: 40px;
+  position: relative;
+  top: 12px;
+  background: url("images/logo_linkedin.svg") no-repeat center;
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+@media all and (max-width: 900px) {
+  #about .content {
+    margin: 80px 80px 120px 240px;
+  }
+  #about .contactContainer {
+    margin: 200px 0px 360px 240px;
+  }
+}
+@media all and (max-width: 700px) {
+  #about .wrapper {
+    padding: 0;
+  }
+  #about .content {
+    margin: 20px 20px 20px;
+  }
+  #about .content h2 {
+    font-size: 32px;
+  }
+  #about .content p {
+    font-size: 20px;
+    line-height: 32px;
+  }
+  #about .contactContainer {
+    margin: 100px 20px 0;
+    padding: 0 0 200px;
+  }
+  #about .contactContainer h3 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  #about .contactContainer p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  #about .otherWorks a {
+    font-size: 14px;
+  }
+}
+/****************************************************************************************************************************
+
+	USER CASE
+
+/***************************************************************************************************************************/
+.menu .backHome {
+  position: absolute;
+  left: 48px;
+  top: -30px;
+}
+
+#summary .wrapper {
+  padding: 420px 0 0;
+}
+
+.userCase {
+  margin: 0px 104px 0 312px;
+  padding: 0;
+}
+.userCase h2 {
+  font-size: 48px;
+  letter-spacing: -1.5px;
+  font-weight: 500;
+  line-height: 56px;
+  padding: 0 0 40px;
+}
+.userCase h3 {
+  font-size: 40px;
+  letter-spacing: 0px;
+  font-weight: 200;
+  line-height: 48px;
+  padding: 0 0 16px;
+}
+.userCase p {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  padding: 24px 0 0;
+  line-height: 40px;
+}
+
+.banner {
+  max-width: 100%;
+  padding: 80px 0 0;
+  margin: 0;
+}
+
+#process {
+  padding: 0 0 160px;
+}
+
+#gallery {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 40%);
+}
+#gallery .wrapper {
+  margin: 80px 5% 40px 26%;
+  padding: 0 0 160px;
+}
+#gallery .wrapper img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.4);
+}
+
+#results {
+  background: #622223 url("images/bg_qvc.png") no-repeat bottom right;
+  background-size: contain;
+  padding: 0 0 75%;
+}
+#results .header {
+  border-bottom: 1px solid #FFD092;
+}
+#results .role {
+  color: #FFD092;
+}
+#results p {
+  color: #EAE2E2;
+}
+
+@media all and (max-width: 920px) {
+  .logoMobile {
+    display: none;
+  }
+
+  .userCase {
+    margin: 0px 40px 0 28%;
+  }
+}
+@media all and (max-width: 700px) {
+  #summary .wrapper {
+    padding: 120px 0 0;
+  }
+
+  #process {
+    padding: 0 0 40px;
+  }
+
+  #results {
+    padding: 20px 0 80%;
+    background-size: 120%;
+  }
+
+  .logoMobile {
+    display: block;
+  }
+
+  .menu .backHome {
+    position: absolute;
+    left: 0px;
+    top: -30px;
+  }
+
+  .banner {
+    padding: 0px 0 20px;
+  }
+
+  .userCase {
+    margin: 0px 24px 40px;
+    padding: 0;
+  }
+  .userCase h2 {
+    font-size: 36px;
+    line-height: 24px;
+  }
+  .userCase h3 {
+    font-size: 26px;
+    line-height: 24px;
+  }
+  .userCase p {
+    font-size: 20px;
+    line-height: 32px;
+    letter-spacing: -0.6px;
+  }
+
+  .job li {
+    font-size: 20px;
+    line-height: 32px;
+    letter-spacing: -0.6px;
+  }
+
+  #gallery .wrapper {
+    margin: 0 24px;
+    padding: 0 0 40px;
+  }
+}
