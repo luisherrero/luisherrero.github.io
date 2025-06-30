@@ -525,6 +525,9 @@ a {
   letter-spacing: 1.5px;
   float: right;
 }
+.job .year span {
+  font-size: 16px;
+}
 .job .description {
   font-size: 24px;
   font-weight: 400;
@@ -539,6 +542,11 @@ a {
   line-height: 40px;
   margin-left: 20px;
   list-style-position: outside;
+}
+.job .clients {
+  max-width: 100%;
+  padding: 40px 0 80px;
+  margin: 0;
 }
 
 @media all and (max-width: 900px) {
@@ -563,6 +571,11 @@ a {
   .job .description {
     font-size: 20px;
     line-height: 32px;
+  }
+  .job .clients {
+    max-width: 100%;
+    padding: 40px 0 0px;
+    margin: 0;
   }
 }
 /****************************************************************************************************************************
