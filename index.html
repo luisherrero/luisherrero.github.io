@@ -371,9 +371,13 @@ function updateCarousel() {
     anchoSub = $(this).width();
     $subrayado.css("width","0px").animate({ "width": anchoSub+"px"}, 300);
 
-  }).fadeTo(300,1)
+  }).fadeTo(300,1, function () {
+    
+    timeoutID = setTimeout(updateCarousel, 4000);  
+    
+  })
 
-  timeoutID = setTimeout(updateCarousel, 4000);
+  
 
 }
 
