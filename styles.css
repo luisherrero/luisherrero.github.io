@@ -942,6 +942,60 @@ a {
   border-radius: 12px;
 }
 
+.overview {
+  margin: 80px 104px 0 312px;
+  overflow: hidden;
+}
+
+.overview div {
+  float: left;
+  padding: 0 0 0 12px;
+  margin: 20px 120px 20px 0;
+  border-left: 2px solid #F90E0E;
+}
+.overview div h4 {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+.overview div p {
+  padding: 0;
+  color: #2D2B2B;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  line-height: 24px;
+}
+
+.overview div:last-child {
+  margin: 20px 0 20px 0;
+}
+
+@media all and (max-width: 1050px) {
+  .overview div {
+    margin: 20px 50px 20px 0;
+  }
+}
+@media all and (max-width: 900px) {
+  .overview {
+    margin: 120px 40px 0px 200px;
+  }
+
+  .overview div {
+    margin: 20px 40px 20px 0;
+  }
+}
+@media all and (max-width: 700px) {
+  .overview {
+    margin: 40px 24px;
+  }
+
+  .overview div {
+    margin: 20px 80px 20px 0;
+  }
+}
 #results .spacer {
   height: 80px;
 }
