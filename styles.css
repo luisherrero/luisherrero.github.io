@@ -396,15 +396,18 @@ a {
 }
 
 #plex {
-  height: 1000px;
+  height: 800px;
   padding: 200px 0 0;
-  background: url("images/bg_plex.png") no-repeat center bottom, linear-gradient(-20deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 40%);
-  background-size: 100%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 60%), url("images/bg_plex.png") no-repeat right bottom;
+  background-size: contain;
+}
+#plex .wrapper {
+  height: 400px;
 }
 #plex .link {
   overflow: hidden;
   display: block;
-  margin: 0 120px 0 0;
+  margin: -80px 120px 0 0;
   text-align: right;
 }
 #plex .link a {
@@ -412,6 +415,43 @@ a {
   padding: 0 40px 0 0;
 }
 
+@media all and (max-width: 1200px) {
+  #plex {
+    background-size: 110%;
+  }
+  #plex .wrapper {
+    height: 80%;
+  }
+  #plex .link {
+    overflow: hidden;
+    display: block;
+    margin: -40px 80px 0 0;
+    text-align: right;
+  }
+  #plex .link a {
+    float: right;
+    padding: 0 40px 0 0;
+  }
+}
+@media all and (max-width: 960px) {
+  #plex {
+    height: 600px;
+    background-size: 100%;
+  }
+  #plex .wrapper {
+    height: 500px;
+  }
+  #plex .link {
+    overflow: hidden;
+    display: block;
+    margin: -40px 80px 0 0;
+    text-align: right;
+  }
+  #plex .link a {
+    float: right;
+    padding: 0 40px 0 0;
+  }
+}
 @media all and (max-width: 700px) {
   .link h3 {
     font-size: 24px;
@@ -430,23 +470,6 @@ a {
     float: none;
   }
 
-  #plex {
-    height: 200px;
-    padding: 40px 0 280px;
-    background: url("images/bg_plex.png") no-repeat center bottom, linear-gradient(-20deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 40%);
-    background-size: 120%;
-  }
-  #plex .link {
-    overflow: hidden;
-    display: block;
-    margin: 0 24px 0 0;
-    text-align: right;
-  }
-  #plex .link a {
-    float: right;
-    padding: 0 40px 0 0;
-  }
-
   #showpal .wrapper {
     height: 520px;
     background: url("images/bg_showpal.png") no-repeat center bottom;
@@ -454,12 +477,34 @@ a {
   }
   #showpal .link {
     position: relative;
+    width: 40%;
+    background: #F7F8F8;
     right: auto;
     top: auto;
     margin: 40px 0 0 24px;
   }
   #showpal .link a {
     left: 0px;
+  }
+
+  #plex {
+    height: auto;
+    background-size: 100%;
+  }
+  #plex .wrapper {
+    height: 400px;
+  }
+  #plex .link {
+    background: #F7F8F8;
+    padding: 20px;
+    overflow: hidden;
+    display: block;
+    margin: -120px 80px 0 0;
+    text-align: right;
+  }
+  #plex .link a {
+    float: right;
+    padding: 0 40px 0 0;
   }
 }
 /****************************************************************************************************************************
