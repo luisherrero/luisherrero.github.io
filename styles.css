@@ -562,7 +562,7 @@ a {
 }
 
 .job {
-  padding: 200px 104px 0px 312px;
+  padding: 120px 104px 0px 312px;
 }
 .job .header {
   overflow: hidden;
@@ -642,7 +642,7 @@ a {
 
 @media all and (max-width: 900px) {
   .job {
-    padding: 120px 40px 120px 200px;
+    padding: 80px 40px 120px 200px;
   }
 }
 @media all and (max-width: 700px) {
@@ -1020,6 +1020,10 @@ a {
   border-radius: 8px;
 }
 
+.wrap-banner {
+  padding: 0 0 0 160px;
+}
+
 .banner {
   max-width: 100%;
   padding: 80px 0 0;
@@ -1172,6 +1176,10 @@ a {
     position: absolute;
     left: 0px;
     top: -30px;
+  }
+
+  .wrap-banner {
+    padding: 0;
   }
 
   .banner {
