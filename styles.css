@@ -1036,7 +1036,7 @@ a {
 }
 
 #process {
-  padding: 0 0 160px;
+  padding: 0 0 60px;
   background: no-repeat right bottom, linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 20%);
 }
 
@@ -1110,7 +1110,7 @@ a {
   height: 80px;
 }
 #results .destacado {
-  padding: 40px;
+  padding: 60px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.06);
