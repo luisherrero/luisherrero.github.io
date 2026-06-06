@@ -986,6 +986,13 @@ a {
   text-decoration: underline;
 }
 
+.disclaimer {
+  background: rgba(255, 0, 0, 0.2);
+  padding: 20px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
 .userCase {
   margin: 0px 104px 0 312px;
   padding: 0;
@@ -1136,6 +1143,12 @@ a {
 
 .footerMApro {
   background: #DEDFDF url("images/bg_mapro.png") no-repeat bottom right;
+  background-size: 95%;
+  padding: 0 0 70%;
+}
+
+.footerModelia {
+  background: #DEDFDF url("images/bg_modelia.png") no-repeat bottom right;
   background-size: 95%;
   padding: 0 0 70%;
 }
