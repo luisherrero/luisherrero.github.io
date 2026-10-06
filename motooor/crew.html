@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MOTOOOR - IRYO “Reflexiones”</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app-min.js" defer></script>
+</head>
+
+
+<body class="app">
+
+
+  <aside class="sidebar" id="sidebar">
+  
+    <header class="sidebar__header">
+      <img class="sidebar__logo" src="img/logo_motooor.svg" alt="Motooor" width="80" height="24">
+      <button class="sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu"></button>
+    </header>
+    
+    <nav>
+      <ul class="sidebar__nav">
+        <li><a class="sidebar__item icon icon__home" href="overview.html">Home</a></li>
+        <li><a class="sidebar__item icon icon__cast" href="cast.html">Cast</a></li>
+        <li><a class="sidebar__item icon icon__crew" href="crew.html">Crew</a></li>
+        <li><a class="sidebar__item icon icon__locations" href="sites.html">Filming Sites</a></li>
+        <li><a class="sidebar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a></li>
+        <li><a class="sidebar__item icon icon__schedule" href="calls.html">Calls</a></li>
+        <li><a class="sidebar__item icon icon__report" href="reports.html">Reports</a></li>
+        <li><a class="sidebar__item icon icon__settings" href="settings.html">Settings</a></li>
+      </ul>
+    </nav>
+  
+  </aside>
+  
+
+  <header class="topbar">
+    <ol class="breadcrumb">
+      <li><a href="#">Projects</a></li>
+      <li><a href="overview.html">IRYO “Reflexiones”</a></li>
+      <li aria-current="page">Crew</li>
+    </ol>
+  </header>
+
+  <main class="content">
+    <section class="card">
+      <header class="card__header">
+        <h1 class="card__title">Crew</h1>
+        <button class="btn icon icon__add">Add</button>
+        <button class="btn icon icon__import" data-modal="modal-import" aria-haspopup="dialog">Import</button>
+        <button class="btn btn--alert icon icon__delete-alert">Delete</button>
+      </header>
+
+      <div class="card__body" id="crew-main">
+        <ul class="list list--crew">
+          <li class="list__row list__row--head">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">#</span>
+            <span class="list__cell list__cell--fill">Title</span>
+            <span class="list__cell list__cell--fill">Name</span>
+            <span class="list__cell list__cell--fill">Dept</span>
+            <span class="list__cell list__cell--fill">Mail</span>
+            <span class="list__cell list__cell--phone">Phone</span>
+            <span class="list__cell list__cell--actions">Info</span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">1</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="title" value="Designer" placeholder="Add title" aria-label="Title"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="name" value="Eva Green" placeholder="Add name" aria-label="Name"></span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="1">Production</button>
+            <span class="list__cell list__cell--fill"><input class="inline-input" type="email" name="mail" value="eva.green@gmail.com" placeholder="Add mail" aria-label="Mail"></span>
+            <span class="list__cell list__cell--phone"><input class="inline-input" type="tel" name="phone" value="654 123 456" placeholder="Add phone" aria-label="Phone"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">All</button>
+              <button class="icon-button icon icon__notes" aria-label="notes"></button>
+              <button class="icon-button icon icon__bookmark" aria-label="bookmark"></button>
+              <button class="icon-button icon icon__contact" aria-label="contact"></button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">2</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="title" value="Manager" placeholder="Add title" aria-label="Title"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="name" value="Sophia Kim" placeholder="Add name" aria-label="Name"></span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="1">Production</button>
+            <span class="list__cell list__cell--fill"><input class="inline-input" type="email" name="mail" value="sophia.kim@gmail.com" placeholder="Add mail" aria-label="Mail"></span>
+            <span class="list__cell list__cell--phone"><input class="inline-input" type="tel" name="phone" value="611 234 567" placeholder="Add phone" aria-label="Phone"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+              <button class="icon-button icon icon__notes" aria-label="notes"></button>
+              <button class="icon-button icon icon__bookmark" aria-label="bookmark"></button>
+              <button class="icon-button icon icon__contact" aria-label="contact"></button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">3</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="title" value="Analyst" placeholder="Add title" aria-label="Title"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="name" value="Ethan Lee" placeholder="Add name" aria-label="Name"></span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="6">Art</button>
+            <span class="list__cell list__cell--fill"><input class="inline-input" type="email" name="mail" value="ethan.lee@gmail.com" placeholder="Add mail" aria-label="Mail"></span>
+            <span class="list__cell list__cell--phone"><input class="inline-input" type="tel" name="phone" value="622 345 678" placeholder="Add phone" aria-label="Phone"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+              <button class="icon-button icon icon__notes" aria-label="notes"></button>
+              <button class="icon-button icon icon__bookmark" aria-label="bookmark"></button>
+              <button class="icon-button icon icon__contact" aria-label="contact"></button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">4</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="title" value="Developer" placeholder="Add title" aria-label="Title"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="name" value="James Chen" placeholder="Add name" aria-label="Name"></span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="3">Camera</button>
+            <span class="list__cell list__cell--fill"><input class="inline-input" type="email" name="mail" value="james.chen@gmail.com" placeholder="Add mail" aria-label="Mail"></span>
+            <span class="list__cell list__cell--phone"><input class="inline-input" type="tel" name="phone" value="633 456 789" placeholder="Add phone" aria-label="Phone"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+              <button class="icon-button icon icon__notes" aria-label="notes"></button>
+              <button class="icon-button icon icon__bookmark" aria-label="bookmark"></button>
+              <button class="icon-button icon icon__contact" aria-label="contact"></button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">5</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="title" value="QA Tester" placeholder="Add title" aria-label="Title"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="name" value="Mia Garcia" placeholder="Add name" aria-label="Name"></span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="7">Sound</button>
+            <span class="list__cell list__cell--fill"><input class="inline-input" type="email" name="mail" value="mia.garcia@gmail.com" placeholder="Add mail" aria-label="Mail"></span>
+            <span class="list__cell list__cell--phone"><input class="inline-input" type="tel" name="phone" value="644 567 890" placeholder="Add phone" aria-label="Phone"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+              <button class="icon-button icon icon__notes" aria-label="notes"></button>
+              <button class="icon-button icon icon__bookmark" aria-label="bookmark"></button>
+              <button class="icon-button icon icon__contact" aria-label="contact"></button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+  </main>
+
+  <dialog class="modal modal--form" id="modal-import" aria-labelledby="modal-import-title">
+    <form method="dialog">
+      <header class="modal__header">
+        <h2 class="modal__heading" id="modal-import-title">Import</h2>
+        <button class="card__action icon icon__close-alt" value="cancel" aria-label="Close"></button>
+      </header>
+      <div class="modal__body">
+        <h3 class="modal__subtitle">Upload Your File</h3>
+        <p class="modal__text">Upload a CSV, Excel, Numbers, or PDF crew list (.csv, .xlsx, .xls, .numbers, .pdf). We'll automatically detect the columns.</p>
+        <label class="btn btn--lg icon icon__upload">
+          Select file
+          <input type="file" accept=".csv,.xlsx,.xls,.numbers,.pdf" hidden>
+        </label>
+      </div>
+      <footer class="modal__buttons">
+        <button class="btn" value="cancel">Cancel</button>
+        <button class="btn btn--cta" value="import">Import</button>
+      </footer>
+    </form>
+  </dialog>
+
+
+
+</body>
+</html>

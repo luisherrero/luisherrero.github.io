@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MOTOOOR - IRYO “Reflexiones”</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app-min.js" defer></script>
+</head>
+
+
+<body class="app">
+
+
+  <aside class="sidebar" id="sidebar">
+  
+    <header class="sidebar__header">
+      <img class="sidebar__logo" src="img/logo_motooor.svg" alt="Motooor" width="80" height="24">
+      <button class="sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu"></button>
+    </header>
+    
+    <nav>
+      <ul class="sidebar__nav">
+        <li><a class="sidebar__item icon icon__home" href="overview.html">Home</a></li>
+        <li><a class="sidebar__item icon icon__cast" href="cast.html">Cast</a></li>
+        <li><a class="sidebar__item icon icon__crew" href="crew.html">Crew</a></li>
+        <li><a class="sidebar__item icon icon__locations" href="sites.html">Filming Sites</a></li>
+        <li><a class="sidebar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a></li>
+        <li><a class="sidebar__item icon icon__schedule" href="calls.html">Calls</a></li>
+        <li><a class="sidebar__item icon icon__report" href="reports.html">Reports</a></li>
+        <li><a class="sidebar__item icon icon__settings" href="settings.html">Settings</a></li>
+      </ul>
+    </nav>
+  
+  </aside>
+  
+
+  <header class="topbar">
+    <ol class="breadcrumb">
+      <li><a href="#">IRYO “Reflexiones”</a></li>
+      <li aria-current="page">Shoot Plan</li>
+    </ol>
+  </header>
+
+  <main class="content">
+    <section class="card">
+      <header class="card__header">
+        <h1 class="card__title">Shoot Plan</h1>
+
+        <details class="menu">
+          <summary class="btn btn--hollow btn--dropdown">Add</summary>
+          <ul class="menu__list">
+            <li><button class="menu__item">Shot</button></li>
+            <li><button class="menu__item">Banner</button></li>
+          </ul>
+        </details>
+
+        <button class="btn btn--hollow btn--square icon icon__group" aria-label="Group"></button>
+        <button class="btn btn--hollow btn--square icon icon__ungroup" aria-label="Ungroup"></button>
+        <button class="btn btn--hollow btn--square icon icon__merge" aria-label="Merge"></button>
+        <button class="btn btn--hollow btn--square icon icon__split" aria-label="Split"></button>
+
+        <!--
+        <details class="menu">
+          <summary class="btn btn--hollow btn--dropdown">Actions</summary>
+          <ul class="menu__list">
+            <li><button class="menu__item">Group</button></li>
+            <li><button class="menu__item">Ungroup</button></li>
+            <li><button class="menu__item">Merge</button></li>
+            <li><button class="menu__item">Split</button></li>
+          </ul>
+        </details>
+        -->
+
+        <button class="btn icon icon__time" data-modal="modal-settings" aria-haspopup="dialog">Settings</button>
+        <button class="btn icon icon__draft">Draft</button>
+        <button class="btn btn--cta icon icon__gallery" data-modal="gallery" aria-haspopup="dialog">Gallery</button>
+        <button class="icon icon__help" aria-label="Help"></button>
+      </header>
+
+      <div class="card__body" id="shoot-plan-main">
+        <ul class="list list--shoot-plan">
+          <li class="list__row list__row--head">
+            <label class="list__cell list__cell--slot"><input type="checkbox" aria-label="Select all"></label>
+            <span class="list__cell list__cell--shot">Shot</span>
+            <span class="list__cell list__cell--desc">Description</span>
+            <span class="list__cell list__cell--set">Set</span>
+            <span class="list__cell list__cell--cast">Cast</span>
+            <span class="list__cell list__cell--reqs">Requirements</span>
+            <span class="list__cell list__cell--actions">Actions</span>
+          </li>
+
+          <li class="list__row list__row--banner">
+            <span class="list__cell list__cell--range">
+              <button class="pill pill--time">9:30</button>
+              <button class="pill pill--time">17:50</button>
+            </span>
+            <h2 class="list__cell list__cell--fill">Day 1 - 29th september, 2026</h2>
+            <span class="list__cell list__cell--meta">Shooting time: <span class="pill">17h 20m</span></span>
+            <span class="list__cell list__cell--meta">52 shots</span>
+            <button class="icon-button icon icon__dropdown" aria-label="dropdown"></button>
+          </li>
+
+          <li class="list__row">
+            <div class="list__cell list__cell--slot">
+              <input type="checkbox" aria-label="Select shot">
+              <button class="pill pill--time">9:30</button>
+              <button class="pill pill--time">9:50</button>
+              <button class="shot-type">AV</button>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="img/ad/001.png" alt="">
+              <figcaption>12</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <div class="list__cell list__cell--set">
+              <button class="chip chip--add">Add set</button>
+            </div>
+            <ul class="list__cell list__cell--cast">
+              <li><button class="chip chip--add">Add cast</button></li>
+            </ul>
+            <div class="list__cell list__cell--reqs">
+              <p><b>Cámara</b>: Alexa cámara en mano.</p>
+              <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
+              <p><b>Producto</b>: Big Mac.</p>
+            </div>
+            <div class="list__cell list__cell--actions">
+              <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
+              <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+            </div>
+          </li>
+
+          <li class="list__row has-warning">
+            <div class="list__cell list__cell--slot">
+              <input type="checkbox" aria-label="Select shot">
+              <button class="pill pill--time">10:00</button>
+              <button class="pill pill--time">10:20</button>
+              <button class="shot-type">AV</button>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="img/ad/002.png" alt="">
+              <figcaption>17</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <div class="list__cell list__cell--set">
+              <button class="chip chip--dropdown">Vestuario</button>
+            </div>
+            <ul class="list__cell list__cell--cast">
+              <li>Policeman</li>
+              <li>Reporter</li>
+              <li>Concerned Citizen</li>
+            </ul>
+            <div class="list__cell list__cell--reqs">
+              <p><b>Cámara</b>: Alexa cámara en mano.</p>
+              <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
+              <p><b>Producto</b>: Big Mac.</p>
+            </div>
+            <div class="list__cell list__cell--actions">
+              <label class="pill pill--flow"><input type="checkbox" unchecked>Flow</label>
+              <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+            </div>
+          </li>
+
+          <li class="list__row">
+            <div class="list__cell list__cell--slot">
+              <input type="checkbox" aria-label="Select shot">
+              <button class="pill pill--time">10:00</button>
+              <button class="pill pill--time">10:20</button>
+              <button class="shot-type shot-type--social">Social</button>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="img/ad/003.png" alt="">
+              <figcaption>24 + 15 + 21</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <div class="list__cell list__cell--set">
+              <button class="chip chip--add">Add set</button>
+            </div>
+            <ul class="list__cell list__cell--cast">
+              <li><button class="chip chip--add">Add cast</button></li>
+            </ul>
+            <div class="list__cell list__cell--reqs">
+              <p>-</p>
+            </div>
+            <div class="list__cell list__cell--actions">
+              <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
+              <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+            </div>
+          </li>
+
+          <li class="list__row list__row--banner list__row--banner-custom" data-color="0">
+            <span class="list__cell list__cell--range">
+              <button class="pill pill--time">9:30</button>
+              <button class="pill pill--time">17:50</button>
+            </span>
+            <h2 class="list__cell list__cell--fill">New banner</h2>
+            <span class="list__cell list__cell--banner-actions">
+              <button class="color-button" data-color-menu aria-label="Banner color"></button>
+              <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
+            </span>
+          </li>
+
+          <li class="list__row">
+            <div class="list__cell list__cell--slot">
+              <input type="checkbox" aria-label="Select shot">
+              <button class="pill pill--time">10:30</button>
+              <button class="pill pill--time">11:20</button>
+              <button class="shot-type">AV</button>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="img/ad/004.png" alt="">
+              <figcaption>28</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <div class="list__cell list__cell--set">
+              <button class="chip chip--add">Add set</button>
+            </div>
+            <ul class="list__cell list__cell--cast">
+              <li><button class="chip chip--add">Add cast</button></li>
+            </ul>
+            <div class="list__cell list__cell--reqs">
+              <p>-</p>
+            </div>
+            <div class="list__cell list__cell--actions">
+              <label class="pill pill--flow"><input type="checkbox">Flow</label>
+              <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+            </div>
+          </li>
+
+          <li class="list__row">
+            <div class="list__cell list__cell--slot">
+              <input type="checkbox" aria-label="Select shot">
+              <button class="pill pill--time">10:30</button>
+              <button class="pill pill--time">10:50</button>
+              <button class="shot-type shot-type--photo">Photo</button>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="img/ad/005.png" alt="">
+              <figcaption>13</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <div class="list__cell list__cell--set">
+              <button class="chip chip--add">Add set</button>
+            </div>
+            <ul class="list__cell list__cell--cast">
+              <li><button class="chip chip--add">Add cast</button></li>
+            </ul>
+            <div class="list__cell list__cell--reqs">
+              <p><b>Cámara</b>: Alexa cámara en mano.</p>
+              <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
+              <p><b>Producto</b>: Big Mac.</p>
+            </div>
+            <div class="list__cell list__cell--actions">
+              <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
+              <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+            </div>
+          </li>
+
+          <li class="list__row">
+            <div class="list__cell list__cell--slot">
+              <input type="checkbox" aria-label="Select shot">
+              <button class="pill pill--time">10:50</button>
+              <button class="pill pill--time">11:10</button>
+              <button class="shot-type">AV</button>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="img/ad/006.png" alt="">
+              <figcaption>14 + 15</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <div class="list__cell list__cell--set">
+              <button class="chip chip--add">Add set</button>
+            </div>
+            <ul class="list__cell list__cell--cast">
+              <li><button class="chip chip--add">Add cast</button></li>
+            </ul>
+            <div class="list__cell list__cell--reqs">
+              <p><b>Cámara</b>: Alexa cámara en mano.</p>
+              <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
+              <p><b>Producto</b>: Big Mac.</p>
+            </div>
+            <div class="list__cell list__cell--actions">
+              <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
+              <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+  </main>
+
+  <dialog class="modal modal--form modal--wide" id="modal-settings" aria-labelledby="modal-settings-title">
+    <form method="dialog">
+      <header class="modal__header">
+        <h2 class="modal__heading" id="modal-settings-title">Settings</h2>
+        <button class="card__action icon icon__close-alt" value="cancel" aria-label="Close"></button>
+      </header>
+      <div class="modal__body">
+        <div class="settings settings--stack">
+          <label class="settings__item">Show unit types <input type="checkbox" class="switch" role="switch" name="show-types" checked></label>
+        </div>
+
+        <ul class="unit-types" aria-label="Unit types">
+          <li class="unit-types__item" data-type="av">
+            <span class="color-button" aria-hidden="true"></span>
+            <span class="unit-types__name">AV</span>
+            <label class="settings__item">Duration <input class="pill pill--input" name="av-duration" value="25m"></label>
+            <label class="settings__item">Gap <input class="pill pill--input" name="av-gap" value="10m"></label>
+          </li>
+          <li class="unit-types__item" data-type="photo">
+            <span class="color-button" aria-hidden="true"></span>
+            <span class="unit-types__name">Photo</span>
+            <label class="settings__item">Duration <input class="pill pill--input" name="photo-duration" value="25m"></label>
+            <label class="settings__item">Gap <input class="pill pill--input" name="photo-gap" value="10m"></label>
+          </li>
+          <li class="unit-types__item" data-type="social">
+            <span class="color-button" aria-hidden="true"></span>
+            <span class="unit-types__name">Social</span>
+            <label class="settings__item">Duration <input class="pill pill--input" name="social-duration" value="25m"></label>
+            <label class="settings__item">Gap <input class="pill pill--input" name="social-gap" value="10m"></label>
+          </li>
+          <li class="unit-types__item" data-type="banner">
+            <span class="color-button" aria-hidden="true"></span>
+            <span class="unit-types__name">Banner</span>
+            <label class="settings__item">Duration <input class="pill pill--input" name="banner-duration" value="60m"></label>
+            <label class="settings__item">Gap <input class="pill pill--input" name="banner-gap" value="0m"></label>
+          </li>
+        </ul>
+
+        <hr class="modal__rule">
+        <button class="btn btn--hollow" type="button" data-add="unit-type-new" aria-controls="unit-types-custom">Add new type</button>
+
+        <ul class="unit-types" id="unit-types-custom" aria-label="Custom types">
+          <li class="unit-types__item" data-color="0">
+            <button class="color-button" type="button" data-color-menu aria-label="Type color"></button>
+            <input class="unit-types__name inline-input" name="type-name" value="Second unit" placeholder="New type" aria-label="Type name">
+            <label class="settings__item">Duration <input class="pill pill--input" name="type-duration" value="25m"></label>
+            <label class="settings__item">Gap <input class="pill pill--input" name="type-gap" value="10m"></label>
+            <button class="card__action icon icon__delete" type="button" data-remove aria-label="Delete type"></button>
+          </li>
+        </ul>
+        <template id="unit-type-new">
+          <li class="unit-types__item" data-color="0">
+            <button class="color-button" type="button" data-color-menu aria-label="Type color"></button>
+            <input class="unit-types__name inline-input" name="type-name" value="" placeholder="New type" aria-label="Type name">
+            <label class="settings__item">Duration <input class="pill pill--input" name="type-duration" value="25m"></label>
+            <label class="settings__item">Gap <input class="pill pill--input" name="type-gap" value="10m"></label>
+            <button class="card__action icon icon__delete" type="button" data-remove aria-label="Delete type"></button>
+          </li>
+        </template>
+
+        <hr class="modal__rule">
+      </div>
+      <footer class="modal__buttons">
+        <button class="btn" value="cancel">Cancel</button>
+        <button class="btn btn--cta" value="done">Done</button>
+      </footer>
+    </form>
+  </dialog>
+
+
+
+
+
+
+
+
+
+  <dialog class="drawer" id="gallery" aria-labelledby="gallery-title">
+    <header class="modal__header">
+      <h2 class="modal__heading" id="gallery-title">Image gallery</h2>
+      <form method="dialog"><button class="card__action icon icon__close-alt" aria-label="Close"></button></form>
+    </header>
+
+    <div class="drawer__toolbar">
+      <button class="btn btn--cta icon icon__shoot-plan">Create shots</button>
+      <hr class="divider">
+      <button class="btn btn--hollow icon icon__new-spot">New spot</button>
+      <details class="menu">
+        <summary class="btn btn--hollow btn--dropdown">Move to</summary>
+        <ul class="menu__list">
+          <li><button class="menu__item">Spot 1</button></li>
+          <li><button class="menu__item">Spot 2</button></li>
+        </ul>
+      </details>
+      <button class="btn btn--hollow btn--square icon icon__merge" aria-label="Merge"></button>
+      <button class="btn btn--hollow btn--square icon icon__split" aria-label="Split"></button>
+      <label class="btn btn--hollow icon icon__upload">
+        Import
+        <input type="file" accept="image/*,.pdf" multiple hidden>
+      </label>
+      <hr class="divider">
+      <button class="btn btn--hollow btn--square icon icon__delete" aria-label="Delete selected"></button>
+      <button class="card__action icon icon__help" aria-label="Help"></button>
+    </div>
+
+    <div class="drawer__body">
+      <section class="gallery">
+        <header class="gallery__head">
+          <h3 class="gallery__title">Spot 1</h3>
+          <label class="gallery__select"><input type="checkbox">Select all</label>
+          <button class="card__action icon" data-toggle aria-controls="gallery-spot-1" aria-expanded="true" aria-label="Collapse"></button>
+        </header>
+        <div class="gallery__grid" id="gallery-spot-1">
+            <figure class="thumb">
+              <img src="img/ad/001.png" alt="">
+              <figcaption>24</figcaption>
+              <input type="checkbox" aria-label="Select image">
+            </figure>
+            <figure class="thumb">
+              <img src="img/ad/002.png" alt="">
+              <figcaption>24</figcaption>
+              <input type="checkbox" aria-label="Select image">
+            </figure>
+            <figure class="thumb">
+              <img src="img/ad/003.png" alt="">
+              <figcaption>24</figcaption>
+              <input type="checkbox" aria-label="Select image">
+            </figure>
+            <figure class="thumb">
+              <img src="img/ad/004.png" alt="">
+              <figcaption>24</figcaption>
+              <input type="checkbox" aria-label="Select image">
+            </figure>
+            <figure class="thumb">
+              <img src="img/ad/005.png" alt="">
+              <figcaption>24</figcaption>
+              <input type="checkbox" aria-label="Select image">
+            </figure>
+            <figure class="thumb">
+              <img src="img/ad/006.png" alt="">
+              <img src="img/ad/007.png" alt="">
+              <figcaption>24</figcaption>
+              <input type="checkbox" aria-label="Select image">
+            </figure>
+            <figure class="thumb">
+              <img src="img/ad/008.png" alt="">
+              <figcaption>24</figcaption>
+              <input type="checkbox" aria-label="Select image">
+            </figure>
+            <figure class="thumb">
+              <img src="img/ad/009.png" alt="">
+              <figcaption>24</figcaption>
+              <input type="checkbox" aria-label="Select image">
+            </figure>
+            <figure class="thumb">
+              <img src="img/ad/010.png" alt="">
+              <figcaption>24</figcaption>
+              <input type="checkbox" aria-label="Select image">
+            </figure>
+            <figure class="thumb">
+              <img src="img/ad/011.png" alt="">
+              <figcaption>24</figcaption>
+              <input type="checkbox" aria-label="Select image">
+            </figure>
+        </div>
+      </section>
+
+      <!-- Empty spot: drop zone (also the first-run state of the gallery) -->
+      <section class="gallery">
+        <header class="gallery__head">
+          <h3 class="gallery__title">Spot 2</h3>
+          <label class="gallery__select"><input type="checkbox">Select all</label>
+          <button class="card__action icon icon__delete" aria-label="Delete spot"></button>
+          <button class="card__action icon" data-toggle aria-controls="gallery-spot-2" aria-expanded="true" aria-label="Collapse"></button>
+        </header>
+        <div id="gallery-spot-2">
+          <div class="dropzone">
+            <p class="dropzone__title icon icon__image">Drag and drop your images/PDF here</p>
+            <p class="dropzone__text">or</p>
+            <label class="btn icon icon__upload">
+              Import
+              <input type="file" accept="image/*,.pdf" multiple hidden>
+            </label>
+          </div>
+        </div>
+      </section>
+    </div>
+  </dialog>
+
+
+
+</body>
+</html>

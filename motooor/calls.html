@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MOTOOOR - IRYO “Reflexiones”</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app-min.js" defer></script>
+</head>
+
+
+<body class="app">
+
+
+  <aside class="sidebar" id="sidebar">
+  
+    <header class="sidebar__header">
+      <img class="sidebar__logo" src="img/logo_motooor.svg" alt="Motooor" width="80" height="24">
+      <button class="sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu"></button>
+    </header>
+    
+    <nav>
+      <ul class="sidebar__nav">
+        <li><a class="sidebar__item icon icon__home" href="overview.html">Home</a></li>
+        <li><a class="sidebar__item icon icon__cast" href="cast.html">Cast</a></li>
+        <li><a class="sidebar__item icon icon__crew" href="crew.html">Crew</a></li>
+        <li><a class="sidebar__item icon icon__locations" href="sites.html">Filming Sites</a></li>
+        <li><a class="sidebar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a></li>
+        <li><a class="sidebar__item icon icon__schedule" href="calls.html">Calls</a></li>
+        <li><a class="sidebar__item icon icon__report" href="reports.html">Reports</a></li>
+        <li><a class="sidebar__item icon icon__settings" href="settings.html">Settings</a></li>
+      </ul>
+    </nav>
+  
+  </aside>
+  
+
+  <header class="topbar">
+    <ol class="breadcrumb">
+      <li><a href="#">IRYO “Reflexiones”</a></li>
+      <li aria-current="page">Calls</li>
+    </ol>
+  </header>
+
+  <main class="content">
+    <section class="card">
+      <header class="card__header">
+        <h1 class="card__title">Calls</h1>
+
+        <div class="settings">
+          <div class="settings__group" role="group" aria-label="Preparation (minutes)">
+            <label class="settings__item">Makeup <input class="pill pill--input" value="30" inputmode="numeric"></label>
+            <label class="settings__item">Dress <input class="pill pill--input" value="15" inputmode="numeric"></label>
+            <label class="settings__item">Ready <input class="pill pill--input" value="10" inputmode="numeric"></label>
+          </div>
+
+
+          <div class="settings__group" role="group" aria-label="Calls">
+            <label class="settings__item">Agency call <input class="pill pill--input" value="10:00" inputmode="numeric"></label>
+            <label class="settings__item">Client call <input class="pill pill--input" value="10:30" inputmode="numeric"></label>
+          </div>
+        </div>
+
+        <details class="menu">
+          <summary class="btn btn--hollow btn--dropdown">Day 1</summary>
+          <ul class="menu__list">
+            <li><button class="menu__item">Day 1</button></li>
+            <li><button class="menu__item">Day 2</button></li>
+          </ul>
+        </details>
+      </header>
+
+      <nav class="tabs">
+        <button class="tabs__tab" aria-selected="true" aria-controls="calls-crew">Crew</button>
+        <button class="tabs__tab" aria-selected="false" aria-controls="calls-cast">Cast</button>
+      </nav>
+
+      <div class="card__body" id="calls-crew">
+        <ul class="list list--calls">
+          <li class="list__row list__row--head">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">#</span>
+            <span class="list__cell list__cell--fill">Role</span>
+            <span class="list__cell list__cell--fill">Department</span>
+            <span class="list__cell list__cell--fill">Name</span>
+            <span class="list__cell list__cell--call">Set call</span>
+            <span class="list__cell list__cell--days">Days</span>
+            <span class="list__cell list__cell--visible"></span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">1</span>
+            <span class="list__cell list__cell--fill">Ayte. Dirección</span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="1">Production</button>
+            <span class="list__cell list__cell--fill">Jose Calero</span>
+            <span class="list__cell list__cell--call"><input class="pill pill--input" value="10:00" inputmode="numeric" aria-label="Set call"></span>
+            <span class="list__cell list__cell--days"><button class="pill icon icon__calendar">1/2</button></span>
+            <span class="list__cell list__cell--visible"><button class="icon-button icon icon__visible" aria-pressed="true" aria-label="Visible"></button></span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">2</span>
+            <span class="list__cell list__cell--fill">Manager</span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="2">Direction</button>
+            <span class="list__cell list__cell--fill">Sophia Kim</span>
+            <span class="list__cell list__cell--call"><input class="pill pill--input" value="10:00" inputmode="numeric" aria-label="Set call"></span>
+            <span class="list__cell list__cell--days"><button class="pill icon icon__calendar">1/2</button></span>
+            <span class="list__cell list__cell--visible"><button class="icon-button icon icon__visible" aria-pressed="true" aria-label="Visible"></button></span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">3</span>
+            <span class="list__cell list__cell--fill">Analyst</span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="3">Camera</button>
+            <span class="list__cell list__cell--fill">Sophia Kim</span>
+            <span class="list__cell list__cell--call"><input class="pill pill--input" value="10:00" inputmode="numeric" aria-label="Set call"></span>
+            <span class="list__cell list__cell--days"><button class="pill icon icon__calendar">1/2</button></span>
+            <span class="list__cell list__cell--visible"><button class="icon-button icon icon__visible" aria-pressed="true" aria-label="Visible"></button></span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">4</span>
+            <span class="list__cell list__cell--fill">Developer</span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="6">Art</button>
+            <span class="list__cell list__cell--fill">Sophia Kim</span>
+            <span class="list__cell list__cell--call"><input class="pill pill--input" value="10:00" inputmode="numeric" aria-label="Set call"></span>
+            <span class="list__cell list__cell--days"><button class="pill icon icon__calendar">1/2</button></span>
+            <span class="list__cell list__cell--visible"><button class="icon-button icon icon__visible" aria-pressed="true" aria-label="Visible"></button></span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">5</span>
+            <span class="list__cell list__cell--fill">QA Tester</span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="7">Sound</button>
+            <span class="list__cell list__cell--fill">Sophia Kim</span>
+            <span class="list__cell list__cell--call"><input class="pill pill--input" value="10:00" inputmode="numeric" aria-label="Set call"></span>
+            <span class="list__cell list__cell--days"><button class="pill icon icon__calendar">1/2</button></span>
+            <span class="list__cell list__cell--visible"><button class="icon-button icon icon__visible" aria-pressed="true" aria-label="Visible"></button></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card__body" id="calls-cast" hidden>
+        <ul class="list list--calls">
+          <li class="list__row list__row--head">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">#</span>
+            <span class="list__cell list__cell--fill">Role</span>
+            <span class="list__cell list__cell--fill">Artist</span>
+            <div class="list__cell list__cell--group" role="group" aria-label="Calls">
+              <span class="list__cell list__cell--call">Set</span>
+              <span class="list__cell list__cell--call">Makeup</span>
+              <span class="list__cell list__cell--call">Dress</span>
+              <span class="list__cell list__cell--call">Ready</span>
+              <span class="list__cell list__cell--call">Motor</span>
+            </div>
+            <span class="list__cell list__cell--days">Days</span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">1</span>
+            <span class="list__cell list__cell--fill">Policeman</span>
+            <span class="list__cell list__cell--fill">Liam Brown</span>
+            <div class="list__cell list__cell--group" role="group" aria-label="Calls">
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="07:50" inputmode="numeric" aria-label="Set call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:05" inputmode="numeric" aria-label="Makeup call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:35" inputmode="numeric" aria-label="Dress call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:50" inputmode="numeric" aria-label="Ready call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="09:00" inputmode="numeric" aria-label="Motor call"></span>
+            </div>
+            <span class="list__cell list__cell--days"><button class="pill icon icon__calendar">1/2</button></span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">2</span>
+            <span class="list__cell list__cell--fill">Reporter</span>
+            <span class="list__cell list__cell--fill">Emma Wilson</span>
+            <div class="list__cell list__cell--group" role="group" aria-label="Calls">
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="07:50" inputmode="numeric" aria-label="Set call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:05" inputmode="numeric" aria-label="Makeup call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:35" inputmode="numeric" aria-label="Dress call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:50" inputmode="numeric" aria-label="Ready call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="09:00" inputmode="numeric" aria-label="Motor call"></span>
+            </div>
+            <span class="list__cell list__cell--days"><button class="pill icon icon__calendar">1/2</button></span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">3</span>
+            <span class="list__cell list__cell--fill">Concerned Citizen</span>
+            <span class="list__cell list__cell--fill">Lucas Martin</span>
+            <div class="list__cell list__cell--group" role="group" aria-label="Calls">
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="07:50" inputmode="numeric" aria-label="Set call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:05" inputmode="numeric" aria-label="Makeup call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:35" inputmode="numeric" aria-label="Dress call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:50" inputmode="numeric" aria-label="Ready call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="09:00" inputmode="numeric" aria-label="Motor call"></span>
+            </div>
+            <span class="list__cell list__cell--days"><button class="pill icon icon__calendar">1/2</button></span>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+  </main>
+
+
+
+</body>
+</html>

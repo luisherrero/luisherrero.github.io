@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MOTOOOR - Login</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app-min.js" defer></script>
+</head>
+
+
+<body class="auth">
+
+  <main class="auth__panel">
+    <img class="auth__logo" src="img/logo_motooor.svg" alt="Motooor" width="210" height="60">
+
+    <!-- Prototype: signing in goes to the Overview -->
+    <form class="auth__form" action="overview.html">
+      <header class="auth__intro">
+        <h1 class="auth__title">Welcome back</h1>
+        <p class="auth__subtitle">Please enter your credentials to sign in.</p>
+      </header>
+
+      <div class="field">
+        <label class="field__label" for="login-user">User</label>
+        <div class="field__box">
+          <input class="field__input" id="login-user" name="user" type="text" autocomplete="username">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="login-password">Password</label>
+        <div class="field__box">
+          <input class="field__input" id="login-password" name="password" type="password" autocomplete="current-password">
+          <button class="card__action icon icon__visible" type="button" data-reveal="login-password" aria-pressed="false" aria-label="Show password"></button>
+        </div>
+      </div>
+
+      <div class="auth__options">
+        <label class="auth__remember"><input type="checkbox" name="remember">Remember me</label>
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <button class="btn btn--cta" type="submit">Login</button>
+    </form>
+
+    <p class="auth__footer">Don’t have an account? <a href="#">Sign up</a></p>
+  </main>
+
+</body>
+</html>

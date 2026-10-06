@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MOTOOOR - IRYO “Reflexiones”</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app-min.js" defer></script>
+</head>
+
+
+<body class="app">
+
+
+  <aside class="sidebar" id="sidebar">
+  
+    <header class="sidebar__header">
+      <img class="sidebar__logo" src="img/logo_motooor.svg" alt="Motooor" width="80" height="24">
+      <button class="sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu"></button>
+    </header>
+    
+    <nav>
+      <ul class="sidebar__nav">
+        <li><a class="sidebar__item icon icon__home" href="overview.html">Home</a></li>
+        <li><a class="sidebar__item icon icon__cast" href="cast.html">Cast</a></li>
+        <li><a class="sidebar__item icon icon__crew" href="crew.html">Crew</a></li>
+        <li><a class="sidebar__item icon icon__locations" href="sites.html">Filming Sites</a></li>
+        <li><a class="sidebar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a></li>
+        <li><a class="sidebar__item icon icon__schedule" href="calls.html">Calls</a></li>
+        <li><a class="sidebar__item icon icon__report" href="reports.html">Reports</a></li>
+        <li><a class="sidebar__item icon icon__settings" href="settings.html">Settings</a></li>
+      </ul>
+    </nav>
+  
+  </aside>
+  
+
+  <header class="topbar">
+    <ol class="breadcrumb">
+      <li><a href="#">IRYO “Reflexiones”</a></li>
+      <li aria-current="page">Overview</li>
+    </ol>
+  </header>
+
+  <main class="content">
+    <div class="toolbar">
+      <details class="menu">
+        <summary class="btn btn--hollow btn--dropdown">Day 1 · 27 September 2026</summary>
+        <ul class="menu__list">
+          <li><button class="menu__item">Day 1 · 27 September 2026</button></li>
+          <li><button class="menu__item">Day 2 · 28 September 2026</button></li>
+        </ul>
+      </details>
+      <details class="menu">
+        <summary class="btn btn--hollow btn--dropdown">Publish</summary>
+        <ul class="menu__list">
+          <li><button class="menu__item">Preview</button></li>
+          <li><button class="menu__item">Call Sheet</button></li>
+        </ul>
+      </details>    </div>
+
+    <div class="dashboard">
+
+      <!-- Column 1 · Credits -->
+      <div class="dashboard__col">
+        <section class="card card--widget">
+          <figure class="card__cover bg_08">
+            <figcaption>
+              <h1>IRYO “Reflexiones”</h1>
+              <button class="card__action icon icon__overflow" aria-label="More options"></button>
+            </figcaption>
+          </figure>
+          <header class="card__header">
+            <h2 class="card__title">Credits</h2>
+          </header>
+          <dl class="facts">
+            <div><dt>Client</dt>
+              <dd>
+                <span class="logo-field">
+                  <input class="inline-input" name="client" value="Under Armour" placeholder="Add client" aria-label="Client">
+                  <span class="logo-field__actions">
+                    <label class="card__action icon icon__image" role="button" tabindex="0" title="Use a logo"><input type="file" accept="image/*" aria-label="Client logo" hidden></label>
+                    <button class="card__action icon icon__close" type="button" data-logo-remove title="Use text" hidden></button>
+                  </span>
+                </span>
+              </dd>
+            </div>
+            <div><dt>Agency</dt>
+              <dd>
+                <span class="logo-field">
+                  <input class="inline-input" name="agency" value="24/7" placeholder="Add agency" aria-label="Agency" hidden>
+                  <img src="img/production_co/247.svg" alt="24/7">
+                  <span class="logo-field__actions">
+                    <label class="card__action icon icon__image" role="button" tabindex="0" title="Use a logo"><input type="file" accept="image/*" aria-label="Agency logo" hidden></label>
+                    <button class="card__action icon icon__close" type="button" data-logo-remove title="Use text"></button>
+                  </span>
+                </span>
+              </dd>
+            </div>
+            <div><dt>Production Company</dt>
+              <dd>
+                <span class="logo-field">
+                  <input class="inline-input" name="production-company" value="agosto" placeholder="Add production company" aria-label="Production Company" hidden>
+                  <img src="img/production_co/agosto.svg" alt="agosto">
+                  <span class="logo-field__actions">
+                    <label class="card__action icon icon__image" role="button" tabindex="0" title="Use a logo"><input type="file" accept="image/*" aria-label="Production Company logo" hidden></label>
+                    <button class="card__action icon icon__close" type="button" data-logo-remove title="Use text"></button>
+                  </span>
+                </span>
+              </dd>
+            </div>
+            <div><dt>Executive Producer</dt><dd>Richard Hammond</dd></div>
+            <div><dt>Producer</dt><dd>Kevin Bacon</dd></div>
+            <div><dt>Director</dt><dd>Erik Morales</dd></div>
+            <div><dt>D.O.P.</dt><dd>Hoyte van Hoytema</dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <!-- Column 2 · Weather, locations and contact -->
+      <div class="dashboard__col">
+        <section class="card card--widget">
+          <header class="card__header">
+            <h2 class="card__title">Weather</h2>
+            <button class="card__action icon icon__reload" aria-label="Actualizar"></button>
+          </header>
+          <div class="weather">
+            <img class="weather__icon" src="img/weather/icon_partly_cloudy.png" alt="Parcialmente nublado" width="140" height="80">
+            <p class="weather__temp">31·22 <small>ºC</small></p>
+            <dl class="weather__stats">
+              <div><dt>Sunrise</dt><dd>06:24</dd></div>
+              <div><dt>Sunset</dt><dd>21:28</dd></div>
+              <div><dt>Humidity</dt><dd>16 %</dd></div>
+              <div><dt>Wind</dt><dd>2.0 m/s</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="card card--widget">
+          <header class="card__header">
+            <h2 class="card__title">Locations</h2>
+          </header>
+          <ul class="list list--places">
+            <li class="list__row">
+              <span class="list__cell list__cell--index">1</span>
+              <address class="list__cell list__cell--fill"><strong>Centro Alto Rendimiento</strong> Av. Alcalde Barnils, 3, 5, 08174 Sant Cugat del Vallès, Barcelona</address>
+              <span class="list__cell list__cell--thumb"><img src="img/thumb-sites.png" alt="Mapa" width="96" height="52"></span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="card card--widget">
+          <header class="card__header">
+            <h2 class="card__title">Contact</h2>
+          </header>
+          <dl class="facts">
+            <div><dt>Dani Molina</dt><dd><a href="tel:+34630976969">630 976 969</a></dd></div>
+            <div><dt>Marta Mur</dt><dd><a href="tel:+34610584558">610 584 558</a></dd></div>
+            <div><dt>Inés Sorlat</dt><dd><a href="tel:+34621789775">621 789 775</a></dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <!-- Column 3 · Requirements and catering -->
+      <div class="dashboard__col">
+        <section class="card card--widget">
+          <header class="card__header">
+            <h2 class="card__title">Requirements</h2>
+            <button class="card__action icon icon__edit" aria-label="Editar"></button>
+          </header>
+          <div class="editor">
+            <div class="editor__toolbar">
+              <button class="icon-button icon icon__format-bold" aria-label="Negrita"></button>
+              <button class="icon-button icon icon__format-italic" aria-label="Cursiva"></button>
+              <button class="icon-button icon icon__format-underline" aria-label="Subrayado"></button>
+              <button class="icon-button icon icon__format-list" aria-label="Lista"></button>
+              <button class="icon-button icon icon__format-list-numbered" aria-label="Lista numerada"></button>
+              <button class="btn btn--soft">Clear</button>
+            </div>
+            <div class="prose">
+              <h3>Material de cámara y Luz:</h3>
+              <ul>
+                <li>Pack Sony Venice 2 (8,6K) + Rialto+ Accesorios</li>
+                <li>Set Ópticas Signature Primes (15m, 18m, 21m, 25m, 29m, 35m, 40m, 47m, 58m, 75m, 152m)</li>
+                <li>Extender</li>
+                <li>Steady Cam</li>
+                <li>Movie Car</li>
+                <li>Cabeza para poner cámara en Cranko</li>
+                <li>Material accesorio según petición del D.O.P.</li>
+              </ul>
+              <h3>Producción:</h3>
+              <ul>
+                <li>Lugar para maquillaje y vestuario.</li>
+                <li>Walkie Talkies.</li>
+                <li>Sombrillas, paraguas, crema solar, …</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card card--widget">
+          <header class="card__header">
+            <h2 class="card__title">Catering</h2>
+            <button class="card__action icon icon__edit" aria-label="Editar"></button>
+          </header>
+          <div class="editor">
+            <div class="editor__toolbar">
+              <button class="icon-button icon icon__format-bold" aria-label="Negrita"></button>
+              <button class="icon-button icon icon__format-italic" aria-label="Cursiva"></button>
+              <button class="icon-button icon icon__format-underline" aria-label="Subrayado"></button>
+              <button class="icon-button icon icon__format-list" aria-label="Lista"></button>
+              <button class="icon-button icon icon__format-list-numbered" aria-label="Lista numerada"></button>
+              <button class="btn btn--soft">Clear</button>
+            </div>
+            <div class="prose">
+              <h3>Catering:</h3>
+              <ul>
+                <li>Running Buffet listo a las 13:00 hrs.</li>
+                <li>Cena lista a las 21:15 hrs. Avanzadilla desde las 20:15hrs.</li>
+                <li>Mantenimiento durante toda la jornada</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>

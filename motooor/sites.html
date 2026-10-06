@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MOTOOOR - IRYO “Reflexiones”</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app-min.js" defer></script>
+</head>
+
+
+<body class="app">
+
+
+  <aside class="sidebar" id="sidebar">
+  
+    <header class="sidebar__header">
+      <img class="sidebar__logo" src="img/logo_motooor.svg" alt="Motooor" width="80" height="24">
+      <button class="sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu"></button>
+    </header>
+    
+    <nav>
+      <ul class="sidebar__nav">
+        <li><a class="sidebar__item icon icon__home" href="overview.html">Home</a></li>
+        <li><a class="sidebar__item icon icon__cast" href="cast.html">Cast</a></li>
+        <li><a class="sidebar__item icon icon__crew" href="crew.html">Crew</a></li>
+        <li><a class="sidebar__item icon icon__locations" href="sites.html">Filming Sites</a></li>
+        <li><a class="sidebar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a></li>
+        <li><a class="sidebar__item icon icon__schedule" href="calls.html">Calls</a></li>
+        <li><a class="sidebar__item icon icon__report" href="reports.html">Reports</a></li>
+        <li><a class="sidebar__item icon icon__settings" href="settings.html">Settings</a></li>
+      </ul>
+    </nav>
+  
+  </aside>
+  
+
+  <header class="topbar">
+    <ol class="breadcrumb">
+      <li><a href="#">IRYO “Reflexiones”</a></li>
+      <li aria-current="page">Filming Sites</li>
+    </ol>
+  </header>
+
+  <main class="content">
+    <section class="card">
+      <header class="card__header">
+        <h1 class="card__title">Filming Sites</h1>
+        <details class="menu">
+          <summary class="btn btn--hollow btn--dropdown">Add</summary>
+          <ul class="menu__list">
+            <li><button class="menu__item">Location</button></li>
+            <li><button class="menu__item">Set</button></li>
+          </ul>
+        </details>
+        <button class="btn btn--alert icon icon__delete-alert">Delete</button>
+      </header>
+
+      <nav class="tabs">
+        <div>
+          <button class="tabs__tab" aria-selected="true" aria-controls="sites-locations">Locations</button>
+          <button class="tabs__tab" aria-selected="false" aria-controls="sites-sets">Sets</button>
+        </div>
+      </nav>
+
+      <div class="card__body" id="sites-locations">
+        <ul class="list list--sites">
+          <li class="list__row list__row--head">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">#</span>
+            <span class="list__cell list__cell--name">Name</span>
+            <span class="list__cell list__cell--thumb">Thumb</span>
+            <span class="list__cell list__cell--fill">Address</span>
+            <span class="list__cell list__cell--fill">Notes</span>
+            <span class="list__cell list__cell--actions">Info</span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">1</span>
+            <span class="list__cell list__cell--name"><input class="inline-input" name="name" value="Casa particular" placeholder="Add name" aria-label="Name"></span>
+            <span class="list__cell list__cell--thumb"><img src="img/thumb-sites.png" alt="Estudio" width="120" height="72"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="address" value="c/ Lopez de Hoyos 123, 28002, Madrid" placeholder="Add address" aria-label="Address"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">All</button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">2</span>
+            <span class="list__cell list__cell--name"><input class="inline-input" name="name" value="Tienda" placeholder="Add name" aria-label="Name"></span>
+            <span class="list__cell list__cell--thumb"><img src="img/thumb-sites.png" alt="Estudio" width="120" height="72"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="address" value="c/ Martinez Polar 48, 28002, Madrid" placeholder="Add address" aria-label="Address"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">All</button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card__body" id="sites-sets" hidden>
+        <ul class="list list--sites">
+          <li class="list__row list__row--head">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">#</span>
+            <span class="list__cell list__cell--name">Name</span>
+            <span class="list__cell list__cell--fill">Location</span>
+            <span class="list__cell list__cell--actions">Info</span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">1</span>
+            <span class="list__cell list__cell--name"><input class="inline-input" name="set-name" value="Estudio" placeholder="Add name" aria-label="Name"></span>
+            <span class="list__cell list__cell--fill">
+              <select name="location_select" aria-label="Location">
+                <option value="" selected>Unassigned</option>
+                <option value="casa-particular">Casa particular</option>
+                <option value="tienda">Tienda</option>
+              </select>
+            </span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">All</button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+
+
+</body>
+</html>

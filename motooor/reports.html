@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MOTOOOR - IRYO “Reflexiones”</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app-min.js" defer></script>
+</head>
+
+
+<body class="app">
+
+
+  <aside class="sidebar" id="sidebar">
+  
+    <header class="sidebar__header">
+      <img class="sidebar__logo" src="img/logo_motooor.svg" alt="Motooor" width="80" height="24">
+      <button class="sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu"></button>
+    </header>
+    
+    <nav>
+      <ul class="sidebar__nav">
+        <li><a class="sidebar__item icon icon__home" href="overview.html">Home</a></li>
+        <li><a class="sidebar__item icon icon__cast" href="cast.html">Cast</a></li>
+        <li><a class="sidebar__item icon icon__crew" href="crew.html">Crew</a></li>
+        <li><a class="sidebar__item icon icon__locations" href="sites.html">Filming Sites</a></li>
+        <li><a class="sidebar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a></li>
+        <li><a class="sidebar__item icon icon__schedule" href="calls.html">Calls</a></li>
+        <li><a class="sidebar__item icon icon__report" href="reports.html">Reports</a></li>
+        <li><a class="sidebar__item icon icon__settings" href="settings.html">Settings</a></li>
+      </ul>
+    </nav>
+  
+  </aside>
+  
+
+  <header class="topbar">
+    <ol class="breadcrumb">
+      <li><a href="#">IRYO “Reflexiones”</a></li>
+      <li aria-current="page">Reports</li>
+    </ol>
+  </header>
+
+  <main class="content">
+    <section class="card">
+      <header class="card__header">
+        <h1 class="card__title">Reports</h1>
+        <button class="btn icon icon__draft">Export PDF</button>
+        <details class="menu">
+          <summary class="btn btn--hollow btn--dropdown">All Days</summary>
+          <ul class="menu__list">
+            <li><button class="menu__item">All Days</button></li>
+            <li><button class="menu__item">Day 1</button></li>
+            <li><button class="menu__item">Day 2</button></li>
+          </ul>
+        </details>
+      </header>
+
+      <nav class="tabs">
+        <button class="tabs__tab" aria-selected="true" aria-controls="reports-cast">Cast</button>
+        <button class="tabs__tab" aria-selected="false" aria-controls="reports-extras">Extras</button>
+        <button class="tabs__tab" aria-selected="false" aria-controls="reports-crew">Crew</button>
+      </nav>
+
+      <div class="card__body" id="reports-main">
+        <ul class="list list--reports">
+          <li class="list__row list__row--head">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill">Name</span>
+            <span class="list__cell list__cell--fill">Role</span>
+            <span class="list__cell list__cell--time">Estimated</span>
+            <span class="list__cell list__cell--time">Final</span>
+            <span class="list__cell list__cell--actions">Days</span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill">Eva Green</span>
+            <span class="list__cell list__cell--fill">Attourney</span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="estimated" value="08:00" inputmode="numeric" aria-label="Estimated"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="final" value="08:00" inputmode="numeric" aria-label="Final"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">ALL</button>
+            </span>
+          </li>
+          <li class="list__row has-warning">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill">Sophia Kim</span>
+            <span class="list__cell list__cell--fill">Reporter</span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="estimated" value="08:00" inputmode="numeric" aria-label="Estimated"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="final" value="09:00" inputmode="numeric" aria-label="Final"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+            </span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill">Ethan Lee</span>
+            <span class="list__cell list__cell--fill">Policeman</span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="estimated" value="08:00" inputmode="numeric" aria-label="Estimated"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="final" value="08:00" inputmode="numeric" aria-label="Final"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">ALL</button>
+            </span>
+          </li>
+          <li class="list__row has-warning">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill">Mia Garcia</span>
+            <span class="list__cell list__cell--fill">Concerned Citizen</span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="estimated" value="08:00" inputmode="numeric" aria-label="Estimated"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="final" value="10:00" inputmode="numeric" aria-label="Final"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+            </span>
+          </li>
+          <li class="list__row has-warning">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill">James Chen</span>
+            <span class="list__cell list__cell--fill">Driver</span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="estimated" value="08:00" inputmode="numeric" aria-label="Estimated"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="final" value="09:00" inputmode="numeric" aria-label="Final"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+            </span>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+  </main>
+
+
+
+</body>
+</html>
