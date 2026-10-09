@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MOTOOOR - Theme lab</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+
+  <!--
+    Theme lab: edit the colour tokens of every theme (HSL + colour picker),
+    see them live on real components and export them for _themes.scss.
+    Development tool only: its own styles and script live in this page.
+  -->
+  <style>
+    .lab {
+      display: grid;
+      --panel-width: 520px;              /* dragged with the handle (.lab__resize) */
+      grid-template-columns: var(--panel-width) 1fr;
+      height: 100vh;
+      margin: 0;
+      font: 12px/16px "Open Sans", system-ui, sans-serif;
+      color: #222;
+      background: #fff;
+      color-scheme: light;
+    }
+
+    /* Editor panel (neutral, not themed) */
+    .lab__panel {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      border-right: 1px solid #ddd;
+    }
+
+    /* Handle on the panel's right edge: drag to resize */
+    .lab__resize {
+      position: absolute;
+      top: 0;
+      right: -4px;
+      bottom: 0;
+      z-index: 1;
+      width: 8px;
+      cursor: col-resize;
+      touch-action: none;
+    }
+
+    .lab__resize:hover,
+    .lab__resize.is-dragging { background: rgba(47, 127, 193, .3); }
+
+    .lab__head {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .lab__title { font-size: 14px; font-weight: 600; }
+    .lab__hint { color: #777; }
+
+    .lab__row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .lab button.lab__btn {
+      height: 28px;
+      padding: 0 10px;
+      font: inherit;
+      font-weight: 600;
+      color: #222;
+      background: #f3f3f3;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .lab button.lab__btn[aria-pressed="true"] { color: #fff; background: #222; border-color: #222; }
+    .lab button.lab__btn:hover { border-color: #888; }
+
+    .lab__tokens { flex: 1; overflow: hidden auto; padding: 8px 16px 24px; }
+
+    .lab__group {
+      margin: 16px 0 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .tok {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 28px repeat(4, 54px) 64px;
+      gap: 4px;
+      align-items: center;
+      padding: 3px 0;
+    }
+
+    .tok__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* Token rows: palette colour it points to and % (opacity) */
+    .tok--ref { grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr) 54px; }
+
+    /* Palette rows: how many tokens use the colour (title lists them) */
+    .tok__uses { color: #777; text-align: right; white-space: nowrap; }
+    .tok__uses.is-unused { color: #bbb; }
+
+    .tok select {
+      width: 100%;
+      min-width: 0;
+      height: 24px;
+      font: inherit;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .tok select:disabled { opacity: .4; }
+    .tok.is-changed .tok__name::after { content: " •"; color: #d33; }
+    .tok__link { color: #2f7fc1; font-style: normal; }
+    .lab button.tok__relink { padding: 0 4px; font: inherit; color: #2f7fc1; background: none; border: 0; cursor: pointer; }
+    .lab button.tok__relink:hover { text-decoration: underline; }
+
+    /* Swatch: opens the HSL picker */
+    .tok__swatch {
+      width: 28px;
+      height: 24px;
+      padding: 0;
+      background:
+        linear-gradient(var(--swatch), var(--swatch)),
+        repeating-conic-gradient(#ccc 0 25%, #fff 0 50%) 0 0 / 8px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .tok.is-editing .tok__swatch { outline: 2px solid #222; outline-offset: 1px; }
+
+    /* HSL picker: saturation × lightness square, hue and alpha sliders */
+    .picker {
+      position: fixed;
+      inset: auto;
+      width: 240px;
+      margin: 0;
+      padding: 12px;
+      font: 12px/16px "Open Sans", system-ui, sans-serif;
+      color: #222;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
+    }
+
+    .picker__title { margin-bottom: 2px; font-weight: 600; }
+    .picker__uses { margin-bottom: 8px; color: #777; }
+
+    /* Token mode: does the picked colour exist in the palette? */
+    .picker__match { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; color: #777; }
+    .picker__match:empty { display: none; }
+    .picker__match strong { color: #222; }
+    .lab button.picker__action { justify-content: flex-start; text-align: left; }
+
+    .picker__area {
+      position: relative;
+      height: 150px;
+      border-radius: 4px;
+      background:
+        linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0) 50%, #000),
+        linear-gradient(to right, hsl(var(--h) 0% 50%), hsl(var(--h) 100% 50%));
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    .picker__dot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, .5);
+      pointer-events: none;
+    }
+
+    .picker__row {
+      display: grid;
+      grid-template-columns: 14px 1fr 48px;
+      gap: 8px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .picker__row input[type="range"] {
+      width: 100%;
+      height: 12px;
+      margin: 0;
+      border-radius: 6px;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .picker__row input[type="range"]::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; background: #fff; border: 1px solid #666; border-radius: 50%; }
+    .picker__row input[type="range"]::-moz-range-thumb { width: 12px; height: 12px; background: #fff; border: 1px solid #666; border-radius: 50%; }
+
+    .picker__hue { background: linear-gradient(to right, hsl(0 100% 50%), hsl(60 100% 50%), hsl(120 100% 50%), hsl(180 100% 50%), hsl(240 100% 50%), hsl(300 100% 50%), hsl(360 100% 50%)); }
+    .picker__sat { background: linear-gradient(to right, hsl(var(--h) 0% var(--l)), hsl(var(--h) 100% var(--l))); }
+    .picker__lig { background: linear-gradient(to right, #000, hsl(var(--h) var(--s) 50%), #fff); }
+    .picker__alp {
+      background:
+        linear-gradient(to right, transparent, hsl(var(--h) var(--s) var(--l))),
+        repeating-conic-gradient(#ccc 0 25%, #fff 0 50%) 0 0 / 8px 8px;
+    }
+
+    .picker__row input[type="number"] {
+      width: 48px;
+      height: 24px;
+      padding: 0 2px;
+      font: inherit;
+      text-align: right;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .picker__preview {
+      height: 24px;
+      margin-top: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background:
+        linear-gradient(hsl(var(--h) var(--s) var(--l) / var(--a)), hsl(var(--h) var(--s) var(--l) / var(--a))),
+        repeating-conic-gradient(#ccc 0 25%, #fff 0 50%) 0 0 / 8px 8px;
+    }
+
+    .tok input[type="number"] {
+      width: 54px;
+      height: 24px;
+      padding: 0 2px;
+      font: inherit;
+      text-align: right;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .tok__labels { color: #999; font-size: 10px; text-align: right; }
+
+    /* Generated SCSS: collapsed by default */
+    .lab__code summary {
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .lab__code[open] summary { margin-bottom: 8px; }
+
+    .lab__export {
+      width: 100%;
+      height: 160px;
+      font: 11px/14px ui-monospace, monospace;
+      border: 1px solid #ccc;
+    }
+
+    .lab__import { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+    .lab__import .lab__export { height: 80px; }
+    .lab__message { color: #777; }
+
+    /* Previews: each is a themed piece of the app */
+    .lab__previews {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      min-height: 0;
+      overflow: auto;
+    }
+
+    .lab__preview {
+      display: flex;
+      gap: 16px;
+      padding: 16px 16px 24px 0;
+      background: var(--color-bg-app);
+      color: var(--color-fg-primary);
+    }
+
+    .lab__preview .sidebar { flex: none; width: 48px; margin: 0; padding-top: 0; overflow: visible; }
+
+    .lab__stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+      padding: 16px;
+      background: var(--color-bg-content);
+      border-radius: 2px;
+    }
+
+    .lab__label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--color-fg-secondary);
+    }
+
+    .lab__line { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .lab__state { padding: 4px 8px; font-weight: 600; color: var(--st); background: var(--st-fill); border: 1px solid var(--st); border-radius: 2px; }
+    .lab__state:hover { background: var(--st-hover); }
+    .lab__cols { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+
+    /* Popovers and dialogs shown in place */
+    .lab__preview .select-menu,
+    .lab__preview .profile-menu,
+    .lab__preview .color-menu,
+    .lab__preview .modal { position: static; display: block; }
+
+    .lab__preview .select-menu--multi { display: flex; flex-direction: column; }
+    .lab__preview .list { min-width: 0; }
+    .lab__preview .card { overflow: hidden; }
+    .lab__preview .card--scroll { overflow-x: auto; }                       /* wide content keeps its real size */
+    .lab__preview .card--scroll .list--shoot-plan { min-width: 1200px; }
+    .lab__preview .lab__line .shot-type { width: 60px; }
+    .lab__preview .modal { animation: none; }
+  </style>
+</head>
+
+
+<body class="lab">
+
+  <aside class="lab__panel">
+    <div class="lab__resize" id="lab-resize" title="Drag to resize"></div>
+    <div class="lab__head">
+      <p class="lab__title">Theme lab</p>
+      <p class="lab__hint">Two levels. Palette: the raw colours (picker or HSL + alpha), shared by every theme; the number is how many tokens use each one. Themes: each token points to a palette colour, optionally at a % (opacity); its swatch picks a colour without touching the palette: an existing palette colour is used as is, otherwise you can use the closest one or add a new step (grey-750). ↺ resets a changed row. Changes show live below and are kept in this browser until the stylesheet has them: export them to _themes.scss, or import that file here.</p>
+      <div class="lab__row" role="group" aria-label="Theme to edit" id="lab-themes"></div>
+      <div class="lab__row">
+        <button class="lab__btn" id="lab-copy">Copy SCSS</button>
+        <button class="lab__btn" id="lab-download">Download</button>
+        <button class="lab__btn" id="lab-reset">Reset theme</button>
+      </div>
+    </div>
+
+    <div class="lab__tokens" id="lab-tokens"></div>
+
+    <div class="lab__head">
+      <details class="lab__code" id="lab-code">
+        <summary>SCSS export</summary>
+        <textarea class="lab__export" id="lab-export" readonly aria-label="SCSS export"></textarea>
+        <div class="lab__import">
+          <textarea class="lab__export" id="lab-import" placeholder="Paste _themes.scss (or an export) to load it here" aria-label="SCSS to import"></textarea>
+          <div class="lab__row"><button class="lab__btn" id="lab-import-apply">Import</button></div>
+          <p class="lab__message" id="lab-import-message"></p>
+        </div>
+      </details>
+    </div>
+  </aside>
+
+
+  <!-- HSL picker (one, shared by every token) -->
+  <div class="picker" id="lab-picker" popover>
+    <p class="picker__title" id="lab-picker-title"></p>
+    <p class="picker__uses" id="lab-picker-uses"></p>
+    <div class="picker__area" id="lab-picker-area"><span class="picker__dot" id="lab-picker-dot"></span></div>
+    <label class="picker__row">H <input type="range" class="picker__hue" data-key="h" min="0" max="360" step="1"><input type="number" data-key="h" min="0" max="360" step="1"></label>
+    <label class="picker__row">S <input type="range" class="picker__sat" data-key="s" min="0" max="100" step=".5"><input type="number" data-key="s" min="0" max="100" step=".5"></label>
+    <label class="picker__row">L <input type="range" class="picker__lig" data-key="l" min="0" max="100" step=".5"><input type="number" data-key="l" min="0" max="100" step=".5"></label>
+    <label class="picker__row" id="lab-picker-alpha">A <input type="range" class="picker__alp" data-key="a" min="0" max="1" step=".01"><input type="number" data-key="a" min="0" max="1" step=".01"></label>
+    <div class="picker__preview"></div>
+    <div class="picker__match" id="lab-picker-match"></div>
+  </div>
+
+  <main class="lab__previews" id="lab-previews">
+
+    <!-- One preview; the script clones it for every theme -->
+    <section class="lab__preview" data-theme="light" id="lab-preview">
+
+      <aside class="sidebar">
+        <ul class="sidebar__nav">
+          <li><a class="sidebar__item icon icon__home" href="#">Home</a></li>
+          <li><a class="sidebar__item icon icon__crew is-current" href="#">Crew</a></li>
+          <li><a class="sidebar__item icon icon__locations" href="#">Sites</a></li>
+          <li><a class="sidebar__item icon icon__shoot-plan" href="#">Shoot Plan</a></li>
+        </ul>
+      </aside>
+
+      <div class="lab__stage">
+        <p class="lab__label" data-lab-name>Light</p>
+
+        <!-- Card with header controls and a list -->
+        <section class="card">
+          <header class="card__header">
+            <h1 class="card__title">Crew</h1>
+            <button class="btn btn--hollow btn--dropdown">Add</button>
+            <button class="btn icon icon__upload">Import</button>
+            <button class="btn btn--cta icon icon__gallery">Gallery</button>
+            <button class="btn btn--alert icon icon__delete-alert">Delete</button>
+          </header>
+
+          <nav class="tabs">
+            <button class="tabs__tab" aria-selected="true">Main</button>
+            <button class="tabs__tab" aria-selected="false">Extras</button>
+          </nav>
+
+          <div class="card__body">
+            <ul class="list list--crew">
+              <li class="list__row list__row--head">
+                <label class="list__cell list__cell--check"><input type="checkbox"></label>
+                <span class="list__cell list__cell--index">#</span>
+                <span class="list__cell list__cell--fill">Dept</span>
+                <span class="list__cell list__cell--fill">Name</span>
+                <span class="list__cell list__cell--fill">Sets</span>
+                <span class="list__cell list__cell--phone">Phone</span>
+                <span class="list__cell list__cell--actions">Info</span>
+              </li>
+              <li class="list__row">
+                <label class="list__cell list__cell--check"><input type="checkbox" checked></label>
+                <span class="list__cell list__cell--index">1</span>
+                <button class="list__cell list__cell--fill list__cell--select">Production</button>
+                <span class="list__cell list__cell--fill"><input class="inline-input" value="Eva Green" aria-label="Name"></span>
+                <button class="list__cell list__cell--fill list__cell--select list__cell--multi"><span class="list__values"><span>Vestuario</span><span>Cocina</span></span></button>
+                <span class="list__cell list__cell--phone"><input class="inline-input" value="654 123 456" aria-label="Phone"></span>
+                <span class="list__cell list__cell--actions">
+                  <button class="pill icon icon__calendar">All</button>
+                  <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+                </span>
+              </li>
+              <li class="list__row has-warning">
+                <label class="list__cell list__cell--check"><input type="checkbox"></label>
+                <span class="list__cell list__cell--index">2</span>
+                <button class="list__cell list__cell--fill list__cell--select">Camera</button>
+                <span class="list__cell list__cell--fill"><input class="inline-input" value="" placeholder="Add name" aria-label="Name"></span>
+                <button class="list__cell list__cell--fill list__cell--select list__cell--multi"><span class="list__values" data-empty="Add set"></span></button>
+                <span class="list__cell list__cell--phone"><input class="inline-input" value="611 234 567" aria-label="Phone"></span>
+                <span class="list__cell list__cell--actions">
+                  <button class="pill icon icon__calendar">1/2</button>
+                  <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Shoot Plan: day banner, shots, custom banners, unit types and flow (scrolls sideways) -->
+        <section class="card card--scroll">
+          <ul class="list list--shoot-plan">
+            <li class="list__row list__row--banner">
+              <span class="list__cell list__cell--range">
+                <button class="pill pill--time">9:30</button>
+                <button class="pill pill--time">17:50</button>
+              </span>
+              <h2 class="list__cell list__cell--fill">Day 1 - 29th september</h2>
+              <span class="list__cell list__cell--meta">Shooting time: <span class="pill">17h 20m</span></span>
+            </li>
+
+            <!-- Shots: in the flow, and out of the flow with a warning -->
+            <li class="list__row">
+              <div class="list__cell list__cell--slot">
+                <input type="checkbox" aria-label="Select shot">
+                <button class="pill pill--time">9:30</button>
+                <button class="pill pill--time">9:50</button>
+              </div>
+              <figure class="list__cell list__cell--shot thumb">
+                <img src="img/ad/001.png" alt="">
+                <figcaption>12</figcaption>
+              </figure>
+              <div class="list__cell list__cell--desc">
+                <strong>Spot 1</strong>
+                <p>Texto que describe la acción que sucede en el plano a rodar</p>
+              </div>
+              <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
+                <span class="list__values" data-empty="Add set"></span>
+              </button>
+              <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Cast">
+                <span class="list__values" data-empty="Add cast"></span>
+              </button>
+              <div class="list__cell list__cell--reqs">
+                <p><b>Cámara</b>: Alexa cámara en mano.</p>
+                <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
+                <p><b>Producto</b>: Big Mac.</p>
+              </div>
+              <div class="list__cell list__cell--actions">
+                <button class="shot-type">AV</button>
+                <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
+                <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+              </div>
+            </li>
+
+            <li class="list__row has-warning">
+              <div class="list__cell list__cell--slot">
+                <input type="checkbox" aria-label="Select shot">
+                <button class="pill pill--time">10:00</button>
+                <button class="pill pill--time">10:20</button>
+              </div>
+              <figure class="list__cell list__cell--shot thumb">
+                <img src="img/ad/002.png" alt="">
+                <figcaption>17</figcaption>
+              </figure>
+              <div class="list__cell list__cell--desc">
+                <strong>Spot 1</strong>
+                <p>Texto que describe la acción que sucede en el plano a rodar</p>
+              </div>
+              <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="1" aria-label="Set">
+                <span class="list__values" data-empty="Add set"><span>Vestuario</span></span>
+              </button>
+              <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="1,2,3" aria-label="Cast">
+                <span class="list__values" data-empty="Add cast"><span>Policeman</span><span>Reporter</span><span>Concerned Citizen</span></span>
+              </button>
+              <div class="list__cell list__cell--reqs">
+                <p><b>Cámara</b>: Alexa cámara en mano.</p>
+                <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
+                <p><b>Producto</b>: Big Mac.</p>
+              </div>
+              <div class="list__cell list__cell--actions">
+                <button class="shot-type">AV</button>
+                <label class="pill pill--flow"><input type="checkbox" unchecked>Flow</label>
+                <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+              </div>
+            </li>
+            <li class="list__row list__row--banner list__row--banner-custom" data-color="0">
+              <span class="list__cell list__cell--range"><button class="pill pill--time">9:30</button><button class="pill pill--time">10:00</button></span>
+              <h2 class="list__cell list__cell--fill">Banner · alt-1</h2>
+              <span class="list__cell list__cell--banner-actions"><span class="color-button"></span><label class="pill pill--flow"><input type="checkbox" checked>Flow</label></span>
+            </li>
+            <li class="list__row list__row--banner list__row--banner-custom" data-color="1"><h2 class="list__cell list__cell--fill">Banner · alt-2</h2></li>
+            <li class="list__row list__row--banner list__row--banner-custom" data-color="2"><h2 class="list__cell list__cell--fill">Banner · alt-3</h2></li>
+            <li class="list__row list__row--banner list__row--banner-custom" data-color="3"><h2 class="list__cell list__cell--fill">Banner · alt-4</h2></li>
+            <li class="list__row list__row--banner list__row--banner-custom" data-color="4">
+              <h2 class="list__cell list__cell--fill">Banner · alt-5 (out of the flow)</h2>
+              <span class="list__cell list__cell--banner-actions"><label class="pill pill--flow"><input type="checkbox">Flow</label></span>
+            </li>
+          </ul>
+          <div class="lab__line" style="padding: 16px">
+            <span class="shot-type">AV</span>
+            <span class="shot-type shot-type--photo">Photo</span>
+            <span class="shot-type shot-type--social">Social</span>
+            <span class="shot-type shot-type--banner">Banner</span>
+            <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
+            <input type="checkbox" class="switch" role="switch" checked aria-label="Switch">
+            <input type="checkbox" class="switch" role="switch" aria-label="Switch">
+            <input type="radio" name="lab-radio" checked aria-label="Radio"> <input type="radio" name="lab-radio" aria-label="Radio">
+            <span class="pill pill--input">20m</span>
+            <span class="pill pill--input is-alert">09:00</span>
+          </div>
+        </section>
+
+        <!-- States: colour, fill and hover (pointer over each) -->
+        <div class="lab__line">
+          <span class="lab__state" style="--st: var(--color-alert); --st-fill: var(--color-alert-fill); --st-hover: var(--color-alert-hover)">Alert</span>
+          <span class="lab__state" style="--st: var(--color-warning); --st-fill: var(--color-warning-fill); --st-hover: var(--color-warning-hover)">Warning</span>
+          <span class="lab__state" style="--st: var(--color-success); --st-fill: var(--color-success-fill); --st-hover: var(--color-success-hover)">Success</span>
+          <span class="lab__state" style="--st: var(--color-info); --st-fill: var(--color-info-fill); --st-hover: var(--color-info-hover)">Info</span>
+        </div>
+
+        <!-- Menus, facts and a modal -->
+        <div class="lab__cols">
+          <div class="select-menu select-menu--multi">
+            <div class="select-menu__list">
+              <label class="select-menu__option"><input type="checkbox" checked>Vestuario</label>
+              <label class="select-menu__option"><input type="checkbox">Dormitorio</label>
+              <label class="select-menu__option"><input type="checkbox">Cocina</label>
+            </div>
+            <div class="select-menu__add"><input class="select-menu__field" aria-label="New option"><button class="icon-button icon icon__add-alt" aria-label="Add"></button></div>
+          </div>
+
+          <div class="profile-menu">
+            <p class="profile-menu__name">Luis Herrero</p>
+            <a class="profile-menu__item" href="#">Account</a>
+            <a class="profile-menu__item" href="#">Settings</a>
+            <div class="profile-menu__item profile-menu__theme">Theme
+              <span class="profile-menu__themes">
+                <button class="icon-button icon icon__theme-light" aria-pressed="true" aria-label="Light"></button>
+                <button class="icon-button icon icon__theme-dark" aria-pressed="false" aria-label="Dark"></button>
+                <button class="icon-button icon icon__theme-system" aria-pressed="false" aria-label="System"></button>
+              </span>
+            </div>
+            <a class="profile-menu__item profile-menu__logout icon icon__log-out" href="#">Log out</a>
+          </div>
+
+          <section class="card card--widget" style="width: 300px">
+            <header class="card__header"><h2 class="card__title">Credits</h2></header>
+            <dl class="facts">
+              <div><dt>Client</dt><dd>Under Armour</dd></div>
+              <div><dt>Director</dt><dd>Erik Morales</dd></div>
+            </dl>
+          </section>
+
+          <div class="modal" style="width: 400px">
+            <h2 class="modal__title icon icon__warning-alert">Delete all items?</h2>
+            <p class="modal__text">This action will remove all crew members from the project.</p>
+            <footer class="modal__buttons">
+              <button class="btn">Cancel</button>
+              <button class="btn btn--alert">Delete all</button>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <script>
+  (function () {
+    "use strict";
+
+    var STORE = "motooor-theme-lab-v3";
+    var themes = ["light", "dark"];
+    var root = getComputedStyle(document.documentElement);
+
+    function listFromCss(prop) {
+      return root.getPropertyValue(prop).replace(/["']/g, "").split(/\s*,\s*|\s+/).filter(Boolean);
+    }
+
+    /* Names come from the CSS, emitted from _themes.scss */
+    var cssPalette = listFromCss("--palette-names");
+    var paletteNames = cssPalette.slice();      /* + steps added here (see addStep) */
+    var tokenNames = listFromCss("--color-tokens");
+
+    /* Colour helpers ----------------------------------------------------- */
+    var probe = document.createElement("i");
+    probe.hidden = true;
+    document.body.append(probe);
+
+    function toRgba(value) {
+      probe.style.color = "";
+      probe.style.color = value;
+      var m = getComputedStyle(probe).color.match(/[\d.]+/g) || [0, 0, 0];
+      return [+m[0], +m[1], +m[2], m[3] === undefined ? 1 : +m[3]];
+    }
+
+    function rgbToHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      var max = Math.max(r, g, b), min = Math.min(r, g, b), h = 0, s = 0, l = (max + min) / 2, d = max - min;
+      if (d) {
+        s = l > .5 ? d / (2 - max - min) : d / (max + min);
+        h = max === r ? (g - b) / d + (g < b ? 6 : 0) : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+        h *= 60;
+      }
+      return [Math.round(h), Math.round(s * 1000) / 10, Math.round(l * 1000) / 10];
+    }
+
+    function toHsla(value) {
+      var c = toRgba(value), hsl = rgbToHsl(c[0], c[1], c[2]);
+      return { h: hsl[0], s: hsl[1], l: hsl[2], a: Math.round(c[3] * 100) / 100 };
+    }
+
+    function css(v) { return "hsl(" + v.h + " " + v.s + "% " + v.l + "% / " + v.a + ")"; }
+
+    function hex(v) {
+      var s = v.s / 100, l = v.l / 100, a = s * Math.min(l, 1 - l);
+      var f = function (n) {
+        var k = (n + v.h / 30) % 12;
+        return Math.round((l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1))) * 255).toString(16).padStart(2, "0");
+      };
+      return "#" + f(0) + f(8) + f(4);
+    }
+
+    function scssColor(v) {
+      return v.a < 1 ? "hsla(" + v.h + ", " + v.s + "%, " + v.l + "%, " + v.a + ")" : hex(v);
+    }
+
+    function same(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+
+    /* Definitions: "ref" or "ref@6%" -------------------------------------- */
+    function parseDef(text) {
+      var m = text.match(/^([\w-]+)(?:@([\d.]+)%)?$/) || [];
+      return { ref: m[1], amount: m[2] ? +m[2] : null };
+    }
+
+    function defToScss(d) {
+      return d.amount === null || d.amount === 100 ? d.ref : "(" + d.ref + " " + d.amount + "%)";
+    }
+
+    function isPalette(name) { return paletteNames.indexOf(name) !== -1; }
+
+    /* A step added in this lab, not yet in the compiled CSS */
+    function isAdded(name) { return cssPalette.indexOf(name) === -1; }
+
+    function varOf(name) { return "var(--palette-" + name + ")"; }
+
+    function defToCss(d) {
+      if (d.amount === null) { return varOf(d.ref); }
+      return "color-mix(in srgb, " + varOf(d.ref) + " " + d.amount + "%, transparent)";
+    }
+
+    /* Values in the stylesheet ------------------------------------------- */
+    var original = { palette: {}, themes: {} };
+    paletteNames.forEach(function (n) { original.palette[n] = toHsla(root.getPropertyValue("--palette-" + n).trim()); });
+    themes.forEach(function (theme) {
+      var el = document.createElement("div");
+      el.setAttribute("data-theme", theme);
+      el.hidden = true;
+      document.body.append(el);
+      var defs = {};
+      getComputedStyle(el).getPropertyValue("--color-defs").replace(/["']/g, "").trim().split(/\s+/).forEach(function (pair) {
+        var i = pair.indexOf("=");
+        if (i > 0) { defs[pair.slice(0, i)] = parseDef(pair.slice(i + 1)); }
+      });
+      original.themes[theme] = defs;
+      el.remove();
+    });
+
+    /*
+      Current values: the stylesheet plus the edits kept in this browser.
+      Only edits are kept (what differs from the stylesheet), so a
+      recompiled _themes.scss shows up here for everything not edited, and
+      an edit disappears once the stylesheet has the same value.
+    */
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(STORE)) || {}; } catch (e) { saved = {}; }
+
+    function known(edits, names, valid) {
+      var out = {};
+      Object.keys(edits || {}).forEach(function (n) { if (names.indexOf(n) !== -1 && valid(edits[n])) { out[n] = edits[n]; } });
+      return out;
+    }
+
+    function validDef(d) { return d && isPalette(d.ref); }
+
+    /* Palette order: families as in the stylesheet, steps in number order */
+    function stepOf(n) { var m = n.match(/-(\d+)$/); return m ? +m[1] : -1; }
+
+    function sortPalette() {
+      var families = [];
+      paletteNames.forEach(function (n) { if (families.indexOf(family(n)) === -1) { families.push(family(n)); } });
+      paletteNames.sort(function (a, b) {
+        return families.indexOf(family(a)) - families.indexOf(family(b)) || stepOf(a) - stepOf(b);
+      });
+    }
+
+    /* Steps added in this browser come back before the edits that use them */
+    (saved.added || []).forEach(function (n) {
+      if (!isPalette(n) && saved.palette && saved.palette[n]) { paletteNames.push(n); }
+    });
+    sortPalette();
+
+    var state = { palette: Object.assign({}, original.palette, known(saved.palette, paletteNames, Boolean)), themes: {} };
+    themes.forEach(function (t) { state.themes[t] = Object.assign({}, original.themes[t], known((saved.themes || {})[t], tokenNames, validDef)); });
+
+    function edits(now, before) {
+      var out = {};
+      Object.keys(now).forEach(function (n) { if (!same(now[n], before[n])) { out[n] = now[n]; } });
+      return out;
+    }
+
+    function save() {
+      var data = { palette: edits(state.palette, original.palette), themes: {}, added: paletteNames.filter(isAdded) };
+      themes.forEach(function (t) { data.themes[t] = edits(state.themes[t], original.themes[t]); });
+      try { localStorage.setItem(STORE, JSON.stringify(data)); } catch (e) { /* private mode */ }
+    }
+
+    /* Tokens that use a palette colour, per theme: ["light · fg-primary", …] */
+    function usesOf(name) {
+      var out = [];
+      themes.forEach(function (t) {
+        tokenNames.forEach(function (n) {
+          var d = state.themes[t][n];
+          if (d.ref === name) { out.push(t + " · " + n); }
+        });
+      });
+      return out;
+    }
+
+    /* Previews ------------------------------------------------------------ */
+
+    function svgImage(svg, colour) {
+      return "url(\"data:image/svg+xml," + svg.replace("COLOR", encodeURIComponent(css(colour))) + "\")";
+    }
+    var template = document.getElementById("lab-preview");
+    var previews = {};
+    themes.forEach(function (t, i) {
+      var p = i ? template.cloneNode(true) : template;
+      p.removeAttribute("id");
+      p.setAttribute("data-theme", t);
+      p.querySelector("[data-lab-name]").textContent = t;
+      if (i) { document.getElementById("lab-previews").append(p); }
+      previews[t] = p;
+
+    });
+
+    /* A token's palette colour (for the tick) */
+    function plainColour(theme, n) {
+      return state.palette[state.themes[theme][n].ref];
+    }
+
+    function paint() {
+      themes.forEach(function (t) {
+        var p = previews[t];
+        paletteNames.forEach(function (n) { p.style.setProperty("--palette-" + n, css(state.palette[n])); });
+        tokenNames.forEach(function (n) { p.style.setProperty("--color-" + n, defToCss(state.themes[t][n])); });
+        if (draft && draft.theme === t) {
+          var d = state.themes[t][draft.token], c = css(draft.value);
+          p.style.setProperty("--color-" + draft.token, d.amount === null ? c : "color-mix(in srgb, " + c + " " + d.amount + "%, transparent)");
+        }
+        /* Images generated per theme, as in theme-vars() of _tokens.scss */
+        p.style.setProperty("--image-check", svgImage("%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='COLOR' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E", plainColour(t, "fg-inverse")));
+        p.style.setProperty("--image-select", svgImage("%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='COLOR'/%3E%3C/svg%3E", plainColour(t, "fg-primary")));
+        p.style.setProperty("--image-chevron", svgImage("%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='COLOR' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E", plainColour(t, "fg-primary")));
+      });
+    }
+
+    /* Editor -------------------------------------------------------------- */
+    var current = "palette";        /* "palette" or a theme name */
+    var list = document.getElementById("lab-tokens");
+
+    /* Palette family: grey-600 → grey; white and black → base */
+    function family(n) {
+      var i = n.lastIndexOf("-");
+      return i > 0 ? n.slice(0, i) : "base";
+    }
+
+    function groupOf(n) {
+      return current === "palette" ? "Palette · " + family(n) : tokenGroup(n);
+    }
+
+    function tokenGroup(n) {
+      return /^bg-/.test(n) ? "Backgrounds" :
+             /^fg-/.test(n) ? "Foregrounds" :
+             /^border-/.test(n) ? "Borders" :
+             /^(alert|warning|success|info)/.test(n) ? "States" :
+             /^accent/.test(n) ? "Brand and focus" :
+             /^(shadow|overlay|backdrop)/.test(n) ? "Effects" :
+             /^sidebar-/.test(n) ? "Sidebar" :
+             /^btn-/.test(n) ? "Buttons" :
+             /^banner-/.test(n) ? "Shoot Plan" : "Other";
+    }
+
+    function el(tag, className, text) {
+      var e = document.createElement(tag);
+      if (className) { e.className = className; }
+      if (text) { e.textContent = text; }
+      return e;
+    }
+
+    function numberInput(key, max, step, title) {
+      var input = el("input");
+      input.type = "number";
+      input.min = 0;
+      input.max = max;
+      input.step = step;
+      input.dataset.key = key;
+      input.title = title || key.toUpperCase();
+      return input;
+    }
+
+    /* <select> of palette colours, grouped by family */
+    function refSelect(key, allowNone) {
+      var s = el("select"), groups = {};
+      s.dataset.key = key;
+      if (allowNone) { s.append(new Option("transparent", "")); }
+      paletteNames.forEach(function (n) {
+        var f = family(n);
+        if (!groups[f]) {
+          groups[f] = document.createElement("optgroup");
+          groups[f].label = f;
+          s.append(groups[f]);
+        }
+        groups[f].append(new Option(n, n));
+      });
+      return s;
+    }
+
+    function build() {
+      list.textContent = "";
+      var names = current === "palette" ? paletteNames : tokenNames, last = "";
+
+      names.forEach(function (n) {
+        var g = groupOf(n);
+        if (g !== last) {
+          list.append(el("p", "lab__group", g));
+          var labels = el("div", "tok tok__labels" + (current === "palette" ? "" : " tok--ref"));
+          labels.innerHTML = current === "palette"
+            ? "<span></span><span></span><span>H</span><span>S %</span><span>L %</span><span>A</span><span>Used by</span>"
+            : "<span></span><span></span><span>Points to</span><span>%</span>";
+          list.append(labels);
+          last = g;
+        }
+
+        var row = el("div", "tok" + (current === "palette" ? "" : " tok--ref"));
+        row.dataset.name = n;
+        var label = el("span", "tok__name");
+        var swatch = el("button", "tok__swatch");
+        swatch.type = "button";
+        swatch.setAttribute("aria-label", n);
+
+        if (current === "palette") {
+          row.append(label, swatch, numberInput("h", 360, 1), numberInput("s", 100, .5), numberInput("l", 100, .5), numberInput("a", 1, .01), el("span", "tok__uses"));
+        } else {
+          var amount = numberInput("amount", 100, 1, "Opacity (empty = 100%)");
+          amount.placeholder = "100";
+          row.append(label, swatch, refSelect("ref"), amount);
+        }
+        list.append(row);
+      });
+      fill();
+    }
+
+    function fillRow(row) {
+      var n = row.dataset.name, label = row.querySelector(".tok__name"), changed;
+
+      if (current === "palette") {
+        var v = state.palette[n];
+        row.querySelector(".tok__swatch").style.setProperty("--swatch", css(v));
+        row.querySelectorAll("[data-key]").forEach(function (i) { if (document.activeElement !== i) { i.value = v[i.dataset.key]; } });
+        changed = !same(v, original.palette[n]);
+        var uses = usesOf(n), count = row.querySelector(".tok__uses");
+        count.textContent = uses.length ? uses.length + (uses.length > 1 ? " tokens" : " token") : "not used";
+        count.title = uses.join("\n");
+        count.classList.toggle("is-unused", !uses.length);
+      } else {
+        var d = state.themes[current][n];
+        row.querySelector("[data-key=ref]").value = d.ref;
+        row.querySelector("[data-key=amount]").value = d.amount === null ? "" : d.amount;
+        var sw = row.querySelector(".tok__swatch");
+        sw.style.setProperty("--swatch", getComputedStyle(previews[current]).getPropertyValue("--color-" + n));
+        sw.title = "Pick a colour (the palette is not changed)";
+        changed = !same(d, original.themes[current][n]);
+      }
+
+      label.textContent = n;
+      row.classList.toggle("is-changed", changed);
+      if (changed) {
+        var reset = el("button", "tok__relink", "↺");
+        reset.type = "button";
+        reset.dataset.reset = "";
+        reset.title = current === "palette" && isAdded(n) ? "Remove this added step" : "Back to the stylesheet value";
+        label.append(reset);
+      }
+    }
+
+    function fill() {
+      list.querySelectorAll(".tok[data-name]").forEach(fillRow);
+      exportScss();
+    }
+
+    function refresh() {
+      paint();
+      save();
+      fill();
+      if (editing) { syncPicker(); }
+    }
+
+    list.addEventListener("input", function (event) {
+      var row = event.target.closest(".tok[data-name]");
+      if (!row || !event.target.dataset.key) { return; }
+      var n = row.dataset.name, key = event.target.dataset.key, value = event.target.value;
+
+      if (current === "palette") {
+        if (value === "") { return; }
+        state.palette[n] = Object.assign({}, state.palette[n]);
+        state.palette[n][key] = +value;
+      } else {
+        var d = Object.assign({}, state.themes[current][n]);
+        if (key === "ref") { d.ref = value; }
+        if (key === "amount") { d.amount = value === "" ? null : +value; }
+        state.themes[current][n] = d;
+      }
+      refresh();
+    });
+
+    list.addEventListener("click", function (event) {
+      var row = event.target.closest(".tok[data-name]");
+      if (!row) { return; }
+      var n = row.dataset.name;
+
+      if (event.target.closest("[data-reset]")) {
+        if (current === "palette" && isAdded(n)) { removeStep(n); build(); }
+        else if (current === "palette") { state.palette[n] = Object.assign({}, original.palette[n]); }
+        else { state.themes[current][n] = Object.assign({}, original.themes[current][n]); }
+        refresh();
+        return;
+      }
+
+      /* Palette row: edit that colour. Token row: pick a colour for the token */
+      var swatch = event.target.closest(".tok__swatch");
+      if (swatch) { openPicker(row, swatch, n); }
+    });
+
+    /* Palette steps added here -------------------------------------------- */
+
+    /* rgb of a palette colour, for comparing */
+    function rgb(v) {
+      var h = hex(v);
+      return [1, 3, 5].map(function (i) { return parseInt(h.substr(i, 2), 16); });
+    }
+
+    function distance(a, b) {
+      var x = rgb(a), y = rgb(b);
+      return Math.pow(x[0] - y[0], 2) + Math.pow(x[1] - y[1], 2) + Math.pow(x[2] - y[2], 2);
+    }
+
+    /* Opaque palette colour equal to v, or the closest one */
+    function exactOf(v) {
+      return paletteNames.filter(function (n) { return state.palette[n].a === 1 && hex(state.palette[n]) === hex(v); })[0] || null;
+    }
+
+    function closestOf(v, names) {
+      return (names || paletteNames).filter(function (n) { return state.palette[n].a === 1; }).sort(function (a, b) {
+        return distance(state.palette[a], v) - distance(state.palette[b], v);
+      })[0];
+    }
+
+    /*
+      Name for a new step: the family of the closest colour (grey when that
+      is white or black) and the step between its lighter and darker
+      neighbours (grey-750 between grey-700 and grey-800).
+    */
+    function newStepName(v) {
+      var near = closestOf(v, paletteNames.filter(function (n) { return family(n) !== "base"; }));
+      var fam = near ? family(near) : "grey";
+      var steps = paletteNames.filter(function (n) { return family(n) === fam && stepOf(n) >= 0; });
+      var lighter = 0, darker = 1000;
+      steps.forEach(function (n) {
+        var step = stepOf(n);
+        if (state.palette[n].l >= v.l) { lighter = Math.max(lighter, step); }
+        else { darker = Math.min(darker, step); }
+      });
+      if (darker <= lighter) { darker = lighter + 50; }
+      var step = Math.round((lighter + darker) / 2 / 25) * 25;
+      if (step <= lighter || step >= darker) { step = Math.round((lighter + darker) / 2); }
+      while (isPalette(fam + "-" + step) && step < darker - 1) { step++; }
+      return fam + "-" + step;
+    }
+
+    function addStep(name, v) {
+      paletteNames.push(name);
+      sortPalette();
+      state.palette[name] = Object.assign({}, v, { a: 1 });
+    }
+
+    /* Remove an added step; tokens that used it go back to the stylesheet */
+    function removeStep(name) {
+      paletteNames.splice(paletteNames.indexOf(name), 1);
+      delete state.palette[name];
+      themes.forEach(function (t) {
+        tokenNames.forEach(function (n) {
+          if (state.themes[t][n].ref === name) { state.themes[t][n] = Object.assign({}, original.themes[t][n]); }
+        });
+      });
+    }
+
+    /* HSL picker ------------------------------------------------------------
+      Palette tab: edits that palette colour (every token using it follows).
+      Theme tab: picks a colour for one token without touching the palette.
+      If the colour is in the palette the token points to it; if not, the
+      picker offers the closest palette colour or a new step. Closing the
+      picker without choosing puts the token back.
+    */
+    var picker = document.getElementById("lab-picker");
+    var area = document.getElementById("lab-picker-area");
+    var dot = document.getElementById("lab-picker-dot");
+    var match = document.getElementById("lab-picker-match");
+    var editing = null;      /* palette name (palette tab) or token name (theme tab) */
+    var draft = null;        /* theme tab: { theme, token, value } being picked */
+
+    function pickedValue() { return draft ? draft.value : state.palette[editing]; }
+
+    function syncPicker() {
+      var v = pickedValue();
+      picker.style.setProperty("--h", v.h);
+      picker.style.setProperty("--s", v.s + "%");
+      picker.style.setProperty("--l", v.l + "%");
+      picker.style.setProperty("--a", v.a);
+      picker.querySelectorAll("[data-key]").forEach(function (i) {
+        if (document.activeElement !== i || i.type === "range") { i.value = v[i.dataset.key]; }
+      });
+      dot.style.left = v.s + "%";
+      dot.style.top = (100 - v.l) + "%";
+      dot.style.background = css(v);
+      if (draft) { syncMatch(); }
+    }
+
+    function action(text, onClick) {
+      var b = el("button", "lab__btn picker__action", text);
+      b.type = "button";
+      b.addEventListener("click", onClick);
+      return b;
+    }
+
+    /* Theme tab: the token points to the picked colour, or the picker offers options */
+    function syncMatch() {
+      var d = state.themes[draft.theme][draft.token], same = exactOf(draft.value);
+      match.textContent = "";
+      if (same) {
+        if (d.ref !== same) {
+          state.themes[draft.theme][draft.token] = Object.assign({}, d, { ref: same });
+          save();
+          fill();
+        }
+        match.append(el("span", "", "In the palette: "), el("strong", "", same));
+        return;
+      }
+      var near = closestOf(draft.value), name = newStepName(draft.value);
+      match.append(el("span", "", "Not in the palette."));
+      match.append(action("Add " + name + " to the palette", function () {
+        addStep(name, draft.value);
+        state.themes[draft.theme][draft.token] = Object.assign({}, d, { ref: name });
+        build();          /* the new step joins the lists */
+        list.querySelector('.tok[data-name="' + draft.token + '"]').classList.add("is-editing");
+        refresh();
+      }));
+      match.append(action("Use the closest: " + near, function () {
+        state.themes[draft.theme][draft.token] = Object.assign({}, d, { ref: near });
+        draft.value = Object.assign({}, state.palette[near]);
+        refresh();
+      }));
+    }
+
+    function openPicker(row, swatch, name) {
+      list.querySelectorAll(".is-editing").forEach(function (r) { r.classList.remove("is-editing"); });
+      editing = name;
+      row.classList.add("is-editing");
+      var title = document.getElementById("lab-picker-title"), uses = document.getElementById("lab-picker-uses");
+
+      if (current === "palette") {
+        draft = null;
+        title.textContent = "Palette · " + name;
+        var list2 = usesOf(name);
+        uses.textContent = list2.length
+          ? "Changes " + list2.length + " token" + (list2.length > 1 ? "s" : "") + ": " + list2.join(", ")
+          : "Not used by any token";
+      } else {
+        var ref = state.themes[current][name].ref;
+        draft = { theme: current, token: name, value: Object.assign({}, state.palette[ref], { a: 1 }) };
+        title.textContent = current + " · " + name;
+        uses.textContent = "Picks a colour for this token; the palette does not change.";
+      }
+      document.getElementById("lab-picker-alpha").hidden = !!draft;     /* tokens use their % instead */
+      match.textContent = "";
+      syncPicker();
+      picker.showPopover();
+      var r = swatch.getBoundingClientRect();
+      picker.style.left = r.right + 12 + "px";
+      picker.style.top = Math.max(8, Math.min(r.top - 8, window.innerHeight - picker.offsetHeight - 8)) + "px";
+    }
+
+    picker.addEventListener("toggle", function (event) {
+      if (event.newState === "closed") {
+        list.querySelectorAll(".is-editing").forEach(function (r) { r.classList.remove("is-editing"); });
+        editing = null;
+        if (draft) { draft = null; refresh(); }    /* a colour not chosen is not kept */
+      }
+    });
+
+    function setPicked(changes) {
+      if (draft) { draft.value = Object.assign({}, draft.value, changes); }
+      else { state.palette[editing] = Object.assign({}, state.palette[editing], changes); }
+      refresh();
+    }
+
+    picker.addEventListener("input", function (event) {
+      if (!editing || event.target.value === "" || !event.target.dataset.key) { return; }
+      var c = {};
+      c[event.target.dataset.key] = +event.target.value;
+      setPicked(c);
+    });
+
+    function pickArea(event) {
+      var r = area.getBoundingClientRect();
+      var x = Math.min(1, Math.max(0, (event.clientX - r.left) / r.width));
+      var y = Math.min(1, Math.max(0, (event.clientY - r.top) / r.height));
+      setPicked({ s: Math.round(x * 1000) / 10, l: Math.round((1 - y) * 1000) / 10 });
+    }
+
+    area.addEventListener("pointerdown", function (event) {
+      if (!editing) { return; }
+      area.setPointerCapture(event.pointerId);
+      pickArea(event);
+      area.addEventListener("pointermove", pickArea);
+    });
+
+    area.addEventListener("pointerup", function () { area.removeEventListener("pointermove", pickArea); });
+
+    /* Tabs: palette and each theme ------------------------------------------ */
+    var tabs = document.getElementById("lab-themes");
+    ["palette"].concat(themes).forEach(function (t) {
+      var b = el("button", "lab__btn", t === "palette" ? "Palette" : "Theme " + t);
+      b.dataset.tab = t;
+      tabs.append(b);
+    });
+
+    function select(t) {
+      if (picker.matches(":popover-open")) { picker.hidePopover(); }
+      current = t;
+      tabs.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.tab === t)); });
+      document.getElementById("lab-reset").textContent = t === "palette" ? "Reset palette" : "Reset theme";
+      build();
+    }
+
+    tabs.addEventListener("click", function (event) {
+      if (event.target.dataset.tab) { select(event.target.dataset.tab); }
+    });
+
+    document.getElementById("lab-reset").addEventListener("click", function () {
+      if (current === "palette") {
+        paletteNames.filter(isAdded).forEach(removeStep);
+        state.palette = Object.assign({}, original.palette);
+        build();
+      }
+      else { state.themes[current] = Object.assign({}, original.themes[current]); }
+      refresh();
+    });
+
+    /* Export: $palette and the themes (dark lists only what differs) --------- */
+    var output = document.getElementById("lab-export");
+
+    /* A map with a comment above each group: entries are [name, value, group] */
+    function block(name, entries) {
+      var width = 19, last = null;
+      return name + ": (\n" + entries.map(function (e, i) {
+        var head = e[2] !== last ? (last === null ? "" : "\n") + "  // " + e[2] + "\n" : "";
+        last = e[2];
+        return head + "  " + (e[0] + ":").padEnd(e[0].length + 2 > width ? e[0].length + 2 : width) + e[1] + (i < entries.length - 1 ? "," : "");
+      }).join("\n") + "\n);";
+    }
+
+    /* Palette colour as in the stylesheet while unchanged (no HSL rounding) */
+    var cssText = {};
+    cssPalette.forEach(function (n) { cssText[n] = root.getPropertyValue("--palette-" + n).trim(); });
+
+    function paletteValue(n) {
+      return !isAdded(n) && same(state.palette[n], original.palette[n]) ? cssText[n] : scssColor(state.palette[n]);
+    }
+
+    function exportScss() {
+      var parts = [block("$palette", paletteNames.map(function (n) { return [n, paletteValue(n), family(n)]; }))];
+      themes.forEach(function (t, i) {
+        var entries = tokenNames.filter(function (n) {
+          return !i || !same(state.themes[t][n], state.themes.light[n]);
+        }).map(function (n) { return [n, defToScss(state.themes[t][n]), tokenGroup(n)]; });
+        parts.push((i ? "/* Dark: only what differs from $theme-light */\n".replace("Dark", t[0].toUpperCase() + t.slice(1)) : "") + block("$theme-" + t, entries));
+      });
+      output.value = parts.join("\n\n");
+    }
+
+    document.getElementById("lab-copy").addEventListener("click", function () {
+      if (navigator.clipboard) { navigator.clipboard.writeText(output.value).catch(function () { output.select(); document.execCommand("copy"); }); }
+      else { output.select(); document.execCommand("copy"); }
+    });
+
+    /* Import: _themes.scss (or an export) back into the lab ---------------- */
+
+    /* "name: ( … )" → the text between the brackets, or null */
+    function scssMap(text, name) {
+      var at = text.search(new RegExp("\\$" + name + "\\s*:\\s*\\("));
+      if (at === -1) { return null; }
+      var start = text.indexOf("(", at), depth = 0;
+      for (var i = start; i < text.length; i++) {
+        if (text[i] === "(") { depth++; }
+        if (text[i] === ")" && !--depth) { return text.slice(start + 1, i); }
+      }
+      return null;
+    }
+
+    /* Entries "key: value" separated by top-level commas */
+    function scssEntries(body) {
+      var out = [], depth = 0, part = "";
+      (body + ",").split("").forEach(function (ch) {
+        if (ch === "(") { depth++; }
+        if (ch === ")") { depth--; }
+        if (ch === "," && !depth) {
+          var i = part.indexOf(":");
+          if (i > 0) { out.push([part.slice(0, i).trim(), part.slice(i + 1).trim()]); }
+          part = "";
+        } else { part += ch; }
+      });
+      return out;
+    }
+
+    function scssDef(value) {
+      var parts = value.replace(/^\(|\)$/g, "").trim().split(/\s+/);
+      return { ref: parts[0], amount: parts[1] ? parseFloat(parts[1]) : null };
+    }
+
+    function importScss(text) {
+      text = text.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
+      var skipped = [], added = [], count = 0, palette = scssMap(text, "palette");
+
+      /* Palette colours not in the compiled CSS are added as new steps */
+      if (palette) {
+        scssEntries(palette).forEach(function (e) {
+          if (!isPalette(e[0])) {
+            if (!/^[a-z]+(-\d+)?$/.test(e[0])) { skipped.push(e[0]); return; }
+            addStep(e[0], toHsla(e[1]));
+            added.push(e[0]);
+          }
+          state.palette[e[0]] = toHsla(e[1]);
+          count++;
+        });
+      }
+
+      themes.forEach(function (t) {
+        var body = scssMap(text, "theme-" + t);
+        if (!body) { return; }
+        var defs = {};
+        scssEntries(body).forEach(function (e) {
+          var d = scssDef(e[1]);
+          if (tokenNames.indexOf(e[0]) !== -1 && validDef(d)) { defs[e[0]] = d; count++; }
+          else { skipped.push(e[0]); }
+        });
+        /* Themes other than light only list what differs from it */
+        state.themes[t] = Object.assign({}, state.themes.light, defs);
+      });
+
+      build();
+      refresh();
+      document.getElementById("lab-import-message").textContent = count
+        ? count + " values imported." +
+          (added.length ? " New palette steps: " + added.join(", ") + "." : "") +
+          (skipped.length ? " Skipped (unknown tokens or names; recompile first): " + skipped.join(", ") + "." : "")
+        : "No $palette or $theme-* maps found.";
+    }
+
+    document.getElementById("lab-import-apply").addEventListener("click", function () {
+      importScss(document.getElementById("lab-import").value);
+    });
+
+    document.getElementById("lab-download").addEventListener("click", function () {
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([output.value], { type: "text/plain" }));
+      a.download = "theme-colours.scss";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    /* SCSS export open or collapsed: kept in this browser */
+    var code = document.getElementById("lab-code");
+    var CODE_KEY = "motooor-theme-lab-code";
+    try { code.open = localStorage.getItem(CODE_KEY) === "open"; } catch (e) { /* private mode */ }
+    code.addEventListener("toggle", function () {
+      try { localStorage.setItem(CODE_KEY, code.open ? "open" : "closed"); } catch (e) { /* private mode */ }
+    });
+
+    /* Panel width: drag the handle; kept in this browser */
+    var lab = document.body;
+    var handle = document.getElementById("lab-resize");
+    var WIDTH_KEY = "motooor-theme-lab-width";
+
+    function setWidth(w) {
+      w = Math.max(320, Math.min(w, window.innerWidth - 400));
+      lab.style.setProperty("--panel-width", w + "px");
+      return w;
+    }
+
+    try { if (localStorage.getItem(WIDTH_KEY)) { setWidth(+localStorage.getItem(WIDTH_KEY)); } } catch (e) { /* private mode */ }
+
+    handle.addEventListener("pointerdown", function (event) {
+      handle.setPointerCapture(event.pointerId);
+      handle.classList.add("is-dragging");
+      function move(e) { setWidth(e.clientX); }
+      function up(e) {
+        var w = setWidth(e.clientX);
+        handle.classList.remove("is-dragging");
+        handle.removeEventListener("pointermove", move);
+        handle.removeEventListener("pointerup", up);
+        try { localStorage.setItem(WIDTH_KEY, w); } catch (err) { /* private mode */ }
+      }
+      handle.addEventListener("pointermove", move);
+      handle.addEventListener("pointerup", up);
+    });
+
+    handle.addEventListener("dblclick", function () {
+      lab.style.removeProperty("--panel-width");
+      try { localStorage.removeItem(WIDTH_KEY); } catch (e) { /* private mode */ }
+    });
+
+    paint();
+    select("palette");
+  }());
+  </script>
+</body>
+</html>

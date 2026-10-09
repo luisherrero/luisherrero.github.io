@@ -2,22 +2,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MOTOOOR - Login</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="styles.css">
-  <script src="app-min.js" defer></script>
+  <!--
+      Shared head of every app page. Each page sets its title first:
+        $title = Crew   (written as a Kit variable comment before this import)
+    -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>MOTOOOR - Login</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+      <link rel="stylesheet" href="styles.css">
+      <script src="app-min.js" defer></script>
+    
 </head>
 
 
 <body class="auth">
 
+  <!--
+    Theme saved in this browser, applied before the page paints.
+    Included first in <body> of every page (by _sidebar.kit, and by index.kit).
+  -->
+  <!-- js/app.js keeps the theme switch in sync -->
+  <script>(function () { try { var t = localStorage.getItem("motooor-theme") || "light"; if (t !== "system") { document.documentElement.setAttribute("data-theme", t); } } catch (e) { /* private mode */ } }());</script>
+  
+
   <main class="auth__panel">
     <img class="auth__logo" src="img/logo_motooor.svg" alt="Motooor" width="210" height="60">
 
-    <!-- Prototype: signing in goes to the Overview -->
-    <form class="auth__form" action="overview.html">
+    <!-- Prototype: signing in goes to the projects list -->
+    <form class="auth__form" action="projects.html">
       <header class="auth__intro">
         <h1 class="auth__title">Welcome back</h1>
         <p class="auth__subtitle">Please enter your credentials to sign in.</p>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+  Shared head of the viewer pages; each page sets its title first (Kit
+  variable "title"). Same JS as the app (../app-min.js). No theme switch:
+  the viewer follows the system (light / dark).
+-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MOTOOOR · Call sheet - Shoot Plan</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="viewer.css">
+  <script src="../app-min.js" defer></script>
+
+</head>
+
+<body class="viewer">
+
+  <!-- Cover image of the project, blurred behind the top of every page -->
+<div class="viewer__cover bg_08" aria-hidden="true"></div>
+
+  <!-- Page title over the cover (Kit variable "title"); the buttons have no action yet -->
+<header class="viewer__bar">
+  <h1>Shoot Plan</h1>
+  <button class="card__action icon icon__overflow" type="button" aria-label="More"></button>
+</header>
+
+
+  <main class="viewer__content">
+    <!-- One card per shot; tap a shot to see requirements, set and talent -->
+    <ul class="list list--shoot-plan">
+      <li class="list__row list__row--banner" data-type="av">
+        <span class="list__cell list__cell--range">
+          <span class="pill pill--time">9:30</span>
+          <span class="pill pill--time">17:50</span>
+        </span>
+        <h2 class="list__cell list__cell--fill">Day 1 - 29th September, 2026</h2>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type">AV</span>
+              <span class="pill pill--time">9:30</span>
+              <span class="pill pill--time">9:50</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/001.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Alexa cámara en mano.</p><p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p><p><b>Producto</b>: Big Mac.</p></dd></div>
+            <div><dt>Set</dt><dd>Vestuario</dd></div>
+            <div><dt>Talent</dt><dd>Policeman<br>Reporter<br>Concerned Citizen</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type">AV</span>
+              <span class="pill pill--time">10:00</span>
+              <span class="pill pill--time">10:20</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/002.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Alexa cámara en mano.</p><p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p><p><b>Producto</b>: Big Mac.</p></dd></div>
+            <div><dt>Set</dt><dd>Vestuario</dd></div>
+            <div><dt>Talent</dt><dd>Policeman<br>Reporter<br>Concerned Citizen</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type shot-type--social">Social</span>
+              <span class="pill pill--time">10:00</span>
+              <span class="pill pill--time">10:20</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/003.png" alt="">
+              <img src="../img/ad/004.png" alt="">
+              <img src="../img/ad/005.png" alt="">
+              <figcaption>24 + 15 + 21</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Steadicam.</p><p><b>Arte</b>: Mesa de la cafetería vestida.</p></dd></div>
+            <div><dt>Set</dt><dd>Cocina</dd></div>
+            <div><dt>Talent</dt><dd>Reporter</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type">AV</span>
+              <span class="pill pill--time">11:40</span>
+              <span class="pill pill--time">12:10</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/006.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 2</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Steadicam.</p><p><b>Arte</b>: Mesa de la cafetería vestida.</p></dd></div>
+            <div><dt>Set</dt><dd>Sala de estar</dd></div>
+            <div><dt>Talent</dt><dd>Attorney<br>Driver</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row list__row--banner" data-color="0">
+        <span class="list__cell list__cell--range">
+          <span class="pill pill--time">10:30</span>
+          <span class="pill pill--time">11:30</span>
+        </span>
+        <h2 class="list__cell list__cell--fill">Lunch break</h2>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type">AV</span>
+              <span class="pill pill--time">11:40</span>
+              <span class="pill pill--time">12:10</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/007.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 2</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Steadicam.</p><p><b>Arte</b>: Mesa de la cafetería vestida.</p></dd></div>
+            <div><dt>Set</dt><dd>Sala de estar</dd></div>
+            <div><dt>Talent</dt><dd>Attorney</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type">AV</span>
+              <span class="pill pill--time">11:40</span>
+              <span class="pill pill--time">12:10</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/008.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 2</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Steadicam.</p><p><b>Arte</b>: Mesa de la cafetería vestida.</p></dd></div>
+            <div><dt>Set</dt><dd>Dormitorio</dd></div>
+            <div><dt>Talent</dt><dd>Driver</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type shot-type--photo">Photo</span>
+              <span class="pill pill--time">11:40</span>
+              <span class="pill pill--time">12:10</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/009.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <p>Photo shoot 30'</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p>-</p></dd></div>
+            <div><dt>Set</dt><dd>Exterior Casa</dd></div>
+            <div><dt>Talent</dt><dd>Policeman</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type">AV</span>
+              <span class="pill pill--time">10:00</span>
+              <span class="pill pill--time">10:20</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/010.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Alexa cámara en mano.</p><p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p><p><b>Producto</b>: Big Mac.</p></dd></div>
+            <div><dt>Set</dt><dd>Vestuario</dd></div>
+            <div><dt>Talent</dt><dd>Concerned Citizen</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row list__row--banner" data-color="4">
+        <span class="list__cell list__cell--range">
+          <span class="pill pill--time">10:30</span>
+          <span class="pill pill--time">11:30</span>
+        </span>
+        <h2 class="list__cell list__cell--fill">Second unit montage</h2>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type">AV</span>
+              <span class="pill pill--time">9:30</span>
+              <span class="pill pill--time">9:50</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/011.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Alexa cámara en mano.</p><p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p><p><b>Producto</b>: Big Mac.</p></dd></div>
+            <div><dt>Set</dt><dd>Vestuario</dd></div>
+            <div><dt>Talent</dt><dd>Policeman</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type">AV</span>
+              <span class="pill pill--time">11:40</span>
+              <span class="pill pill--time">12:10</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/012.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 2</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Steadicam.</p><p><b>Arte</b>: Mesa de la cafetería vestida.</p></dd></div>
+            <div><dt>Set</dt><dd>Cocina</dd></div>
+            <div><dt>Talent</dt><dd>Reporter</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type">AV</span>
+              <span class="pill pill--time">11:40</span>
+              <span class="pill pill--time">12:10</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/013.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 2</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Steadicam.</p><p><b>Arte</b>: Mesa de la cafetería vestida.</p></dd></div>
+            <div><dt>Set</dt><dd>Cocina</dd></div>
+            <div><dt>Talent</dt><dd>Reporter<br>Driver</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type">AV</span>
+              <span class="pill pill--time">9:30</span>
+              <span class="pill pill--time">9:50</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/014.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Alexa cámara en mano.</p><p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p><p><b>Producto</b>: Big Mac.</p></dd></div>
+            <div><dt>Set</dt><dd>Dormitorio</dd></div>
+            <div><dt>Talent</dt><dd>Attorney</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type">AV</span>
+              <span class="pill pill--time">11:40</span>
+              <span class="pill pill--time">12:10</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/015.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 2</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Steadicam.</p><p><b>Arte</b>: Mesa de la cafetería vestida.</p></dd></div>
+            <div><dt>Set</dt><dd>Sala de estar</dd></div>
+            <div><dt>Talent</dt><dd>Driver</dd></div>
+          </dl>
+        </details>
+      </li>
+      <li class="list__row">
+        <details>
+          <summary class="list__summary">
+            <div class="list__cell list__cell--slot">
+              <span class="shot-type">AV</span>
+              <span class="pill pill--time">11:40</span>
+              <span class="pill pill--time">12:10</span>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="../img/ad/016.png" alt="">
+              <figcaption>24</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 2</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <span class="list__close icon icon__close-alt" aria-hidden="true"></span>
+          </summary>
+          <dl class="list__details">
+            <div><dt>Requirements</dt><dd><p><b>Cámara</b>: Steadicam.</p><p><b>Arte</b>: Mesa de la cafetería vestida.</p></dd></div>
+            <div><dt>Set</dt><dd>Exterior Casa</dd></div>
+            <div><dt>Talent</dt><dd>Policeman<br>Reporter</dd></div>
+          </dl>
+        </details>
+      </li>
+    </ul>
+  </main>
+
+  <p class="viewer__footer">© Motooor 2026</p>
+
+  <!-- Sections of the call sheet; app.js marks the open page -->
+<nav class="tabbar" aria-label="Call sheet">
+  <a class="tabbar__item icon icon__home" href="index.html">Home</a>
+  <a class="tabbar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+  <a class="tabbar__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+  <a class="tabbar__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+</nav>
+
+
+</body>
+</html>

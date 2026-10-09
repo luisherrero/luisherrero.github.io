@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+  Shared head of the viewer pages; each page sets its title first (Kit
+  variable "title"). Same JS as the app (../app-min.js). No theme switch:
+  the viewer follows the system (light / dark).
+-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MOTOOOR · Call sheet - Crew Calls</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="viewer.css">
+  <script src="../app-min.js" defer></script>
+
+</head>
+
+<body class="viewer">
+
+  <!-- Cover image of the project, blurred behind the top of every page -->
+<div class="viewer__cover bg_08" aria-hidden="true"></div>
+
+  <!-- Page title over the cover (Kit variable "title"); the buttons have no action yet -->
+<header class="viewer__bar">
+  <h1>Crew Calls</h1>
+  <button class="card__action icon icon__overflow" type="button" aria-label="More"></button>
+</header>
+
+
+  <main class="viewer__content">
+    <!-- One card per department: name · title · set call -->
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Production</h2>
+        <span class="pill pill--time">10:00</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Jose Calero</span>
+          <span class="list__cell list__cell--fill">Ayte. Dirección</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">10:00</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Sofia Kim</span>
+          <span class="list__cell list__cell--fill">Producer</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">10:00</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Carl Weathers</span>
+          <span class="list__cell list__cell--fill">Production</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">10:00</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Melanie Pimm</span>
+          <span class="list__cell list__cell--fill">Senior Producer</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">10:00</span></span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Direction</h2>
+        <span class="pill pill--time">10:00</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Jose Calero</span>
+          <span class="list__cell list__cell--fill">Ayte. Dirección</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">10:00</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Sofia Kim</span>
+          <span class="list__cell list__cell--fill">Producer</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">10:00</span></span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Camera</h2>
+        <span class="pill pill--time">10:00</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Maya Liu</span>
+          <span class="list__cell list__cell--fill">Cinematographer</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">10:30</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Nina Roy</span>
+          <span class="list__cell list__cell--fill">Camera Assistant</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">13:30</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Samir Patel</span>
+          <span class="list__cell list__cell--fill">Camera Operator</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">11:00</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Lucas Adams</span>
+          <span class="list__cell list__cell--fill">Steadicam Operator</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">13:00</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Oliver Smith</span>
+          <span class="list__cell list__cell--fill">DIT</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">14:00</span></span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Makeup</h2>
+        <span class="pill pill--time">10:00</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Maya Liu</span>
+          <span class="list__cell list__cell--fill">Cinematographer</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">10:30</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Nina Roy</span>
+          <span class="list__cell list__cell--fill">Camera Assistant</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">13:30</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Samir Patel</span>
+          <span class="list__cell list__cell--fill">Camera Operator</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">11:00</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Lucas Adams</span>
+          <span class="list__cell list__cell--fill">Steadicam Operator</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">13:00</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Oliver Smith</span>
+          <span class="list__cell list__cell--fill">DIT</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">14:00</span></span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <p class="viewer__footer">© Motooor 2026</p>
+
+  <!-- Sections of the call sheet; app.js marks the open page -->
+<nav class="tabbar" aria-label="Call sheet">
+  <a class="tabbar__item icon icon__home" href="index.html">Home</a>
+  <a class="tabbar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+  <a class="tabbar__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+  <a class="tabbar__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+</nav>
+
+
+</body>
+</html>

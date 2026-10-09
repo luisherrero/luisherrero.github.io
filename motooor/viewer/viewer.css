@@ -1,0 +1,3953 @@
+@charset "UTF-8";
+/****************************************************************************
+
+  THEMES
+
+****************************************************************************/
+/*
+  Colours in two levels. Only $palette holds raw colours.
+
+  1. PALETTE (primitives): raw colours in families with a fixed set of
+     steps, shared by every theme:
+
+       50  100  200  300  400  500  600  700  800  900  950  (+ white, black)
+       light ──────────────── middle ──────────────── dark
+
+     Every family has all 11 steps and a step means about the same
+     lightness in every family (colour families keep a little more
+     saturation, so it is close, not identical).
+       grey, slate    neutrals (slate is bluer). Light themes use the
+                      light end for backgrounds and borders, dark themes
+                      the dark end; text and icons sit around the middle.
+       red, orange, amber, yellow, green, teal, blue, violet, pink
+                      one scale per hue, holding both the strong tones
+                      (states: 400–600) and the soft ones (unit types and
+                      banners: 100 light, 700 dark).
+     A colour that falls between two steps takes the step in between
+     (grey-750 between grey-700 and grey-800).
+
+  2. SEMANTIC tokens (per theme): what a colour is for. Each points to a
+     palette colour, never to another token, so a token can change on its
+     own and editing a palette colour reaches every token that uses it.
+       bg-*, fg-*, border-*     surfaces, text and lines
+       alert, warning…          states: colour, -fill (soft background),
+                                -hover (soft background under the pointer)
+       accent                   brand and focus
+       shadow, overlay…         effects
+       sidebar-*, btn-*,        components that need tuning on their own
+       banner-*
+
+  A value is written as:
+    name                  a palette colour
+    (name 6%)             that colour at 6% opacity
+
+  Themes: $theme-light defines every token. Other themes only list what
+  changes; the rest comes from $theme-light.
+
+  Activating a theme
+    <html>                     light (default)
+    <html data-theme="dark">   any theme registered in $themes
+    Without data-theme, a theme called "dark" is also used automatically
+    when the system asks for a dark appearance (prefers-color-scheme).
+
+  Both levels can be edited in themes.html: it reads this file through
+  the compiled CSS and exports it back (paste the export here, or paste
+  this file there to load it). Picking a colour for a token there never
+  changes the palette: it offers the closest palette colour or adds a new
+  step.
+  The checkbox tick, the select arrow and the breadcrumb chevron follow
+  fg-inverse and fg-primary. Icons are SVG files with their own colour.
+*/
+/* 1. PALETTE ------------------------------------------------------------- */
+/* Dark: only what differs from $theme-light */
+/****************************************************************************
+
+  TOKENS
+
+****************************************************************************/
+/*
+  Design tokens (Figma names → SCSS), shared mixins, base reset and the
+  icon system. Every other partial loads this file with:
+
+    @use "tokens" as *;
+*/
+/* Colours ----------------------------------------------------------------
+  Palette and themes live in _themes.scss. The palette becomes --palette-*
+  custom properties; the active theme becomes --color-* (each pointing to
+  a palette colour with var(), or color-mix() for a %) plus its generated
+  images.
+  $color-name below points to --color-name, so the partials never hold a
+  raw colour.
+*/
+/* SVG data URI with its colour taken from a theme (checkbox tick, select arrow) */
+/* A palette name as text: white and black are read by Sass as colours */
+/* The palette with text keys */
+/* A theme's tokens: $theme-light plus the theme's own values */
+/* var() of a palette colour */
+/* CSS value of a token: name · (name 6%) */
+/* The same value as text for themes.html: name or name@6% */
+/* The palette colour of a token, without its % (for the generated images) */
+/*
+  Icons: one folder per theme, named like the theme in $themes.
+    icons/<theme>/<name>.svg       every icon
+    icons/<theme>/<name>-inv.svg   only the ones in $icons-inv: icons that
+                                   sit on a dark fill (CTA button, covers)
+  Each theme only uses its own folder. Every name in $icons becomes
+  --icon-<name> in each theme and .icon__<name>; names in $icons-inv also
+  get --icon-<name>-inv. To add an icon: drop its SVG in every theme
+  folder and add the name to $icons (and its -inv to $icons-inv if needed).
+*/
+/* relative to the compiled CSS (viewer: "../icons/") */
+/* same, for images (covers, login background) */
+/* Every token of a theme as --color-name, its colour scheme and images */
+:root {
+  --palette-white: #ffffff;
+  --palette-black: #000000;
+  --palette-grey-50: #f6f7f7;
+  --palette-grey-100: #ECEFF1;
+  --palette-grey-200: #dbdfe2;
+  --palette-grey-300: #b2bec4;
+  --palette-grey-400: #9daab3;
+  --palette-grey-500: #6e767d;
+  --palette-grey-600: #414d53;
+  --palette-grey-700: #2e373c;
+  --palette-grey-800: #232a2e;
+  --palette-grey-900: #1c2226;
+  --palette-grey-950: #161b1e;
+  --palette-slate-50: #f6f8f9;
+  --palette-slate-100: #e9eef1;
+  --palette-slate-200: #d7dfe5;
+  --palette-slate-300: #bccbd3;
+  --palette-slate-400: #a4bdcd;
+  --palette-slate-500: #657c8a;
+  --palette-slate-600: #3d505c;
+  --palette-slate-700: #2c3b44;
+  --palette-slate-800: #212e36;
+  --palette-slate-900: #19232a;
+  --palette-slate-950: #121b21;
+  --palette-red-50: #fef3f3;
+  --palette-red-100: #fee0e0;
+  --palette-red-200: #fdc4c4;
+  --palette-red-300: #fb9a9a;
+  --palette-red-400: #ff5c5c;
+  --palette-red-500: #dd1d1d;
+  --palette-red-600: #a01b1b;
+  --palette-red-700: #731919;
+  --palette-red-800: #521515;
+  --palette-red-900: #3b1212;
+  --palette-red-950: #2a0e0e;
+  --palette-orange-50: #fef6f3;
+  --palette-orange-100: #fed7cb;
+  --palette-orange-200: #f9c3b3;
+  --palette-orange-300: #efa792;
+  --palette-orange-400: #dd846a;
+  --palette-orange-500: #b6563a;
+  --palette-orange-600: #804736;
+  --palette-orange-700: #5a3a31;
+  --palette-orange-800: #402c26;
+  --palette-orange-900: #2f221e;
+  --palette-orange-950: #211917;
+  --palette-amber-50: #fefcf3;
+  --palette-amber-100: #fdefc4;
+  --palette-amber-200: #fbe5b1;
+  --palette-amber-300: #f6d494;
+  --palette-amber-400: #f0bc6f;
+  --palette-amber-500: #cd922b;
+  --palette-amber-600: #86692e;
+  --palette-amber-700: #55492b;
+  --palette-amber-800: #3e3623;
+  --palette-amber-900: #2e291c;
+  --palette-amber-950: #221f16;
+  --palette-yellow-50: #fdfdf4;
+  --palette-yellow-100: #f7f7c5;
+  --palette-yellow-200: #efefaf;
+  --palette-yellow-300: #e2e290;
+  --palette-yellow-400: #cece69;
+  --palette-yellow-500: #9e9e40;
+  --palette-yellow-600: #6d6d36;
+  --palette-yellow-700: #4a4a2c;
+  --palette-yellow-800: #373724;
+  --palette-yellow-900: #2a2a1d;
+  --palette-yellow-950: #212117;
+  --palette-green-50: #f5fcf5;
+  --palette-green-100: #cef2cf;
+  --palette-green-200: #b0e8b9;
+  --palette-green-300: #85d89d;
+  --palette-green-400: #4cc27e;
+  --palette-green-500: #2e9e5b;
+  --palette-green-600: #306d45;
+  --palette-green-700: #2f4a37;
+  --palette-green-800: #25372b;
+  --palette-green-900: #1e2a22;
+  --palette-green-950: #18201a;
+  --palette-teal-50: #f5fbfc;
+  --palette-teal-100: #e0f2f5;
+  --palette-teal-200: #c0e4eb;
+  --palette-teal-300: #8fcfdc;
+  --palette-teal-400: #4fb3c8;
+  --palette-teal-500: #1f869b;
+  --palette-teal-600: #0c5f71;
+  --palette-teal-700: #0e4a57;
+  --palette-teal-800: #0e3943;
+  --palette-teal-900: #0f2e35;
+  --palette-teal-950: #0d262b;
+  --palette-blue-50: #f3f9fe;
+  --palette-blue-100: #c8e4fb;
+  --palette-blue-200: #afd7f7;
+  --palette-blue-300: #8ac2f0;
+  --palette-blue-400: #5aa7e6;
+  --palette-blue-500: #2f7fc1;
+  --palette-blue-600: #2f5d83;
+  --palette-blue-700: #2c4458;
+  --palette-blue-800: #233340;
+  --palette-blue-900: #1d262f;
+  --palette-blue-950: #161d22;
+  --palette-violet-50: #f8f3fe;
+  --palette-violet-100: #e1c9fd;
+  --palette-violet-200: #d1b2f7;
+  --palette-violet-300: #ba93ec;
+  --palette-violet-400: #9b6dda;
+  --palette-violet-500: #6e3fb3;
+  --palette-violet-600: #553a7f;
+  --palette-violet-700: #43355a;
+  --palette-violet-800: #322940;
+  --palette-violet-900: #25202e;
+  --palette-violet-950: #1b1721;
+  --palette-pink-50: #fef3f7;
+  --palette-pink-100: #faccdc;
+  --palette-pink-200: #f4b5cc;
+  --palette-pink-300: #e895b4;
+  --palette-pink-400: #d56e95;
+  --palette-pink-500: #ac4069;
+  --palette-pink-600: #793852;
+  --palette-pink-700: #55303f;
+  --palette-pink-800: #3e262f;
+  --palette-pink-900: #2d1e24;
+  --palette-pink-950: #21171b;
+  --palette-names: "white, black, grey-50, grey-100, grey-200, grey-300, grey-400, grey-500, grey-600, grey-700, grey-800, grey-900, grey-950, slate-50, slate-100, slate-200, slate-300, slate-400, slate-500, slate-600, slate-700, slate-800, slate-900, slate-950, red-50, red-100, red-200, red-300, red-400, red-500, red-600, red-700, red-800, red-900, red-950, orange-50, orange-100, orange-200, orange-300, orange-400, orange-500, orange-600, orange-700, orange-800, orange-900, orange-950, amber-50, amber-100, amber-200, amber-300, amber-400, amber-500, amber-600, amber-700, amber-800, amber-900, amber-950, yellow-50, yellow-100, yellow-200, yellow-300, yellow-400, yellow-500, yellow-600, yellow-700, yellow-800, yellow-900, yellow-950, green-50, green-100, green-200, green-300, green-400, green-500, green-600, green-700, green-800, green-900, green-950, teal-50, teal-100, teal-200, teal-300, teal-400, teal-500, teal-600, teal-700, teal-800, teal-900, teal-950, blue-50, blue-100, blue-200, blue-300, blue-400, blue-500, blue-600, blue-700, blue-800, blue-900, blue-950, violet-50, violet-100, violet-200, violet-300, violet-400, violet-500, violet-600, violet-700, violet-800, violet-900, violet-950, pink-50, pink-100, pink-200, pink-300, pink-400, pink-500, pink-600, pink-700, pink-800, pink-900, pink-950"; /* for themes.html */
+  --color-tokens: "bg-app, bg-content, bg-card, bg-selected-icon, bg-selected-cell, bg-hover-cell, bg-floating, fg-primary, fg-secondary, fg-subtle, fg-inverse, fg-on-image, border-button, border-form-item, border-pill, border-divider, border-floating, alert, alert-fill, alert-hover, warning, warning-fill, warning-hover, success, success-fill, success-hover, info, info-fill, info-hover, accent, shadow, shadow-inset, overlay, overlay-soft, backdrop, sidebar-hover, btn-bg, btn-fg, btn-hover, btn-cta-bg, btn-cta-fg, btn-cta-border, btn-cta-hover, btn-alert-bg, btn-alert-fg, btn-alert-border, btn-alert-hover, banner-bg-av, banner-bg-photo, banner-bg-social, banner-bg-alt-1, banner-bg-alt-2, banner-bg-alt-3, banner-bg-alt-4, banner-bg-alt-5"; /* for themes.html */
+  color-scheme: light;
+  /* Icons of this theme (see $icons) */
+  --icon-add: url("../icons/light/add.svg");
+  --icon-add-alt: url("../icons/light/add-alt.svg");
+  --icon-add-banner: url("../icons/light/add-banner.svg");
+  --icon-add-shot: url("../icons/light/add-shot.svg");
+  --icon-archived: url("../icons/light/archived.svg");
+  --icon-bookmark: url("../icons/light/bookmark.svg");
+  --icon-calendar: url("../icons/light/calendar.svg");
+  --icon-cast: url("../icons/light/cast.svg");
+  --icon-chevron-right: url("../icons/light/chevron-right.svg");
+  --icon-close: url("../icons/light/close.svg");
+  --icon-close-alt: url("../icons/light/close-alt.svg");
+  --icon-contact: url("../icons/light/contact.svg");
+  --icon-crew: url("../icons/light/crew.svg");
+  --icon-delete: url("../icons/light/delete.svg");
+  --icon-delete-alert: url("../icons/light/delete-alert.svg");
+  --icon-download: url("../icons/light/download.svg");
+  --icon-draft: url("../icons/light/draft.svg");
+  --icon-dropdown: url("../icons/light/dropdown.svg");
+  --icon-dropdown-alert: url("../icons/light/dropdown-alert.svg");
+  --icon-dropdown-alt: url("../icons/light/dropdown-alt.svg");
+  --icon-edit: url("../icons/light/edit.svg");
+  --icon-flow-enter: url("../icons/light/flow-enter.svg");
+  --icon-flow-leave: url("../icons/light/flow-leave.svg");
+  --icon-gallery: url("../icons/light/gallery.svg");
+  --icon-group: url("../icons/light/group.svg");
+  --icon-help: url("../icons/light/help.svg");
+  --icon-hidden: url("../icons/light/hidden.svg");
+  --icon-home: url("../icons/light/home.svg");
+  --icon-image: url("../icons/light/image.svg");
+  --icon-import: url("../icons/light/import.svg");
+  --icon-locations: url("../icons/light/locations.svg");
+  --icon-merge: url("../icons/light/merge.svg");
+  --icon-new-shot: url("../icons/light/new-shot.svg");
+  --icon-new-spot: url("../icons/light/new-spot.svg");
+  --icon-notes: url("../icons/light/notes.svg");
+  --icon-overflow: url("../icons/light/overflow.svg");
+  --icon-reload: url("../icons/light/reload.svg");
+  --icon-report: url("../icons/light/report.svg");
+  --icon-schedule: url("../icons/light/schedule.svg");
+  --icon-settings: url("../icons/light/settings.svg");
+  --icon-shoot-plan: url("../icons/light/shoot-plan.svg");
+  --icon-shot-type: url("../icons/light/shot-type.svg");
+  --icon-sidebar: url("../icons/light/sidebar.svg");
+  --icon-split: url("../icons/light/split.svg");
+  --icon-time: url("../icons/light/time.svg");
+  --icon-ungroup: url("../icons/light/ungroup.svg");
+  --icon-upload: url("../icons/light/upload.svg");
+  --icon-visible: url("../icons/light/visible.svg");
+  --icon-warning-alert: url("../icons/light/warning-alert.svg");
+  --icon-format-bold: url("../icons/light/format-bold.svg");
+  --icon-format-italic: url("../icons/light/format-italic.svg");
+  --icon-format-underline: url("../icons/light/format-underline.svg");
+  --icon-format-unordered-list: url("../icons/light/format-unordered-list.svg");
+  --icon-format-ordered-list: url("../icons/light/format-ordered-list.svg");
+  --icon-log-out: url("../icons/light/log-out.svg");
+  --icon-theme-light: url("../icons/light/theme-light.svg");
+  --icon-theme-dark: url("../icons/light/theme-dark.svg");
+  --icon-theme-system: url("../icons/light/theme-system.svg");
+  --icon-current: url("../icons/light/current.svg");
+  --icon-filter: url("../icons/light/filter.svg");
+  --icon-gallery-inv: url("../icons/light/gallery-inv.svg");
+  --icon-overflow-inv: url("../icons/light/overflow-inv.svg");
+  --icon-shoot-plan-inv: url("../icons/light/shoot-plan-inv.svg");
+  --color-bg-app: var(--palette-grey-100);
+  --color-bg-content: var(--palette-grey-50);
+  --color-bg-card: var(--palette-white);
+  --color-bg-selected-icon: var(--palette-grey-200);
+  --color-bg-selected-cell: var(--palette-grey-100);
+  --color-bg-hover-cell: var(--palette-grey-50);
+  --color-bg-floating: color-mix(in srgb, var(--palette-white) 90%, transparent);
+  --color-fg-primary: var(--palette-grey-800);
+  --color-fg-secondary: var(--palette-slate-500);
+  --color-fg-subtle: var(--palette-grey-400);
+  --color-fg-inverse: var(--palette-slate-50);
+  --color-fg-on-image: var(--palette-grey-50);
+  --color-border-button: var(--palette-grey-300);
+  --color-border-form-item: var(--palette-slate-500);
+  --color-border-pill: var(--palette-grey-200);
+  --color-border-divider: var(--palette-grey-200);
+  --color-border-floating: var(--palette-grey-200);
+  --color-alert: var(--palette-red-500);
+  --color-alert-fill: color-mix(in srgb, var(--palette-red-500) 10%, transparent);
+  --color-alert-hover: color-mix(in srgb, var(--palette-red-500) 20%, transparent);
+  --color-warning: var(--palette-amber-400);
+  --color-warning-fill: color-mix(in srgb, var(--palette-amber-400) 10%, transparent);
+  --color-warning-hover: color-mix(in srgb, var(--palette-amber-400) 20%, transparent);
+  --color-success: var(--palette-green-500);
+  --color-success-fill: color-mix(in srgb, var(--palette-green-500) 10%, transparent);
+  --color-success-hover: color-mix(in srgb, var(--palette-green-500) 20%, transparent);
+  --color-info: var(--palette-blue-500);
+  --color-info-fill: color-mix(in srgb, var(--palette-blue-500) 8%, transparent);
+  --color-info-hover: color-mix(in srgb, var(--palette-blue-500) 14%, transparent);
+  --color-accent: var(--palette-teal-600);
+  --color-shadow: color-mix(in srgb, var(--palette-grey-950) 16%, transparent);
+  --color-shadow-inset: color-mix(in srgb, var(--palette-grey-600) 18%, transparent);
+  --color-overlay: color-mix(in srgb, var(--palette-black) 40%, transparent);
+  --color-overlay-soft: color-mix(in srgb, var(--palette-black) 15%, transparent);
+  --color-backdrop: color-mix(in srgb, var(--palette-grey-50) 60%, transparent);
+  --color-sidebar-hover: color-mix(in srgb, var(--palette-grey-200) 60%, transparent);
+  --color-btn-bg: var(--palette-white);
+  --color-btn-fg: var(--palette-grey-600);
+  --color-btn-hover: var(--palette-grey-50);
+  --color-btn-cta-bg: var(--palette-grey-600);
+  --color-btn-cta-fg: var(--palette-white);
+  --color-btn-cta-border: var(--palette-slate-300);
+  --color-btn-cta-hover: var(--palette-grey-950);
+  --color-btn-alert-bg: color-mix(in srgb, var(--palette-red-500) 6%, transparent);
+  --color-btn-alert-fg: var(--palette-red-500);
+  --color-btn-alert-border: var(--palette-red-700);
+  --color-btn-alert-hover: color-mix(in srgb, var(--palette-red-500) 16%, transparent);
+  --color-banner-bg-av: var(--palette-grey-100);
+  --color-banner-bg-photo: var(--palette-green-100);
+  --color-banner-bg-social: var(--palette-yellow-100);
+  --color-banner-bg-alt-1: var(--palette-orange-100);
+  --color-banner-bg-alt-2: var(--palette-blue-100);
+  --color-banner-bg-alt-3: var(--palette-pink-100);
+  --color-banner-bg-alt-4: var(--palette-violet-100);
+  --color-banner-bg-alt-5: var(--palette-amber-100);
+  --color-defs: " bg-app=grey-100 bg-content=grey-50 bg-card=white bg-selected-icon=grey-200 bg-selected-cell=grey-100 bg-hover-cell=grey-50 bg-floating=white@90% fg-primary=grey-800 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 border-button=grey-300 border-form-item=slate-500 border-pill=grey-200 border-divider=grey-200 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-400 warning-fill=amber-400@10% warning-hover=amber-400@20% success=green-500 success-fill=green-500@10% success-hover=green-500@20% info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% accent=teal-600 shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@60% btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=grey-600 btn-cta-fg=white btn-cta-border=slate-300 btn-cta-hover=grey-950 btn-alert-bg=red-500@6% btn-alert-fg=red-500 btn-alert-border=red-700 btn-alert-hover=red-500@16% banner-bg-av=grey-100 banner-bg-photo=green-100 banner-bg-social=yellow-100 banner-bg-alt-1=orange-100 banner-bg-alt-2=blue-100 banner-bg-alt-3=pink-100 banner-bg-alt-4=violet-100 banner-bg-alt-5=amber-100"; /* for themes.html */
+  /* Checkbox tick (fg-inverse), native select arrow and breadcrumb chevron (fg-primary) */
+  --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23f6f8f9' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23232a2e'/%3E%3C/svg%3E");
+  --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23232a2e' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+[data-theme=light] {
+  color-scheme: light;
+  /* Icons of this theme (see $icons) */
+  --icon-add: url("../icons/light/add.svg");
+  --icon-add-alt: url("../icons/light/add-alt.svg");
+  --icon-add-banner: url("../icons/light/add-banner.svg");
+  --icon-add-shot: url("../icons/light/add-shot.svg");
+  --icon-archived: url("../icons/light/archived.svg");
+  --icon-bookmark: url("../icons/light/bookmark.svg");
+  --icon-calendar: url("../icons/light/calendar.svg");
+  --icon-cast: url("../icons/light/cast.svg");
+  --icon-chevron-right: url("../icons/light/chevron-right.svg");
+  --icon-close: url("../icons/light/close.svg");
+  --icon-close-alt: url("../icons/light/close-alt.svg");
+  --icon-contact: url("../icons/light/contact.svg");
+  --icon-crew: url("../icons/light/crew.svg");
+  --icon-delete: url("../icons/light/delete.svg");
+  --icon-delete-alert: url("../icons/light/delete-alert.svg");
+  --icon-download: url("../icons/light/download.svg");
+  --icon-draft: url("../icons/light/draft.svg");
+  --icon-dropdown: url("../icons/light/dropdown.svg");
+  --icon-dropdown-alert: url("../icons/light/dropdown-alert.svg");
+  --icon-dropdown-alt: url("../icons/light/dropdown-alt.svg");
+  --icon-edit: url("../icons/light/edit.svg");
+  --icon-flow-enter: url("../icons/light/flow-enter.svg");
+  --icon-flow-leave: url("../icons/light/flow-leave.svg");
+  --icon-gallery: url("../icons/light/gallery.svg");
+  --icon-group: url("../icons/light/group.svg");
+  --icon-help: url("../icons/light/help.svg");
+  --icon-hidden: url("../icons/light/hidden.svg");
+  --icon-home: url("../icons/light/home.svg");
+  --icon-image: url("../icons/light/image.svg");
+  --icon-import: url("../icons/light/import.svg");
+  --icon-locations: url("../icons/light/locations.svg");
+  --icon-merge: url("../icons/light/merge.svg");
+  --icon-new-shot: url("../icons/light/new-shot.svg");
+  --icon-new-spot: url("../icons/light/new-spot.svg");
+  --icon-notes: url("../icons/light/notes.svg");
+  --icon-overflow: url("../icons/light/overflow.svg");
+  --icon-reload: url("../icons/light/reload.svg");
+  --icon-report: url("../icons/light/report.svg");
+  --icon-schedule: url("../icons/light/schedule.svg");
+  --icon-settings: url("../icons/light/settings.svg");
+  --icon-shoot-plan: url("../icons/light/shoot-plan.svg");
+  --icon-shot-type: url("../icons/light/shot-type.svg");
+  --icon-sidebar: url("../icons/light/sidebar.svg");
+  --icon-split: url("../icons/light/split.svg");
+  --icon-time: url("../icons/light/time.svg");
+  --icon-ungroup: url("../icons/light/ungroup.svg");
+  --icon-upload: url("../icons/light/upload.svg");
+  --icon-visible: url("../icons/light/visible.svg");
+  --icon-warning-alert: url("../icons/light/warning-alert.svg");
+  --icon-format-bold: url("../icons/light/format-bold.svg");
+  --icon-format-italic: url("../icons/light/format-italic.svg");
+  --icon-format-underline: url("../icons/light/format-underline.svg");
+  --icon-format-unordered-list: url("../icons/light/format-unordered-list.svg");
+  --icon-format-ordered-list: url("../icons/light/format-ordered-list.svg");
+  --icon-log-out: url("../icons/light/log-out.svg");
+  --icon-theme-light: url("../icons/light/theme-light.svg");
+  --icon-theme-dark: url("../icons/light/theme-dark.svg");
+  --icon-theme-system: url("../icons/light/theme-system.svg");
+  --icon-current: url("../icons/light/current.svg");
+  --icon-filter: url("../icons/light/filter.svg");
+  --icon-gallery-inv: url("../icons/light/gallery-inv.svg");
+  --icon-overflow-inv: url("../icons/light/overflow-inv.svg");
+  --icon-shoot-plan-inv: url("../icons/light/shoot-plan-inv.svg");
+  --color-bg-app: var(--palette-grey-100);
+  --color-bg-content: var(--palette-grey-50);
+  --color-bg-card: var(--palette-white);
+  --color-bg-selected-icon: var(--palette-grey-200);
+  --color-bg-selected-cell: var(--palette-grey-100);
+  --color-bg-hover-cell: var(--palette-grey-50);
+  --color-bg-floating: color-mix(in srgb, var(--palette-white) 90%, transparent);
+  --color-fg-primary: var(--palette-grey-800);
+  --color-fg-secondary: var(--palette-slate-500);
+  --color-fg-subtle: var(--palette-grey-400);
+  --color-fg-inverse: var(--palette-slate-50);
+  --color-fg-on-image: var(--palette-grey-50);
+  --color-border-button: var(--palette-grey-300);
+  --color-border-form-item: var(--palette-slate-500);
+  --color-border-pill: var(--palette-grey-200);
+  --color-border-divider: var(--palette-grey-200);
+  --color-border-floating: var(--palette-grey-200);
+  --color-alert: var(--palette-red-500);
+  --color-alert-fill: color-mix(in srgb, var(--palette-red-500) 10%, transparent);
+  --color-alert-hover: color-mix(in srgb, var(--palette-red-500) 20%, transparent);
+  --color-warning: var(--palette-amber-400);
+  --color-warning-fill: color-mix(in srgb, var(--palette-amber-400) 10%, transparent);
+  --color-warning-hover: color-mix(in srgb, var(--palette-amber-400) 20%, transparent);
+  --color-success: var(--palette-green-500);
+  --color-success-fill: color-mix(in srgb, var(--palette-green-500) 10%, transparent);
+  --color-success-hover: color-mix(in srgb, var(--palette-green-500) 20%, transparent);
+  --color-info: var(--palette-blue-500);
+  --color-info-fill: color-mix(in srgb, var(--palette-blue-500) 8%, transparent);
+  --color-info-hover: color-mix(in srgb, var(--palette-blue-500) 14%, transparent);
+  --color-accent: var(--palette-teal-600);
+  --color-shadow: color-mix(in srgb, var(--palette-grey-950) 16%, transparent);
+  --color-shadow-inset: color-mix(in srgb, var(--palette-grey-600) 18%, transparent);
+  --color-overlay: color-mix(in srgb, var(--palette-black) 40%, transparent);
+  --color-overlay-soft: color-mix(in srgb, var(--palette-black) 15%, transparent);
+  --color-backdrop: color-mix(in srgb, var(--palette-grey-50) 60%, transparent);
+  --color-sidebar-hover: color-mix(in srgb, var(--palette-grey-200) 60%, transparent);
+  --color-btn-bg: var(--palette-white);
+  --color-btn-fg: var(--palette-grey-600);
+  --color-btn-hover: var(--palette-grey-50);
+  --color-btn-cta-bg: var(--palette-grey-600);
+  --color-btn-cta-fg: var(--palette-white);
+  --color-btn-cta-border: var(--palette-slate-300);
+  --color-btn-cta-hover: var(--palette-grey-950);
+  --color-btn-alert-bg: color-mix(in srgb, var(--palette-red-500) 6%, transparent);
+  --color-btn-alert-fg: var(--palette-red-500);
+  --color-btn-alert-border: var(--palette-red-700);
+  --color-btn-alert-hover: color-mix(in srgb, var(--palette-red-500) 16%, transparent);
+  --color-banner-bg-av: var(--palette-grey-100);
+  --color-banner-bg-photo: var(--palette-green-100);
+  --color-banner-bg-social: var(--palette-yellow-100);
+  --color-banner-bg-alt-1: var(--palette-orange-100);
+  --color-banner-bg-alt-2: var(--palette-blue-100);
+  --color-banner-bg-alt-3: var(--palette-pink-100);
+  --color-banner-bg-alt-4: var(--palette-violet-100);
+  --color-banner-bg-alt-5: var(--palette-amber-100);
+  --color-defs: " bg-app=grey-100 bg-content=grey-50 bg-card=white bg-selected-icon=grey-200 bg-selected-cell=grey-100 bg-hover-cell=grey-50 bg-floating=white@90% fg-primary=grey-800 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 border-button=grey-300 border-form-item=slate-500 border-pill=grey-200 border-divider=grey-200 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-400 warning-fill=amber-400@10% warning-hover=amber-400@20% success=green-500 success-fill=green-500@10% success-hover=green-500@20% info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% accent=teal-600 shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@60% btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=grey-600 btn-cta-fg=white btn-cta-border=slate-300 btn-cta-hover=grey-950 btn-alert-bg=red-500@6% btn-alert-fg=red-500 btn-alert-border=red-700 btn-alert-hover=red-500@16% banner-bg-av=grey-100 banner-bg-photo=green-100 banner-bg-social=yellow-100 banner-bg-alt-1=orange-100 banner-bg-alt-2=blue-100 banner-bg-alt-3=pink-100 banner-bg-alt-4=violet-100 banner-bg-alt-5=amber-100"; /* for themes.html */
+  /* Checkbox tick (fg-inverse), native select arrow and breadcrumb chevron (fg-primary) */
+  --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23f6f8f9' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23232a2e'/%3E%3C/svg%3E");
+  --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23232a2e' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+[data-theme=dark] {
+  color-scheme: dark;
+  /* Icons of this theme (see $icons) */
+  --icon-add: url("../icons/dark/add.svg");
+  --icon-add-alt: url("../icons/dark/add-alt.svg");
+  --icon-add-banner: url("../icons/dark/add-banner.svg");
+  --icon-add-shot: url("../icons/dark/add-shot.svg");
+  --icon-archived: url("../icons/dark/archived.svg");
+  --icon-bookmark: url("../icons/dark/bookmark.svg");
+  --icon-calendar: url("../icons/dark/calendar.svg");
+  --icon-cast: url("../icons/dark/cast.svg");
+  --icon-chevron-right: url("../icons/dark/chevron-right.svg");
+  --icon-close: url("../icons/dark/close.svg");
+  --icon-close-alt: url("../icons/dark/close-alt.svg");
+  --icon-contact: url("../icons/dark/contact.svg");
+  --icon-crew: url("../icons/dark/crew.svg");
+  --icon-delete: url("../icons/dark/delete.svg");
+  --icon-delete-alert: url("../icons/dark/delete-alert.svg");
+  --icon-download: url("../icons/dark/download.svg");
+  --icon-draft: url("../icons/dark/draft.svg");
+  --icon-dropdown: url("../icons/dark/dropdown.svg");
+  --icon-dropdown-alert: url("../icons/dark/dropdown-alert.svg");
+  --icon-dropdown-alt: url("../icons/dark/dropdown-alt.svg");
+  --icon-edit: url("../icons/dark/edit.svg");
+  --icon-flow-enter: url("../icons/dark/flow-enter.svg");
+  --icon-flow-leave: url("../icons/dark/flow-leave.svg");
+  --icon-gallery: url("../icons/dark/gallery.svg");
+  --icon-group: url("../icons/dark/group.svg");
+  --icon-help: url("../icons/dark/help.svg");
+  --icon-hidden: url("../icons/dark/hidden.svg");
+  --icon-home: url("../icons/dark/home.svg");
+  --icon-image: url("../icons/dark/image.svg");
+  --icon-import: url("../icons/dark/import.svg");
+  --icon-locations: url("../icons/dark/locations.svg");
+  --icon-merge: url("../icons/dark/merge.svg");
+  --icon-new-shot: url("../icons/dark/new-shot.svg");
+  --icon-new-spot: url("../icons/dark/new-spot.svg");
+  --icon-notes: url("../icons/dark/notes.svg");
+  --icon-overflow: url("../icons/dark/overflow.svg");
+  --icon-reload: url("../icons/dark/reload.svg");
+  --icon-report: url("../icons/dark/report.svg");
+  --icon-schedule: url("../icons/dark/schedule.svg");
+  --icon-settings: url("../icons/dark/settings.svg");
+  --icon-shoot-plan: url("../icons/dark/shoot-plan.svg");
+  --icon-shot-type: url("../icons/dark/shot-type.svg");
+  --icon-sidebar: url("../icons/dark/sidebar.svg");
+  --icon-split: url("../icons/dark/split.svg");
+  --icon-time: url("../icons/dark/time.svg");
+  --icon-ungroup: url("../icons/dark/ungroup.svg");
+  --icon-upload: url("../icons/dark/upload.svg");
+  --icon-visible: url("../icons/dark/visible.svg");
+  --icon-warning-alert: url("../icons/dark/warning-alert.svg");
+  --icon-format-bold: url("../icons/dark/format-bold.svg");
+  --icon-format-italic: url("../icons/dark/format-italic.svg");
+  --icon-format-underline: url("../icons/dark/format-underline.svg");
+  --icon-format-unordered-list: url("../icons/dark/format-unordered-list.svg");
+  --icon-format-ordered-list: url("../icons/dark/format-ordered-list.svg");
+  --icon-log-out: url("../icons/dark/log-out.svg");
+  --icon-theme-light: url("../icons/dark/theme-light.svg");
+  --icon-theme-dark: url("../icons/dark/theme-dark.svg");
+  --icon-theme-system: url("../icons/dark/theme-system.svg");
+  --icon-current: url("../icons/dark/current.svg");
+  --icon-filter: url("../icons/dark/filter.svg");
+  --icon-gallery-inv: url("../icons/dark/gallery-inv.svg");
+  --icon-overflow-inv: url("../icons/dark/overflow-inv.svg");
+  --icon-shoot-plan-inv: url("../icons/dark/shoot-plan-inv.svg");
+  --color-bg-app: var(--palette-grey-700);
+  --color-bg-content: var(--palette-grey-800);
+  --color-bg-card: var(--palette-grey-900);
+  --color-bg-selected-icon: var(--palette-grey-600);
+  --color-bg-selected-cell: var(--palette-grey-700);
+  --color-bg-hover-cell: color-mix(in srgb, var(--palette-grey-700) 50%, transparent);
+  --color-bg-floating: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
+  --color-fg-primary: var(--palette-grey-50);
+  --color-fg-secondary: var(--palette-slate-400);
+  --color-fg-subtle: var(--palette-grey-500);
+  --color-fg-inverse: var(--palette-grey-950);
+  --color-fg-on-image: var(--palette-grey-50);
+  --color-border-button: var(--palette-grey-600);
+  --color-border-form-item: var(--palette-slate-400);
+  --color-border-pill: var(--palette-slate-600);
+  --color-border-divider: var(--palette-slate-700);
+  --color-border-floating: var(--palette-slate-700);
+  --color-alert: var(--palette-red-400);
+  --color-alert-fill: color-mix(in srgb, var(--palette-red-400) 10%, transparent);
+  --color-alert-hover: color-mix(in srgb, var(--palette-red-400) 20%, transparent);
+  --color-warning: var(--palette-amber-300);
+  --color-warning-fill: color-mix(in srgb, var(--palette-amber-300) 10%, transparent);
+  --color-warning-hover: color-mix(in srgb, var(--palette-amber-300) 20%, transparent);
+  --color-success: var(--palette-green-300);
+  --color-success-fill: color-mix(in srgb, var(--palette-green-400) 10%, transparent);
+  --color-success-hover: color-mix(in srgb, var(--palette-green-400) 20%, transparent);
+  --color-info: var(--palette-blue-400);
+  --color-info-fill: color-mix(in srgb, var(--palette-blue-400) 12%, transparent);
+  --color-info-hover: color-mix(in srgb, var(--palette-blue-400) 20%, transparent);
+  --color-accent: var(--palette-teal-400);
+  --color-shadow: color-mix(in srgb, var(--palette-black) 50%, transparent);
+  --color-shadow-inset: color-mix(in srgb, var(--palette-black) 40%, transparent);
+  --color-overlay: color-mix(in srgb, var(--palette-black) 40%, transparent);
+  --color-overlay-soft: color-mix(in srgb, var(--palette-black) 25%, transparent);
+  --color-backdrop: color-mix(in srgb, var(--palette-grey-900) 60%, transparent);
+  --color-sidebar-hover: color-mix(in srgb, var(--palette-grey-600) 60%, transparent);
+  --color-btn-bg: var(--palette-grey-800);
+  --color-btn-fg: var(--palette-grey-100);
+  --color-btn-hover: var(--palette-grey-700);
+  --color-btn-cta-bg: var(--palette-slate-700);
+  --color-btn-cta-fg: var(--palette-grey-200);
+  --color-btn-cta-border: var(--palette-grey-600);
+  --color-btn-cta-hover: var(--palette-slate-600);
+  --color-btn-alert-bg: var(--palette-red-800);
+  --color-btn-alert-fg: var(--palette-red-50);
+  --color-btn-alert-border: var(--palette-red-500);
+  --color-btn-alert-hover: var(--palette-red-700);
+  --color-banner-bg-av: var(--palette-grey-700);
+  --color-banner-bg-photo: var(--palette-green-600);
+  --color-banner-bg-social: var(--palette-yellow-600);
+  --color-banner-bg-alt-1: var(--palette-orange-600);
+  --color-banner-bg-alt-2: var(--palette-blue-600);
+  --color-banner-bg-alt-3: var(--palette-pink-600);
+  --color-banner-bg-alt-4: var(--palette-violet-600);
+  --color-banner-bg-alt-5: var(--palette-amber-600);
+  --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-900 bg-selected-icon=grey-600 bg-selected-cell=grey-700 bg-hover-cell=grey-700@50% bg-floating=grey-800@90% fg-primary=grey-50 fg-secondary=slate-400 fg-subtle=grey-500 fg-inverse=grey-950 fg-on-image=grey-50 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-700 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-300 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% accent=teal-400 shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% btn-bg=grey-800 btn-fg=grey-100 btn-hover=grey-700 btn-cta-bg=slate-700 btn-cta-fg=grey-200 btn-cta-border=grey-600 btn-cta-hover=slate-600 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600"; /* for themes.html */
+  /* Checkbox tick (fg-inverse), native select arrow and breadcrumb chevron (fg-primary) */
+  --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23161b1e' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23f6f7f7'/%3E%3C/svg%3E");
+  --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23f6f7f7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    /* Icons of this theme (see $icons) */
+    --icon-add: url("../icons/dark/add.svg");
+    --icon-add-alt: url("../icons/dark/add-alt.svg");
+    --icon-add-banner: url("../icons/dark/add-banner.svg");
+    --icon-add-shot: url("../icons/dark/add-shot.svg");
+    --icon-archived: url("../icons/dark/archived.svg");
+    --icon-bookmark: url("../icons/dark/bookmark.svg");
+    --icon-calendar: url("../icons/dark/calendar.svg");
+    --icon-cast: url("../icons/dark/cast.svg");
+    --icon-chevron-right: url("../icons/dark/chevron-right.svg");
+    --icon-close: url("../icons/dark/close.svg");
+    --icon-close-alt: url("../icons/dark/close-alt.svg");
+    --icon-contact: url("../icons/dark/contact.svg");
+    --icon-crew: url("../icons/dark/crew.svg");
+    --icon-delete: url("../icons/dark/delete.svg");
+    --icon-delete-alert: url("../icons/dark/delete-alert.svg");
+    --icon-download: url("../icons/dark/download.svg");
+    --icon-draft: url("../icons/dark/draft.svg");
+    --icon-dropdown: url("../icons/dark/dropdown.svg");
+    --icon-dropdown-alert: url("../icons/dark/dropdown-alert.svg");
+    --icon-dropdown-alt: url("../icons/dark/dropdown-alt.svg");
+    --icon-edit: url("../icons/dark/edit.svg");
+    --icon-flow-enter: url("../icons/dark/flow-enter.svg");
+    --icon-flow-leave: url("../icons/dark/flow-leave.svg");
+    --icon-gallery: url("../icons/dark/gallery.svg");
+    --icon-group: url("../icons/dark/group.svg");
+    --icon-help: url("../icons/dark/help.svg");
+    --icon-hidden: url("../icons/dark/hidden.svg");
+    --icon-home: url("../icons/dark/home.svg");
+    --icon-image: url("../icons/dark/image.svg");
+    --icon-import: url("../icons/dark/import.svg");
+    --icon-locations: url("../icons/dark/locations.svg");
+    --icon-merge: url("../icons/dark/merge.svg");
+    --icon-new-shot: url("../icons/dark/new-shot.svg");
+    --icon-new-spot: url("../icons/dark/new-spot.svg");
+    --icon-notes: url("../icons/dark/notes.svg");
+    --icon-overflow: url("../icons/dark/overflow.svg");
+    --icon-reload: url("../icons/dark/reload.svg");
+    --icon-report: url("../icons/dark/report.svg");
+    --icon-schedule: url("../icons/dark/schedule.svg");
+    --icon-settings: url("../icons/dark/settings.svg");
+    --icon-shoot-plan: url("../icons/dark/shoot-plan.svg");
+    --icon-shot-type: url("../icons/dark/shot-type.svg");
+    --icon-sidebar: url("../icons/dark/sidebar.svg");
+    --icon-split: url("../icons/dark/split.svg");
+    --icon-time: url("../icons/dark/time.svg");
+    --icon-ungroup: url("../icons/dark/ungroup.svg");
+    --icon-upload: url("../icons/dark/upload.svg");
+    --icon-visible: url("../icons/dark/visible.svg");
+    --icon-warning-alert: url("../icons/dark/warning-alert.svg");
+    --icon-format-bold: url("../icons/dark/format-bold.svg");
+    --icon-format-italic: url("../icons/dark/format-italic.svg");
+    --icon-format-underline: url("../icons/dark/format-underline.svg");
+    --icon-format-unordered-list: url("../icons/dark/format-unordered-list.svg");
+    --icon-format-ordered-list: url("../icons/dark/format-ordered-list.svg");
+    --icon-log-out: url("../icons/dark/log-out.svg");
+    --icon-theme-light: url("../icons/dark/theme-light.svg");
+    --icon-theme-dark: url("../icons/dark/theme-dark.svg");
+    --icon-theme-system: url("../icons/dark/theme-system.svg");
+    --icon-current: url("../icons/dark/current.svg");
+    --icon-filter: url("../icons/dark/filter.svg");
+    --icon-gallery-inv: url("../icons/dark/gallery-inv.svg");
+    --icon-overflow-inv: url("../icons/dark/overflow-inv.svg");
+    --icon-shoot-plan-inv: url("../icons/dark/shoot-plan-inv.svg");
+    --color-bg-app: var(--palette-grey-700);
+    --color-bg-content: var(--palette-grey-800);
+    --color-bg-card: var(--palette-grey-900);
+    --color-bg-selected-icon: var(--palette-grey-600);
+    --color-bg-selected-cell: var(--palette-grey-700);
+    --color-bg-hover-cell: color-mix(in srgb, var(--palette-grey-700) 50%, transparent);
+    --color-bg-floating: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
+    --color-fg-primary: var(--palette-grey-50);
+    --color-fg-secondary: var(--palette-slate-400);
+    --color-fg-subtle: var(--palette-grey-500);
+    --color-fg-inverse: var(--palette-grey-950);
+    --color-fg-on-image: var(--palette-grey-50);
+    --color-border-button: var(--palette-grey-600);
+    --color-border-form-item: var(--palette-slate-400);
+    --color-border-pill: var(--palette-slate-600);
+    --color-border-divider: var(--palette-slate-700);
+    --color-border-floating: var(--palette-slate-700);
+    --color-alert: var(--palette-red-400);
+    --color-alert-fill: color-mix(in srgb, var(--palette-red-400) 10%, transparent);
+    --color-alert-hover: color-mix(in srgb, var(--palette-red-400) 20%, transparent);
+    --color-warning: var(--palette-amber-300);
+    --color-warning-fill: color-mix(in srgb, var(--palette-amber-300) 10%, transparent);
+    --color-warning-hover: color-mix(in srgb, var(--palette-amber-300) 20%, transparent);
+    --color-success: var(--palette-green-300);
+    --color-success-fill: color-mix(in srgb, var(--palette-green-400) 10%, transparent);
+    --color-success-hover: color-mix(in srgb, var(--palette-green-400) 20%, transparent);
+    --color-info: var(--palette-blue-400);
+    --color-info-fill: color-mix(in srgb, var(--palette-blue-400) 12%, transparent);
+    --color-info-hover: color-mix(in srgb, var(--palette-blue-400) 20%, transparent);
+    --color-accent: var(--palette-teal-400);
+    --color-shadow: color-mix(in srgb, var(--palette-black) 50%, transparent);
+    --color-shadow-inset: color-mix(in srgb, var(--palette-black) 40%, transparent);
+    --color-overlay: color-mix(in srgb, var(--palette-black) 40%, transparent);
+    --color-overlay-soft: color-mix(in srgb, var(--palette-black) 25%, transparent);
+    --color-backdrop: color-mix(in srgb, var(--palette-grey-900) 60%, transparent);
+    --color-sidebar-hover: color-mix(in srgb, var(--palette-grey-600) 60%, transparent);
+    --color-btn-bg: var(--palette-grey-800);
+    --color-btn-fg: var(--palette-grey-100);
+    --color-btn-hover: var(--palette-grey-700);
+    --color-btn-cta-bg: var(--palette-slate-700);
+    --color-btn-cta-fg: var(--palette-grey-200);
+    --color-btn-cta-border: var(--palette-grey-600);
+    --color-btn-cta-hover: var(--palette-slate-600);
+    --color-btn-alert-bg: var(--palette-red-800);
+    --color-btn-alert-fg: var(--palette-red-50);
+    --color-btn-alert-border: var(--palette-red-500);
+    --color-btn-alert-hover: var(--palette-red-700);
+    --color-banner-bg-av: var(--palette-grey-700);
+    --color-banner-bg-photo: var(--palette-green-600);
+    --color-banner-bg-social: var(--palette-yellow-600);
+    --color-banner-bg-alt-1: var(--palette-orange-600);
+    --color-banner-bg-alt-2: var(--palette-blue-600);
+    --color-banner-bg-alt-3: var(--palette-pink-600);
+    --color-banner-bg-alt-4: var(--palette-violet-600);
+    --color-banner-bg-alt-5: var(--palette-amber-600);
+    --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-900 bg-selected-icon=grey-600 bg-selected-cell=grey-700 bg-hover-cell=grey-700@50% bg-floating=grey-800@90% fg-primary=grey-50 fg-secondary=slate-400 fg-subtle=grey-500 fg-inverse=grey-950 fg-on-image=grey-50 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-700 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-300 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% accent=teal-400 shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% btn-bg=grey-800 btn-fg=grey-100 btn-hover=grey-700 btn-cta-bg=slate-700 btn-cta-fg=grey-200 btn-cta-border=grey-600 btn-cta-hover=slate-600 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600"; /* for themes.html */
+    /* Checkbox tick (fg-inverse), native select arrow and breadcrumb chevron (fg-primary) */
+    --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23161b1e' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23f6f7f7'/%3E%3C/svg%3E");
+    --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23f6f7f7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+}
+/* What the partials use */
+/*
+  Fixed unit types (Settings modal and shot-type tags). The key is the
+  data-type value and the .shot-type--key modifier.
+*/
+/*
+  Colour picker palette, in menu order. The key is the banner's data-color
+  value; keep the list in sync with BANNER_COLORS in js/app.js.
+*/
+/* Radii ------------------------------------------------------------------ */
+/* layout/radius-container */
+/* layout/radius-card */
+/* layout/radius-button */
+/* Borders and shadows ---------------------------------------------------- */
+/* anything that floats: menus, popovers, modal, drawer, sidebar */
+/* Spacing ---------------------------------------------------------------- */
+/* Typography -------------------------------------------------------------- */
+/*
+  Text styles: every text of the interface uses one of them through
+  @include type(name). Line-heights are multiples of 4, so every text box is.
+  The few big display texts (login title, cover title, weather) set their own.
+*/
+/* Layout ----------------------------------------------------------------- */
+/* sidebar items and every 32px icon button */
+/* top bar */
+/* list rows */
+/* default .btn */
+/* .btn--lg */
+/* logo box (production_co SVGs are 80x40): Credits, project cards */
+/* .pill */
+/* editable text (.inline-input) */
+/* editable time pill inside lists */
+/* shot / image thumbnail */
+/* card header and tabs */
+/* Motion ----------------------------------------------------------------- */
+/****************************************************************************
+
+  MIXINS
+
+****************************************************************************/
+/*
+  Text style from $type-styles. Optional: $color, a different $weight
+  (e.g. regular for a quieter variant) or $case (none for values in a caps
+  style).
+*/
+/* Viewport narrower than $bp */
+/* Honour the OS "reduce motion" setting */
+/* Flex row with vertically centred items; justify, gap and display are optional */
+/* Fixed-width list cell with its content centred */
+/* Single line cut with "…" */
+/* Square box */
+/* Icon of the current theme as a centred background */
+/* Another icon in the same place (e.g. arrow up while open) */
+/* Icon drawn in a pseudo-element (dropdown arrows, "+"…) */
+/* Fill under the pointer (buttons, menu items, pills, tabs…) */
+/* Red text and border of destructive actions and warnings */
+/* White panel with the hairline border of the buttons (menus, popovers) */
+/* Native [popover] placed by js/app.js next to the element that opens it */
+/* Shared reset of the custom checkbox and radio (16px box, 10px control) */
+/****************************************************************************
+
+  BASE
+
+****************************************************************************/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-fg-primary);
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+h1, h2, h3, p, ol, ul {
+  margin: 0;
+}
+
+ol, ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+[hidden] {
+  display: none !important;
+} /* hidden always wins over a component's display */
+/****************************************************************************
+
+  ICONS
+
+****************************************************************************/
+/*
+  Standalone SVGs in production/icons/<theme>/ (see $icons in the colour
+  section), drawn as a background in ::before so the icon can sit next to
+  the element's text. The SVGs carry their own colour (red ones end in
+  -alert); on dark fills the -inv version is used when there is one:
+
+    <a class="sidebar__item icon icon__crew" href="crew.html">Crew</a>
+
+  Each .icon__name only sets --icon (and --icon-inv). Per-component settings:
+    --icon-size  icon box (32px by default)
+    --icon-fit   background size: cover (scales the SVG to the box) or a
+                 fixed value, e.g. 32px, to crop the SVG's built-in margin
+                 when the box is smaller than the drawing
+*/
+.icon {
+  --icon-size: 32px;
+  --icon-fit: cover;
+  display: inline-flex;
+  align-items: center;
+}
+.icon::before {
+  content: "";
+  flex: none;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  background: var(--icon) center/var(--icon-fit) no-repeat;
+}
+
+.icon__add {
+  --icon: var(--icon-add);
+}
+
+.icon__add-alt {
+  --icon: var(--icon-add-alt);
+}
+
+.icon__add-banner {
+  --icon: var(--icon-add-banner);
+}
+
+.icon__add-shot {
+  --icon: var(--icon-add-shot);
+}
+
+.icon__archived {
+  --icon: var(--icon-archived);
+}
+
+.icon__bookmark {
+  --icon: var(--icon-bookmark);
+}
+
+.icon__calendar {
+  --icon: var(--icon-calendar);
+}
+
+.icon__cast {
+  --icon: var(--icon-cast);
+}
+
+.icon__chevron-right {
+  --icon: var(--icon-chevron-right);
+}
+
+.icon__close {
+  --icon: var(--icon-close);
+}
+
+.icon__close-alt {
+  --icon: var(--icon-close-alt);
+}
+
+.icon__contact {
+  --icon: var(--icon-contact);
+}
+
+.icon__crew {
+  --icon: var(--icon-crew);
+}
+
+.icon__delete {
+  --icon: var(--icon-delete);
+}
+
+.icon__delete-alert {
+  --icon: var(--icon-delete-alert);
+}
+
+.icon__download {
+  --icon: var(--icon-download);
+}
+
+.icon__draft {
+  --icon: var(--icon-draft);
+}
+
+.icon__dropdown {
+  --icon: var(--icon-dropdown);
+}
+
+.icon__dropdown-alert {
+  --icon: var(--icon-dropdown-alert);
+}
+
+.icon__dropdown-alt {
+  --icon: var(--icon-dropdown-alt);
+}
+
+.icon__edit {
+  --icon: var(--icon-edit);
+}
+
+.icon__flow-enter {
+  --icon: var(--icon-flow-enter);
+}
+
+.icon__flow-leave {
+  --icon: var(--icon-flow-leave);
+}
+
+.icon__gallery {
+  --icon: var(--icon-gallery);
+}
+
+.icon__group {
+  --icon: var(--icon-group);
+}
+
+.icon__help {
+  --icon: var(--icon-help);
+}
+
+.icon__hidden {
+  --icon: var(--icon-hidden);
+}
+
+.icon__home {
+  --icon: var(--icon-home);
+}
+
+.icon__image {
+  --icon: var(--icon-image);
+}
+
+.icon__import {
+  --icon: var(--icon-import);
+}
+
+.icon__locations {
+  --icon: var(--icon-locations);
+}
+
+.icon__merge {
+  --icon: var(--icon-merge);
+}
+
+.icon__new-shot {
+  --icon: var(--icon-new-shot);
+}
+
+.icon__new-spot {
+  --icon: var(--icon-new-spot);
+}
+
+.icon__notes {
+  --icon: var(--icon-notes);
+}
+
+.icon__overflow {
+  --icon: var(--icon-overflow);
+}
+
+.icon__reload {
+  --icon: var(--icon-reload);
+}
+
+.icon__report {
+  --icon: var(--icon-report);
+}
+
+.icon__schedule {
+  --icon: var(--icon-schedule);
+}
+
+.icon__settings {
+  --icon: var(--icon-settings);
+}
+
+.icon__shoot-plan {
+  --icon: var(--icon-shoot-plan);
+}
+
+.icon__shot-type {
+  --icon: var(--icon-shot-type);
+}
+
+.icon__sidebar {
+  --icon: var(--icon-sidebar);
+}
+
+.icon__split {
+  --icon: var(--icon-split);
+}
+
+.icon__time {
+  --icon: var(--icon-time);
+}
+
+.icon__ungroup {
+  --icon: var(--icon-ungroup);
+}
+
+.icon__upload {
+  --icon: var(--icon-upload);
+}
+
+.icon__visible {
+  --icon: var(--icon-visible);
+}
+
+.icon__warning-alert {
+  --icon: var(--icon-warning-alert);
+}
+
+.icon__format-bold {
+  --icon: var(--icon-format-bold);
+}
+
+.icon__format-italic {
+  --icon: var(--icon-format-italic);
+}
+
+.icon__format-underline {
+  --icon: var(--icon-format-underline);
+}
+
+.icon__format-unordered-list {
+  --icon: var(--icon-format-unordered-list);
+}
+
+.icon__format-ordered-list {
+  --icon: var(--icon-format-ordered-list);
+}
+
+.icon__log-out {
+  --icon: var(--icon-log-out);
+}
+
+.icon__theme-light {
+  --icon: var(--icon-theme-light);
+}
+
+.icon__theme-dark {
+  --icon: var(--icon-theme-dark);
+}
+
+.icon__theme-system {
+  --icon: var(--icon-theme-system);
+}
+
+.icon__current {
+  --icon: var(--icon-current);
+}
+
+.icon__filter {
+  --icon: var(--icon-filter);
+}
+
+/* Icons with an -inv version (on dark fills, see $icons-inv) */
+.icon__gallery {
+  --icon-inv: var(--icon-gallery-inv);
+}
+
+.icon__overflow {
+  --icon-inv: var(--icon-overflow-inv);
+}
+
+.icon__shoot-plan {
+  --icon-inv: var(--icon-shoot-plan-inv);
+}
+
+/****************************************************************************
+
+  BUTTONS
+
+****************************************************************************/
+/*
+  .btn (with text) · .icon-button (icon only) · .pill (icon + value)
+
+  Style (colour and fill):           Variant (shape):
+    .btn              Fill (white)     (no class)           text only
+    .btn--hollow      Hollow           .btn--dropdown       arrow after
+    .btn--cta         CTA (dark)       .icon .icon__name    icon before
+    .btn--alert       Alert (red)
+
+  Size: .btn--lg, or redefine --btn-height in a given context:
+    .area .btn { --btn-height: 36px; }
+
+  They combine freely:  <button class="btn btn--cta btn--dropdown">
+  SVGs carry their colour: CTA uses the -inv versions when there is one
+  ($icons-inv); Alert uses the -alert versions (delete-alert.svg, dropdown-alert.svg).
+*/
+.btn {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: var(--color-btn-fg);
+  --icon-size: 28px;
+  --btn-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: var(--btn-height);
+  padding: 0 16px;
+  background: var(--color-btn-bg);
+  border: 0.5px solid var(--color-border-button);
+  border-radius: 2px;
+  white-space: nowrap;
+  transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1), border-color 200ms cubic-bezier(0.2, 0, 0, 1);
+  /* SIZES ---------------------------------------------------------------- */
+  /* VARIANTS ------------------------------------------------------------- */
+  /* Icon before the label */
+  /* Opens a dropdown → arrow after the label */
+  /* STYLES --------------------------------------------------------------- */
+  /* Destructive action */
+  /* Square icon-only button (e.g. delete in the gallery toolbar) */
+  /* Quiet button on a grey fill (e.g. "Clear" in the editor toolbar) */
+}
+.btn:hover {
+  background-color: var(--color-btn-hover);
+}
+.btn--lg {
+  --btn-height: 40px;
+}
+.btn.icon {
+  gap: 0;
+  padding: 0 12px 0 6px;
+}
+.btn--dropdown {
+  padding-right: 10px;
+}
+.btn--dropdown::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: var(--icon-dropdown) center/32px no-repeat;
+}
+.btn--hollow {
+  background: transparent;
+}
+.btn--cta {
+  color: var(--color-btn-cta-fg);
+  background: var(--color-btn-cta-bg);
+  border-color: var(--color-btn-cta-border);
+  /* Icons on a dark fill: the -inv versions */
+}
+.btn--cta:hover {
+  background: var(--color-btn-cta-hover);
+}
+.btn--cta::before {
+  background-image: var(--icon-inv, var(--icon));
+}
+.btn--cta::after {
+  background-image: var(--icon-dropdown-inv, var(--icon-dropdown));
+}
+.btn--alert {
+  color: var(--color-btn-alert-fg);
+  background: var(--color-btn-alert-bg);
+  border-color: var(--color-btn-alert-border);
+}
+.btn--alert:hover {
+  background-color: var(--color-btn-alert-hover);
+}
+.btn--alert::after {
+  background-image: var(--icon-dropdown-alert);
+}
+.btn--square {
+  flex: none;
+  width: var(--btn-height);
+  padding: 0;
+}
+.btn--square.icon {
+  padding: 0;
+}
+.btn--soft {
+  --btn-height: 24px;
+  color: var(--color-fg-primary);
+  background: var(--color-bg-app);
+  border: 0;
+}
+.btn--soft:hover {
+  background-color: var(--color-bg-selected-icon);
+}
+
+/* 24×32 icon button; the 32px SVG is cropped to the box */
+.icon-button {
+  --icon-fit: 32px;
+  justify-content: center;
+  width: 24px;
+  height: 32px;
+  border-radius: 2px;
+}
+.icon-button:hover {
+  background-color: var(--color-bg-selected-cell);
+}
+.icon-button::before {
+  width: 24px;
+}
+
+/* Small bordered value with an optional 16px icon */
+.pill {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-fg-secondary);
+  --icon-size: 16px;
+  --icon-fit: 28px; /* crops the 32px SVG's margin */
+  justify-content: center;
+  gap: 2px;
+  min-width: 46px;
+  height: 24px;
+  padding: 0 4px 0 2px;
+  border: 1px solid var(--color-border-pill);
+  border-radius: 2px;
+  /*
+    Editable pill: <input class="pill pill--input" value="30">
+    Width in --pill-width (40px; $pill-time-width for times in lists).
+  */
+  /* Warning (e.g. Final > Estimated in Reports): looks like a hovered .btn--alert */
+}
+.pill:hover {
+  background-color: var(--color-bg-selected-cell);
+}
+.pill--input {
+  --pill-width: 40px;
+  width: var(--pill-width);
+  min-width: 0;
+  padding: 0;
+  font-family: inherit;
+  color: var(--color-fg-primary);
+  text-align: center;
+  text-transform: none; /* "20m", not "20M" */
+  background: transparent;
+}
+.pill--input:focus-visible {
+  outline-offset: -1px;
+  background: var(--color-bg-card);
+}
+.pill.is-alert {
+  color: var(--color-alert);
+  border-color: var(--color-alert);
+  background: var(--color-alert-fill);
+}
+
+/* Vertical divider between groups of buttons: <hr class="divider"> */
+/* box, including the space on both sides */
+/* visible line */
+.divider {
+  flex: none;
+  width: 32px;
+  height: 24px;
+  margin: 0;
+  border: 0;
+  background: linear-gradient(var(--color-bg-selected-icon), var(--color-bg-selected-icon)) center/1px 100% no-repeat;
+}
+
+/*
+  Disclosure button: <button data-toggle aria-controls="id" aria-expanded="true">
+  js/app.js shows or hides the target; the arrow points up while expanded.
+*/
+[data-toggle].icon {
+  --icon: var(--icon-dropdown-alt);
+}
+
+[data-toggle][aria-expanded=false].icon {
+  --icon: var(--icon-dropdown);
+}
+
+/****************************************************************************
+
+  INLINE SETTINGS
+
+****************************************************************************/
+/*
+  Groups of label + editable pill (Calls card header)
+
+    <div class="settings">
+      <div class="settings__group" role="group" aria-label="Preparation (minutes)">
+        <label class="settings__item">Makeup <input class="pill pill--input" value="30" inputmode="numeric"></label>
+        …
+      </div>
+      …
+    </div>
+*/
+/* between the settings of a group */
+/* between groups and up to the next button */
+.settings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  column-gap: 80px;
+  min-width: 0;
+  margin-right: 72px; /* the header's gap adds the other 8px */
+  /* Narrow windows: groups get closer */
+  /* Stacked: one setting per line, label left and control right (Settings modal) */
+}
+.settings__group {
+  display: flex;
+  gap: 16px;
+}
+.settings__item {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: var(--color-fg-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 32px;
+  white-space: nowrap;
+}
+@media (max-width: 1199px) {
+  .settings {
+    column-gap: 24px;
+    margin-right: 16px;
+  }
+}
+.settings--stack {
+  flex-direction: column;
+  margin-right: 0;
+}
+.settings--stack .settings__item {
+  justify-content: space-between;
+}
+
+/****************************************************************************
+
+  DROPDOWN MENU
+
+****************************************************************************/
+/*
+  Native <details>: opens and closes without JS. js/app.js only closes it
+  on an outside click, on choosing an option or with Esc.
+
+    <details class="menu">
+      <summary class="btn btn--dropdown">Add</summary>
+      <ul class="menu__list">
+        <li><button class="menu__item">Main</button></li>
+        <li><button class="menu__item">Extras</button></li>
+      </ul>
+    </details>
+
+  Options can be <button> or <a href>. --menu-width sets the list's
+  minimum width (100px by default).
+*/
+.menu {
+  --menu-width: 100px;
+  position: relative;
+  display: inline-block;
+  /* The button is the <summary>, without the browser's triangle */
+  /* Open: button and list become a single piece with a shadow */
+}
+.menu > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+.menu > summary::-webkit-details-marker {
+  display: none;
+}
+.menu[open] {
+  z-index: 20;
+  filter: drop-shadow(1px 3px 8px var(--color-shadow));
+}
+.menu[open] > summary {
+  position: relative;
+  z-index: 2;
+  background: var(--color-bg-card);
+  border-bottom-color: transparent;
+  border-radius: 2px 2px 0 0;
+}
+.menu[open] > summary::after {
+  background-image: var(--icon-dropdown-alt);
+}
+.menu__list {
+  position: absolute;
+  top: calc(100% - 0.5px);
+  left: 0;
+  z-index: 1;
+  min-width: max(100%, var(--menu-width));
+  background: var(--color-bg-card);
+  border: 0.5px solid var(--color-border-button); /* same as the button that opens it */
+  border-radius: 0 2px 2px 2px;
+}
+.menu__item {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: var(--color-fg-primary);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 32px;
+  padding: 0 16px;
+  white-space: nowrap;
+  text-align: left;
+}
+.menu__item:hover, .menu__item:focus-visible {
+  background: var(--color-bg-hover-cell);
+}
+.menu__item:focus-visible {
+  outline-offset: -2px;
+}
+
+/****************************************************************************
+
+  FORM CONTROLS
+
+****************************************************************************/
+/* Native select styled like the buttons; unassigned (value="") looks grey */
+select {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+  appearance: none;
+  max-width: 100%;
+  min-width: 160px;
+  height: 24px;
+  padding: 0 24px 0 12px;
+  color: var(--color-fg-primary);
+  background: var(--color-bg-card) var(--image-select) right 4px center/24px no-repeat;
+  border: 0.5px solid var(--color-border-button);
+  border-radius: 2px;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+  /* the cell crops whatever sticks out */
+}
+select:hover {
+  background-color: var(--color-bg-selected-cell);
+}
+select:focus-visible {
+  outline-offset: -2px;
+}
+select:has(option[value=""]:checked) {
+  font-weight: 400;
+  color: var(--color-fg-secondary);
+}
+select option {
+  color: var(--color-fg-primary);
+}
+
+/*
+  Text field with its label (login form)
+
+    <div class="field">
+      <label class="field__label" for="login-user">User</label>
+      <div class="field__box">
+        <input class="field__input" id="login-user" type="text" autocomplete="username">
+      </div>
+    </div>
+
+  A trailing button (e.g. show password) goes inside .field__box, after the
+  input. The box shows the focus ring of the input.
+*/
+/* .field--sm: short values (days…) */
+.field {
+  display: flex;
+  flex-direction: column;
+  /* Short value beside a wide field (Days next to Starting date) */
+}
+.field__label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-fg-secondary);
+  line-height: 24px;
+}
+.field__box {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  background: var(--color-bg-content);
+  border: 0.5px solid var(--color-fg-primary);
+  border-radius: 2px;
+}
+.field__box:focus-within {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+.field__input {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 8px;
+  font-family: inherit;
+  color: var(--color-fg-primary);
+  background: transparent;
+  border: 0;
+  /* the ring is drawn by .field__box */
+}
+.field__input:focus-visible {
+  outline: 0;
+}
+.field--sm {
+  flex: none;
+  width: 100px;
+}
+
+/*
+  Inline input: editable text that looks like plain text (cast roles and
+  artists, custom unit types…). Focus ring with 4px of air.
+    <span class="list__cell list__cell--fill"><input class="inline-input" value="Designer" aria-label="Role"></span>
+*/
+.inline-input {
+  width: calc(100% + 4px);
+  min-width: 0;
+  height: 24px;
+  margin-left: -4px; /* text stays aligned with the column */
+  padding: 0 4px;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  text-overflow: ellipsis;
+  background: transparent;
+  border: 0;
+  border-radius: 2px;
+}
+.inline-input:focus-visible {
+  outline-offset: 0;
+  background: var(--color-bg-card);
+}
+.inline-input::placeholder {
+  color: var(--color-fg-subtle);
+}
+
+/* A cell holding one is not clipped, so the ring and the -4px margin show */
+.list__cell:has(> .inline-input) {
+  overflow: visible;
+}
+
+/* Show / hide password: <button class="card__action icon icon__visible" data-reveal="input-id"> */
+[data-reveal][aria-pressed=true] {
+  --icon: var(--icon-hidden);
+}
+
+/* Checkbox */
+input[type=checkbox] {
+  appearance: none;
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin: 3px;
+  border: 1px solid var(--color-border-form-item);
+  background: var(--color-bg-card) center/100% no-repeat;
+  border-radius: 1px;
+  cursor: pointer;
+}
+input[type=checkbox]:checked {
+  background-color: var(--color-fg-primary);
+  background-image: var(--image-check); /* tick in fg-inverse, per theme */
+  border-color: var(--color-fg-primary);
+}
+input[type=checkbox]:indeterminate {
+  background-image: linear-gradient(var(--color-fg-primary), var(--color-fg-primary));
+  background-size: 6px 1.5px;
+}
+
+/* Radio */
+input[type=radio] {
+  appearance: none;
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin: 3px;
+  border: 1px solid var(--color-border-form-item);
+  background: var(--color-bg-card);
+  border-radius: 50%;
+  /* Selected: a thick primary border leaves a white dot in the centre */
+}
+input[type=radio]:checked {
+  border: var(--color-fg-primary) solid 4px;
+}
+input[type=radio]:focus-visible {
+  outline-offset: 2px;
+}
+
+/* Switch: <input type="checkbox" class="switch" role="switch"> */
+/* knob to the inner edge */
+input.switch {
+  width: 26px;
+  height: 14px;
+  margin: 3px 2px; /* 30 x 20 box */
+  background: radial-gradient(circle closest-side, var(--color-fg-primary) 92%, transparent) no-repeat var(--color-bg-card);
+  background-position: 2px center;
+  background-size: 8px 8px;
+  border-color: var(--color-border-button);
+  border-radius: 14px;
+  transition: background-position 200ms cubic-bezier(0.2, 0, 0, 1), background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+input.switch:checked {
+  background-image: radial-gradient(circle closest-side, var(--color-fg-inverse) 92%, transparent);
+  background-color: var(--color-fg-primary);
+  background-position: right 2px center;
+  border-color: var(--color-fg-primary);
+}
+@media (prefers-reduced-motion: reduce) {
+  input.switch {
+    transition: none;
+  }
+}
+
+/****************************************************************************
+
+  CELL SELECTOR
+
+****************************************************************************/
+/*
+  Select with the app's look for list cells (e.g. Department). The options
+  live in js/app.js (OPTIONS); the script builds one popover per option
+  list and reuses it in every cell.
+
+    <button class="list__cell list__cell--fill list__cell--select"
+            data-select="departments" value="1">Production</button>
+
+  Closes on an outside click, with Esc or when the page scrolls.
+*/
+/* fits the longest option plus the scrollbar */
+/* option rows (and the add row of --multi) */
+/* visible options; the rest scroll */
+/* radio / checkbox, drawn in a 20px box */
+.select-menu {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  color: inherit;
+  background: var(--color-bg-card);
+  border: 0.5px solid var(--color-border-button); /* same as the button that opens it */
+  width: 180px;
+  max-height: 401px;
+  padding: 0;
+  overflow: hidden auto; /* vertical scroll only */
+  overscroll-behavior: contain; /* scrolling never reaches the page */
+  scrollbar-width: thin;
+  border-radius: 0 2px 2px 2px;
+  box-shadow: 1px 3px 8px var(--color-shadow);
+}
+.select-menu__option {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 40px;
+  padding: 0 8px;
+  line-height: 16px;
+  cursor: pointer;
+  /* Larger radio / checkbox than in lists */
+}
+.select-menu__option:hover, .select-menu__option:has(:focus-visible) {
+  background: var(--color-bg-hover-cell);
+}
+.select-menu__option input {
+  width: 12.5px;
+  height: 12.5px;
+  margin: 3.75px;
+  border-width: 1.25px;
+  cursor: pointer;
+}
+
+/*
+  Multiple choice (e.g. Sets in Locations): the same menu with checkboxes and,
+  at the bottom, a field to add a new option. The cell lists the chosen
+  options one per line; the menu stays open while ticking.
+
+    <button class="list__cell list__cell--fill list__cell--select list__cell--multi"
+            data-multi="sets" value="1,3">
+      <span class="list__values" data-empty="Add set"><span>Vestuario</span><span>Cocina</span></span>
+    </button>
+
+  value holds the chosen positions in OPTIONS[key] (1, 2, 3…). A new option is
+  added to OPTIONS[key], so every cell of that key offers it.
+*/
+/* minimum; grows with longer options… */
+/* …up to this */
+/* visible options; the rest scroll */
+.select-menu--multi {
+  width: max-content;
+  min-width: 160px;
+  max-width: 240px;
+  max-height: none;
+  padding: 0;
+  overflow: hidden;
+  border-color: var(--color-border-floating); /* floats over the cell, not attached to a button */
+  box-shadow: 1px 3px 8px var(--color-shadow);
+}
+.select-menu--multi:popover-open {
+  display: flex;
+  flex-direction: column;
+}
+.select-menu--multi .select-menu__list {
+  max-height: 320px;
+  overflow: hidden auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+/* New option: field + add button */
+.select-menu__add {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  padding: 0 8px;
+  border-top: 1px solid var(--color-border-divider);
+  /* no hover fill on the + */
+}
+.select-menu__add .icon-button:hover {
+  background: none;
+}
+
+.select-menu__field {
+  flex: 1;
+  width: 0; /* the options, not the field, set the menu width */
+  min-width: 0;
+  height: 24px;
+  padding: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+  color: var(--color-fg-primary);
+  background: var(--color-bg-content);
+  border: 0.5px solid var(--color-fg-primary);
+  border-radius: 2px;
+}
+
+/****************************************************************************
+
+  COLOUR PICKER
+
+****************************************************************************/
+/*
+  Button with a dot of the current colour that opens a row of swatches,
+  like the colour tags of the macOS context menu.
+
+    <li class="list__row list__row--banner list__row--banner-custom" data-color="1">
+      …
+      <button class="color-button" data-color-menu aria-label="Banner color"></button>
+    </li>
+
+  Colours come from $banner-colors (_tokens.scss): an element with
+  data-color="n" gets --banner-bg set to colour n. js/app.js builds the
+  menu and, on choosing, updates the row's data-color.
+  Fixed unit types use data-type="av|photo|social|banner" ($type-colors);
+  their dot is a plain <span class="color-button"> with no menu.
+*/
+/* dot inside the button */
+/* swatches in the menu */
+[data-type=av] {
+  --banner-bg: var(--color-banner-bg-av);
+}
+
+[data-type=photo] {
+  --banner-bg: var(--color-banner-bg-photo);
+}
+
+[data-type=social] {
+  --banner-bg: var(--color-banner-bg-social);
+}
+
+[data-type=banner] {
+  --banner-bg: var(--color-banner-bg-alt-1);
+}
+
+/* After the types, so a chosen colour wins */
+[data-color="0"] {
+  --banner-bg: var(--color-banner-bg-alt-1);
+}
+
+.swatch[value="0"] {
+  --swatch: var(--color-banner-bg-alt-1);
+}
+
+[data-color="1"] {
+  --banner-bg: var(--color-banner-bg-alt-2);
+}
+
+.swatch[value="1"] {
+  --swatch: var(--color-banner-bg-alt-2);
+}
+
+[data-color="2"] {
+  --banner-bg: var(--color-banner-bg-alt-3);
+}
+
+.swatch[value="2"] {
+  --swatch: var(--color-banner-bg-alt-3);
+}
+
+[data-color="3"] {
+  --banner-bg: var(--color-banner-bg-alt-4);
+}
+
+.swatch[value="3"] {
+  --swatch: var(--color-banner-bg-alt-4);
+}
+
+[data-color="4"] {
+  --banner-bg: var(--color-banner-bg-alt-5);
+}
+
+.swatch[value="4"] {
+  --swatch: var(--color-banner-bg-alt-5);
+}
+
+.color-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+}
+.color-button::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: var(--banner-bg, var(--color-banner-bg-av));
+  border: 1px solid var(--color-fg-secondary); /* always outlined so it is easy to spot */
+  border-radius: 50%;
+}
+
+.color-menu {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  color: inherit;
+  background: var(--color-bg-card);
+  border: 0.5px solid var(--color-border-button); /* same as the button that opens it */
+  padding: 4px 16px 16px;
+  border-radius: 6px;
+  box-shadow: 1px 3px 8px var(--color-shadow);
+}
+.color-menu__title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: var(--color-fg-secondary);
+  line-height: 24px;
+}
+.color-menu__list {
+  display: flex;
+  gap: 8px;
+}
+
+/* Colour swatch (round radio) */
+input.swatch {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  background: var(--swatch);
+  border: 1px solid var(--color-border-pill);
+  cursor: pointer;
+  transition: transform 200ms cubic-bezier(0.2, 0, 0, 1);
+  /* Selected: the ring outside marks it; the swatch keeps its thin border
+     (the generic radio's thick border would hide the colour) */
+}
+input.swatch:hover {
+  transform: scale(1.15);
+}
+input.swatch:checked {
+  background: var(--swatch);
+  border: 1px solid var(--color-border-pill);
+  box-shadow: 0 0 0 2px var(--color-bg-card), 0 0 0 3px var(--color-fg-primary);
+}
+
+/****************************************************************************
+
+  CARD
+
+****************************************************************************/
+.card {
+  background: var(--color-bg-card);
+  border-radius: 2px;
+  /* Title on the left; any button after it is pushed to the right */
+  /* 32px icon button in a header or over a cover */
+  /* Widget variant (dashboard): tall header, no rule, secondary title */
+  /* Cover image with the title on a gradient */
+}
+.card + .card {
+  margin-top: 16px;
+}
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 64px;
+  padding: 16px 16px 16px 24px;
+  border-bottom: 0.5px solid var(--color-border-divider);
+}
+.card__title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-fg-primary);
+  margin-right: auto;
+  line-height: 24px;
+}
+.card__body {
+  overflow-x: auto;
+  padding-bottom: 24px;
+}
+.card__action {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+}
+.card__action:hover {
+  background-color: var(--color-bg-selected-cell);
+}
+.card--widget {
+  overflow: hidden;
+  padding-bottom: 40px;
+}
+.card--widget .card__header {
+  min-height: 80px;
+  padding: 0 16px 0 24px;
+  border-bottom: 0;
+}
+.card--widget .card__title {
+  color: var(--color-fg-secondary);
+}
+.card__cover {
+  position: relative;
+  height: 220px;
+  margin: 0;
+  background: center;
+  background-size: cover;
+}
+.card__cover figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 24px 8px 24px 24px;
+  background: linear-gradient(transparent, var(--color-overlay));
+}
+.card__cover h1 {
+  font-size: 28px; /* display */
+  font-weight: 300;
+  line-height: 36px;
+  letter-spacing: -0.2px;
+  color: var(--color-fg-on-image);
+}
+.card__cover .card__action { /* -inv icon over the image */ }
+.card__cover .card__action::before {
+  background-image: var(--icon-inv, var(--icon));
+}
+.card__cover .card__action:hover {
+  background-color: var(--color-overlay-soft);
+}
+
+/* Cover backgrounds: .bg_01 … .bg_24 → img/bg/bg_01.png … bg_24.png */
+.bg_01 {
+  background-image: url("../img/bg/bg_01.png");
+}
+
+.bg_02 {
+  background-image: url("../img/bg/bg_02.png");
+}
+
+.bg_03 {
+  background-image: url("../img/bg/bg_03.png");
+}
+
+.bg_04 {
+  background-image: url("../img/bg/bg_04.png");
+}
+
+.bg_05 {
+  background-image: url("../img/bg/bg_05.png");
+}
+
+.bg_06 {
+  background-image: url("../img/bg/bg_06.png");
+}
+
+.bg_07 {
+  background-image: url("../img/bg/bg_07.png");
+}
+
+.bg_08 {
+  background-image: url("../img/bg/bg_08.png");
+}
+
+.bg_09 {
+  background-image: url("../img/bg/bg_09.png");
+}
+
+.bg_10 {
+  background-image: url("../img/bg/bg_10.png");
+}
+
+.bg_11 {
+  background-image: url("../img/bg/bg_11.png");
+}
+
+.bg_12 {
+  background-image: url("../img/bg/bg_12.png");
+}
+
+.bg_13 {
+  background-image: url("../img/bg/bg_13.png");
+}
+
+.bg_14 {
+  background-image: url("../img/bg/bg_14.png");
+}
+
+.bg_15 {
+  background-image: url("../img/bg/bg_15.png");
+}
+
+.bg_16 {
+  background-image: url("../img/bg/bg_16.png");
+}
+
+.bg_17 {
+  background-image: url("../img/bg/bg_17.png");
+}
+
+.bg_18 {
+  background-image: url("../img/bg/bg_18.png");
+}
+
+.bg_19 {
+  background-image: url("../img/bg/bg_19.png");
+}
+
+.bg_20 {
+  background-image: url("../img/bg/bg_20.png");
+}
+
+.bg_21 {
+  background-image: url("../img/bg/bg_21.png");
+}
+
+.bg_22 {
+  background-image: url("../img/bg/bg_22.png");
+}
+
+.bg_23 {
+  background-image: url("../img/bg/bg_23.png");
+}
+
+.bg_24 {
+  background-image: url("../img/bg/bg_24.png");
+}
+
+/****************************************************************************
+
+  TABS
+
+****************************************************************************/
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 64px;
+  padding: 0 24px;
+  /* Unselected in $color-fg-subtle; selected and hovered in primary */
+}
+.tabs__tab {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-fg-subtle);
+  height: 24px;
+  padding: 4px 8px;
+  line-height: 16px;
+  border-radius: 2px;
+  transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1), color 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+.tabs__tab:hover, .tabs__tab[aria-selected=true] {
+  color: var(--color-fg-primary);
+  background: var(--color-bg-selected-cell);
+}
+
+/****************************************************************************
+
+  OVERVIEW WIDGETS: FACTS, WEATHER AND EDITOR
+
+****************************************************************************/
+/* Label / value pairs (Credits, Contact) */
+.facts {
+  margin: 0;
+}
+.facts > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 48px;
+  padding: 0 24px;
+}
+.facts dt {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  line-height: 20px;
+  text-transform: none;
+}
+.facts dd {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 20px;
+  text-transform: none;
+  margin: 0;
+  text-align: right;
+}
+.facts dd img {
+  display: block;
+}
+.facts a:hover {
+  text-decoration: underline;
+}
+
+/*
+  Logo field (Credits › Client, Agency, Production Company): the value is
+  either editable text or a logo. On hover or focus the controls show on top
+  of it: image (choose a logo file) and close (back to text, only with a
+  logo). js/app.js swaps them.
+
+    <dd>
+      <span class="logo-field">
+        <input class="inline-input" name="client" value="Under Armour" aria-label="Client">
+        <span class="logo-field__actions">
+          <label class="card__action icon icon__image" role="button" tabindex="0" title="Use a logo"><input type="file" accept="image/*" hidden></label>
+          <button class="card__action icon icon__close" type="button" data-logo-remove title="Use text" hidden></button>
+        </span>
+      </span>
+    </dd>
+
+  With a logo the text input gets hidden and an <img> takes its place.
+  Value, logo and controls share one grid cell, so they stack.
+*/
+.logo-field {
+  display: grid;
+  justify-content: end; /* one column as wide as the value, on the right */
+  align-items: center;
+  /* As wide as its text (field-sizing; js/app.js sets the width where it
+     is not supported) and flush with the right edge */
+  /* Controls centred on top of the value; only on hover or focus
+     (always on touch screens) */
+}
+.logo-field > * {
+  grid-area: 1/1;
+}
+.logo-field .inline-input {
+  field-sizing: content;
+  width: auto;
+  min-width: 4ch;
+  margin: 0 -4px 0 0;
+  text-align: right;
+}
+.logo-field img {
+  width: 80px;
+  height: 40px;
+  object-fit: contain;
+}
+.logo-field__actions {
+  z-index: 1;
+  place-self: center;
+  display: flex;
+  background: var(--color-bg-floating);
+  border-radius: 2px;
+  box-shadow: 1px 3px 8px var(--color-shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+.logo-field:hover .logo-field__actions, .logo-field:focus-within .logo-field__actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+@media (hover: none) {
+  .logo-field__actions {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Weather */
+.weather {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 16px 24px 0;
+}
+.weather__icon {
+  width: 140px;
+  height: 80px;
+  object-fit: cover;
+}
+.weather__temp {
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 40px;
+  letter-spacing: -1.5px;
+  color: var(--color-fg-primary);
+}
+.weather__temp small {
+  font-size: 20px;
+  line-height: 1; /* keeps the 40px line */
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--color-fg-secondary);
+}
+.weather__stats {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: space-between;
+  margin: 16px 0 0;
+  color: var(--color-fg-primary);
+}
+.weather__stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.weather__stats dt {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  line-height: 20px;
+  text-transform: none;
+  line-height: 16px;
+}
+.weather__stats dd {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 20px;
+  text-transform: none;
+  margin: 0;
+  line-height: 16px;
+}
+
+/* Rich text with a formatting toolbar */
+.editor__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  padding: 0 16px;
+  border-block: 1px solid var(--color-bg-app);
+}
+.editor__toolbar .icon-button {
+  --icon-fit: 28px;
+  height: 24px;
+}
+.editor__toolbar .btn--soft {
+  margin-left: auto;
+}
+
+.prose {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+  padding: 16px 24px 0;
+  line-height: 20px;
+  color: var(--color-fg-primary);
+}
+.prose h3 {
+  font-size: inherit;
+  font-weight: 700;
+}
+.prose ul {
+  padding-left: 1.3em;
+  list-style: disc;
+}
+.prose ul + h3 {
+  margin-top: 24px;
+}
+
+/****************************************************************************
+
+  THUMBNAIL
+
+****************************************************************************/
+/*
+  Fixed-size image with an optional shot number and selection checkbox.
+  Two or more images split the box (merged shots).
+
+    <figure class="thumb">
+      <img src="img/ad/001.png" alt="">
+      <figcaption>24</figcaption>
+      <input type="checkbox" aria-label="Select image">
+    </figure>
+
+  Size in --thumb-width / --thumb-height ($thumb-width × $thumb-height).
+*/
+/* number and checkbox from the corners */
+.thumb {
+  --thumb-width: 200px;
+  --thumb-height: 112px;
+  position: relative;
+  display: flex;
+  gap: 2px; /* between merged images */
+  width: var(--thumb-width);
+  height: var(--thumb-height);
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-button);
+  border-radius: 4px;
+  /* Shot number */
+  /* Selection */
+}
+.thumb img {
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  object-fit: cover;
+}
+.thumb figcaption {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  min-width: 24px;
+  padding: 2px 4px;
+  line-height: 12px;
+  color: var(--color-fg-inverse);
+  text-align: center;
+  background: var(--color-fg-primary);
+  border-radius: 2px;
+}
+.thumb input[type=checkbox] {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+
+/****************************************************************************
+
+  DRAWER (IMAGE GALLERY)
+
+****************************************************************************/
+/*
+  Side panel that slides in from the right over the page. It is a <dialog>
+  opened like a modal (data-modal="id"): it closes with its close button,
+  with Esc or on a click outside.
+
+    <dialog class="drawer" id="gallery" aria-labelledby="gallery-title">
+      <header class="modal__header">
+        <h2 class="modal__heading" id="gallery-title">Image gallery</h2>
+        <form method="dialog"><button class="card__action icon icon__close" aria-label="Close"></button></form>
+      </header>
+      <div class="drawer__toolbar">…</div>
+      <div class="drawer__body">…</div>
+    </dialog>
+
+  The header reuses .modal__header and .modal__heading. Only the body scrolls.
+*/
+/* reused .modal__header, shorter here */
+/* distance from the window edges */
+/* veil over the page */
+/* entrance duration and curve */
+/* slides in from this distance */
+.drawer {
+  inset: 64px 8px 8px auto;
+  flex-direction: column;
+  width: 880px;
+  max-width: calc(100vw - 16px);
+  height: auto;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  background: var(--color-bg-card);
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 1px 3px 8px var(--color-shadow);
+}
+.drawer[open] {
+  display: flex;
+  animation: drawer-in 280ms cubic-bezier(0.2, 0, 0, 1);
+}
+.drawer::backdrop {
+  background: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  .drawer[open] {
+    animation: none;
+  }
+}
+.drawer .modal__header {
+  flex: none;
+  height: 64px;
+}
+.drawer__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  padding: 8px 24px;
+  border-block: 1px solid var(--color-bg-selected-cell);
+  /* help, on the far right */
+}
+.drawer__toolbar > :last-child {
+  margin-left: auto;
+}
+.drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+@keyframes drawer-in {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
+/* No page scroll while a drawer is open */
+body:has(.drawer[open]) {
+  overflow: hidden;
+}
+
+/****************************************************************************
+
+  GALLERY
+
+****************************************************************************/
+/*
+  Images grouped by spot. Each group has a header (name, rule, select all,
+  optional delete, collapse) and a grid of thumbnails, or a drop zone when
+  it is empty.
+
+    <section class="gallery">
+      <header class="gallery__head">
+        <h3 class="gallery__title">Spot 1</h3>
+        <label class="gallery__select"><input type="checkbox">Select all</label>
+        <button class="card__action icon" data-toggle aria-controls="spot-1" aria-expanded="true" aria-label="Collapse"></button>
+      </header>
+      <div class="gallery__grid" id="spot-1"> <figure class="thumb">…</figure> … </div>
+    </section>
+*/
+/* between thumbnails */
+/* columns fill the row; each one at least this wide */
+.gallery {
+  /* Name followed by a rule that fills the row */
+  /*
+    Flexible columns: as many as fit (min $gallery-thumb-min), sharing the
+    whole width, so there is no gap on the right whatever the panel width or
+    the scrollbar. Thumbnails keep the $thumb-width × $thumb-height ratio.
+  */
+}
+.gallery__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 48px;
+  padding: 0 24px;
+}
+.gallery__title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: var(--color-fg-primary);
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  line-height: 40px;
+  white-space: nowrap;
+}
+.gallery__title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  margin-left: 16px;
+  background: var(--color-border-button);
+}
+.gallery__select {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-fg-primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 16px;
+  cursor: pointer;
+}
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  padding: 0 16px 40px;
+}
+.gallery__grid .thumb {
+  --thumb-width: 100%;
+  --thumb-height: auto;
+  aspect-ratio: 200/112; /* $thumb-width / $thumb-height */
+}
+
+/*
+  Drop zone (first run or empty spot)
+
+    <div class="dropzone">
+      <p class="dropzone__title icon icon__image">Drag and drop your images/PDF here</p>
+      <p class="dropzone__text">or</p>
+      <label class="btn icon icon__upload">Import <input type="file" multiple hidden></label>
+    </div>
+
+  --compact (inside a modal): the whole zone is the file input's label
+    <label class="dropzone dropzone--compact">
+      <span class="dropzone__title icon icon__import">Drag and drop the cover images here</span>
+      <span class="dropzone__text">or</span>
+      <span class="dropzone__browse">Browse files</span>
+      <span class="dropzone__text">Recommended size: 800x500</span>
+      <input type="file" accept="image/*" hidden>
+    </label>
+*/
+/* above and below the content */
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 24px;
+  padding: 80px 0;
+  background: var(--color-bg-content);
+  border: 1px dashed var(--color-fg-secondary);
+  border-radius: 2px;
+  /* 64px icon above the title */
+  /* "Browse files": the whole dropzone is the <label> of a hidden file input */
+  /* Inside a modal body: no outer margin, tighter lines (New project) */
+}
+.dropzone__title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-fg-primary);
+  --icon-size: 64px;
+  flex-direction: column;
+  gap: 8px;
+  line-height: 16px;
+  text-align: center;
+}
+.dropzone__text {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+  line-height: 16px;
+}
+.dropzone__browse {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-fg-primary);
+  text-decoration: underline;
+}
+.dropzone--compact {
+  gap: 4px;
+  margin: 0;
+  padding: 24px 0;
+  cursor: pointer;
+}
+.dropzone--compact .dropzone__title {
+  gap: 4px;
+}
+
+/****************************************************************************
+
+  LISTS
+
+****************************************************************************/
+/*
+  Data list (replaces <table>)
+
+    ul.list > li.list__row > .list__cell
+
+  Each row is a flexbox and the column width lives in the cell's class,
+  not in its position: cells or rows can be reordered by JS (moving nodes
+  or with `order`) without breaking the layout.
+
+  Cells:  --check (28px) · --index (40px) · --fill (shares the rest)
+          --name (200px) · --phone (9 digits) · --thumb (120×72 image)
+          --select (opens a cell selector) · --actions (--list-actions)
+  Rows:   --head (column heads) · --banner (group separator)
+  Lists:  one class per view (--cast, --crew…) sets --list-actions to fit
+          that view's actions.
+*/
+/* grey box of a banner row */
+/* multiple-choice cells: lines shown before "…" */
+/* space around the box (40px row) */
+.list {
+  --list-actions: 130px; /* default */
+  min-width: 480px;
+  /* Actions column width per view */
+  /* pill + 2 buttons */
+  /* pill + 4 buttons */
+  /* pill + 1 button */
+  /* Compact list inside a widget (Overview › Locations) */
+  /* ROWS ----------------------------------------------------------------- */
+  /* CELLS ---------------------------------------------------------------- */
+  /*
+    Values of a multiple-choice cell: up to $values-max lines, then "…".
+    data-empty shows when none is chosen.
+  */
+}
+.list--cast {
+  --list-actions: 110px;
+}
+.list--crew {
+  --list-actions: 162px;
+}
+.list--sites {
+  --list-actions: 100px;
+}
+.list--places {
+  min-width: 0;
+}
+.list--places .list__row {
+  min-height: 64px;
+  padding: 0 16px;
+}
+.list--places .list__cell--fill {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+  padding: 0 24px 0 0;
+  font-style: normal;
+  line-height: 16px;
+  white-space: normal;
+}
+.list--places .list__cell--fill strong {
+  display: block;
+  font-weight: 600;
+}
+.list--places .list__cell--thumb {
+  width: auto;
+  margin: 0;
+}
+.list--places .list__cell--thumb img {
+  width: 96px;
+  height: 52px;
+  border: 0.5px solid var(--color-bg-selected-icon);
+  border-radius: 2px;
+}
+.list__row {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 4px;
+  /* Highlight data rows under the pointer (not heads or banners) */
+  /* Banner: group separator (e.g. a day in Shoot Plan) */
+}
+.list__row:not(.list__row--head, .list__row--banner):hover {
+  background-color: var(--color-bg-hover-cell);
+}
+.list__row--head {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: var(--color-fg-secondary);
+}
+.list__row--banner {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: var(--color-fg-primary);
+  gap: 16px;
+  min-height: 0;
+  height: 32px;
+  margin: 4px 8px;
+  padding: 0 8px;
+  background: var(--color-bg-app);
+  border-radius: 2px;
+}
+.list__row--banner h2 {
+  font-size: inherit;
+}
+.list__values {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.list__values > * {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.list__values > :nth-child(n+6) {
+  display: none;
+}
+.list__values:has(> :nth-child(6))::after {
+  content: "…";
+}
+.list__values:empty::before {
+  content: attr(data-empty);
+  color: var(--color-fg-subtle);
+}
+.list__cell {
+  flex: none;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* "654 123 456" at 13px semibold + .inline-input padding */
+  /*
+    Cell that opens a cell selector (see CELL SELECTOR in _controls.scss).
+    Looks like text; the arrow shows on hover or while the menu is open.
+  */
+  /* Several values, one per line; the arrow follows the longest one */
+  /* 120×72 thumbnail; the row grows to 80px. 24px before the actions. */
+  /*
+    Actions aligned to the right, so icons stay in columns even if the
+    pill changes width ("1/2", "ALL"…). Centred in the head row.
+  */
+}
+.list__cell--check {
+  display: flex;
+  justify-content: center;
+  width: 28px;
+  padding-left: 12px; /* checkbox 6px right of the centre */
+}
+.list__cell--index {
+  width: 40px;
+  text-align: center;
+}
+.list__row:not(.list__row--head) .list__cell--index {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+}
+.list__cell--fill {
+  flex: 1 1 0;
+  padding-right: 8px; /* keeps long texts (e.g. email) apart */
+}
+.list__cell--phone {
+  width: 100px;
+}
+.list__cell--select {
+  text-align: left;
+  cursor: pointer;
+}
+.list__cell--select::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: var(--icon-dropdown) center/cover no-repeat;
+  display: inline-block;
+  margin: -1px 0 -1px 2px; /* 18px arrow on a 16px line */
+  vertical-align: top;
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+.list__cell--select:hover::after, .list__cell--select.is-open::after {
+  opacity: 1;
+}
+.list__cell--multi {
+  display: flex;
+  align-items: center;
+  white-space: normal;
+}
+.list__cell--multi::after {
+  margin-block: -1px;
+}
+.list__cell--name {
+  width: 200px;
+  padding-right: 8px;
+}
+.list__cell--thumb {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  margin-right: 24px;
+  padding: 4px 0;
+}
+.list__cell--thumb img {
+  display: block;
+  width: 120px;
+  height: 72px;
+  object-fit: cover;
+  border: 1px solid var(--color-border-button);
+  border-radius: 4px;
+}
+.list__cell--actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: var(--list-actions);
+  padding-right: 16px;
+}
+.list__row--head .list__cell--actions {
+  justify-content: center;
+  padding-right: 0;
+}
+
+/****************************************************************************
+
+  ROW WARNING
+
+****************************************************************************/
+/*
+  Warning marker: a dot in the row's left margin flagging something
+  pending (e.g. a character with no artist). Works in any list:
+
+    <li class="list__row has-warning" title="No artist assigned">…</li>
+
+  The dot takes no space: it is drawn on top, without moving any cell.
+  Tune it with custom properties, globally here or per list/row:
+
+    --warning-color   dot colour
+    --warning-size    diameter
+    --warning-x       distance from the row's left edge
+    --warning-y       height of the dot's centre (50% = centred)
+*/
+/* with a checkbox, ~5px from the box */
+.has-warning {
+  --warning-color: var(--color-warning);
+  --warning-size: 6px;
+  --warning-x: 6px;
+  --warning-y: 50%;
+  position: relative;
+}
+.has-warning::after {
+  content: "";
+  position: absolute;
+  top: var(--warning-y);
+  left: var(--warning-x);
+  width: var(--warning-size);
+  height: var(--warning-size);
+  margin-top: calc(var(--warning-size) / -2);
+  background: var(--warning-color);
+  border: 0.5px solid var(--color-overlay);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/****************************************************************************
+
+  SHOOT PLAN
+
+****************************************************************************/
+/*
+  .list--shoot-plan — own head row, day banners, custom banners and shot rows.
+
+    Columns:  --slot (check, times) · --shot (thumbnail)
+              --desc (spot, text) · --set · --cast · --reqs · --actions
+
+  Every fixed size lives in the $sp-* variables, so they can be tuned here
+  without touching the rules. --desc and --reqs share the remaining width;
+  below $sp-min-width the card scrolls horizontally.
+*/
+/* Sizes (Figma › APP - ALT Shoot Plan) */
+/* between cells */
+/* shot row height */
+/* check + times + type column */
+/* vertical axis of the check and the pills */
+/* top edge → first line of slot and actions */
+/* first line → second (check → start, type → flow) */
+/* the other lines (start → end, flow → delete) */
+/* extra space above delete (it leaves the end-time line) */
+/* fixed-size thumbnail (.thumb) */
+/* height of description, set and cast */
+/* 5 lines of requirements; the rest is hidden */
+/* flow and type pills in the actions */
+/* times, type, duration and flow */
+/* time in a shot row */
+/* time in a banner */
+/* .has-warning: next to the check, near the top */
+/* Row out of the flow */
+/* shift */
+/* fill */
+/* left edge */
+/* Body text of the shot cells */
+.list--shoot-plan {
+  --list-actions: 80px;
+  min-width: 1016px;
+  padding: 8px 0;
+  /* Warning in shot rows: level with the check, not centred in 120px */
+  /* Shot row (anything that is not a head or a banner) */
+  /*
+    Out of the flow ("Flow" unchecked): the row shifts right, as if pulled
+    out of the sequence, with an inner shadow on its left edge and a greyer
+    fill. CSS only (:has), no JS.
+  */
+  /* A banner out of the flow shifts the same way but keeps its colour */
+  /* Value pills (times, duration): shorter and in the primary colour */
+  /* CELLS ---------------------------------------------------------------- */
+  /*
+    Slot (check, start, end) and actions (type, flow, delete) are two stacks
+    of $sp-pill-h lines with the same top and gaps, so their lines match.
+    The slot is centred on $sp-slot-axis.
+  */
+  /* Fixed-size thumbnail (.thumb) with the shot number ("24", "24 + 15 + 21") */
+  /* Spot on top; the text is centred in the remaining space */
+  /*
+    Set and cast: multiple choice cells (data-multi="sets" / "characters"),
+    one value per line, left-aligned and vertically centred. If they do not
+    fit, the bottom is cut.
+  */
+  /* Requirements: ExtraBold label + text. Empty = "-" */
+  /* Type, flow and delete, one per line (see the slot above) */
+  /* Head row: same cell classes, without the row's content */
+  /* BANNERS -------------------------------------------------------------- */
+  /*
+    Custom banner (Add › Banner): title, selectable colour and flow.
+    The colour comes from data-color (see COLOUR PICKER in _controls.scss).
+  */
+}
+.list--shoot-plan .list__row {
+  gap: 16px;
+}
+.list--shoot-plan .has-warning {
+  --warning-x: 14px;
+  --warning-y: 21%;
+}
+.list--shoot-plan .list__row--head {
+  padding: 0;
+}
+.list--shoot-plan .list__row:not(.list__row--head, .list__row--banner) {
+  min-height: 120px;
+  padding: 0;
+  transition: padding-left 200ms cubic-bezier(0.2, 0, 0, 1), box-shadow 200ms cubic-bezier(0.2, 0, 0, 1), background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+.list--shoot-plan .list__row:has(.pill--flow input:not(:checked)) {
+  --warning-x: 32px;
+  padding-left: 18px;
+  background: var(--color-bg-content);
+  box-shadow: inset 8px 0 8px -4px var(--color-shadow-inset);
+}
+.list--shoot-plan .list__row--banner:has(.pill--flow input:not(:checked)) {
+  background: var(--banner-bg, var(--color-bg-app));
+}
+.list--shoot-plan .pill {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  min-width: 0;
+  padding: 0 4px;
+  line-height: 16px;
+  color: var(--color-fg-primary);
+}
+.list--shoot-plan .pill--time {
+  width: 44px;
+  padding: 0;
+}
+.list--shoot-plan .list__cell--slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: flex-start;
+  gap: 2px;
+  width: 48px;
+  padding: 16px 0 0 16px;
+  overflow: visible; /* the 44px pills stick out */
+  /* 10px box on a 20px line */
+}
+.list--shoot-plan .list__cell--slot input[type=checkbox] {
+  margin-block: 5px;
+}
+.list--shoot-plan .list__cell--slot .pill--time:first-of-type {
+  margin-top: 6px;
+}
+.list--shoot-plan .list__cell--shot {
+  --thumb-width: 200px;
+  --thumb-height: 112px;
+  width: 200px;
+}
+.list--shoot-plan .list__cell--desc {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  height: 104px;
+}
+.list--shoot-plan .list__cell--desc strong {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: var(--color-fg-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 24px;
+}
+.list--shoot-plan .list__cell--desc p {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+  display: flex;
+  flex: 1;
+  align-items: safe center;
+  overflow: hidden;
+  white-space: normal;
+}
+.list--shoot-plan .list__cell--set,
+.list--shoot-plan .list__cell--cast {
+  height: 104px;
+}
+.list--shoot-plan .list__cell--set .list__values,
+.list--shoot-plan .list__cell--cast .list__values {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+}
+.list--shoot-plan .list__cell--set {
+  width: 120px;
+}
+.list--shoot-plan .list__cell--cast {
+  width: 160px;
+}
+.list--shoot-plan .list__cell--reqs {
+  flex: 1 1 0;
+  max-height: 80px;
+}
+.list--shoot-plan .list__cell--reqs p {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+  color: var(--color-fg-primary);
+  white-space: normal;
+}
+.list--shoot-plan .list__cell--reqs b {
+  font-weight: 700;
+}
+.list--shoot-plan .list__cell--actions {
+  flex-direction: column;
+  align-self: flex-start;
+  gap: 2px;
+  padding: 16px 0 0;
+  /* Type as wide as Flow, room for the whole name ("Social", "Photo") */
+}
+.list--shoot-plan .list__cell--actions > :nth-child(2) {
+  margin-top: 6px;
+}
+.list--shoot-plan .list__cell--actions .icon-button {
+  --icon-size: 20px;
+  height: 20px;
+  margin-top: 6px;
+}
+.list--shoot-plan .list__cell--actions .pill--flow,
+.list--shoot-plan .list__cell--actions .shot-type {
+  width: 60px;
+}
+.list--shoot-plan .list__cell--actions .shot-type {
+  padding-left: 4px;
+}
+.list--shoot-plan .pill--flow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-fg-primary);
+  gap: 2px;
+  padding: 0 5px 0 2px;
+  line-height: 16px;
+  cursor: pointer;
+}
+.list--shoot-plan .list__row--head .list__cell--slot,
+.list--shoot-plan .list__row--head .list__cell--actions {
+  align-self: center;
+  padding-top: 0;
+}
+.list--shoot-plan .list__row--head .list__cell--shot {
+  text-align: center;
+}
+.list--shoot-plan .list__row--head .list__cell--desc,
+.list--shoot-plan .list__row--head .list__cell--set,
+.list--shoot-plan .list__row--head .list__cell--cast {
+  height: auto;
+}
+.list--shoot-plan .list__row--banner {
+  /* Title: 11px, still uppercase (inherited from the banner row) */
+  /* Time range: chevron between the two times */
+  /* "Shooting time: 17h 20m" · "52 shots" */
+  /* Custom banner actions: colour + flow */
+  /* Collapse / Expand: arrow up while expanded */
+}
+.list--shoot-plan .list__row--banner h2 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+.list--shoot-plan .list__row--banner .pill--time {
+  width: 40px;
+}
+.list--shoot-plan .list__row--banner .list__cell--range {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  overflow: visible;
+}
+.list--shoot-plan .list__row--banner .list__cell--range::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--icon-chevron-right) center/24px no-repeat;
+  pointer-events: none;
+}
+.list--shoot-plan .list__row--banner .list__cell--meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-fg-secondary);
+}
+.list--shoot-plan .list__row--banner .list__cell--meta .pill {
+  text-transform: none;
+}
+.list--shoot-plan .list__row--banner .list__cell--banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: visible;
+}
+.list--shoot-plan .list__row--banner .btn {
+  --btn-height: 24px;
+  flex: none;
+  padding: 0 4px 0 8px;
+}
+.list--shoot-plan .list__row--banner .btn[aria-expanded=true]::after {
+  background-image: var(--icon-dropdown-alt);
+}
+.list--shoot-plan .list__row--banner-custom {
+  padding: 0 6px;
+  background: var(--banner-bg, var(--color-banner-bg-av));
+}
+
+/*
+  Shot type — small dropdown coloured by type
+    <button class="shot-type shot-type--social">Social</button>
+  No modifier = AV · one modifier per key of $type-colors (_tokens.scss)
+*/
+.shot-type {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-fg-primary);
+  position: relative;
+  flex: none;
+  width: 44px;
+  height: 20px;
+  padding: 0 11px 0 2px; /* 11px = arrow (10px) + 1px */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 20px;
+  text-align: center;
+  background: var(--color-banner-bg-av);
+  border-radius: 2px;
+}
+.shot-type::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: var(--icon-dropdown) center/16px no-repeat;
+  position: absolute;
+  top: 50%;
+  right: 1px;
+  margin-top: -6px;
+}
+.shot-type--av {
+  background: var(--color-banner-bg-av);
+}
+.shot-type--photo {
+  background: var(--color-banner-bg-photo);
+}
+.shot-type--social {
+  background: var(--color-banner-bg-social);
+}
+.shot-type--banner {
+  background: var(--color-banner-bg-alt-1);
+}
+
+/****************************************************************************
+
+  CALLS
+
+****************************************************************************/
+/*
+  .list--calls — # · role · department/artist · name · set call · days · visible
+  The last three columns have a fixed width and centred content.
+
+  Cast tab: the five call times (Set, Makeup, Dress, Ready, Motor) are
+  grouped in a --group cell, both in the head and in the rows:
+
+    <div class="list__cell list__cell--group" role="group" aria-label="Calls">
+      <span class="list__cell list__cell--call">…</span>  ×5
+    </div>
+*/
+/* call time (46px editable pill) */
+/* days (calendar pill) */
+/* show / hide on the call sheet */
+/* time column inside the group */
+/* between the times of the group */
+/* space on each side of the group */
+.list--calls {
+  /* Time group: narrower columns, close together and apart from the rest */
+  /* aria-pressed="false" → crossed-out eye */
+}
+.list--calls .list__row {
+  padding: 0 8px;
+}
+.list--calls .list__cell--call {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+}
+.list--calls .list__cell--call .pill--input {
+  --pill-width: 46px;
+}
+.list--calls .list__cell--group {
+  display: flex;
+  gap: 0px;
+  margin: 0 40px;
+}
+.list--calls .list__cell--group .list__cell--call {
+  width: 64px;
+}
+.list--calls .list__cell--days {
+  display: flex;
+  justify-content: center;
+  width: 80px;
+}
+.list--calls .list__cell--visible {
+  display: flex;
+  justify-content: center;
+  width: 40px;
+}
+.list--calls .icon__visible[aria-pressed=false] {
+  --icon: var(--icon-hidden);
+}
+
+/****************************************************************************
+
+  REPORTS
+
+****************************************************************************/
+/*
+  .list--reports (Crew tab) — check · dept (cell selector) · title · name ·
+  start · final · total · extras. Start and Final (--time) only show the
+  time pill; Total and Extras are numbers in --time cells.
+*/
+/* checkbox with more room on its right */
+/* estimated / final */
+/* days */
+.list--reports {
+  --list-actions: 80px;
+  /* Total and Extras: plain numbers set like the text of the time pills */
+  /* Days: pill centred under its title */
+}
+.list--reports .list__row {
+  padding: 0 8px;
+}
+.list--reports .list__cell--check {
+  justify-content: flex-start;
+  width: 48px;
+  padding-left: 8px;
+}
+.list--reports .list__cell--time {
+  display: flex;
+  justify-content: center;
+  width: 80px;
+}
+.list--reports .list__cell--time .pill--input {
+  --pill-width: 46px;
+}
+.list--reports .list__row:not(.list__row--head) .list__cell--time {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  text-transform: none;
+  color: var(--color-fg-primary);
+}
+.list--reports .list__cell--actions {
+  justify-content: center;
+  padding-right: 0;
+}
+
+/****************************************************************************
+
+  CALL SHEET VIEWER (phone / tablet)
+
+****************************************************************************/
+/*
+  Read-only call sheet for the phone (Figma › Viewer: Home, Shoot Plan,
+  Crew Calls). The pages use the app's own components (card, facts,
+  weather, prose, list, thumb, pill, shot type); this partial (_mobile.scss) only adds the
+  phone shell and retouches those components for a narrow screen, always
+  scoped to .viewer so the app is not affected.
+
+    body.viewer
+     ├─ .viewer__cover     blurred cover image behind the top of the page
+     ├─ .viewer__hero      Home: title over the cover
+     │  or .viewer__bar    other pages: icon · title · icon
+     ├─ main.viewer__content   the cards (Home: --columns on tablets)
+     ├─ .viewer__footer    © line
+     └─ nav.tabbar         sections, fixed at the bottom
+*/
+/* Sizes (Figma › Viewer) */
+/* cover image */
+/* its bottom fades into the page */
+/* Home: the first card starts here, over the cover */
+/* content to the screen edges */
+/* one column on tablets */
+/* Home, two columns on tablets */
+/* tab width on wide screens */
+/* tab bar, without the safe area */
+/* card header (app widget: 80px) */
+/* facts row (app: 48px) */
+/* read-only time pill */
+/* in Calls */
+/* in Shoot Plan */
+/* Shoot Plan banner */
+/* shot row */
+/* type + times */
+/* description lines before it is cut */
+/* PAGE --------------------------------------------------------------------- */
+.viewer {
+  position: relative;
+  isolation: isolate; /* the cover sits under the content, not under the page */
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  background: var(--color-bg-content);
+  /* Cover: the image, blurred, fading into the page at its bottom.
+     The image comes from a .bg_NN class on the element. */
+  /* Home: title at the bottom of the cover, on a dark gradient */
+  /* Other pages: icon · title · icon, over the cover */
+  /* Cards, one under the other */
+}
+.viewer__cover {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: 320px;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+}
+.viewer__cover::before, .viewer__cover::after {
+  content: "";
+  position: absolute;
+}
+.viewer__cover::before {
+  inset: -75px;
+  background: inherit;
+  filter: blur(75px);
+}
+.viewer__cover::after {
+  inset: auto 0 0;
+  height: 80px;
+  background: linear-gradient(transparent, var(--color-bg-content));
+}
+.viewer__hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  height: 240px;
+  padding: 24px 24px 20px;
+  background: linear-gradient(transparent, var(--color-overlay));
+}
+.viewer__hero h1 {
+  max-width: 960px;
+  font-size: 28px; /* display, as the Overview cover */
+  font-weight: 300;
+  line-height: 36px;
+  letter-spacing: -0.2px;
+  color: var(--color-fg-on-image);
+}
+.viewer__bar {
+  display: grid;
+  grid-template-columns: 32px 1fr 32px;
+  align-items: center;
+  height: 48px;
+  padding: 0 8px;
+  /* -inv icon over the image (as on the Overview cover) */
+}
+.viewer__bar h1 {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: var(--color-fg-on-image);
+  grid-column: 2;
+  letter-spacing: 0.8px;
+  line-height: 24px;
+  text-align: center;
+}
+.viewer__bar .card__action::before {
+  background-image: var(--icon-inv, var(--icon));
+}
+.viewer__bar .card__action:hover {
+  background-color: var(--color-overlay-soft);
+}
+.viewer__content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 8px 8px 0;
+  /* Lists of rows (Shoot Plan) */
+  /* Home on tablets: two columns, the cards flow without gaps */
+}
+.viewer__hero + .viewer__content {
+  padding-top: 0;
+}
+.viewer__content--tight {
+  gap: 8px;
+}
+.viewer__content--columns {
+  max-width: 960px;
+}
+@media (min-width: 720px) {
+  .viewer__content--columns {
+    display: block;
+    columns: 2;
+    column-gap: 16px;
+  }
+  .viewer__content--columns > * {
+    margin-bottom: 16px;
+    break-inside: avoid;
+  }
+}
+.viewer__footer {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-fg-subtle);
+  padding: 16px 0 24px;
+  line-height: 24px;
+  text-align: center;
+}
+
+/* TAB BAR ------------------------------------------------------------------ */
+/*
+  The sidebar as tabs: icon + label. js/app.js marks the open page
+  (.is-current), as it does with the sidebar.
+
+    <nav class="tabbar"><a class="tabbar__item icon icon__home" href="index.html">Home</a>…</nav>
+*/
+.tabbar {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
+  background: var(--color-bg-app);
+  border-top: 0.5px solid var(--color-bg-card);
+  box-shadow: 0 -2px 4px var(--color-shadow);
+}
+.tabbar__item {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-fg-secondary);
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 120px;
+  height: 48px;
+  letter-spacing: 0;
+  white-space: nowrap;
+  border-radius: 4px;
+  transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1), color 200ms cubic-bezier(0.2, 0, 0, 1);
+  /* 32px icon close to its label */
+}
+.tabbar__item:hover {
+  background-color: var(--color-sidebar-hover);
+}
+.tabbar__item::before {
+  margin-bottom: -4px;
+}
+.tabbar__item.is-current {
+  color: var(--color-fg-primary);
+  background: var(--color-bg-selected-icon);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tabbar__item {
+    transition: none;
+  }
+}
+
+/* CARDS -------------------------------------------------------------------- */
+.viewer { /* the content's gap spaces them */
+  /* Widget: lower header, less space around */
+  /* Second value in a header (General Call date), styled as the title */
+  /* Big value under the header (General Call time) */
+  /* Alert: red frame, big icon above the text (Notes) */
+}
+.viewer .card + .card {
+  margin-top: 0;
+}
+.viewer .card--widget {
+  padding-bottom: 24px;
+}
+.viewer .card--widget .card__header {
+  min-height: 64px;
+  padding: 0 16px;
+}
+.viewer .card__header time {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-fg-secondary);
+  line-height: 24px;
+}
+.viewer .card__display {
+  padding: 16px 24px;
+  font-size: 60px; /* display */
+  font-weight: 300;
+  line-height: 64px;
+  letter-spacing: -1.2px;
+  text-align: center;
+  color: var(--color-fg-primary);
+}
+.viewer .card--alert {
+  border: 2px solid var(--color-alert);
+}
+.viewer .card--alert .card__header {
+  justify-content: center;
+  min-height: 64px;
+}
+.viewer .card--alert .icon {
+  --icon-size: 64px;
+}
+.viewer .card--alert .prose {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 20px;
+  text-transform: none;
+  color: var(--color-fg-secondary);
+  padding: 8px 24px 0;
+}
+.viewer .facts > div {
+  min-height: 40px;
+  padding: 0 16px;
+}
+.viewer .weather {
+  padding: 16px 24px 0;
+}
+.viewer .weather__stats {
+  margin-top: 24px;
+  padding: 0 8px;
+}
+
+/* PILLS AND SHOT TYPE ------------------------------------------------------- */
+/* Read-only: no hover, the type has no arrow */
+.viewer .pill--time {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  min-width: 0;
+  height: 22px;
+  padding: 0;
+  color: var(--color-fg-primary);
+}
+.viewer .pill--time:hover {
+  background: none;
+}
+.viewer .shot-type {
+  width: 40px;
+  padding: 0;
+}
+.viewer .shot-type::after {
+  content: none;
+}
+
+/* EXPANDABLE ROWS ------------------------------------------------------------ */
+/*
+  A row that opens with more data underneath (Shoot Plan, Talent Calls):
+  native <details>, no JS. The summary holds the row's cells.
+
+    <li class="list__row">
+      <details>
+        <summary class="list__summary">…cells…</summary>
+        <dl class="list__details"><div><dt>Set</dt><dd>Vestuario</dd></div>…</dl>
+      </details>
+    </li>
+*/
+.viewer {
+  /* Close (×), only while open */
+}
+.viewer .list__summary {
+  display: flex;
+  align-items: center;
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+}
+.viewer .list__summary::-webkit-details-marker {
+  display: none;
+}
+.viewer .list__close {
+  --icon-size: 24px;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+.viewer details:not([open]) .list__close {
+  display: none;
+}
+.viewer .list__details {
+  margin: 0;
+}
+.viewer .list__details dt {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: var(--color-fg-secondary);
+  line-height: 16px;
+}
+.viewer .list__details dd {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+  color: var(--color-fg-primary);
+  margin: 0;
+  white-space: normal;
+}
+.viewer .list__details dd b {
+  font-weight: 700;
+}
+
+/* SHOOT PLAN ----------------------------------------------------------------- */
+/*
+  .list--shoot-plan with the same cells, one card per row:
+    summary   slot (type, start, end) · shot (thumb) · desc (spot, text)
+    details   requirements | set + talent
+*/
+.viewer .list--shoot-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 0;
+  /* Type on top, times at the bottom */
+  /* Spot on top, text at the bottom */
+  /* Requirements under slot + thumb; set and talent under the description */
+  /* Banners: full width, colour from data-color / data-type */
+}
+.viewer .list--shoot-plan .list__row {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  border-radius: 2px;
+  transition: box-shadow 200ms cubic-bezier(0.2, 0, 0, 1);
+  /* no hover fill */
+}
+.viewer .list--shoot-plan .list__row:not(.list__row--banner), .viewer .list--shoot-plan .list__row:not(.list__row--banner):hover {
+  background: var(--color-bg-card);
+}
+.viewer .list--shoot-plan .list__row:has(> details[open]) {
+  box-shadow: 1px 3px 8px var(--color-shadow);
+}
+.viewer .list--shoot-plan .list__summary {
+  align-items: stretch;
+  height: 100px;
+  padding: 8px 0;
+}
+.viewer .list--shoot-plan .pill--time {
+  height: 20px;
+}
+.viewer .list--shoot-plan .list__cell--slot {
+  align-self: stretch;
+  justify-content: flex-start;
+  gap: 4px;
+  width: 52px;
+  padding: 0;
+}
+.viewer .list--shoot-plan .list__cell--slot .shot-type {
+  margin-bottom: auto;
+}
+.viewer .list--shoot-plan .list__cell--slot .pill--time:first-of-type {
+  margin-top: 0;
+}
+.viewer .list--shoot-plan .list__cell--shot {
+  --thumb-width: 156px;
+  --thumb-height: 88px;
+  align-self: center;
+  width: 156px;
+  border-radius: 2px;
+}
+.viewer .list--shoot-plan .list__cell--desc {
+  justify-content: space-between;
+  height: auto;
+  padding: 0 8px;
+}
+.viewer .list--shoot-plan .list__cell--desc strong {
+  line-height: 16px;
+}
+.viewer .list--shoot-plan .list__cell--desc p {
+  display: block;
+  flex: none;
+  max-height: 48px;
+}
+.viewer .list--shoot-plan .list__details {
+  display: grid;
+  grid-template-columns: 208px minmax(0, 1fr);
+  margin-top: 4px;
+  padding: 4px 0 16px;
+  background: linear-gradient(var(--color-border-pill), var(--color-border-pill)) top center/calc(100% - 16px) 1px no-repeat;
+}
+.viewer .list--shoot-plan .list__details > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+}
+.viewer .list--shoot-plan .list__details > :first-child {
+  grid-row: span 2;
+}
+.viewer .list--shoot-plan .list__row--banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 32px;
+  margin: 0;
+  padding: 0 8px;
+  background: var(--banner-bg, var(--color-banner-bg-av));
+}
+.viewer .list--shoot-plan .list__row--banner h2 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 12px;
+  text-transform: uppercase;
+  line-height: 16px;
+  text-align: right;
+}
+.viewer .list--shoot-plan .list__row--banner .list__cell--range {
+  gap: 4px;
+}
+.viewer .list--shoot-plan .list__row--banner .list__cell--range::after {
+  content: none;
+}
+
+/* CALLS ---------------------------------------------------------------------- */
+/*
+  .list--calls inside a card per group (department, call time):
+  name · role · time. Talent rows open with the other call times.
+*/
+.viewer .list--calls {
+  min-width: 0;
+  /* Expandable (Talent) */
+}
+.viewer .list--calls .list__row {
+  gap: 4px;
+  padding: 0 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 16px;
+  text-transform: none;
+}
+.viewer .list--calls .list__row:hover {
+  background: none;
+}
+.viewer .list--calls .list__cell--fill {
+  padding-right: 0;
+}
+.viewer .list--calls .list__cell--call {
+  width: auto;
+}
+.viewer .list--calls .list__row:has(> details) {
+  display: block;
+  padding: 0;
+}
+.viewer .list--calls .list__row:has(> details[open]) {
+  background: var(--color-bg-hover-cell);
+}
+.viewer .list--calls .list__summary {
+  gap: 4px;
+  min-height: 40px;
+  padding: 0 16px;
+}
+.viewer .list--calls .list__details {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 0 16px 16px;
+}
+.viewer .list--calls .list__details > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}

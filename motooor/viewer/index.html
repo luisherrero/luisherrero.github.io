@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+  Shared head of the viewer pages; each page sets its title first (Kit
+  variable "title"). Same JS as the app (../app-min.js). No theme switch:
+  the viewer follows the system (light / dark).
+-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MOTOOOR · Call sheet - Home</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="viewer.css">
+  <script src="../app-min.js" defer></script>
+
+</head>
+
+<body class="viewer">
+
+  <!-- Cover image of the project, blurred behind the top of every page -->
+<div class="viewer__cover bg_08" aria-hidden="true"></div>
+
+
+  <header class="viewer__hero">
+    <h1>IRYO “Reflexiones”</h1>
+  </header>
+
+  <main class="viewer__content viewer__content--columns">
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Credits</h2>
+      </header>
+      <dl class="facts">
+        <div><dt>Production Company</dt><dd><img src="../img/production_co/agosto.svg" alt="Agosto" width="80" height="40"></dd></div>
+        <div><dt>Executive Producer</dt><dd>Richard Hammond</dd></div>
+        <div><dt>Producer</dt><dd>Kevin Bacon</dd></div>
+        <div><dt>Director</dt><dd>Erik Morales</dd></div>
+        <div><dt>D.O.P.</dt><dd>Hoyte van Hoytema</dd></div>
+      </dl>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">General Call</h2>
+        <time datetime="2026-07-25">25 July 2026</time>
+      </header>
+      <p class="card__display">14:00</p>
+      <dl class="facts">
+        <div><dt>Ready to Shoot</dt><dd>15:00</dd></div>
+        <div><dt>Estimated End Time</dt><dd>02:00</dd></div>
+        <div><dt>Agency Call</dt><dd>13:30</dd></div>
+        <div><dt>Client Call</dt><dd>13:30</dd></div>
+      </dl>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Locations</h2>
+      </header>
+      <ul class="list list--places">
+        <li class="list__row">
+          <span class="list__cell list__cell--index">1</span>
+          <address class="list__cell list__cell--fill"><strong><a href="https://maps.google.com/?q=Av.+Alcalde+Barnils+3,+08174+Sant+Cugat+del+Vall%C3%A8s" target="_blank" rel="noopener">Centro Alto Rendimiento</a></strong> Av. Alcalde Barnils, 3, 5, 08174 Sant Cugat del Vallès, Barcelona</address>
+          <span class="list__cell list__cell--thumb"><img src="../img/thumb-sites.png" alt="Map" width="96" height="52"></span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Weather</h2>
+        <button class="card__action icon icon__reload" type="button" aria-label="Reload"></button>
+      </header>
+      <div class="weather">
+        <img class="weather__icon" src="../img/weather/icon_partly_cloudy.png" alt="Partly cloudy" width="140" height="80">
+        <p class="weather__temp">31·22 <small>ºC</small></p>
+        <dl class="weather__stats">
+          <div><dt>Sunrise</dt><dd>06:24</dd></div>
+          <div><dt>Sunset</dt><dd>21:28</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Approved By</h2>
+      </header>
+      <dl class="facts">
+        <div><dt>Production Manager</dt><dd>Tony Martinez</dd></div>
+        <div><dt>Assistant Director</dt><dd>Henry McKinnon</dd></div>
+      </dl>
+    </section>
+
+    <section class="card card--widget card--alert">
+      <header class="card__header">
+        <span class="icon icon__warning-alert" role="img" aria-label="Notice"></span>
+      </header>
+      <div class="prose">
+        <p>For confidentiality reasons, taking photographs and posting any information on social media are strictly prohibited.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <p class="viewer__footer">© Motooor 2026</p>
+
+  <!-- Sections of the call sheet; app.js marks the open page -->
+<nav class="tabbar" aria-label="Call sheet">
+  <a class="tabbar__item icon icon__home" href="index.html">Home</a>
+  <a class="tabbar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+  <a class="tabbar__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+  <a class="tabbar__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+</nav>
+
+
+</body>
+</html>

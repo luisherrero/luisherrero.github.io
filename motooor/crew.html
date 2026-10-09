@@ -2,18 +2,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MOTOOOR - IRYO “Reflexiones”</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
-  <link rel="stylesheet" href="styles.css">
-  <script src="app-min.js" defer></script>
+  <!--
+      Shared head of every app page. Each page sets its title first:
+        $title = Crew   (written as a Kit variable comment before this import)
+    -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>MOTOOOR - IRYO “Reflexiones”</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+      <link rel="stylesheet" href="styles.css">
+      <script src="app-min.js" defer></script>
+    
 </head>
 
 
 <body class="app">
 
 
+  <!--
+    Theme saved in this browser, applied before the page paints.
+    Included first in <body> of every page (by _sidebar.kit, and by index.kit).
+  -->
+  <!-- js/app.js keeps the theme switch in sync -->
+  <script>(function () { try { var t = localStorage.getItem("motooor-theme") || "light"; if (t !== "system") { document.documentElement.setAttribute("data-theme", t); } } catch (e) { /* private mode */ } }());</script>
+  
+  
   <aside class="sidebar" id="sidebar">
   
     <header class="sidebar__header">
@@ -24,22 +37,45 @@
     <nav>
       <ul class="sidebar__nav">
         <li><a class="sidebar__item icon icon__home" href="overview.html">Home</a></li>
-        <li><a class="sidebar__item icon icon__cast" href="cast.html">Cast</a></li>
+        <li><a class="sidebar__item icon icon__cast" href="talent.html">Talent</a></li>
         <li><a class="sidebar__item icon icon__crew" href="crew.html">Crew</a></li>
-        <li><a class="sidebar__item icon icon__locations" href="sites.html">Filming Sites</a></li>
+        <li><a class="sidebar__item icon icon__locations" href="sites.html">Locations</a></li>
         <li><a class="sidebar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a></li>
         <li><a class="sidebar__item icon icon__schedule" href="calls.html">Calls</a></li>
         <li><a class="sidebar__item icon icon__report" href="reports.html">Reports</a></li>
-        <li><a class="sidebar__item icon icon__settings" href="settings.html">Settings</a></li>
       </ul>
     </nav>
+  
+    <!-- Sidebar bottom: avatar and profile menu (imported by _sidebar.kit and projects.kit) -->
+    <footer class="sidebar__footer">
+      <button class="sidebar__item sidebar__profile" popovertarget="profile-menu" aria-haspopup="true"><img class="avatar" src="img/avatar.png" alt="" width="28" height="28">Luis Herrero</button>
+    </footer>
+    
+    <!-- Profile menu: opens beside the avatar (js/app.js) -->
+    <div class="profile-menu" id="profile-menu" popover>
+      <p class="profile-menu__name">Luis Herrero</p>
+      <a class="profile-menu__item" href="#">Account</a>
+      <a class="profile-menu__item" href="#">Settings</a>
+      <a class="profile-menu__item" href="#">Docs</a>
+      <a class="profile-menu__item" href="#">Contact</a>
+      <div class="profile-menu__item profile-menu__theme">
+        Theme
+        <span class="profile-menu__themes" role="group" aria-label="Theme">
+          <button class="icon-button icon icon__theme-light" data-theme-choice="light" aria-pressed="false" aria-label="Light" title="Light"></button>
+          <button class="icon-button icon icon__theme-dark" data-theme-choice="dark" aria-pressed="false" aria-label="Dark" title="Dark"></button>
+          <button class="icon-button icon icon__theme-system" data-theme-choice="system" aria-pressed="false" aria-label="System" title="System"></button>
+        </span>
+      </div>
+      <a class="profile-menu__item profile-menu__logout icon icon__log-out" href="index.html">Log out</a>
+    </div>
+    
   
   </aside>
   
 
   <header class="topbar">
     <ol class="breadcrumb">
-      <li><a href="#">Projects</a></li>
+      <li><a href="projects.html">Projects</a></li>
       <li><a href="overview.html">IRYO “Reflexiones”</a></li>
       <li aria-current="page">Crew</li>
     </ol>
@@ -59,9 +95,9 @@
           <li class="list__row list__row--head">
             <label class="list__cell list__cell--check"><input type="checkbox"></label>
             <span class="list__cell list__cell--index">#</span>
+            <span class="list__cell list__cell--fill">Dept</span>
             <span class="list__cell list__cell--fill">Title</span>
             <span class="list__cell list__cell--fill">Name</span>
-            <span class="list__cell list__cell--fill">Dept</span>
             <span class="list__cell list__cell--fill">Mail</span>
             <span class="list__cell list__cell--phone">Phone</span>
             <span class="list__cell list__cell--actions">Info</span>
@@ -69,9 +105,9 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox"></label>
             <span class="list__cell list__cell--index">1</span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="1">Production</button>
             <span class="list__cell list__cell--fill"><input class="inline-input" name="title" value="Designer" placeholder="Add title" aria-label="Title"></span>
             <span class="list__cell list__cell--fill"><input class="inline-input" name="name" value="Eva Green" placeholder="Add name" aria-label="Name"></span>
-            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="1">Production</button>
             <span class="list__cell list__cell--fill"><input class="inline-input" type="email" name="mail" value="eva.green@gmail.com" placeholder="Add mail" aria-label="Mail"></span>
             <span class="list__cell list__cell--phone"><input class="inline-input" type="tel" name="phone" value="654 123 456" placeholder="Add phone" aria-label="Phone"></span>
             <span class="list__cell list__cell--actions">
@@ -85,9 +121,9 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox"></label>
             <span class="list__cell list__cell--index">2</span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="1">Production</button>
             <span class="list__cell list__cell--fill"><input class="inline-input" name="title" value="Manager" placeholder="Add title" aria-label="Title"></span>
             <span class="list__cell list__cell--fill"><input class="inline-input" name="name" value="Sophia Kim" placeholder="Add name" aria-label="Name"></span>
-            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="1">Production</button>
             <span class="list__cell list__cell--fill"><input class="inline-input" type="email" name="mail" value="sophia.kim@gmail.com" placeholder="Add mail" aria-label="Mail"></span>
             <span class="list__cell list__cell--phone"><input class="inline-input" type="tel" name="phone" value="611 234 567" placeholder="Add phone" aria-label="Phone"></span>
             <span class="list__cell list__cell--actions">
@@ -101,9 +137,9 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox"></label>
             <span class="list__cell list__cell--index">3</span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="6">Art</button>
             <span class="list__cell list__cell--fill"><input class="inline-input" name="title" value="Analyst" placeholder="Add title" aria-label="Title"></span>
             <span class="list__cell list__cell--fill"><input class="inline-input" name="name" value="Ethan Lee" placeholder="Add name" aria-label="Name"></span>
-            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="6">Art</button>
             <span class="list__cell list__cell--fill"><input class="inline-input" type="email" name="mail" value="ethan.lee@gmail.com" placeholder="Add mail" aria-label="Mail"></span>
             <span class="list__cell list__cell--phone"><input class="inline-input" type="tel" name="phone" value="622 345 678" placeholder="Add phone" aria-label="Phone"></span>
             <span class="list__cell list__cell--actions">
@@ -117,9 +153,9 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox"></label>
             <span class="list__cell list__cell--index">4</span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="3">Camera</button>
             <span class="list__cell list__cell--fill"><input class="inline-input" name="title" value="Developer" placeholder="Add title" aria-label="Title"></span>
             <span class="list__cell list__cell--fill"><input class="inline-input" name="name" value="James Chen" placeholder="Add name" aria-label="Name"></span>
-            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="3">Camera</button>
             <span class="list__cell list__cell--fill"><input class="inline-input" type="email" name="mail" value="james.chen@gmail.com" placeholder="Add mail" aria-label="Mail"></span>
             <span class="list__cell list__cell--phone"><input class="inline-input" type="tel" name="phone" value="633 456 789" placeholder="Add phone" aria-label="Phone"></span>
             <span class="list__cell list__cell--actions">
@@ -133,9 +169,9 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox"></label>
             <span class="list__cell list__cell--index">5</span>
+            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="7">Sound</button>
             <span class="list__cell list__cell--fill"><input class="inline-input" name="title" value="QA Tester" placeholder="Add title" aria-label="Title"></span>
             <span class="list__cell list__cell--fill"><input class="inline-input" name="name" value="Mia Garcia" placeholder="Add name" aria-label="Name"></span>
-            <button class="list__cell list__cell--fill list__cell--select" data-select="departments" value="7">Sound</button>
             <span class="list__cell list__cell--fill"><input class="inline-input" type="email" name="mail" value="mia.garcia@gmail.com" placeholder="Add mail" aria-label="Mail"></span>
             <span class="list__cell list__cell--phone"><input class="inline-input" type="tel" name="phone" value="644 567 890" placeholder="Add phone" aria-label="Phone"></span>
             <span class="list__cell list__cell--actions">

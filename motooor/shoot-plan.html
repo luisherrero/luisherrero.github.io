@@ -2,18 +2,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MOTOOOR - IRYO “Reflexiones”</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap">
-  <link rel="stylesheet" href="styles.css">
-  <script src="app-min.js" defer></script>
+  <!--
+      Shared head of every app page. Each page sets its title first:
+        $title = Crew   (written as a Kit variable comment before this import)
+    -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>MOTOOOR - IRYO “Reflexiones”</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+      <link rel="stylesheet" href="styles.css">
+      <script src="app-min.js" defer></script>
+    
 </head>
 
 
 <body class="app">
 
 
+  <!--
+    Theme saved in this browser, applied before the page paints.
+    Included first in <body> of every page (by _sidebar.kit, and by index.kit).
+  -->
+  <!-- js/app.js keeps the theme switch in sync -->
+  <script>(function () { try { var t = localStorage.getItem("motooor-theme") || "light"; if (t !== "system") { document.documentElement.setAttribute("data-theme", t); } } catch (e) { /* private mode */ } }());</script>
+  
+  
   <aside class="sidebar" id="sidebar">
   
     <header class="sidebar__header">
@@ -24,21 +37,45 @@
     <nav>
       <ul class="sidebar__nav">
         <li><a class="sidebar__item icon icon__home" href="overview.html">Home</a></li>
-        <li><a class="sidebar__item icon icon__cast" href="cast.html">Cast</a></li>
+        <li><a class="sidebar__item icon icon__cast" href="talent.html">Talent</a></li>
         <li><a class="sidebar__item icon icon__crew" href="crew.html">Crew</a></li>
-        <li><a class="sidebar__item icon icon__locations" href="sites.html">Filming Sites</a></li>
+        <li><a class="sidebar__item icon icon__locations" href="sites.html">Locations</a></li>
         <li><a class="sidebar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a></li>
         <li><a class="sidebar__item icon icon__schedule" href="calls.html">Calls</a></li>
         <li><a class="sidebar__item icon icon__report" href="reports.html">Reports</a></li>
-        <li><a class="sidebar__item icon icon__settings" href="settings.html">Settings</a></li>
       </ul>
     </nav>
+  
+    <!-- Sidebar bottom: avatar and profile menu (imported by _sidebar.kit and projects.kit) -->
+    <footer class="sidebar__footer">
+      <button class="sidebar__item sidebar__profile" popovertarget="profile-menu" aria-haspopup="true"><img class="avatar" src="img/avatar.png" alt="" width="28" height="28">Luis Herrero</button>
+    </footer>
+    
+    <!-- Profile menu: opens beside the avatar (js/app.js) -->
+    <div class="profile-menu" id="profile-menu" popover>
+      <p class="profile-menu__name">Luis Herrero</p>
+      <a class="profile-menu__item" href="#">Account</a>
+      <a class="profile-menu__item" href="#">Settings</a>
+      <a class="profile-menu__item" href="#">Docs</a>
+      <a class="profile-menu__item" href="#">Contact</a>
+      <div class="profile-menu__item profile-menu__theme">
+        Theme
+        <span class="profile-menu__themes" role="group" aria-label="Theme">
+          <button class="icon-button icon icon__theme-light" data-theme-choice="light" aria-pressed="false" aria-label="Light" title="Light"></button>
+          <button class="icon-button icon icon__theme-dark" data-theme-choice="dark" aria-pressed="false" aria-label="Dark" title="Dark"></button>
+          <button class="icon-button icon icon__theme-system" data-theme-choice="system" aria-pressed="false" aria-label="System" title="System"></button>
+        </span>
+      </div>
+      <a class="profile-menu__item profile-menu__logout icon icon__log-out" href="index.html">Log out</a>
+    </div>
+    
   
   </aside>
   
 
   <header class="topbar">
     <ol class="breadcrumb">
+      <li><a href="projects.html">Projects</a></li>
       <li><a href="#">IRYO “Reflexiones”</a></li>
       <li aria-current="page">Shoot Plan</li>
     </ol>
@@ -108,7 +145,6 @@
               <input type="checkbox" aria-label="Select shot">
               <button class="pill pill--time">9:30</button>
               <button class="pill pill--time">9:50</button>
-              <button class="shot-type">AV</button>
             </div>
             <figure class="list__cell list__cell--shot thumb">
               <img src="img/ad/001.png" alt="">
@@ -118,18 +154,19 @@
               <strong>Spot 1</strong>
               <p>Texto que describe la acción que sucede en el plano a rodar</p>
             </div>
-            <div class="list__cell list__cell--set">
-              <button class="chip chip--add">Add set</button>
-            </div>
-            <ul class="list__cell list__cell--cast">
-              <li><button class="chip chip--add">Add cast</button></li>
-            </ul>
+            <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
+              <span class="list__values" data-empty="Add set"></span>
+            </button>
+            <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Cast">
+              <span class="list__values" data-empty="Add cast"></span>
+            </button>
             <div class="list__cell list__cell--reqs">
               <p><b>Cámara</b>: Alexa cámara en mano.</p>
               <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
+              <button class="shot-type">AV</button>
               <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
@@ -140,7 +177,6 @@
               <input type="checkbox" aria-label="Select shot">
               <button class="pill pill--time">10:00</button>
               <button class="pill pill--time">10:20</button>
-              <button class="shot-type">AV</button>
             </div>
             <figure class="list__cell list__cell--shot thumb">
               <img src="img/ad/002.png" alt="">
@@ -150,20 +186,19 @@
               <strong>Spot 1</strong>
               <p>Texto que describe la acción que sucede en el plano a rodar</p>
             </div>
-            <div class="list__cell list__cell--set">
-              <button class="chip chip--dropdown">Vestuario</button>
-            </div>
-            <ul class="list__cell list__cell--cast">
-              <li>Policeman</li>
-              <li>Reporter</li>
-              <li>Concerned Citizen</li>
-            </ul>
+            <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="1" aria-label="Set">
+              <span class="list__values" data-empty="Add set"><span>Vestuario</span></span>
+            </button>
+            <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="1,2,3" aria-label="Cast">
+              <span class="list__values" data-empty="Add cast"><span>Policeman</span><span>Reporter</span><span>Concerned Citizen</span></span>
+            </button>
             <div class="list__cell list__cell--reqs">
               <p><b>Cámara</b>: Alexa cámara en mano.</p>
               <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
+              <button class="shot-type">AV</button>
               <label class="pill pill--flow"><input type="checkbox" unchecked>Flow</label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
@@ -174,7 +209,6 @@
               <input type="checkbox" aria-label="Select shot">
               <button class="pill pill--time">10:00</button>
               <button class="pill pill--time">10:20</button>
-              <button class="shot-type shot-type--social">Social</button>
             </div>
             <figure class="list__cell list__cell--shot thumb">
               <img src="img/ad/003.png" alt="">
@@ -184,16 +218,17 @@
               <strong>Spot 1</strong>
               <p>Texto que describe la acción que sucede en el plano a rodar</p>
             </div>
-            <div class="list__cell list__cell--set">
-              <button class="chip chip--add">Add set</button>
-            </div>
-            <ul class="list__cell list__cell--cast">
-              <li><button class="chip chip--add">Add cast</button></li>
-            </ul>
+            <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
+              <span class="list__values" data-empty="Add set"></span>
+            </button>
+            <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Cast">
+              <span class="list__values" data-empty="Add cast"></span>
+            </button>
             <div class="list__cell list__cell--reqs">
               <p>-</p>
             </div>
             <div class="list__cell list__cell--actions">
+              <button class="shot-type shot-type--social">Social</button>
               <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
@@ -216,7 +251,6 @@
               <input type="checkbox" aria-label="Select shot">
               <button class="pill pill--time">10:30</button>
               <button class="pill pill--time">11:20</button>
-              <button class="shot-type">AV</button>
             </div>
             <figure class="list__cell list__cell--shot thumb">
               <img src="img/ad/004.png" alt="">
@@ -226,16 +260,17 @@
               <strong>Spot 1</strong>
               <p>Texto que describe la acción que sucede en el plano a rodar</p>
             </div>
-            <div class="list__cell list__cell--set">
-              <button class="chip chip--add">Add set</button>
-            </div>
-            <ul class="list__cell list__cell--cast">
-              <li><button class="chip chip--add">Add cast</button></li>
-            </ul>
+            <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
+              <span class="list__values" data-empty="Add set"></span>
+            </button>
+            <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Cast">
+              <span class="list__values" data-empty="Add cast"></span>
+            </button>
             <div class="list__cell list__cell--reqs">
               <p>-</p>
             </div>
             <div class="list__cell list__cell--actions">
+              <button class="shot-type">AV</button>
               <label class="pill pill--flow"><input type="checkbox">Flow</label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
@@ -246,7 +281,6 @@
               <input type="checkbox" aria-label="Select shot">
               <button class="pill pill--time">10:30</button>
               <button class="pill pill--time">10:50</button>
-              <button class="shot-type shot-type--photo">Photo</button>
             </div>
             <figure class="list__cell list__cell--shot thumb">
               <img src="img/ad/005.png" alt="">
@@ -256,18 +290,19 @@
               <strong>Spot 1</strong>
               <p>Texto que describe la acción que sucede en el plano a rodar</p>
             </div>
-            <div class="list__cell list__cell--set">
-              <button class="chip chip--add">Add set</button>
-            </div>
-            <ul class="list__cell list__cell--cast">
-              <li><button class="chip chip--add">Add cast</button></li>
-            </ul>
+            <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
+              <span class="list__values" data-empty="Add set"></span>
+            </button>
+            <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Cast">
+              <span class="list__values" data-empty="Add cast"></span>
+            </button>
             <div class="list__cell list__cell--reqs">
               <p><b>Cámara</b>: Alexa cámara en mano.</p>
               <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
+              <button class="shot-type shot-type--photo">Photo</button>
               <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
@@ -278,7 +313,6 @@
               <input type="checkbox" aria-label="Select shot">
               <button class="pill pill--time">10:50</button>
               <button class="pill pill--time">11:10</button>
-              <button class="shot-type">AV</button>
             </div>
             <figure class="list__cell list__cell--shot thumb">
               <img src="img/ad/006.png" alt="">
@@ -288,18 +322,19 @@
               <strong>Spot 1</strong>
               <p>Texto que describe la acción que sucede en el plano a rodar</p>
             </div>
-            <div class="list__cell list__cell--set">
-              <button class="chip chip--add">Add set</button>
-            </div>
-            <ul class="list__cell list__cell--cast">
-              <li><button class="chip chip--add">Add cast</button></li>
-            </ul>
+            <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
+              <span class="list__values" data-empty="Add set"></span>
+            </button>
+            <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Cast">
+              <span class="list__values" data-empty="Add cast"></span>
+            </button>
             <div class="list__cell list__cell--reqs">
               <p><b>Cámara</b>: Alexa cámara en mano.</p>
               <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
+              <button class="shot-type">AV</button>
               <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
@@ -318,7 +353,7 @@
       </header>
       <div class="modal__body">
         <div class="settings settings--stack">
-          <label class="settings__item">Show unit types <input type="checkbox" class="switch" role="switch" name="show-types" checked></label>
+          <label class="settings__item">Show units <input type="checkbox" class="switch" role="switch" name="show-types" checked></label>
         </div>
 
         <ul class="unit-types" aria-label="Unit types">
@@ -349,7 +384,7 @@
         </ul>
 
         <hr class="modal__rule">
-        <button class="btn btn--hollow" type="button" data-add="unit-type-new" aria-controls="unit-types-custom">Add new type</button>
+        <button class="btn btn--hollow" type="button" data-add="unit-type-new" aria-controls="unit-types-custom">Add new unit</button>
 
         <ul class="unit-types" id="unit-types-custom" aria-label="Custom types">
           <li class="unit-types__item" data-color="0">

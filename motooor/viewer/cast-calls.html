@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+  Shared head of the viewer pages; each page sets its title first (Kit
+  variable "title"). Same JS as the app (../app-min.js). No theme switch:
+  the viewer follows the system (light / dark).
+-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MOTOOOR · Call sheet - Talent Calls</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="viewer.css">
+  <script src="../app-min.js" defer></script>
+
+</head>
+
+<body class="viewer">
+
+  <!-- Cover image of the project, blurred behind the top of every page -->
+<div class="viewer__cover bg_08" aria-hidden="true"></div>
+
+  <!-- Page title over the cover (Kit variable "title"); the buttons have no action yet -->
+<header class="viewer__bar">
+  <h1>Talent Calls</h1>
+  <button class="card__action icon icon__overflow" type="button" aria-label="More"></button>
+</header>
+
+
+  <main class="viewer__content">
+    <!-- One card per call time: character · artist · set call; tap a row for makeup, dress, ready and motor -->
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Call</h2>
+        <span class="pill pill--time">13:00</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <details>
+            <summary class="list__summary">
+              <span class="list__cell list__cell--fill">Principal</span>
+              <span class="list__cell list__cell--fill">Celia Muñoz</span>
+              <span class="list__cell list__cell--call"><span class="pill pill--time">14:00</span></span>
+            </summary>
+            <dl class="list__details">
+              <div><dt>Makeup</dt><dd><span class="pill pill--time">13:00</span></dd></div>
+              <div><dt>Dress</dt><dd><span class="pill pill--time">13:30</span></dd></div>
+              <div><dt>Ready</dt><dd><span class="pill pill--time">13:45</span></dd></div>
+              <div><dt>Motor</dt><dd><span class="pill pill--time">14:10</span></dd></div>
+            </dl>
+          </details>
+        </li>
+        <li class="list__row">
+          <details>
+            <summary class="list__summary">
+              <span class="list__cell list__cell--fill">Bailarinas RRSS</span>
+              <span class="list__cell list__cell--fill">Sara Madoz</span>
+              <span class="list__cell list__cell--call"><span class="pill pill--time">14:00</span></span>
+            </summary>
+            <dl class="list__details">
+              <div><dt>Makeup</dt><dd><span class="pill pill--time">13:00</span></dd></div>
+              <div><dt>Dress</dt><dd><span class="pill pill--time">13:30</span></dd></div>
+              <div><dt>Ready</dt><dd><span class="pill pill--time">13:45</span></dd></div>
+              <div><dt>Motor</dt><dd><span class="pill pill--time">14:10</span></dd></div>
+            </dl>
+          </details>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Call</h2>
+        <span class="pill pill--time">13:30</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <details>
+            <summary class="list__summary">
+              <span class="list__cell list__cell--fill">Fitness RRSS</span>
+              <span class="list__cell list__cell--fill">Hanna</span>
+              <span class="list__cell list__cell--call"><span class="pill pill--time">14:30</span></span>
+            </summary>
+            <dl class="list__details">
+              <div><dt>Makeup</dt><dd><span class="pill pill--time">13:30</span></dd></div>
+              <div><dt>Dress</dt><dd><span class="pill pill--time">14:00</span></dd></div>
+              <div><dt>Ready</dt><dd><span class="pill pill--time">14:15</span></dd></div>
+              <div><dt>Motor</dt><dd><span class="pill pill--time">14:40</span></dd></div>
+            </dl>
+          </details>
+        </li>
+        <li class="list__row">
+          <details>
+            <summary class="list__summary">
+              <span class="list__cell list__cell--fill">Salto de altura RRSS</span>
+              <span class="list__cell list__cell--fill">Fatuomata</span>
+              <span class="list__cell list__cell--call"><span class="pill pill--time">14:30</span></span>
+            </summary>
+            <dl class="list__details">
+              <div><dt>Makeup</dt><dd><span class="pill pill--time">13:30</span></dd></div>
+              <div><dt>Dress</dt><dd><span class="pill pill--time">14:00</span></dd></div>
+              <div><dt>Ready</dt><dd><span class="pill pill--time">14:15</span></dd></div>
+              <div><dt>Motor</dt><dd><span class="pill pill--time">14:40</span></dd></div>
+            </dl>
+          </details>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Call</h2>
+        <span class="pill pill--time">14:30</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <details>
+            <summary class="list__summary">
+              <span class="list__cell list__cell--fill">Bailarinas RRSS</span>
+              <span class="list__cell list__cell--fill">Berta Contijoch</span>
+              <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
+            </summary>
+            <dl class="list__details">
+              <div><dt>Makeup</dt><dd><span class="pill pill--time">14:30</span></dd></div>
+              <div><dt>Dress</dt><dd><span class="pill pill--time">15:00</span></dd></div>
+              <div><dt>Ready</dt><dd><span class="pill pill--time">15:15</span></dd></div>
+              <div><dt>Motor</dt><dd><span class="pill pill--time">15:40</span></dd></div>
+            </dl>
+          </details>
+        </li>
+        <li class="list__row">
+          <details>
+            <summary class="list__summary">
+              <span class="list__cell list__cell--fill">Bailarinas RRSS</span>
+              <span class="list__cell list__cell--fill">Laura Bitca</span>
+              <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
+            </summary>
+            <dl class="list__details">
+              <div><dt>Makeup</dt><dd><span class="pill pill--time">14:30</span></dd></div>
+              <div><dt>Dress</dt><dd><span class="pill pill--time">15:00</span></dd></div>
+              <div><dt>Ready</dt><dd><span class="pill pill--time">15:15</span></dd></div>
+              <div><dt>Motor</dt><dd><span class="pill pill--time">15:40</span></dd></div>
+            </dl>
+          </details>
+        </li>
+        <li class="list__row">
+          <details>
+            <summary class="list__summary">
+              <span class="list__cell list__cell--fill">Bailarinas RRSS</span>
+              <span class="list__cell list__cell--fill">Samanta Dodu</span>
+              <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
+            </summary>
+            <dl class="list__details">
+              <div><dt>Makeup</dt><dd><span class="pill pill--time">14:30</span></dd></div>
+              <div><dt>Dress</dt><dd><span class="pill pill--time">15:00</span></dd></div>
+              <div><dt>Ready</dt><dd><span class="pill pill--time">15:15</span></dd></div>
+              <div><dt>Motor</dt><dd><span class="pill pill--time">15:40</span></dd></div>
+            </dl>
+          </details>
+        </li>
+        <li class="list__row">
+          <details>
+            <summary class="list__summary">
+              <span class="list__cell list__cell--fill">Bailarinas RRSS</span>
+              <span class="list__cell list__cell--fill">Veronica Bosque</span>
+              <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
+            </summary>
+            <dl class="list__details">
+              <div><dt>Makeup</dt><dd><span class="pill pill--time">14:30</span></dd></div>
+              <div><dt>Dress</dt><dd><span class="pill pill--time">15:00</span></dd></div>
+              <div><dt>Ready</dt><dd><span class="pill pill--time">15:15</span></dd></div>
+              <div><dt>Motor</dt><dd><span class="pill pill--time">15:40</span></dd></div>
+            </dl>
+          </details>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Call</h2>
+        <span class="pill pill--time">15:20</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <details>
+            <summary class="list__summary">
+              <span class="list__cell list__cell--fill">Velocista FE</span>
+              <span class="list__cell list__cell--fill">Celia Caro</span>
+              <span class="list__cell list__cell--call"><span class="pill pill--time">16:20</span></span>
+            </summary>
+            <dl class="list__details">
+              <div><dt>Makeup</dt><dd><span class="pill pill--time">15:20</span></dd></div>
+              <div><dt>Dress</dt><dd><span class="pill pill--time">15:50</span></dd></div>
+              <div><dt>Ready</dt><dd><span class="pill pill--time">16:05</span></dd></div>
+              <div><dt>Motor</dt><dd><span class="pill pill--time">16:30</span></dd></div>
+            </dl>
+          </details>
+        </li>
+        <li class="list__row">
+          <details>
+            <summary class="list__summary">
+              <span class="list__cell list__cell--fill">Velocista FE</span>
+              <span class="list__cell list__cell--fill">Claudia Camacho</span>
+              <span class="list__cell list__cell--call"><span class="pill pill--time">16:20</span></span>
+            </summary>
+            <dl class="list__details">
+              <div><dt>Makeup</dt><dd><span class="pill pill--time">15:20</span></dd></div>
+              <div><dt>Dress</dt><dd><span class="pill pill--time">15:50</span></dd></div>
+              <div><dt>Ready</dt><dd><span class="pill pill--time">16:05</span></dd></div>
+              <div><dt>Motor</dt><dd><span class="pill pill--time">16:30</span></dd></div>
+            </dl>
+          </details>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <p class="viewer__footer">© Motooor 2026</p>
+
+  <!-- Sections of the call sheet; app.js marks the open page -->
+<nav class="tabbar" aria-label="Call sheet">
+  <a class="tabbar__item icon icon__home" href="index.html">Home</a>
+  <a class="tabbar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+  <a class="tabbar__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+  <a class="tabbar__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+</nav>
+
+
+</body>
+</html>

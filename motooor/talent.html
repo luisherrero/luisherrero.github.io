@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+      Shared head of every app page. Each page sets its title first:
+        $title = Crew   (written as a Kit variable comment before this import)
+    -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>MOTOOOR - IRYO “Reflexiones”</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+      <link rel="stylesheet" href="styles.css">
+      <script src="app-min.js" defer></script>
+    
+</head>
+
+
+<body class="app">
+
+
+  <!--
+    Theme saved in this browser, applied before the page paints.
+    Included first in <body> of every page (by _sidebar.kit, and by index.kit).
+  -->
+  <!-- js/app.js keeps the theme switch in sync -->
+  <script>(function () { try { var t = localStorage.getItem("motooor-theme") || "light"; if (t !== "system") { document.documentElement.setAttribute("data-theme", t); } } catch (e) { /* private mode */ } }());</script>
+  
+  
+  <aside class="sidebar" id="sidebar">
+  
+    <header class="sidebar__header">
+      <img class="sidebar__logo" src="img/logo_motooor.svg" alt="Motooor" width="80" height="24">
+      <button class="sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu"></button>
+    </header>
+    
+    <nav>
+      <ul class="sidebar__nav">
+        <li><a class="sidebar__item icon icon__home" href="overview.html">Home</a></li>
+        <li><a class="sidebar__item icon icon__cast" href="talent.html">Talent</a></li>
+        <li><a class="sidebar__item icon icon__crew" href="crew.html">Crew</a></li>
+        <li><a class="sidebar__item icon icon__locations" href="sites.html">Locations</a></li>
+        <li><a class="sidebar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a></li>
+        <li><a class="sidebar__item icon icon__schedule" href="calls.html">Calls</a></li>
+        <li><a class="sidebar__item icon icon__report" href="reports.html">Reports</a></li>
+      </ul>
+    </nav>
+  
+    <!-- Sidebar bottom: avatar and profile menu (imported by _sidebar.kit and projects.kit) -->
+    <footer class="sidebar__footer">
+      <button class="sidebar__item sidebar__profile" popovertarget="profile-menu" aria-haspopup="true"><img class="avatar" src="img/avatar.png" alt="" width="28" height="28">Luis Herrero</button>
+    </footer>
+    
+    <!-- Profile menu: opens beside the avatar (js/app.js) -->
+    <div class="profile-menu" id="profile-menu" popover>
+      <p class="profile-menu__name">Luis Herrero</p>
+      <a class="profile-menu__item" href="#">Account</a>
+      <a class="profile-menu__item" href="#">Settings</a>
+      <a class="profile-menu__item" href="#">Docs</a>
+      <a class="profile-menu__item" href="#">Contact</a>
+      <div class="profile-menu__item profile-menu__theme">
+        Theme
+        <span class="profile-menu__themes" role="group" aria-label="Theme">
+          <button class="icon-button icon icon__theme-light" data-theme-choice="light" aria-pressed="false" aria-label="Light" title="Light"></button>
+          <button class="icon-button icon icon__theme-dark" data-theme-choice="dark" aria-pressed="false" aria-label="Dark" title="Dark"></button>
+          <button class="icon-button icon icon__theme-system" data-theme-choice="system" aria-pressed="false" aria-label="System" title="System"></button>
+        </span>
+      </div>
+      <a class="profile-menu__item profile-menu__logout icon icon__log-out" href="index.html">Log out</a>
+    </div>
+    
+  
+  </aside>
+  
+
+  <header class="topbar">
+    <ol class="breadcrumb">
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="#">IRYO “Reflexiones”</a></li>
+      <li aria-current="page">Talent</li>
+    </ol>
+  </header>
+
+  <main class="content">
+    <section class="card">
+      <header class="card__header">
+        <h1 class="card__title">Talent</h1>
+        <details class="menu">
+          <summary class="btn btn--hollow btn--dropdown">Add</summary>
+          <ul class="menu__list">
+            <li><button class="menu__item">Cast</button></li>
+            <li><button class="menu__item">Extras</button></li>
+          </ul>
+        </details>
+        <button class="btn btn--alert icon icon__delete-alert" data-modal="modal-delete" aria-haspopup="dialog">Delete</button>
+      </header>
+
+      <nav class="tabs">
+        <button class="tabs__tab" aria-selected="true" aria-controls="cast-main">Cast</button>
+        <button class="tabs__tab" aria-selected="false" aria-controls="cast-extras">Extras</button>
+      </nav>
+
+      <div class="card__body" id="cast-main">
+        <ul class="list list--cast">
+          <li class="list__row list__row--head">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">#</span>
+            <span class="list__cell list__cell--fill">Character</span>
+            <span class="list__cell list__cell--fill">Artist</span>
+            <span class="list__cell list__cell--fill">Notes</span>
+            <span class="list__cell list__cell--actions">Info</span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">1</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="role" value="Designer" placeholder="Add role" aria-label="Role"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="artist" value="Ava Patel" placeholder="Add artist" aria-label="Artist"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+          <li class="list__row has-warning" title="No artist assigned">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">2</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="role" value="Manager" placeholder="Add role" aria-label="Role"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="artist" value="" placeholder="Add artist" aria-label="Artist"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">3</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="role" value="Analyst" placeholder="Add role" aria-label="Role"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="artist" value="Ethan Lee" placeholder="Add artist" aria-label="Artist"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">4</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="role" value="Developer" placeholder="Add role" aria-label="Role"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="artist" value="James Chen" placeholder="Add artist" aria-label="Artist"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">5</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="role" value="QA Tester" placeholder="Add role" aria-label="Role"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="artist" value="Mia Garcia" placeholder="Add artist" aria-label="Artist"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="card__body" id="cast-extras" hidden>
+        <ul class="list list--cast">
+          <li class="list__row list__row--head">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">#</span>
+            <span class="list__cell list__cell--fill">Role</span>
+            <span class="list__cell list__cell--fill">Amount</span>
+            <span class="list__cell list__cell--fill">Notes</span>
+            <span class="list__cell list__cell--actions">Info</span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">1</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="role" value="Gang Members" placeholder="Add role" aria-label="Role"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="amount" value="4" placeholder="Add amount" inputmode="numeric" aria-label="Amount"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">2</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="role" value="Candidates" placeholder="Add role" aria-label="Role"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="amount" value="10" placeholder="Add amount" inputmode="numeric" aria-label="Amount"></span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--actions">
+              <button class="pill icon icon__calendar">1/2</button>
+              <button class="icon-button icon icon__delete" aria-label="delete"></button>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="modal" id="modal-delete" aria-labelledby="modal-delete-title">
+    <form method="dialog">
+      <h2 class="modal__title icon icon__warning-alert" id="modal-delete-title">Delete all items?</h2>
+      <p class="modal__text">This action will remove all crew members from the project.</p>
+      <footer class="modal__buttons">
+        <button class="btn" value="cancel">Cancel</button>
+        <button class="btn btn--alert" value="delete">Delete all</button>
+      </footer>
+    </form>
+  </dialog>
+
+
+
+</body>
+</html>

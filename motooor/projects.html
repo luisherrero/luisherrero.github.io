@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+      Shared head of every app page. Each page sets its title first:
+        $title = Crew   (written as a Kit variable comment before this import)
+    -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>MOTOOOR - Projects</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+      <link rel="stylesheet" href="styles.css">
+      <script src="app-min.js" defer></script>
+    
+</head>
+
+
+<body class="app">
+
+  <!--
+    Theme saved in this browser, applied before the page paints.
+    Included first in <body> of every page (by _sidebar.kit, and by index.kit).
+  -->
+  <!-- js/app.js keeps the theme switch in sync -->
+  <script>(function () { try { var t = localStorage.getItem("motooor-theme") || "light"; if (t !== "system") { document.documentElement.setAttribute("data-theme", t); } } catch (e) { /* private mode */ } }());</script>
+  
+
+  <!-- Sidebar of this page only: active and archived projects (js/app.js filters the cards) -->
+  <aside class="sidebar" id="sidebar">
+
+    <header class="sidebar__header">
+      <img class="sidebar__logo" src="img/logo_motooor.svg" alt="Motooor" width="80" height="24">
+      <button class="sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu"></button>
+    </header>
+
+    <nav>
+      <ul class="sidebar__nav">
+        <li><button class="sidebar__item icon icon__current" data-project-filter="active">Active projects</button></li>
+        <li><button class="sidebar__item icon icon__archived" data-project-filter="archived">Archived</button></li>
+      </ul>
+    </nav>
+
+    <!-- Sidebar bottom: avatar and profile menu (imported by _sidebar.kit and projects.kit) -->
+    <footer class="sidebar__footer">
+      <button class="sidebar__item sidebar__profile" popovertarget="profile-menu" aria-haspopup="true"><img class="avatar" src="img/avatar.png" alt="" width="28" height="28">Luis Herrero</button>
+    </footer>
+    
+    <!-- Profile menu: opens beside the avatar (js/app.js) -->
+    <div class="profile-menu" id="profile-menu" popover>
+      <p class="profile-menu__name">Luis Herrero</p>
+      <a class="profile-menu__item" href="#">Account</a>
+      <a class="profile-menu__item" href="#">Settings</a>
+      <a class="profile-menu__item" href="#">Docs</a>
+      <a class="profile-menu__item" href="#">Contact</a>
+      <div class="profile-menu__item profile-menu__theme">
+        Theme
+        <span class="profile-menu__themes" role="group" aria-label="Theme">
+          <button class="icon-button icon icon__theme-light" data-theme-choice="light" aria-pressed="false" aria-label="Light" title="Light"></button>
+          <button class="icon-button icon icon__theme-dark" data-theme-choice="dark" aria-pressed="false" aria-label="Dark" title="Dark"></button>
+          <button class="icon-button icon icon__theme-system" data-theme-choice="system" aria-pressed="false" aria-label="System" title="System"></button>
+        </span>
+      </div>
+      <a class="profile-menu__item profile-menu__logout icon icon__log-out" href="index.html">Log out</a>
+    </div>
+    
+
+  </aside>
+
+  <header class="topbar">
+    <ol class="breadcrumb">
+      <li><a href="projects.html">Projects</a></li>
+      <li aria-current="page" data-project-crumb>Active</li>
+    </ol>
+  </header>
+
+  <main class="content">
+    <!--
+      Project cards: data-status="active | archived" (the sidebar shows one
+      group). The first card always opens the new project form.
+    -->
+    <ul class="projects">
+
+      <li data-status="active">
+        <button class="project-card project-card--new" type="button" data-modal="new-project" aria-haspopup="dialog">
+          <span class="project-card__info">
+            <span class="project-card__title">New project</span>
+            <span class="project-card__add icon icon__add" aria-hidden="true"></span>
+          </span>
+          <span class="project-card__pic"></span>
+        </button>
+      </li>
+
+      <li data-status="active">
+        <article class="project-card">
+          <a class="project-card__link" href="overview.html">
+            <span class="project-card__info">
+              <span class="project-card__title">Reflexiones in the sky when things goes bad</span>
+              <span class="project-card__client">IRYO</span>
+              <img class="project-card__logo" src="img/production_co/hawai.svg" alt="Hawai" width="80" height="40">
+            </span>
+            <span class="project-card__pic bg_05"></span>
+          </a>
+          <span class="project-card__days pill icon icon__calendar" title="Shooting days">2</span>
+          <button class="project-card__menu icon icon__overflow" type="button" aria-label="Project options"></button>
+        </article>
+      </li>
+
+      <li data-status="active">
+        <article class="project-card">
+          <a class="project-card__link" href="overview.html">
+            <span class="project-card__info">
+              <span class="project-card__title">Salvajada</span>
+              <span class="project-card__client">KFC</span>
+              <img class="project-card__logo" src="img/production_co/landia.svg" alt="Landia" width="80" height="40">
+            </span>
+            <span class="project-card__pic bg_12"></span>
+          </a>
+          <span class="project-card__days pill icon icon__calendar" title="Shooting days">2</span>
+          <button class="project-card__menu icon icon__overflow" type="button" aria-label="Project options"></button>
+        </article>
+      </li>
+
+      <li data-status="archived" hidden>
+        <article class="project-card">
+          <a class="project-card__link" href="overview.html">
+            <span class="project-card__info">
+              <span class="project-card__title">Summer drop</span>
+              <span class="project-card__client">Under Armour</span>
+              <img class="project-card__logo" src="img/production_co/agosto.svg" alt="Agosto" width="80" height="40">
+            </span>
+            <span class="project-card__pic bg_18"></span>
+          </a>
+          <span class="project-card__days pill icon icon__calendar" title="Shooting days">3</span>
+          <button class="project-card__menu icon icon__overflow" type="button" aria-label="Project options"></button>
+        </article>
+      </li>
+
+    </ul>
+  </main>
+
+
+  <!-- New project: opened by the first card (data-modal="new-project") -->
+  <dialog class="modal modal--form" id="new-project" aria-labelledby="new-project-title">
+    <form method="dialog">
+      <header class="modal__header">
+        <h2 class="modal__heading" id="new-project-title">New project</h2>
+        <button class="card__action icon icon__close-alt" value="cancel" formnovalidate aria-label="Close"></button>
+      </header>
+
+      <div class="modal__body">
+        <div class="field">
+          <label class="field__label" for="np-title">Project title</label>
+          <div class="field__box"><input class="field__input" id="np-title" name="title" type="text" required></div>
+        </div>
+
+        <label class="dropzone dropzone--compact">
+          <span class="dropzone__title icon icon__import">Drag and drop the cover images here</span>
+          <span class="dropzone__text">or</span>
+          <span class="dropzone__browse">Browse files</span>
+          <span class="dropzone__text">Recommended size: 800x500</span>
+          <input type="file" name="cover" accept="image/*" multiple hidden>
+        </label>
+
+        <div class="modal__row">
+          <div class="field">
+            <label class="field__label" for="np-date">Starting date</label>
+            <div class="field__box"><input class="field__input" id="np-date" name="date" type="date"></div>
+          </div>
+          <div class="field field--sm">
+            <label class="field__label" for="np-days">Days</label>
+            <div class="field__box"><input class="field__input" id="np-days" name="days" type="number" min="1" step="1"></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="np-client">Client</label>
+          <div class="field__box"><input class="field__input" id="np-client" name="client" type="text"></div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="np-production">Production company</label>
+          <div class="field__box"><input class="field__input" id="np-production" name="production" type="text"></div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="np-agency">Agency</label>
+          <div class="field__box"><input class="field__input" id="np-agency" name="agency" type="text"></div>
+        </div>
+      </div>
+
+      <footer class="modal__buttons modal__buttons--block">
+        <button class="btn btn--cta btn--lg" value="create">Create project</button>
+      </footer>
+    </form>
+  </dialog>
+
+</body>
+</html>
