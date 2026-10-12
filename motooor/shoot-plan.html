@@ -16,7 +16,7 @@
 </head>
 
 
-<body class="app">
+<body class="app is-sidebar-expanded">
 
 
   <!--
@@ -85,6 +85,7 @@
     <section class="card">
       <header class="card__header">
         <h1 class="card__title">Shoot Plan</h1>
+        <p class="info">52 shots · 2 days</p>
 
         <details class="menu">
           <summary class="btn btn--hollow btn--dropdown">Add</summary>
@@ -111,38 +112,46 @@
         </details>
         -->
 
-        <button class="btn icon icon__time" data-modal="modal-settings" aria-haspopup="dialog">Settings</button>
-        <button class="btn icon icon__draft">Draft</button>
+        <button class="btn btn--hollow icon icon__time" data-modal="modal-settings" aria-haspopup="dialog">Settings</button>
+        <button class="btn btn--hollow icon icon__draft">Draft</button>
         <button class="btn btn--cta icon icon__gallery" data-modal="gallery" aria-haspopup="dialog">Gallery</button>
         <button class="icon icon__help" aria-label="Help"></button>
       </header>
 
+      <nav class="tabs">
+        <button class="tabs__tab" aria-selected="true" aria-controls="day-1"><strong>Day 1</strong> · Tuesday 29</button>
+        <button class="tabs__tab" aria-selected="false" aria-controls="day-2"><strong>Day 2</strong> · Wednesday 30</button>
+      </nav>
+
       <div class="card__body" id="shoot-plan-main">
+
+
+
+        <!-- Day summary: call and wrap (editable), totals and what needs attention -->
+        <dl class="stats">
+          <div class="stats__item"><dt>Call · Wrap</dt><dd>09:30 · 17:50</dd></div>
+          <div class="stats__item"><dt>Total shooting time</dt><dd>17h 20m</dd></div>
+          <div class="stats__item"><dt>Total shots</dt><dd>52 (40 + 12)</dd></div>
+          <div class="stats__item stats__item--alert"><dt>Needs attention</dt><dd>Overlap · Set TBD · Talent TBD</dd></div>
+        </dl>
+
+
+
         <ul class="list list--shoot-plan">
           <li class="list__row list__row--head">
-            <label class="list__cell list__cell--slot"><input type="checkbox" aria-label="Select all"></label>
+            <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select all"></label>
+            <span class="list__cell list__cell--time">Time</span>
             <span class="list__cell list__cell--shot">Shot</span>
-            <span class="list__cell list__cell--desc">Description</span>
+            <span class="list__cell list__cell--desc">Action</span>
             <span class="list__cell list__cell--set">Set</span>
-            <span class="list__cell list__cell--cast">Cast</span>
+            <span class="list__cell list__cell--talent">Talent</span>
             <span class="list__cell list__cell--reqs">Requirements</span>
-            <span class="list__cell list__cell--actions">Actions</span>
-          </li>
-
-          <li class="list__row list__row--banner">
-            <span class="list__cell list__cell--range">
-              <button class="pill pill--time">9:30</button>
-              <button class="pill pill--time">17:50</button>
-            </span>
-            <h2 class="list__cell list__cell--fill">Day 1 - 29th september, 2026</h2>
-            <span class="list__cell list__cell--meta">Shooting time: <span class="pill">17h 20m</span></span>
-            <span class="list__cell list__cell--meta">52 shots</span>
-            <button class="icon-button icon icon__dropdown" aria-label="dropdown"></button>
+            <span class="list__cell list__cell--actions">Output</span>
           </li>
 
           <li class="list__row">
-            <div class="list__cell list__cell--slot">
-              <input type="checkbox" aria-label="Select shot">
+            <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
+            <div class="list__cell list__cell--time">
               <button class="pill pill--time">9:30</button>
               <button class="pill pill--time">9:50</button>
             </div>
@@ -151,85 +160,85 @@
               <figcaption>12</figcaption>
             </figure>
             <div class="list__cell list__cell--desc">
-              <strong>Spot 1</strong>
+              <strong>Spot 1 · 12</strong>
               <p>Texto que describe la acción que sucede en el plano a rodar</p>
             </div>
             <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
               <span class="list__values" data-empty="Add set"></span>
             </button>
-            <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Cast">
-              <span class="list__values" data-empty="Add cast"></span>
+            <button class="list__cell list__cell--talent list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Talent">
+              <span class="list__values" data-empty="Add talent"></span>
             </button>
             <div class="list__cell list__cell--reqs">
-              <p><b>Cámara</b>: Alexa cámara en mano.</p>
-              <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
+              <p><b>Cámara</b>: Alexa, cámara en mano.</p>
+              <p><b>Arte</b>: Decorado según PPM. Manteles y cajas de hamburguesas.</p>
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
               <button class="shot-type">AV</button>
-              <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
+              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
 
-          <li class="list__row has-warning">
-            <div class="list__cell list__cell--slot">
-              <input type="checkbox" aria-label="Select shot">
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
+            <div class="list__cell list__cell--time">
               <button class="pill pill--time">10:00</button>
               <button class="pill pill--time">10:20</button>
+              <span class="list__note warning-note">Overlap</span>
             </div>
             <figure class="list__cell list__cell--shot thumb">
               <img src="img/ad/002.png" alt="">
               <figcaption>17</figcaption>
             </figure>
             <div class="list__cell list__cell--desc">
-              <strong>Spot 1</strong>
+              <strong>Spot 1 · 17</strong>
               <p>Texto que describe la acción que sucede en el plano a rodar</p>
             </div>
             <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="1" aria-label="Set">
               <span class="list__values" data-empty="Add set"><span>Vestuario</span></span>
             </button>
-            <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="1,2,3" aria-label="Cast">
-              <span class="list__values" data-empty="Add cast"><span>Policeman</span><span>Reporter</span><span>Concerned Citizen</span></span>
+            <button class="list__cell list__cell--talent list__cell--select list__cell--multi" data-multi="characters" value="1,2,3" aria-label="Talent">
+              <span class="list__values" data-empty="Add talent"><span>Policeman</span><span>Reporter</span><span>Concerned Citizen</span></span>
             </button>
             <div class="list__cell list__cell--reqs">
-              <p><b>Cámara</b>: Alexa cámara en mano.</p>
-              <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
+              <p><b>Cámara</b>: Alexa, cámara en mano.</p>
+              <p><b>Arte</b>: Decorado según PPM. Manteles y cajas de hamburguesas.</p>
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
               <button class="shot-type">AV</button>
-              <label class="pill pill--flow"><input type="checkbox" unchecked>Flow</label>
+              <label class="flow">Flow <input type="checkbox" class="switch" role="switch"></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
 
           <li class="list__row">
-            <div class="list__cell list__cell--slot">
-              <input type="checkbox" aria-label="Select shot">
+            <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
+            <div class="list__cell list__cell--time">
               <button class="pill pill--time">10:00</button>
               <button class="pill pill--time">10:20</button>
+              <span class="list__note warning-note">Overlap</span>
             </div>
             <figure class="list__cell list__cell--shot thumb">
               <img src="img/ad/003.png" alt="">
               <figcaption>24 + 15 + 21</figcaption>
             </figure>
             <div class="list__cell list__cell--desc">
-              <strong>Spot 1</strong>
+              <strong>Spot 1 · 24 + 15 + 21</strong>
               <p>Texto que describe la acción que sucede en el plano a rodar</p>
             </div>
             <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
               <span class="list__values" data-empty="Add set"></span>
             </button>
-            <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Cast">
-              <span class="list__values" data-empty="Add cast"></span>
+            <button class="list__cell list__cell--talent list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Talent">
+              <span class="list__values" data-empty="Add talent"></span>
             </button>
-            <div class="list__cell list__cell--reqs">
-              <p>-</p>
-            </div>
+            <div class="list__cell list__cell--reqs" data-empty="Add requirements"></div>
             <div class="list__cell list__cell--actions">
               <button class="shot-type shot-type--social">Social</button>
-              <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
+              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
@@ -242,13 +251,13 @@
             <h2 class="list__cell list__cell--fill">New banner</h2>
             <span class="list__cell list__cell--banner-actions">
               <button class="color-button" data-color-menu aria-label="Banner color"></button>
-              <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
+              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
             </span>
           </li>
 
           <li class="list__row">
-            <div class="list__cell list__cell--slot">
-              <input type="checkbox" aria-label="Select shot">
+            <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
+            <div class="list__cell list__cell--time">
               <button class="pill pill--time">10:30</button>
               <button class="pill pill--time">11:20</button>
             </div>
@@ -257,28 +266,26 @@
               <figcaption>28</figcaption>
             </figure>
             <div class="list__cell list__cell--desc">
-              <strong>Spot 1</strong>
+              <strong>Spot 1 · 28</strong>
               <p>Texto que describe la acción que sucede en el plano a rodar</p>
             </div>
             <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
               <span class="list__values" data-empty="Add set"></span>
             </button>
-            <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Cast">
-              <span class="list__values" data-empty="Add cast"></span>
+            <button class="list__cell list__cell--talent list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Talent">
+              <span class="list__values" data-empty="Add talent"></span>
             </button>
-            <div class="list__cell list__cell--reqs">
-              <p>-</p>
-            </div>
+            <div class="list__cell list__cell--reqs" data-empty="Add requirements"></div>
             <div class="list__cell list__cell--actions">
               <button class="shot-type">AV</button>
-              <label class="pill pill--flow"><input type="checkbox">Flow</label>
+              <label class="flow">Flow <input type="checkbox" class="switch" role="switch"></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
 
           <li class="list__row">
-            <div class="list__cell list__cell--slot">
-              <input type="checkbox" aria-label="Select shot">
+            <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
+            <div class="list__cell list__cell--time">
               <button class="pill pill--time">10:30</button>
               <button class="pill pill--time">10:50</button>
             </div>
@@ -287,30 +294,33 @@
               <figcaption>13</figcaption>
             </figure>
             <div class="list__cell list__cell--desc">
-              <strong>Spot 1</strong>
+              <strong>Spot 1 · 13</strong>
               <p>Texto que describe la acción que sucede en el plano a rodar</p>
             </div>
             <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
               <span class="list__values" data-empty="Add set"></span>
             </button>
-            <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Cast">
-              <span class="list__values" data-empty="Add cast"></span>
+            <button class="list__cell list__cell--talent list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Talent">
+              <span class="list__values" data-empty="Add talent"></span>
             </button>
             <div class="list__cell list__cell--reqs">
-              <p><b>Cámara</b>: Alexa cámara en mano.</p>
-              <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
+              <p><b>Arte</b>:</p>
+              <ul>
+                <li>Mesa de cocina con mantel de cuadros.</li>
+                <li>Dos tazas y una cafetera italiana.</li>
+              </ul>
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
               <button class="shot-type shot-type--photo">Photo</button>
-              <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
+              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
 
           <li class="list__row">
-            <div class="list__cell list__cell--slot">
-              <input type="checkbox" aria-label="Select shot">
+            <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
+            <div class="list__cell list__cell--time">
               <button class="pill pill--time">10:50</button>
               <button class="pill pill--time">11:10</button>
             </div>
@@ -319,26 +329,134 @@
               <figcaption>14 + 15</figcaption>
             </figure>
             <div class="list__cell list__cell--desc">
-              <strong>Spot 1</strong>
+              <strong>Spot 1 · 14 + 15</strong>
               <p>Texto que describe la acción que sucede en el plano a rodar</p>
             </div>
             <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
               <span class="list__values" data-empty="Add set"></span>
             </button>
-            <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Cast">
-              <span class="list__values" data-empty="Add cast"></span>
+            <button class="list__cell list__cell--talent list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Talent">
+              <span class="list__values" data-empty="Add talent"></span>
             </button>
             <div class="list__cell list__cell--reqs">
-              <p><b>Cámara</b>: Alexa cámara en mano.</p>
-              <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
+              <p><b>Cámara</b>: Alexa, cámara en mano.</p>
+              <p><b>Arte</b>: Decorado según PPM. Manteles y cajas de hamburguesas.</p>
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
               <button class="shot-type">AV</button>
-              <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
+              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
+
+          <li class="list__row list__row--banner list__row--banner-custom" data-color="0">
+            <span class="list__cell list__cell--range">
+              <button class="pill pill--time">9:30</button>
+              <button class="pill pill--time">17:50</button>
+            </span>
+            <h2 class="list__cell list__cell--fill">New banner</h2>
+            <span class="list__cell list__cell--banner-actions">
+              <button class="color-button" data-color-menu aria-label="Banner color"></button>
+              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
+            </span>
+          </li>
+
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
+            <div class="list__cell list__cell--time">
+              <button class="pill pill--time">10:30</button>
+              <button class="pill pill--time">11:20</button>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="img/ad/004.png" alt="">
+              <figcaption>28</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1 · 28</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
+              <span class="list__values" data-empty="Add set"></span>
+            </button>
+            <button class="list__cell list__cell--talent list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Talent">
+              <span class="list__values" data-empty="Add talent"></span>
+            </button>
+            <div class="list__cell list__cell--reqs" data-empty="Add requirements"></div>
+            <div class="list__cell list__cell--actions">
+              <button class="shot-type">AV</button>
+              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
+              <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+            </div>
+          </li>
+
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
+            <div class="list__cell list__cell--time">
+              <button class="pill pill--time">10:30</button>
+              <button class="pill pill--time">10:50</button>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="img/ad/005.png" alt="">
+              <figcaption>13</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1 · 13</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
+              <span class="list__values" data-empty="Add set"></span>
+            </button>
+            <button class="list__cell list__cell--talent list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Talent">
+              <span class="list__values" data-empty="Add talent"></span>
+            </button>
+            <div class="list__cell list__cell--reqs">
+              <p><b>Arte</b>:</p>
+              <ul>
+                <li>Mesa de cocina con mantel de cuadros.</li>
+                <li>Dos tazas y una cafetera italiana.</li>
+              </ul>
+              <p><b>Producto</b>: Big Mac.</p>
+            </div>
+            <div class="list__cell list__cell--actions">
+              <button class="shot-type shot-type--photo">Photo</button>
+              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
+              <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+            </div>
+          </li>
+
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
+            <div class="list__cell list__cell--time">
+              <button class="pill pill--time">10:50</button>
+              <button class="pill pill--time">11:10</button>
+            </div>
+            <figure class="list__cell list__cell--shot thumb">
+              <img src="img/ad/006.png" alt="">
+              <figcaption>14 + 15</figcaption>
+            </figure>
+            <div class="list__cell list__cell--desc">
+              <strong>Spot 1 · 14 + 15</strong>
+              <p>Texto que describe la acción que sucede en el plano a rodar</p>
+            </div>
+            <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
+              <span class="list__values" data-empty="Add set"></span>
+            </button>
+            <button class="list__cell list__cell--talent list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Talent">
+              <span class="list__values" data-empty="Add talent"></span>
+            </button>
+            <div class="list__cell list__cell--reqs">
+              <p><b>Cámara</b>: Alexa, cámara en mano.</p>
+              <p><b>Arte</b>: Decorado según PPM. Manteles y cajas de hamburguesas.</p>
+              <p><b>Producto</b>: Big Mac.</p>
+            </div>
+            <div class="list__cell list__cell--actions">
+              <button class="shot-type">AV</button>
+              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
+              <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+            </div>
+          </li>
+
         </ul>
       </div>
 

@@ -2,41 +2,44 @@
 <html lang="en">
 <head>
   <!--
-  Shared head of the viewer pages; each page sets its title first (Kit
-  variable "title"). Same JS as the app (../app-min.js). No theme switch:
-  the viewer follows the system (light / dark).
--->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>MOTOOOR · Call sheet - Shoot Plan</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
-  <link rel="stylesheet" href="viewer.css">
-  <script src="../app-min.js" defer></script>
-
+      Shared head of the viewer pages; each page sets its title first (Kit
+      variable "title"). Same JS as the app (../app-min.js). No theme switch:
+      the viewer follows the system (light / dark).
+    -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+      <title>MOTOOOR · Call sheet - Shoot Plan</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+      <link rel="stylesheet" href="viewer.css">
+      <script src="../app-min.js" defer></script>
+    
 </head>
 
 <body class="viewer">
 
   <!-- Cover image of the project, blurred behind the top of every page -->
-<div class="viewer__cover bg_08" aria-hidden="true"></div>
-
+  <div class="viewer__cover bg_08" aria-hidden="true"></div>
+  
   <!-- Page title over the cover (Kit variable "title"); the buttons have no action yet -->
-<header class="viewer__bar">
-  <h1>Shoot Plan</h1>
-  <button class="card__action icon icon__overflow" type="button" aria-label="More"></button>
-</header>
-
+    <header class="viewer__bar">
+      <h1>Shoot Plan</h1>
+      <button class="card__action icon icon__overflow" type="button" aria-label="More"></button>
+    </header>
+    
 
   <main class="viewer__content">
+    <!-- Day stats, as in the app's Shoot Plan (read-only, without needs attention) -->
+    <dl class="stats">
+      <div class="stats__item">
+        <dt>Call → wrap</dt>
+        <dd><span class="stats__range"><span class="pill pill--time">9:30</span><span class="pill pill--time">17:50</span></span></dd>
+      </div>
+      <div class="stats__item"><dt>Shooting</dt><dd>17h 20m</dd></div>
+      <div class="stats__item"><dt>Shots</dt><dd>52</dd></div>
+    </dl>
+
     <!-- One card per shot; tap a shot to see requirements, set and talent -->
     <ul class="list list--shoot-plan">
-      <li class="list__row list__row--banner" data-type="av">
-        <span class="list__cell list__cell--range">
-          <span class="pill pill--time">9:30</span>
-          <span class="pill pill--time">17:50</span>
-        </span>
-        <h2 class="list__cell list__cell--fill">Day 1 - 29th September, 2026</h2>
-      </li>
       <li class="list__row">
         <details>
           <summary class="list__summary">
@@ -406,15 +409,15 @@
   </main>
 
   <p class="viewer__footer">© Motooor 2026</p>
-
+  
   <!-- Sections of the call sheet; app.js marks the open page -->
-<nav class="tabbar" aria-label="Call sheet">
-  <a class="tabbar__item icon icon__home" href="index.html">Home</a>
-  <a class="tabbar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
-  <a class="tabbar__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
-  <a class="tabbar__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
-</nav>
-
+    <nav class="tabbar" aria-label="Call sheet">
+      <a class="tabbar__item icon icon__home" href="index.html">Home</a>
+      <a class="tabbar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+      <a class="tabbar__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+      <a class="tabbar__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+    </nav>
+    
 
 </body>
 </html>

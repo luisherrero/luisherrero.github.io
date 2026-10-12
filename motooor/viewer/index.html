@@ -2,24 +2,24 @@
 <html lang="en">
 <head>
   <!--
-  Shared head of the viewer pages; each page sets its title first (Kit
-  variable "title"). Same JS as the app (../app-min.js). No theme switch:
-  the viewer follows the system (light / dark).
--->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>MOTOOOR · Call sheet - Home</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
-  <link rel="stylesheet" href="viewer.css">
-  <script src="../app-min.js" defer></script>
-
+      Shared head of the viewer pages; each page sets its title first (Kit
+      variable "title"). Same JS as the app (../app-min.js). No theme switch:
+      the viewer follows the system (light / dark).
+    -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+      <title>MOTOOOR · Call sheet - Home</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+      <link rel="stylesheet" href="viewer.css">
+      <script src="../app-min.js" defer></script>
+    
 </head>
 
 <body class="viewer">
 
   <!-- Cover image of the project, blurred behind the top of every page -->
-<div class="viewer__cover bg_08" aria-hidden="true"></div>
-
+  <div class="viewer__cover bg_08" aria-hidden="true"></div>
+  
 
   <header class="viewer__hero">
     <h1>IRYO “Reflexiones”</h1>
@@ -58,13 +58,16 @@
       <header class="card__header">
         <h2 class="card__title">Locations</h2>
       </header>
-      <ul class="list list--places">
-        <li class="list__row">
-          <span class="list__cell list__cell--index">1</span>
-          <address class="list__cell list__cell--fill"><strong><a href="https://maps.google.com/?q=Av.+Alcalde+Barnils+3,+08174+Sant+Cugat+del+Vall%C3%A8s" target="_blank" rel="noopener">Centro Alto Rendimiento</a></strong> Av. Alcalde Barnils, 3, 5, 08174 Sant Cugat del Vallès, Barcelona</address>
-          <span class="list__cell list__cell--thumb"><img src="../img/thumb-sites.png" alt="Map" width="96" height="52"></span>
-        </li>
-      </ul>
+      <!-- Same widget as Overview › Locations: numbered list and a map with numbered pins -->
+      <div class="places">
+        <ol class="places__list">
+          <li class="places__item"><address><strong><a href="https://maps.google.com/?q=Av.+Alcalde+Barnils+3,+08174+Sant+Cugat+del+Vall%C3%A8s" target="_blank" rel="noopener">Centro Alto Rendimiento</a></strong> Av. Alcalde Barnils, 3-5<br>08174 Sant Cugat del Vallès, Barcelona</address></li>
+        </ol>
+        <div class="places__map">
+          <img src="../img/thumb-sites.png" alt="Map of the location">
+          <span class="places__pin" style="--x: 50%; --y: 55%">1</span>
+        </div>
+      </div>
     </section>
 
     <section class="card card--widget">
@@ -104,15 +107,15 @@
   </main>
 
   <p class="viewer__footer">© Motooor 2026</p>
-
+  
   <!-- Sections of the call sheet; app.js marks the open page -->
-<nav class="tabbar" aria-label="Call sheet">
-  <a class="tabbar__item icon icon__home" href="index.html">Home</a>
-  <a class="tabbar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
-  <a class="tabbar__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
-  <a class="tabbar__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
-</nav>
-
+    <nav class="tabbar" aria-label="Call sheet">
+      <a class="tabbar__item icon icon__home" href="index.html">Home</a>
+      <a class="tabbar__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+      <a class="tabbar__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+      <a class="tabbar__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+    </nav>
+    
 
 </body>
 </html>

@@ -16,7 +16,7 @@
 </head>
 
 
-<body class="app">
+<body class="app is-sidebar-expanded">
 
 
   <!--
@@ -85,7 +85,8 @@
     <section class="card">
       <header class="card__header">
         <h1 class="card__title">Reports</h1>
-        <button class="btn icon icon__draft">Export PDF</button>
+        <p class="info"> </p>
+        <button class="btn btn--hollow icon icon__draft">Export PDF</button>
         <details class="menu">
           <summary class="btn btn--hollow btn--dropdown">Day 1</summary>
           <ul class="menu__list">
@@ -97,15 +98,14 @@
 
       <nav class="tabs">
         <button class="tabs__tab" aria-selected="true" aria-controls="reports-crew">Crew</button>
-        <button class="tabs__tab" aria-selected="false" aria-controls="reports-cast">Cast</button>
-        <button class="tabs__tab" aria-selected="false" aria-controls="reports-extras">Extras</button>
+        <button class="tabs__tab" aria-selected="false" aria-controls="reports-talent">Talent</button>
       </nav>
 
       <div class="card__body" id="reports-crew">
         <ul class="list list--reports">
           <li class="list__row list__row--head">
             <label class="list__cell list__cell--check"><input type="checkbox"></label>
-            <span class="list__cell list__cell--fill">Dept</span>
+            <span class="list__cell list__cell--fill">Department</span>
             <span class="list__cell list__cell--fill">Title</span>
             <span class="list__cell list__cell--fill">Name</span>
             <span class="list__cell list__cell--time">On Set</span>
@@ -160,6 +160,85 @@
             <span class="list__cell list__cell--fill">James Chen</span>
             <span class="list__cell list__cell--time"><input class="pill pill--input" name="estimated" value="08:00" inputmode="numeric" aria-label="Estimated"></span>
             <span class="list__cell list__cell--time"><input class="pill pill--input" name="final" value="09:00" inputmode="numeric" aria-label="Final"></span>
+            <span class="list__cell list__cell--time">8+1</span>
+            <span class="list__cell list__cell--time">2</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Talent: cast first, then extras (same columns, a gap between the two lists) -->
+      <div class="card__body" id="reports-talent" hidden>
+        <ul class="list list--reports" aria-label="Cast">
+          <li class="list__row list__row--head">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill list__cell--character">Character</span>
+            <span class="list__cell list__cell--fill">Artist</span>
+            <span class="list__cell list__cell--fill">Notes</span>
+            <span class="list__cell list__cell--time">On Set</span>
+            <span class="list__cell list__cell--time">Wrap</span>
+            <span class="list__cell list__cell--time">Total</span>
+            <span class="list__cell list__cell--time">Overtime</span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill list__cell--character">Policeman</span>
+            <span class="list__cell list__cell--fill">Liam Brown</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="estimated" value="07:50" inputmode="numeric" aria-label="Estimated"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="final" value="07:50" inputmode="numeric" aria-label="Final"></span>
+            <span class="list__cell list__cell--time">8+1</span>
+            <span class="list__cell list__cell--time">2</span>
+          </li>
+          <li class="list__row has-warning">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill list__cell--character">Reporter</span>
+            <span class="list__cell list__cell--fill">Emma Wilson</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="estimated" value="07:50" inputmode="numeric" aria-label="Estimated"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="final" value="08:40" inputmode="numeric" aria-label="Final"></span>
+            <span class="list__cell list__cell--time">8+1</span>
+            <span class="list__cell list__cell--time">2</span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill list__cell--character">Concerned Citizen</span>
+            <span class="list__cell list__cell--fill">Lucas Martin</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="estimated" value="07:50" inputmode="numeric" aria-label="Estimated"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="final" value="07:50" inputmode="numeric" aria-label="Final"></span>
+            <span class="list__cell list__cell--time">8+1</span>
+            <span class="list__cell list__cell--time">2</span>
+          </li>
+        </ul>
+
+        <ul class="list list--reports" aria-label="Extras">
+          <li class="list__row list__row--head">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill">Role</span>
+            <span class="list__cell list__cell--fill">Amount</span>
+            <span class="list__cell list__cell--fill">Notes</span>
+            <span class="list__cell list__cell--time">On Set</span>
+            <span class="list__cell list__cell--time">Wrap</span>
+            <span class="list__cell list__cell--time">Total</span>
+            <span class="list__cell list__cell--time">Overtime</span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill">Gang Members</span>
+            <span class="list__cell list__cell--fill">4</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="estimated" value="07:30" inputmode="numeric" aria-label="Estimated"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="final" value="07:30" inputmode="numeric" aria-label="Final"></span>
+            <span class="list__cell list__cell--time">8+1</span>
+            <span class="list__cell list__cell--time">2</span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--fill">Passers-by</span>
+            <span class="list__cell list__cell--fill">12</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="estimated" value="08:00" inputmode="numeric" aria-label="Estimated"></span>
+            <span class="list__cell list__cell--time"><input class="pill pill--input" name="final" value="08:00" inputmode="numeric" aria-label="Final"></span>
             <span class="list__cell list__cell--time">8+1</span>
             <span class="list__cell list__cell--time">2</span>
           </li>

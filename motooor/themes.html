@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MOTOOOR - Theme lab</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
 
   <!--
-    Theme lab: edit the colour tokens of every theme (HSL + colour picker),
-    see them live on real components and export them for _themes.scss.
+    Theme lab: edit the palette, the colour tokens of every theme and the
+    text styles, see them live on real components and export them for
+    _themes.scss.
     Development tool only: its own styles and script live in this page.
   -->
   <style>
@@ -242,6 +243,23 @@
 
     .tok__labels { color: #999; font-size: 10px; text-align: right; }
 
+    /* Text style rows: size, weight, tracking, line-height and case, with a sample */
+    .tok--type { grid-template-columns: minmax(0, 1fr) 48px 60px 54px 48px 96px; row-gap: 2px; padding: 8px 0; border-bottom: 1px solid #eee; }
+    .tok--type.tok__labels { padding: 0; border: 0; }
+    .tok--type input[type="number"] { width: 100%; }
+    .tok--type select { padding: 0 18px 0 6px; background-position: right -2px center; }
+    .tok--type input.is-off-grid { border-color: #d33; }   /* line-height not a multiple of 4 */
+    .tok__use { grid-column: 1 / -1; color: #999; font-size: 11px; }
+    .tok__sample {
+      grid-column: 1 / -1;
+      overflow: hidden;
+      font-family: "Open Sans", system-ui, sans-serif;
+      color: #222;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      background: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(47, 127, 193, .12) 3px 4px);   /* 4px grid */
+    }
+
     /* Generated SCSS: collapsed by default */
     .lab__code summary {
       font-weight: 600;
@@ -271,25 +289,24 @@
       overflow: auto;
     }
 
+    /* Laid out as the app: sidebar, top bar and content */
     .lab__preview {
       display: flex;
-      gap: 16px;
-      padding: 16px 16px 24px 0;
+      border-bottom: 8px solid #ddd;
       background: var(--color-bg-app);
       color: var(--color-fg-primary);
     }
 
-    .lab__preview .sidebar { flex: none; width: 48px; margin: 0; padding-top: 0; overflow: visible; }
+    .lab__preview .sidebar { flex: none; width: 64px; margin: 0; overflow: visible; }   /* = $sidebar-collapsed */
+    .lab__main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    .lab__preview .topbar { height: 48px; padding-right: 16px; }                     /* = $bar-height */
 
     .lab__stage {
-      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 16px;
-      min-width: 0;
-      padding: 16px;
+      padding: 8px 12px 24px;
       background: var(--color-bg-content);
-      border-radius: 2px;
     }
 
     .lab__label {
@@ -299,6 +316,10 @@
       text-transform: uppercase;
       color: var(--color-fg-secondary);
     }
+
+    /* Text styles specimen: each line uses its style through --type-* */
+    .lab__types { display: grid; grid-template-columns: max-content 1fr; gap: 8px 24px; align-items: baseline; padding: 16px; }
+    .lab__types .lab__label { font-weight: 400; letter-spacing: 0; text-transform: none; font-size: 11px; }
 
     .lab__line { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
     .lab__state { padding: 4px 8px; font-weight: 600; color: var(--st); background: var(--st-fill); border: 1px solid var(--st); border-radius: 2px; }
@@ -328,7 +349,7 @@
     <div class="lab__resize" id="lab-resize" title="Drag to resize"></div>
     <div class="lab__head">
       <p class="lab__title">Theme lab</p>
-      <p class="lab__hint">Two levels. Palette: the raw colours (picker or HSL + alpha), shared by every theme; the number is how many tokens use each one. Themes: each token points to a palette colour, optionally at a % (opacity); its swatch picks a colour without touching the palette: an existing palette colour is used as is, otherwise you can use the closest one or add a new step (grey-750). ↺ resets a changed row. Changes show live below and are kept in this browser until the stylesheet has them: export them to _themes.scss, or import that file here.</p>
+      <p class="lab__hint">Two levels. Palette: the raw colours (picker or HSL + alpha), shared by every theme; the number is how many tokens use each one. Themes: each token points to a palette colour, optionally at a % (opacity); its swatch picks a colour without touching the palette: an existing palette colour is used as is, otherwise you can use the closest one or add a new step (grey-750). Text styles: size, weight, tracking, line-height (a multiple of 4) and case of every text in the app. ↺ resets a changed row. Changes show live below and are kept in this browser until the stylesheet has them: export them to _themes.scss, or import that file here.</p>
       <div class="lab__row" role="group" aria-label="Theme to edit" id="lab-themes"></div>
       <div class="lab__row">
         <button class="lab__btn" id="lab-copy">Copy SCSS</button>
@@ -344,7 +365,7 @@
         <summary>SCSS export</summary>
         <textarea class="lab__export" id="lab-export" readonly aria-label="SCSS export"></textarea>
         <div class="lab__import">
-          <textarea class="lab__export" id="lab-import" placeholder="Paste _themes.scss (or an export) to load it here" aria-label="SCSS to import"></textarea>
+          <textarea class="lab__export" id="lab-import" placeholder="Paste _themes.scss (or an export) to load it here: palette, themes and text styles" aria-label="SCSS to import"></textarea>
           <div class="lab__row"><button class="lab__btn" id="lab-import-apply">Import</button></div>
           <p class="lab__message" id="lab-import-message"></p>
         </div>
@@ -380,215 +401,455 @@
         </ul>
       </aside>
 
-      <div class="lab__stage">
-        <p class="lab__label" data-lab-name>Light</p>
+      <div class="lab__main">
+        <header class="topbar">
+          <ol class="breadcrumb">
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">IRYO “Reflexiones”</a></li>
+            <li aria-current="page">Crew</li>
+          </ol>
+          <p class="lab__label" data-lab-name>Light</p>
+        </header>
 
-        <!-- Card with header controls and a list -->
-        <section class="card">
-          <header class="card__header">
-            <h1 class="card__title">Crew</h1>
-            <button class="btn btn--hollow btn--dropdown">Add</button>
-            <button class="btn icon icon__upload">Import</button>
-            <button class="btn btn--cta icon icon__gallery">Gallery</button>
-            <button class="btn btn--alert icon icon__delete-alert">Delete</button>
-          </header>
+        <div class="lab__stage">
 
-          <nav class="tabs">
-            <button class="tabs__tab" aria-selected="true">Main</button>
-            <button class="tabs__tab" aria-selected="false">Extras</button>
-          </nav>
+          <!-- Text styles: one line per style, filled by the script from $type-styles -->
+          <section class="card">
+            <header class="card__header"><h2 class="card__title">Text styles</h2></header>
+            <div class="lab__types" data-lab-types></div>
+          </section>
 
-          <div class="card__body">
-            <ul class="list list--crew">
+          <!-- Card with header controls and a list -->
+          <section class="card">
+            <header class="card__header">
+              <h1 class="card__title">Crew</h1>
+              <button class="btn btn--hollow btn--dropdown">Add</button>
+              <button class="btn icon icon__upload">Import</button>
+              <button class="btn btn--cta icon icon__gallery">Gallery</button>
+              <button class="btn btn--alert icon icon__delete-alert">Delete</button>
+            </header>
+
+            <nav class="tabs">
+              <button class="tabs__tab" aria-selected="true">Main</button>
+              <button class="tabs__tab" aria-selected="false">Extras</button>
+            </nav>
+
+            <div class="card__body">
+              <ul class="list list--crew">
+                <li class="list__row list__row--head">
+                  <label class="list__cell list__cell--check"><input type="checkbox"></label>
+                  <span class="list__cell list__cell--index">#</span>
+                  <span class="list__cell list__cell--fill">Dept</span>
+                  <span class="list__cell list__cell--fill">Name</span>
+                  <span class="list__cell list__cell--fill">Sets</span>
+                  <span class="list__cell list__cell--phone">Phone</span>
+                  <span class="list__cell list__cell--actions">Info</span>
+                </li>
+                <li class="list__row">
+                  <label class="list__cell list__cell--check"><input type="checkbox" checked></label>
+                  <span class="list__cell list__cell--index">1</span>
+                  <button class="list__cell list__cell--fill list__cell--select">Production</button>
+                  <span class="list__cell list__cell--fill"><input class="inline-input" value="Eva Green" aria-label="Name"></span>
+                  <button class="list__cell list__cell--fill list__cell--select list__cell--multi"><span class="list__values"><span>Vestuario</span><span>Cocina</span></span></button>
+                  <span class="list__cell list__cell--phone"><input class="inline-input" value="654 123 456" aria-label="Phone"></span>
+                  <span class="list__cell list__cell--actions">
+                    <button class="pill icon icon__calendar">All</button>
+                    <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+                  </span>
+                </li>
+                <li class="list__row has-warning">
+                  <label class="list__cell list__cell--check"><input type="checkbox"></label>
+                  <span class="list__cell list__cell--index">2</span>
+                  <button class="list__cell list__cell--fill list__cell--select">Camera</button>
+                  <span class="list__cell list__cell--fill"><input class="inline-input" value="" placeholder="Add name" aria-label="Name"></span>
+                  <button class="list__cell list__cell--fill list__cell--select list__cell--multi"><span class="list__values" data-empty="Add set"></span></button>
+                  <span class="list__cell list__cell--phone"><input class="inline-input" value="611 234 567" aria-label="Phone"></span>
+                  <span class="list__cell list__cell--actions">
+                    <button class="pill icon icon__calendar">1/2</button>
+                    <button class="icon-button icon icon__delete" aria-label="Delete"></button>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Shoot Plan: day stats, shots, custom banners, unit types and flow (scrolls sideways) -->
+          <section class="card card--scroll">
+            <dl class="stats">
+              <div class="stats__item">
+                <dt>Call → wrap</dt>
+                <dd>
+                  <span class="stats__range">
+                    <input class="pill pill--input" value="9:30" aria-label="Call">
+                    <input class="pill pill--input" value="17:50" aria-label="Wrap">
+                  </span>
+                </dd>
+              </div>
+              <div class="stats__item"><dt>Scheduled shooting</dt><dd>17h 20m</dd></div>
+              <div class="stats__item"><dt>Shots</dt><dd>52</dd></div>
+              <div class="stats__item stats__item--alert"><dt>Needs attention</dt><dd>2 overlaps · 1 missing artist</dd></div>
+            </dl>
+
+            <ul class="list list--shoot-plan">
               <li class="list__row list__row--head">
-                <label class="list__cell list__cell--check"><input type="checkbox"></label>
-                <span class="list__cell list__cell--index">#</span>
-                <span class="list__cell list__cell--fill">Dept</span>
-                <span class="list__cell list__cell--fill">Name</span>
-                <span class="list__cell list__cell--fill">Sets</span>
-                <span class="list__cell list__cell--phone">Phone</span>
-                <span class="list__cell list__cell--actions">Info</span>
+                <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select all"></label>
+                <span class="list__cell list__cell--time">Time</span>
+                <span class="list__cell list__cell--shot">Shot</span>
+                <span class="list__cell list__cell--desc">Action</span>
+                <span class="list__cell list__cell--set">Set</span>
+                <span class="list__cell list__cell--talent">Talent</span>
+                <span class="list__cell list__cell--reqs">Requirements</span>
+                <span class="list__cell list__cell--actions">Output</span>
               </li>
+
               <li class="list__row">
-                <label class="list__cell list__cell--check"><input type="checkbox" checked></label>
-                <span class="list__cell list__cell--index">1</span>
-                <button class="list__cell list__cell--fill list__cell--select">Production</button>
-                <span class="list__cell list__cell--fill"><input class="inline-input" value="Eva Green" aria-label="Name"></span>
-                <button class="list__cell list__cell--fill list__cell--select list__cell--multi"><span class="list__values"><span>Vestuario</span><span>Cocina</span></span></button>
-                <span class="list__cell list__cell--phone"><input class="inline-input" value="654 123 456" aria-label="Phone"></span>
-                <span class="list__cell list__cell--actions">
-                  <button class="pill icon icon__calendar">All</button>
+                <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
+                <div class="list__cell list__cell--time">
+                  <button class="pill pill--time">9:30</button>
+                  <button class="pill pill--time">9:50</button>
+                </div>
+                <figure class="list__cell list__cell--shot thumb">
+                  <img src="img/ad/001.png" alt="">
+                  <figcaption>12</figcaption>
+                </figure>
+                <div class="list__cell list__cell--desc">
+                  <strong>Spot 1 · 12</strong>
+                  <p>Texto que describe la acción que sucede en el plano a rodar</p>
+                </div>
+                <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
+                  <span class="list__values" data-empty="Add set"></span>
+                </button>
+                <button class="list__cell list__cell--talent list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Talent">
+                  <span class="list__values" data-empty="Add talent"></span>
+                </button>
+                <div class="list__cell list__cell--reqs">
+                  <p><b>Cámara</b>: Alexa, cámara en mano.</p>
+                  <p><b>Arte</b>: Decorado según PPM. Manteles y cajas de hamburguesas.</p>
+                  <p><b>Producto</b>: Big Mac.</p>
+                </div>
+                <div class="list__cell list__cell--actions">
+                  <button class="shot-type">AV</button>
+                  <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
                   <button class="icon-button icon icon__delete" aria-label="Delete"></button>
-                </span>
+                </div>
               </li>
-              <li class="list__row has-warning">
-                <label class="list__cell list__cell--check"><input type="checkbox"></label>
-                <span class="list__cell list__cell--index">2</span>
-                <button class="list__cell list__cell--fill list__cell--select">Camera</button>
-                <span class="list__cell list__cell--fill"><input class="inline-input" value="" placeholder="Add name" aria-label="Name"></span>
-                <button class="list__cell list__cell--fill list__cell--select list__cell--multi"><span class="list__values" data-empty="Add set"></span></button>
-                <span class="list__cell list__cell--phone"><input class="inline-input" value="611 234 567" aria-label="Phone"></span>
-                <span class="list__cell list__cell--actions">
-                  <button class="pill icon icon__calendar">1/2</button>
+
+              <li class="list__row">
+                <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
+                <div class="list__cell list__cell--time">
+                  <button class="pill pill--time">10:00</button>
+                  <button class="pill pill--time">10:20</button>
+                  <span class="list__note warning-note">Overlap</span>
+                </div>
+                <figure class="list__cell list__cell--shot thumb">
+                  <img src="img/ad/002.png" alt="">
+                  <figcaption>17</figcaption>
+                </figure>
+                <div class="list__cell list__cell--desc">
+                  <strong>Spot 1 · 17</strong>
+                  <p>Texto que describe la acción que sucede en el plano a rodar</p>
+                </div>
+                <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="1" aria-label="Set">
+                  <span class="list__values" data-empty="Add set"><span>Vestuario</span></span>
+                </button>
+                <button class="list__cell list__cell--talent list__cell--select list__cell--multi" data-multi="characters" value="1,2,3" aria-label="Talent">
+                  <span class="list__values" data-empty="Add talent"><span>Policeman</span><span>Reporter</span><span>Concerned Citizen</span></span>
+                </button>
+                <div class="list__cell list__cell--reqs">
+                  <p><b>Cámara</b>: Alexa, cámara en mano.</p>
+                  <p><b>Arte</b>: Decorado según PPM. Manteles y cajas de hamburguesas.</p>
+                  <p><b>Producto</b>: Big Mac.</p>
+                </div>
+                <div class="list__cell list__cell--actions">
+                  <button class="shot-type">AV</button>
+                  <label class="flow">Flow <input type="checkbox" class="switch" role="switch"></label>
                   <button class="icon-button icon icon__delete" aria-label="Delete"></button>
-                </span>
+                </div>
+              </li>
+
+              <li class="list__row list__row--banner list__row--banner-custom" data-color="0">
+                <span class="list__cell list__cell--range"><button class="pill pill--time">9:30</button><button class="pill pill--time">10:00</button></span>
+                <h2 class="list__cell list__cell--fill">Banner · alt-1</h2>
+                <span class="list__cell list__cell--banner-actions"><span class="color-button"></span><label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label></span>
+              </li>
+              <li class="list__row list__row--banner list__row--banner-custom" data-color="1"><h2 class="list__cell list__cell--fill">Banner · alt-2</h2></li>
+              <li class="list__row list__row--banner list__row--banner-custom" data-color="2"><h2 class="list__cell list__cell--fill">Banner · alt-3</h2></li>
+              <li class="list__row list__row--banner list__row--banner-custom" data-color="3"><h2 class="list__cell list__cell--fill">Banner · alt-4</h2></li>
+              <li class="list__row list__row--banner list__row--banner-custom" data-color="4">
+                <h2 class="list__cell list__cell--fill">Banner · alt-5 (out of the flow)</h2>
+                <span class="list__cell list__cell--banner-actions"><label class="flow">Flow <input type="checkbox" class="switch" role="switch"></label></span>
               </li>
             </ul>
+            <div class="lab__line" style="padding: 16px">
+              <span class="shot-type">AV</span>
+              <span class="shot-type shot-type--photo">Photo</span>
+              <span class="shot-type shot-type--social">Social</span>
+              <span class="shot-type shot-type--banner">Banner</span>
+              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
+              <input type="checkbox" class="switch" role="switch" checked aria-label="Switch">
+              <input type="checkbox" class="switch" role="switch" aria-label="Switch">
+              <input type="radio" name="lab-radio" checked aria-label="Radio"> <input type="radio" name="lab-radio" aria-label="Radio">
+              <span class="pill pill--input">20m</span>
+              <span class="pill pill--input is-alert">09:00</span>
+            </div>
+          </section>
+
+          <!-- States: colour, fill and hover (pointer over each) -->
+          <div class="lab__line">
+            <span class="lab__state" style="--st: var(--color-alert); --st-fill: var(--color-alert-fill); --st-hover: var(--color-alert-hover)">Alert</span>
+            <span class="lab__state" style="--st: var(--color-warning); --st-fill: var(--color-warning-fill); --st-hover: var(--color-warning-hover)">Warning</span>
+            <span class="lab__state" style="--st: var(--color-success); --st-fill: var(--color-success-fill); --st-hover: var(--color-success-hover)">Success</span>
+            <span class="lab__state" style="--st: var(--color-info); --st-fill: var(--color-info-fill); --st-hover: var(--color-info-hover)">Info</span>
           </div>
-        </section>
 
-        <!-- Shoot Plan: day banner, shots, custom banners, unit types and flow (scrolls sideways) -->
-        <section class="card card--scroll">
-          <ul class="list list--shoot-plan">
-            <li class="list__row list__row--banner">
-              <span class="list__cell list__cell--range">
-                <button class="pill pill--time">9:30</button>
-                <button class="pill pill--time">17:50</button>
-              </span>
-              <h2 class="list__cell list__cell--fill">Day 1 - 29th september</h2>
-              <span class="list__cell list__cell--meta">Shooting time: <span class="pill">17h 20m</span></span>
-            </li>
+          <!-- Menus, facts and a modal -->
+          <div class="lab__cols">
+            <div class="select-menu select-menu--multi">
+              <div class="select-menu__list">
+                <label class="select-menu__option"><input type="checkbox" checked>Vestuario</label>
+                <label class="select-menu__option"><input type="checkbox">Dormitorio</label>
+                <label class="select-menu__option"><input type="checkbox">Cocina</label>
+              </div>
+              <div class="select-menu__add"><input class="select-menu__field" aria-label="New option"><button class="icon-button icon icon__add-alt" aria-label="Add"></button></div>
+            </div>
 
-            <!-- Shots: in the flow, and out of the flow with a warning -->
-            <li class="list__row">
-              <div class="list__cell list__cell--slot">
-                <input type="checkbox" aria-label="Select shot">
-                <button class="pill pill--time">9:30</button>
-                <button class="pill pill--time">9:50</button>
+            <div class="profile-menu">
+              <p class="profile-menu__name">Luis Herrero</p>
+              <a class="profile-menu__item" href="#">Account</a>
+              <a class="profile-menu__item" href="#">Settings</a>
+              <div class="profile-menu__item profile-menu__theme">Theme
+                <span class="profile-menu__themes">
+                  <button class="icon-button icon icon__theme-light" aria-pressed="true" aria-label="Light"></button>
+                  <button class="icon-button icon icon__theme-dark" aria-pressed="false" aria-label="Dark"></button>
+                  <button class="icon-button icon icon__theme-system" aria-pressed="false" aria-label="System"></button>
+                </span>
               </div>
-              <figure class="list__cell list__cell--shot thumb">
-                <img src="img/ad/001.png" alt="">
-                <figcaption>12</figcaption>
-              </figure>
-              <div class="list__cell list__cell--desc">
-                <strong>Spot 1</strong>
-                <p>Texto que describe la acción que sucede en el plano a rodar</p>
-              </div>
-              <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="" aria-label="Set">
-                <span class="list__values" data-empty="Add set"></span>
+              <a class="profile-menu__item profile-menu__logout icon icon__log-out" href="#">Log out</a>
+            </div>
+
+            <div class="modal" style="width: 400px">
+              <h2 class="modal__title icon icon__warning-alert">Delete all items?</h2>
+              <p class="modal__text">This action will remove all crew members from the project.</p>
+              <footer class="modal__buttons">
+                <button class="btn">Cancel</button>
+                <button class="btn btn--alert">Delete all</button>
+              </footer>
+            </div>
+          </div>
+
+          <!-- Projects (projects.kit) -->
+          <ul class="projects">
+            <li>
+              <button class="project-card project-card--new" type="button">
+                <span class="project-card__add icon icon__add" aria-hidden="true"></span>
+                New project
               </button>
-              <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="" aria-label="Cast">
-                <span class="list__values" data-empty="Add cast"></span>
-              </button>
-              <div class="list__cell list__cell--reqs">
-                <p><b>Cámara</b>: Alexa cámara en mano.</p>
-                <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
-                <p><b>Producto</b>: Big Mac.</p>
-              </div>
-              <div class="list__cell list__cell--actions">
-                <button class="shot-type">AV</button>
-                <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
-                <button class="icon-button icon icon__delete" aria-label="Delete"></button>
-              </div>
             </li>
 
-            <li class="list__row has-warning">
-              <div class="list__cell list__cell--slot">
-                <input type="checkbox" aria-label="Select shot">
-                <button class="pill pill--time">10:00</button>
-                <button class="pill pill--time">10:20</button>
-              </div>
-              <figure class="list__cell list__cell--shot thumb">
-                <img src="img/ad/002.png" alt="">
-                <figcaption>17</figcaption>
-              </figure>
-              <div class="list__cell list__cell--desc">
-                <strong>Spot 1</strong>
-                <p>Texto que describe la acción que sucede en el plano a rodar</p>
-              </div>
-              <button class="list__cell list__cell--set list__cell--select list__cell--multi" data-multi="sets" value="1" aria-label="Set">
-                <span class="list__values" data-empty="Add set"><span>Vestuario</span></span>
-              </button>
-              <button class="list__cell list__cell--cast list__cell--select list__cell--multi" data-multi="characters" value="1,2,3" aria-label="Cast">
-                <span class="list__values" data-empty="Add cast"><span>Policeman</span><span>Reporter</span><span>Concerned Citizen</span></span>
-              </button>
-              <div class="list__cell list__cell--reqs">
-                <p><b>Cámara</b>: Alexa cámara en mano.</p>
-                <p><b>Arte</b>: Decorado montado según PPM, Manteles y cajas de hamburguesas.</p>
-                <p><b>Producto</b>: Big Mac.</p>
-              </div>
-              <div class="list__cell list__cell--actions">
-                <button class="shot-type">AV</button>
-                <label class="pill pill--flow"><input type="checkbox" unchecked>Flow</label>
-                <button class="icon-button icon icon__delete" aria-label="Delete"></button>
-              </div>
+            <li>
+              <article class="project-card">
+                <a class="project-card__link" href="#">
+                  <span class="project-card__pic bg_05"></span>
+                  <span class="project-card__info">
+                    <span class="project-card__title">Reflexiones in the sky when things goes bad</span>
+                    <span class="project-card__client">IRYO</span>
+                    <span class="project-card__days icon icon__calendar">2 shooting days</span>
+                    <img class="project-card__logo" src="img/production_co/hawai.svg" alt="Hawai" width="80" height="40">
+                  </span>
+                </a>
+                <button class="project-card__menu icon icon__overflow" type="button" aria-label="Project options"></button>
+              </article>
             </li>
-            <li class="list__row list__row--banner list__row--banner-custom" data-color="0">
-              <span class="list__cell list__cell--range"><button class="pill pill--time">9:30</button><button class="pill pill--time">10:00</button></span>
-              <h2 class="list__cell list__cell--fill">Banner · alt-1</h2>
-              <span class="list__cell list__cell--banner-actions"><span class="color-button"></span><label class="pill pill--flow"><input type="checkbox" checked>Flow</label></span>
-            </li>
-            <li class="list__row list__row--banner list__row--banner-custom" data-color="1"><h2 class="list__cell list__cell--fill">Banner · alt-2</h2></li>
-            <li class="list__row list__row--banner list__row--banner-custom" data-color="2"><h2 class="list__cell list__cell--fill">Banner · alt-3</h2></li>
-            <li class="list__row list__row--banner list__row--banner-custom" data-color="3"><h2 class="list__cell list__cell--fill">Banner · alt-4</h2></li>
-            <li class="list__row list__row--banner list__row--banner-custom" data-color="4">
-              <h2 class="list__cell list__cell--fill">Banner · alt-5 (out of the flow)</h2>
-              <span class="list__cell list__cell--banner-actions"><label class="pill pill--flow"><input type="checkbox">Flow</label></span>
+
+            <li>
+              <article class="project-card">
+                <a class="project-card__link" href="#">
+                  <span class="project-card__pic project-card__pic--empty">No frames yet</span>
+                  <span class="project-card__info">
+                    <span class="project-card__title">Salvajada</span>
+                    <span class="project-card__client">KFC</span>
+                    <span class="project-card__days icon icon__calendar">2 shooting days</span>
+                    <img class="project-card__logo" src="img/production_co/landia.svg" alt="Landia" width="80" height="40">
+                  </span>
+                </a>
+                <button class="project-card__menu icon icon__overflow" type="button" aria-label="Project options"></button>
+              </article>
             </li>
           </ul>
-          <div class="lab__line" style="padding: 16px">
-            <span class="shot-type">AV</span>
-            <span class="shot-type shot-type--photo">Photo</span>
-            <span class="shot-type shot-type--social">Social</span>
-            <span class="shot-type shot-type--banner">Banner</span>
-            <label class="pill pill--flow"><input type="checkbox" checked>Flow</label>
-            <input type="checkbox" class="switch" role="switch" checked aria-label="Switch">
-            <input type="checkbox" class="switch" role="switch" aria-label="Switch">
-            <input type="radio" name="lab-radio" checked aria-label="Radio"> <input type="radio" name="lab-radio" aria-label="Radio">
-            <span class="pill pill--input">20m</span>
-            <span class="pill pill--input is-alert">09:00</span>
-          </div>
-        </section>
 
-        <!-- States: colour, fill and hover (pointer over each) -->
-        <div class="lab__line">
-          <span class="lab__state" style="--st: var(--color-alert); --st-fill: var(--color-alert-fill); --st-hover: var(--color-alert-hover)">Alert</span>
-          <span class="lab__state" style="--st: var(--color-warning); --st-fill: var(--color-warning-fill); --st-hover: var(--color-warning-hover)">Warning</span>
-          <span class="lab__state" style="--st: var(--color-success); --st-fill: var(--color-success-fill); --st-hover: var(--color-success-hover)">Success</span>
-          <span class="lab__state" style="--st: var(--color-info); --st-fill: var(--color-info-fill); --st-hover: var(--color-info-hover)">Info</span>
-        </div>
+          <!-- Overview dashboard (overview.kit): cover, weather, needs attention, credits, locations, editors -->
+        <div class="dashboard">
 
-        <!-- Menus, facts and a modal -->
-        <div class="lab__cols">
-          <div class="select-menu select-menu--multi">
-            <div class="select-menu__list">
-              <label class="select-menu__option"><input type="checkbox" checked>Vestuario</label>
-              <label class="select-menu__option"><input type="checkbox">Dormitorio</label>
-              <label class="select-menu__option"><input type="checkbox">Cocina</label>
-            </div>
-            <div class="select-menu__add"><input class="select-menu__field" aria-label="New option"><button class="icon-button icon icon__add-alt" aria-label="Add"></button></div>
-          </div>
+          <!-- Cover: project image and its options -->
+          <figure class="card__cover dashboard__cover bg_08">
+            <figcaption>
+              <button class="card__action icon icon__overflow" aria-label="More options"></button>
+            </figcaption>
+          </figure>
 
-          <div class="profile-menu">
-            <p class="profile-menu__name">Luis Herrero</p>
-            <a class="profile-menu__item" href="#">Account</a>
-            <a class="profile-menu__item" href="#">Settings</a>
-            <div class="profile-menu__item profile-menu__theme">Theme
-              <span class="profile-menu__themes">
-                <button class="icon-button icon icon__theme-light" aria-pressed="true" aria-label="Light"></button>
-                <button class="icon-button icon icon__theme-dark" aria-pressed="false" aria-label="Dark"></button>
-                <button class="icon-button icon icon__theme-system" aria-pressed="false" aria-label="System"></button>
-              </span>
-            </div>
-            <a class="profile-menu__item profile-menu__logout icon icon__log-out" href="#">Log out</a>
-          </div>
-
-          <section class="card card--widget" style="width: 300px">
-            <header class="card__header"><h2 class="card__title">Credits</h2></header>
-            <dl class="facts">
-              <div><dt>Client</dt><dd>Under Armour</dd></div>
-              <div><dt>Director</dt><dd>Erik Morales</dd></div>
+          <!-- Weather of the chosen day -->
+          <section class="dashboard__weather weather" aria-label="Weather">
+            <img class="weather__icon" src="img/weather/icon_partly_cloudy.png" alt="Parcialmente nublado" width="140" height="80">
+            <p class="weather__temp">31·22 <small>ºC</small></p>
+            <dl class="weather__stats">
+              <div><dt>Sunrise</dt><dd>06:24</dd></div>
+              <div><dt>Sunset</dt><dd>21:28</dd></div>
+              <div><dt>Humidity</dt><dd>16 %</dd></div>
+              <div><dt>Wind</dt><dd>2.0 m/s</dd></div>
             </dl>
           </section>
 
-          <div class="modal" style="width: 400px">
-            <h2 class="modal__title icon icon__warning-alert">Delete all items?</h2>
-            <p class="modal__text">This action will remove all crew members from the project.</p>
-            <footer class="modal__buttons">
-              <button class="btn">Cancel</button>
-              <button class="btn btn--alert">Delete all</button>
-            </footer>
+          <!-- What needs attention that day (same .stats as the Shoot Plan) -->
+          <dl class="stats dashboard__attention">
+            <div class="stats__item stats__item--alert"><dt>Needs attention</dt><dd>Overlap · Set TBD · Talent TBD</dd></div>
+          </dl>
+
+          <!-- Credits and contact, one under the other -->
+          <div class="dashboard__people">
+            <section class="card card--widget">
+              <header class="card__header">
+                <h2 class="card__title">Credits</h2>
+              </header>
+              <dl class="facts">
+                <div><dt>Client</dt>
+                  <dd>
+                    <span class="logo-field">
+                      <input class="inline-input" name="client" value="Under Armour" placeholder="Add client" aria-label="Client">
+                      <span class="logo-field__actions">
+                        <label class="card__action icon icon__image" role="button" tabindex="0" title="Use a logo"><input type="file" accept="image/*" aria-label="Client logo" hidden></label>
+                        <button class="card__action icon icon__close" type="button" data-logo-remove title="Use text" hidden></button>
+                      </span>
+                    </span>
+                  </dd>
+                </div>
+                <div><dt>Agency</dt>
+                  <dd>
+                    <span class="logo-field">
+                      <input class="inline-input" name="agency" value="24/7" placeholder="Add agency" aria-label="Agency" hidden>
+                      <img src="img/production_co/247.svg" alt="24/7">
+                      <span class="logo-field__actions">
+                        <label class="card__action icon icon__image" role="button" tabindex="0" title="Use a logo"><input type="file" accept="image/*" aria-label="Agency logo" hidden></label>
+                        <button class="card__action icon icon__close" type="button" data-logo-remove title="Use text"></button>
+                      </span>
+                    </span>
+                  </dd>
+                </div>
+                <div><dt>Production Company</dt>
+                  <dd>
+                    <span class="logo-field">
+                      <input class="inline-input" name="production-company" value="agosto" placeholder="Add production company" aria-label="Production Company" hidden>
+                      <img src="img/production_co/agosto.svg" alt="agosto">
+                      <span class="logo-field__actions">
+                        <label class="card__action icon icon__image" role="button" tabindex="0" title="Use a logo"><input type="file" accept="image/*" aria-label="Production Company logo" hidden></label>
+                        <button class="card__action icon icon__close" type="button" data-logo-remove title="Use text"></button>
+                      </span>
+                    </span>
+                  </dd>
+                </div>
+                <div><dt>Executive Producer</dt><dd>Richard Hammond</dd></div>
+                <div><dt>Producer</dt><dd>Kevin Bacon</dd></div>
+                <div><dt>Director</dt><dd>Erik Morales</dd></div>
+                <div><dt>D.O.P.</dt><dd>Hoyte van Hoytema</dd></div>
+              </dl>
+            </section>
+
+            <section class="card card--widget">
+              <header class="card__header">
+                <h2 class="card__title">Contact</h2>
+              </header>
+              <dl class="facts">
+                <div><dt>Dani Molina</dt><dd><a href="tel:+34630976969">630 976 969</a></dd></div>
+                <div><dt>Marta Mur</dt><dd><a href="tel:+34610584558">610 584 558</a></dd></div>
+                <div><dt>Inés Sorlat</dt><dd><a href="tel:+34621789775">621 789 775</a></dd></div>
+              </dl>
+            </section>
           </div>
+
+          <!-- Locations, requirements and catering -->
+          <div class="dashboard__main">
+
+            <!-- Locations: numbered list and one map with numbered pins (item n ↔ pin n) -->
+            <section class="card card--widget dashboard__locations">
+              <header class="card__header">
+                <h2 class="card__title">Locations</h2>
+              </header>
+              <div class="places">
+                <ol class="places__list">
+                  <li class="places__item"><address><strong>Centro Alto Rendimiento</strong> Av. Alcalde Barnils, 3-5<br>08174 Sant Cugat del Vallès, Barcelona</address></li>
+                  <li class="places__item"><address><strong>Mercat de Sant Antoni</strong> Carrer del Comte d’Urgell, 1<br>08011 Barcelona</address></li>
+                  <li class="places__item"><address><strong>Platja de la Mar Bella</strong> Passeig Marítim de la Mar Bella<br>08005 Barcelona</address></li>
+                </ol>
+                <div class="places__map">
+                  <img src="img/thumb-sites.png" alt="Map of the locations">
+                  <span class="places__pin" style="--x: 28%; --y: 38%">1</span>
+                  <span class="places__pin" style="--x: 55%; --y: 62%">2</span>
+                  <span class="places__pin" style="--x: 78%; --y: 30%">3</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- Requirements: rich text -->
+            <section class="card card--widget">
+              <header class="card__header">
+                <h2 class="card__title">Requirements</h2>
+              </header>
+              <div class="editor">
+                <div class="editor__toolbar">
+                  <button class="icon-button icon icon__format-bold" aria-label="Bold"></button>
+                  <button class="icon-button icon icon__format-italic" aria-label="Italic"></button>
+                  <button class="icon-button icon icon__format-underline" aria-label="Underline"></button>
+                  <button class="icon-button icon icon__format-unordered-list" aria-label="Bulleted list"></button>
+                  <button class="icon-button icon icon__format-ordered-list" aria-label="Numbered list"></button>
+                  <button class="btn btn--soft">Clear</button>
+                </div>
+                <div class="prose">
+                  <h3>Material de cámara y Luz:</h3>
+                  <ul>
+                    <li>Pack Sony Venice 2 (8,6K) + Rialto+ Accesorios</li>
+                    <li>Set Ópticas Signature Primes (15m, 18m, 21m, 25m, 29m, 35m, 40m, 47m, 58m, 75m, 152m)</li>
+                    <li>Extender</li>
+                    <li>Steady Cam</li>
+                    <li>Movie Car</li>
+                    <li>Cabeza para poner cámara en Cranko</li>
+                    <li>Material accesorio según petición del D.O.P.</li>
+                  </ul>
+                  <h3>Producción:</h3>
+                  <ul>
+                    <li>Lugar para maquillaje y vestuario.</li>
+                    <li>Walkie Talkies.</li>
+                    <li>Sombrillas, paraguas, crema solar, …</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- Catering: rich text -->
+            <section class="card card--widget">
+              <header class="card__header">
+                <h2 class="card__title">Catering</h2>
+              </header>
+              <div class="editor">
+                <div class="editor__toolbar">
+                  <button class="icon-button icon icon__format-bold" aria-label="Bold"></button>
+                  <button class="icon-button icon icon__format-italic" aria-label="Italic"></button>
+                  <button class="icon-button icon icon__format-underline" aria-label="Underline"></button>
+                  <button class="icon-button icon icon__format-unordered-list" aria-label="Bulleted list"></button>
+                  <button class="icon-button icon icon__format-ordered-list" aria-label="Numbered list"></button>
+                  <button class="btn btn--soft">Clear</button>
+                </div>
+                <div class="prose">
+                  <h3>Catering:</h3>
+                  <ul>
+                    <li>Running Buffet listo a las 13:00 hrs.</li>
+                    <li>Cena lista a las 21:15 hrs. Avanzadilla desde las 20:15hrs.</li>
+                    <li>Mantenimiento durante toda la jornada</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
         </div>
       </div>
     </section>
@@ -612,6 +873,9 @@
     var cssPalette = listFromCss("--palette-names");
     var paletteNames = cssPalette.slice();      /* + steps added here (see addStep) */
     var tokenNames = listFromCss("--color-tokens");
+    var typeNames = listFromCss("--type-styles");
+    var typeKeys = ["size", "weight", "tracking", "line", "case"];
+    var typeUse = {};          /* "use" notes of $type-styles, read only */
 
     /* Colour helpers ----------------------------------------------------- */
     var probe = document.createElement("i");
@@ -697,6 +961,18 @@
       el.remove();
     });
 
+    /* Text styles: --type-<name>-size… → { size: 10, weight: 600, tracking: .8, line: 12, case: "uppercase" } */
+    original.type = {};
+    typeNames.forEach(function (n) {
+      var v = {};
+      typeKeys.forEach(function (k) {
+        var raw = root.getPropertyValue("--type-" + n + "-" + k).trim();
+        v[k] = k === "case" ? raw : parseFloat(raw);
+      });
+      original.type[n] = v;
+      typeUse[n] = root.getPropertyValue("--type-" + n + "-use").trim().replace(/^["']|["']$/g, "");
+    });
+
     /*
       Current values: the stylesheet plus the edits kept in this browser.
       Only edits are kept (what differs from the stylesheet), so a
@@ -733,6 +1009,11 @@
 
     var state = { palette: Object.assign({}, original.palette, known(saved.palette, paletteNames, Boolean)), themes: {} };
     themes.forEach(function (t) { state.themes[t] = Object.assign({}, original.themes[t], known((saved.themes || {})[t], tokenNames, validDef)); });
+    state.type = Object.assign({}, original.type, known(saved.type, typeNames, validType));
+
+    function validType(v) {
+      return v && typeKeys.every(function (k) { return k === "case" ? typeof v[k] === "string" : isFinite(v[k]); });
+    }
 
     function edits(now, before) {
       var out = {};
@@ -743,6 +1024,7 @@
     function save() {
       var data = { palette: edits(state.palette, original.palette), themes: {}, added: paletteNames.filter(isAdded) };
       themes.forEach(function (t) { data.themes[t] = edits(state.themes[t], original.themes[t]); });
+      data.type = edits(state.type, original.type);
       try { localStorage.setItem(STORE, JSON.stringify(data)); } catch (e) { /* private mode */ }
     }
 
@@ -764,6 +1046,16 @@
       return "url(\"data:image/svg+xml," + svg.replace("COLOR", encodeURIComponent(css(colour))) + "\")";
     }
     var template = document.getElementById("lab-preview");
+
+    /* Text styles specimen: name and "use" note, each in its own style */
+    var specimen = template.querySelector("[data-lab-types]");
+    typeNames.forEach(function (n) {
+      var name = el("span", "lab__label", n), sample = el("span", "", typeUse[n] || "The quick brown fox · 9:30");
+      ["size", "weight", "tracking", "line", "case"].forEach(function (k, i) {
+        sample.style.setProperty(["font-size", "font-weight", "letter-spacing", "line-height", "text-transform"][i], "var(--type-" + n + "-" + k + ")");
+      });
+      specimen.append(name, sample);
+    });
     var previews = {};
     themes.forEach(function (t, i) {
       var p = i ? template.cloneNode(true) : template;
@@ -789,6 +1081,14 @@
           var d = state.themes[t][draft.token], c = css(draft.value);
           p.style.setProperty("--color-" + draft.token, d.amount === null ? c : "color-mix(in srgb, " + c + " " + d.amount + "%, transparent)");
         }
+        typeNames.forEach(function (n) {
+          var v = state.type[n];
+          p.style.setProperty("--type-" + n + "-size", v.size + "px");
+          p.style.setProperty("--type-" + n + "-weight", v.weight);
+          p.style.setProperty("--type-" + n + "-tracking", v.tracking + "px");
+          p.style.setProperty("--type-" + n + "-line", v.line + "px");
+          p.style.setProperty("--type-" + n + "-case", v.case);
+        });
         /* Images generated per theme, as in theme-vars() of _tokens.scss */
         p.style.setProperty("--image-check", svgImage("%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='COLOR' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E", plainColour(t, "fg-inverse")));
         p.style.setProperty("--image-select", svgImage("%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='COLOR'/%3E%3C/svg%3E", plainColour(t, "fg-primary")));
@@ -797,7 +1097,7 @@
     }
 
     /* Editor -------------------------------------------------------------- */
-    var current = "palette";        /* "palette" or a theme name */
+    var current = "palette";        /* "palette", a theme name or "type" */
     var list = document.getElementById("lab-tokens");
 
     /* Palette family: grey-600 → grey; white and black → base */
@@ -807,7 +1107,7 @@
     }
 
     function groupOf(n) {
-      return current === "palette" ? "Palette · " + family(n) : tokenGroup(n);
+      return current === "palette" ? "Palette · " + family(n) : current === "type" ? "Text styles" : tokenGroup(n);
     }
 
     function tokenGroup(n) {
@@ -857,8 +1157,43 @@
       return s;
     }
 
+    /* <select> from [value, label] pairs */
+    function choice(key, options) {
+      var s = el("select");
+      s.dataset.key = key;
+      options.forEach(function (o) { s.append(new Option(o[1], o[0])); });
+      return s;
+    }
+
+    function typeRow(n) {
+      var row = el("div", "tok tok--type");
+      row.dataset.name = n;
+      var size = numberInput("size", 96, 1, "Font size (px)");
+      var tracking = numberInput("tracking", 4, .1, "Letter spacing (px)");
+      tracking.min = -4;
+      var line = numberInput("line", 128, 1, "Line height (px): a multiple of 4");
+      row.append(
+        el("span", "tok__name"), size,
+        choice("weight", [["300", "300"], ["400", "400"], ["600", "600"], ["700", "700"]]),
+        tracking, line,
+        choice("case", [["uppercase", "uppercase"], ["none", "none"], ["capitalize", "capitalize"], ["lowercase", "lowercase"]]),
+        el("span", "tok__use", typeUse[n] ? "Used in: " + typeUse[n] : ""),
+        el("span", "tok__sample", "The quick brown fox jumps · 9:30 · Day 1")
+      );
+      return row;
+    }
+
     function build() {
       list.textContent = "";
+      if (current === "type") {
+        list.append(el("p", "lab__group", "Text styles"));
+        var head = el("div", "tok tok--type tok__labels");
+        head.innerHTML = "<span></span><span>Size</span><span>Weight</span><span>Tracking</span><span>Line</span><span>Case</span>";
+        list.append(head);
+        typeNames.forEach(function (n) { list.append(typeRow(n)); });
+        fill();
+        return;
+      }
       var names = current === "palette" ? paletteNames : tokenNames, last = "";
 
       names.forEach(function (n) {
@@ -895,7 +1230,17 @@
     function fillRow(row) {
       var n = row.dataset.name, label = row.querySelector(".tok__name"), changed;
 
-      if (current === "palette") {
+      if (current === "type") {
+        var t = state.type[n], sample = row.querySelector(".tok__sample");
+        row.querySelectorAll("[data-key]").forEach(function (i) { if (document.activeElement !== i) { i.value = t[i.dataset.key]; } });
+        row.querySelector("[data-key=line]").classList.toggle("is-off-grid", t.line % 4 !== 0);
+        sample.style.fontSize = t.size + "px";
+        sample.style.fontWeight = t.weight;
+        sample.style.letterSpacing = t.tracking + "px";
+        sample.style.lineHeight = t.line + "px";
+        sample.style.textTransform = t.case;
+        changed = !same(t, original.type[n]);
+      } else if (current === "palette") {
         var v = state.palette[n];
         row.querySelector(".tok__swatch").style.setProperty("--swatch", css(v));
         row.querySelectorAll("[data-key]").forEach(function (i) { if (document.activeElement !== i) { i.value = v[i.dataset.key]; } });
@@ -942,7 +1287,11 @@
       if (!row || !event.target.dataset.key) { return; }
       var n = row.dataset.name, key = event.target.dataset.key, value = event.target.value;
 
-      if (current === "palette") {
+      if (current === "type") {
+        if (value === "") { return; }
+        state.type[n] = Object.assign({}, state.type[n]);
+        state.type[n][key] = key === "case" ? value : +value;
+      } else if (current === "palette") {
         if (value === "") { return; }
         state.palette[n] = Object.assign({}, state.palette[n]);
         state.palette[n][key] = +value;
@@ -961,7 +1310,8 @@
       var n = row.dataset.name;
 
       if (event.target.closest("[data-reset]")) {
-        if (current === "palette" && isAdded(n)) { removeStep(n); build(); }
+        if (current === "type") { state.type[n] = Object.assign({}, original.type[n]); }
+        else if (current === "palette" && isAdded(n)) { removeStep(n); build(); }
         else if (current === "palette") { state.palette[n] = Object.assign({}, original.palette[n]); }
         else { state.themes[current][n] = Object.assign({}, original.themes[current][n]); }
         refresh();
@@ -1170,8 +1520,8 @@
 
     /* Tabs: palette and each theme ------------------------------------------ */
     var tabs = document.getElementById("lab-themes");
-    ["palette"].concat(themes).forEach(function (t) {
-      var b = el("button", "lab__btn", t === "palette" ? "Palette" : "Theme " + t);
+    ["palette"].concat(themes, "type").forEach(function (t) {
+      var b = el("button", "lab__btn", t === "palette" ? "Palette" : t === "type" ? "Text styles" : "Theme " + t);
       b.dataset.tab = t;
       tabs.append(b);
     });
@@ -1180,7 +1530,8 @@
       if (picker.matches(":popover-open")) { picker.hidePopover(); }
       current = t;
       tabs.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.tab === t)); });
-      document.getElementById("lab-reset").textContent = t === "palette" ? "Reset palette" : "Reset theme";
+      if (previews[t]) { previews[t].scrollIntoView({ block: "start" }); }   /* a theme tab shows its preview */
+      document.getElementById("lab-reset").textContent = t === "palette" ? "Reset palette" : t === "type" ? "Reset text styles" : "Reset theme";
       build();
     }
 
@@ -1189,7 +1540,8 @@
     });
 
     document.getElementById("lab-reset").addEventListener("click", function () {
-      if (current === "palette") {
+      if (current === "type") { state.type = Object.assign({}, original.type); }
+      else if (current === "palette") {
         paletteNames.filter(isAdded).forEach(removeStep);
         state.palette = Object.assign({}, original.palette);
         build();
@@ -1227,7 +1579,27 @@
         }).map(function (n) { return [n, defToScss(state.themes[t][n]), tokenGroup(n)]; });
         parts.push((i ? "/* Dark: only what differs from $theme-light */\n".replace("Dark", t[0].toUpperCase() + t.slice(1)) : "") + block("$theme-" + t, entries));
       });
+      parts.push(typeBlock());
       output.value = parts.join("\n\n");
+    }
+
+    /* 0.8 → ".8px", -0.4 → "-.4px", as written in _themes.scss */
+    function px(n) { return String(+n.toFixed(2)).replace(/^(-?)0\./, "$1.") + "px"; }
+
+    /* $type-styles, one style per line, columns aligned */
+    function typeBlock() {
+      var width = Math.max.apply(null, typeNames.map(function (n) { return n.length; })) + 2;
+      return "$type-styles: (\n" + typeNames.map(function (n, i) {
+        var v = state.type[n];
+        return "  " + (n + ":").padEnd(width) + "(" +
+          "size: " + px(v.size) + "," +
+          " weight: " + v.weight + "," +
+          " tracking: " + (px(v.tracking) + ",").padEnd(6) +
+          " line: " + (px(v.line) + ",") +
+          " case: " + v.case +
+          (typeUse[n] ? ", use: \"" + typeUse[n] + "\"" : "") + ")" +
+          (i < typeNames.length - 1 ? "," : "");
+      }).join("\n") + "\n);";
     }
 
     document.getElementById("lab-copy").addEventListener("click", function () {
@@ -1251,11 +1623,12 @@
 
     /* Entries "key: value" separated by top-level commas */
     function scssEntries(body) {
-      var out = [], depth = 0, part = "";
+      var out = [], depth = 0, part = "", quoted = false;
       (body + ",").split("").forEach(function (ch) {
-        if (ch === "(") { depth++; }
-        if (ch === ")") { depth--; }
-        if (ch === "," && !depth) {
+        if (ch === "\"") { quoted = !quoted; }
+        if (ch === "(" && !quoted) { depth++; }
+        if (ch === ")" && !quoted) { depth--; }
+        if (ch === "," && !depth && !quoted) {
           var i = part.indexOf(":");
           if (i > 0) { out.push([part.slice(0, i).trim(), part.slice(i + 1).trim()]); }
           part = "";
@@ -1299,13 +1672,27 @@
         state.themes[t] = Object.assign({}, state.themes.light, defs);
       });
 
+      /* Text styles: only the ones the stylesheet has (a new one needs SCSS) */
+      var types = scssMap(text, "type-styles");
+      if (types) {
+        scssEntries(types).forEach(function (e) {
+          if (typeNames.indexOf(e[0]) === -1) { skipped.push(e[0]); return; }
+          var v = Object.assign({}, state.type[e[0]]);
+          scssEntries(e[1].replace(/^\(|\)$/g, "")).forEach(function (kv) {
+            if (typeKeys.indexOf(kv[0]) === -1) { return; }
+            v[kv[0]] = kv[0] === "case" ? kv[1] : parseFloat(kv[1]);
+          });
+          if (validType(v)) { state.type[e[0]] = v; count++; } else { skipped.push(e[0]); }
+        });
+      }
+
       build();
       refresh();
       document.getElementById("lab-import-message").textContent = count
         ? count + " values imported." +
           (added.length ? " New palette steps: " + added.join(", ") + "." : "") +
           (skipped.length ? " Skipped (unknown tokens or names; recompile first): " + skipped.join(", ") + "." : "")
-        : "No $palette or $theme-* maps found.";
+        : "No $palette, $theme-* or $type-styles maps found.";
     }
 
     document.getElementById("lab-import-apply").addEventListener("click", function () {
@@ -1315,7 +1702,7 @@
     document.getElementById("lab-download").addEventListener("click", function () {
       var a = document.createElement("a");
       a.href = URL.createObjectURL(new Blob([output.value], { type: "text/plain" }));
-      a.download = "theme-colours.scss";
+      a.download = "themes-lab.scss";
       a.click();
       URL.revokeObjectURL(a.href);
     });

@@ -16,7 +16,7 @@
 </head>
 
 
-<body class="app">
+<body class="app is-sidebar-expanded">
 
 
   <!--
@@ -85,10 +85,11 @@
     <section class="card">
       <header class="card__header">
         <h1 class="card__title">Calls</h1>
-
+        <p class="info"> </p>
+        
         <div class="settings">
           <div class="settings__group" role="group" aria-label="Preparation (minutes)">
-            <label class="settings__item">Makeup <input class="pill pill--input" value="30" inputmode="numeric"></label>
+            <label class="settings__item">HMUP <input class="pill pill--input" value="30" inputmode="numeric"></label>
             <label class="settings__item">Dress <input class="pill pill--input" value="15" inputmode="numeric"></label>
             <label class="settings__item">Ready <input class="pill pill--input" value="10" inputmode="numeric"></label>
           </div>
@@ -111,7 +112,7 @@
 
       <nav class="tabs">
         <button class="tabs__tab" aria-selected="true" aria-controls="calls-crew">Crew</button>
-        <button class="tabs__tab" aria-selected="false" aria-controls="calls-cast">Cast</button>
+        <button class="tabs__tab" aria-selected="false" aria-controls="calls-cast">Talent</button>
       </nav>
 
       <div class="card__body" id="calls-crew">
@@ -180,15 +181,17 @@
       </div>
 
       <div class="card__body" id="calls-cast" hidden>
-        <ul class="list list--calls">
+        <!-- Talent: cast first, then extras (a gap between the two lists) -->
+        <ul class="list list--calls" aria-label="Cast">
           <li class="list__row list__row--head">
             <label class="list__cell list__cell--check"><input type="checkbox"></label>
             <span class="list__cell list__cell--index">#</span>
-            <span class="list__cell list__cell--fill">Character</span>
+            <span class="list__cell list__cell--fill list__cell--character">Character</span>
             <span class="list__cell list__cell--fill">Artist</span>
+            <span class="list__cell list__cell--fill">Notes</span>
             <div class="list__cell list__cell--group" role="group" aria-label="Calls">
               <span class="list__cell list__cell--call">Set</span>
-              <span class="list__cell list__cell--call">Makeup</span>
+              <span class="list__cell list__cell--call">HMUP</span>
               <span class="list__cell list__cell--call">Dress</span>
               <span class="list__cell list__cell--call">Ready</span>
               <span class="list__cell list__cell--call">Motor</span>
@@ -198,11 +201,12 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox"></label>
             <span class="list__cell list__cell--index">1</span>
-            <span class="list__cell list__cell--fill">Policeman</span>
+            <span class="list__cell list__cell--fill list__cell--character">Policeman</span>
             <span class="list__cell list__cell--fill">Liam Brown</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
             <div class="list__cell list__cell--group" role="group" aria-label="Calls">
               <span class="list__cell list__cell--call"><input class="pill pill--input" value="07:50" inputmode="numeric" aria-label="Set call"></span>
-              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:05" inputmode="numeric" aria-label="Makeup call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:05" inputmode="numeric" aria-label="HMUP call"></span>
               <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:35" inputmode="numeric" aria-label="Dress call"></span>
               <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:50" inputmode="numeric" aria-label="Ready call"></span>
               <span class="list__cell list__cell--call"><input class="pill pill--input" value="09:00" inputmode="numeric" aria-label="Motor call"></span>
@@ -212,11 +216,12 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox"></label>
             <span class="list__cell list__cell--index">2</span>
-            <span class="list__cell list__cell--fill">Reporter</span>
+            <span class="list__cell list__cell--fill list__cell--character">Reporter</span>
             <span class="list__cell list__cell--fill">Emma Wilson</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
             <div class="list__cell list__cell--group" role="group" aria-label="Calls">
               <span class="list__cell list__cell--call"><input class="pill pill--input" value="07:50" inputmode="numeric" aria-label="Set call"></span>
-              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:05" inputmode="numeric" aria-label="Makeup call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:05" inputmode="numeric" aria-label="HMUP call"></span>
               <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:35" inputmode="numeric" aria-label="Dress call"></span>
               <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:50" inputmode="numeric" aria-label="Ready call"></span>
               <span class="list__cell list__cell--call"><input class="pill pill--input" value="09:00" inputmode="numeric" aria-label="Motor call"></span>
@@ -226,14 +231,63 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox"></label>
             <span class="list__cell list__cell--index">3</span>
-            <span class="list__cell list__cell--fill">Concerned Citizen</span>
+            <span class="list__cell list__cell--fill list__cell--character">Concerned Citizen</span>
             <span class="list__cell list__cell--fill">Lucas Martin</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
             <div class="list__cell list__cell--group" role="group" aria-label="Calls">
               <span class="list__cell list__cell--call"><input class="pill pill--input" value="07:50" inputmode="numeric" aria-label="Set call"></span>
-              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:05" inputmode="numeric" aria-label="Makeup call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:05" inputmode="numeric" aria-label="HMUP call"></span>
               <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:35" inputmode="numeric" aria-label="Dress call"></span>
               <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:50" inputmode="numeric" aria-label="Ready call"></span>
               <span class="list__cell list__cell--call"><input class="pill pill--input" value="09:00" inputmode="numeric" aria-label="Motor call"></span>
+            </div>
+            <span class="list__cell list__cell--days"><button class="pill icon icon__calendar">1/2</button></span>
+          </li>
+        </ul>
+
+        <ul class="list list--calls" aria-label="Extras">
+          <li class="list__row list__row--head">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">#</span>
+            <span class="list__cell list__cell--fill">Role</span>
+            <span class="list__cell list__cell--fill">Amount</span>
+            <span class="list__cell list__cell--fill">Notes</span>
+            <div class="list__cell list__cell--group" role="group" aria-label="Calls">
+              <span class="list__cell list__cell--call">Set</span>
+              <span class="list__cell list__cell--call">HMUP</span>
+              <span class="list__cell list__cell--call">Dress</span>
+              <span class="list__cell list__cell--call">Ready</span>
+              <span class="list__cell list__cell--call">Motor</span>
+            </div>
+            <span class="list__cell list__cell--days">Days</span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">1</span>
+            <span class="list__cell list__cell--fill">Gang Members</span>
+            <span class="list__cell list__cell--fill">4</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <div class="list__cell list__cell--group" role="group" aria-label="Calls">
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="07:30" inputmode="numeric" aria-label="Set call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="07:45" inputmode="numeric" aria-label="HMUP call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:15" inputmode="numeric" aria-label="Dress call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:30" inputmode="numeric" aria-label="Ready call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="09:00" inputmode="numeric" aria-label="Motor call"></span>
+            </div>
+            <span class="list__cell list__cell--days"><button class="pill icon icon__calendar">1/2</button></span>
+          </li>
+          <li class="list__row">
+            <label class="list__cell list__cell--check"><input type="checkbox"></label>
+            <span class="list__cell list__cell--index">2</span>
+            <span class="list__cell list__cell--fill">Passers-by</span>
+            <span class="list__cell list__cell--fill">12</span>
+            <span class="list__cell list__cell--fill"><input class="inline-input" name="notes" value="" placeholder="Add notes" aria-label="Notes"></span>
+            <div class="list__cell list__cell--group" role="group" aria-label="Calls">
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:00" inputmode="numeric" aria-label="Set call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:15" inputmode="numeric" aria-label="HMUP call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="08:45" inputmode="numeric" aria-label="Dress call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="09:00" inputmode="numeric" aria-label="Ready call"></span>
+              <span class="list__cell list__cell--call"><input class="pill pill--input" value="09:30" inputmode="numeric" aria-label="Motor call"></span>
             </div>
             <span class="list__cell list__cell--days"><button class="pill icon icon__calendar">1/2</button></span>
           </li>

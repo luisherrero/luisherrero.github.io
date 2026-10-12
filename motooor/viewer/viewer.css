@@ -103,21 +103,21 @@
 :root {
   --palette-white: #ffffff;
   --palette-black: #000000;
-  --palette-grey-50: #f6f7f7;
-  --palette-grey-100: #ECEFF1;
-  --palette-grey-200: #dbdfe2;
-  --palette-grey-300: #b2bec4;
-  --palette-grey-400: #9daab3;
+  --palette-grey-50: #f7f8f8;
+  --palette-grey-100: #f0f2f3;
+  --palette-grey-200: #d3dadf;
+  --palette-grey-300: #aebec7;
+  --palette-grey-400: #9aa7b0;
   --palette-grey-500: #6e767d;
   --palette-grey-600: #414d53;
   --palette-grey-700: #2e373c;
   --palette-grey-800: #232a2e;
   --palette-grey-900: #1c2226;
   --palette-grey-950: #161b1e;
-  --palette-slate-50: #f6f8f9;
-  --palette-slate-100: #e9eef1;
-  --palette-slate-200: #d7dfe5;
-  --palette-slate-300: #bccbd3;
+  --palette-slate-50: #fcfcfc;
+  --palette-slate-100: #f9fafa;
+  --palette-slate-200: #d4dce3;
+  --palette-slate-300: #c7d2d7;
   --palette-slate-400: #a4bdcd;
   --palette-slate-500: #657c8a;
   --palette-slate-600: #3d505c;
@@ -149,17 +149,17 @@
   --palette-orange-950: #211917;
   --palette-amber-50: #fefcf3;
   --palette-amber-100: #fdefc4;
-  --palette-amber-200: #fbe5b1;
-  --palette-amber-300: #f6d494;
-  --palette-amber-400: #f0bc6f;
-  --palette-amber-500: #cd922b;
+  --palette-amber-200: #fbe6b5;
+  --palette-amber-300: #f9d38c;
+  --palette-amber-400: #fbbe64;
+  --palette-amber-500: #f5a110;
   --palette-amber-600: #86692e;
   --palette-amber-700: #55492b;
   --palette-amber-800: #3e3623;
   --palette-amber-900: #2e291c;
   --palette-amber-950: #221f16;
   --palette-yellow-50: #fdfdf4;
-  --palette-yellow-100: #f7f7c5;
+  --palette-yellow-100: #f8f8bd;
   --palette-yellow-200: #efefaf;
   --palette-yellow-300: #e2e290;
   --palette-yellow-400: #cece69;
@@ -170,7 +170,7 @@
   --palette-yellow-900: #2a2a1d;
   --palette-yellow-950: #212117;
   --palette-green-50: #f5fcf5;
-  --palette-green-100: #cef2cf;
+  --palette-green-100: #d1f4d2;
   --palette-green-200: #b0e8b9;
   --palette-green-300: #85d89d;
   --palette-green-400: #4cc27e;
@@ -203,7 +203,7 @@
   --palette-blue-900: #1d262f;
   --palette-blue-950: #161d22;
   --palette-violet-50: #f8f3fe;
-  --palette-violet-100: #e1c9fd;
+  --palette-violet-100: #e0c8fc;
   --palette-violet-200: #d1b2f7;
   --palette-violet-300: #ba93ec;
   --palette-violet-400: #9b6dda;
@@ -224,8 +224,10 @@
   --palette-pink-800: #3e262f;
   --palette-pink-900: #2d1e24;
   --palette-pink-950: #21171b;
-  --palette-names: "white, black, grey-50, grey-100, grey-200, grey-300, grey-400, grey-500, grey-600, grey-700, grey-800, grey-900, grey-950, slate-50, slate-100, slate-200, slate-300, slate-400, slate-500, slate-600, slate-700, slate-800, slate-900, slate-950, red-50, red-100, red-200, red-300, red-400, red-500, red-600, red-700, red-800, red-900, red-950, orange-50, orange-100, orange-200, orange-300, orange-400, orange-500, orange-600, orange-700, orange-800, orange-900, orange-950, amber-50, amber-100, amber-200, amber-300, amber-400, amber-500, amber-600, amber-700, amber-800, amber-900, amber-950, yellow-50, yellow-100, yellow-200, yellow-300, yellow-400, yellow-500, yellow-600, yellow-700, yellow-800, yellow-900, yellow-950, green-50, green-100, green-200, green-300, green-400, green-500, green-600, green-700, green-800, green-900, green-950, teal-50, teal-100, teal-200, teal-300, teal-400, teal-500, teal-600, teal-700, teal-800, teal-900, teal-950, blue-50, blue-100, blue-200, blue-300, blue-400, blue-500, blue-600, blue-700, blue-800, blue-900, blue-950, violet-50, violet-100, violet-200, violet-300, violet-400, violet-500, violet-600, violet-700, violet-800, violet-900, violet-950, pink-50, pink-100, pink-200, pink-300, pink-400, pink-500, pink-600, pink-700, pink-800, pink-900, pink-950"; /* for themes.html */
-  --color-tokens: "bg-app, bg-content, bg-card, bg-selected-icon, bg-selected-cell, bg-hover-cell, bg-floating, fg-primary, fg-secondary, fg-subtle, fg-inverse, fg-on-image, border-button, border-form-item, border-pill, border-divider, border-floating, alert, alert-fill, alert-hover, warning, warning-fill, warning-hover, success, success-fill, success-hover, info, info-fill, info-hover, accent, shadow, shadow-inset, overlay, overlay-soft, backdrop, sidebar-hover, btn-bg, btn-fg, btn-hover, btn-cta-bg, btn-cta-fg, btn-cta-border, btn-cta-hover, btn-alert-bg, btn-alert-fg, btn-alert-border, btn-alert-hover, banner-bg-av, banner-bg-photo, banner-bg-social, banner-bg-alt-1, banner-bg-alt-2, banner-bg-alt-3, banner-bg-alt-4, banner-bg-alt-5"; /* for themes.html */
+  --palette-names: "white, black, grey-50, grey-100, grey-200, grey-300, grey-400, grey-500, grey-600, grey-700, grey-800, grey-900, grey-950, slate-50, slate-100, slate-200, slate-300, slate-400, slate-500, slate-600, slate-700, slate-800, slate-900, slate-950, red-50, red-100, red-200, red-300, red-400, red-500, red-600, red-700, red-800, red-900, red-950, orange-50, orange-100, orange-200, orange-300, orange-400, orange-500, orange-600, orange-700, orange-800, orange-900, orange-950, amber-50, amber-100, amber-200, amber-300, amber-400, amber-500, amber-600, amber-700, amber-800, amber-900, amber-950, yellow-50, yellow-100, yellow-200, yellow-300, yellow-400, yellow-500, yellow-600, yellow-700, yellow-800, yellow-900, yellow-950, green-50, green-100, green-200, green-300, green-400, green-500, green-600, green-700, green-800, green-900, green-950, teal-50, teal-100, teal-200, teal-300, teal-400, teal-500, teal-600, teal-700, teal-800, teal-900, teal-950, blue-50, blue-100, blue-200, blue-300, blue-400, blue-500, blue-600, blue-700, blue-800, blue-900, blue-950, violet-50, violet-100, violet-200, violet-300, violet-400, violet-500, violet-600, violet-700, violet-800, violet-900, violet-950, pink-50, pink-100, pink-200, pink-300, pink-400, pink-500, pink-600, pink-700, pink-800, pink-900, pink-950";
+  /* for themes.html */
+  --color-tokens: "bg-app, bg-content, bg-card, bg-selected-icon, bg-selected-cell, bg-hover-cell, bg-floating, fg-primary, fg-secondary, fg-subtle, fg-inverse, fg-on-image, fg-on-warning, border-button, border-form-item, border-pill, border-divider, border-floating, alert, alert-fill, alert-hover, warning, warning-fill, warning-hover, success, success-fill, success-hover, info, info-fill, info-hover, accent, shadow, shadow-inset, overlay, overlay-soft, backdrop, sidebar-hover, btn-bg, btn-fg, btn-hover, btn-cta-bg, btn-cta-fg, btn-cta-border, btn-cta-hover, btn-alert-bg, btn-alert-fg, btn-alert-border, btn-alert-hover, banner-bg-av, banner-bg-photo, banner-bg-social, banner-bg-alt-1, banner-bg-alt-2, banner-bg-alt-3, banner-bg-alt-4, banner-bg-alt-5";
+  /* for themes.html */
   color-scheme: light;
   /* Icons of this theme (see $icons) */
   --icon-add: url("../icons/light/add.svg");
@@ -287,22 +289,22 @@
   --icon-theme-dark: url("../icons/light/theme-dark.svg");
   --icon-theme-system: url("../icons/light/theme-system.svg");
   --icon-current: url("../icons/light/current.svg");
-  --icon-filter: url("../icons/light/filter.svg");
   --icon-gallery-inv: url("../icons/light/gallery-inv.svg");
   --icon-overflow-inv: url("../icons/light/overflow-inv.svg");
   --icon-shoot-plan-inv: url("../icons/light/shoot-plan-inv.svg");
   --color-bg-app: var(--palette-grey-100);
-  --color-bg-content: var(--palette-grey-50);
-  --color-bg-card: var(--palette-white);
+  --color-bg-content: var(--palette-slate-50);
+  --color-bg-card: var(--palette-slate-50);
   --color-bg-selected-icon: var(--palette-grey-200);
   --color-bg-selected-cell: var(--palette-grey-100);
-  --color-bg-hover-cell: var(--palette-grey-50);
-  --color-bg-floating: color-mix(in srgb, var(--palette-white) 90%, transparent);
+  --color-bg-hover-cell: var(--palette-slate-100);
+  --color-bg-floating: var(--palette-white);
   --color-fg-primary: var(--palette-grey-800);
   --color-fg-secondary: var(--palette-slate-500);
   --color-fg-subtle: var(--palette-grey-400);
   --color-fg-inverse: var(--palette-slate-50);
   --color-fg-on-image: var(--palette-grey-50);
+  --color-fg-on-warning: var(--palette-grey-900);
   --color-border-button: var(--palette-grey-300);
   --color-border-form-item: var(--palette-slate-500);
   --color-border-pill: var(--palette-grey-200);
@@ -311,9 +313,9 @@
   --color-alert: var(--palette-red-500);
   --color-alert-fill: color-mix(in srgb, var(--palette-red-500) 10%, transparent);
   --color-alert-hover: color-mix(in srgb, var(--palette-red-500) 20%, transparent);
-  --color-warning: var(--palette-amber-400);
-  --color-warning-fill: color-mix(in srgb, var(--palette-amber-400) 10%, transparent);
-  --color-warning-hover: color-mix(in srgb, var(--palette-amber-400) 20%, transparent);
+  --color-warning: var(--palette-amber-500);
+  --color-warning-fill: color-mix(in srgb, var(--palette-amber-300) 10%, transparent);
+  --color-warning-hover: color-mix(in srgb, var(--palette-amber-300) 20%, transparent);
   --color-success: var(--palette-green-500);
   --color-success-fill: color-mix(in srgb, var(--palette-green-500) 10%, transparent);
   --color-success-hover: color-mix(in srgb, var(--palette-green-500) 20%, transparent);
@@ -330,7 +332,7 @@
   --color-btn-bg: var(--palette-white);
   --color-btn-fg: var(--palette-grey-600);
   --color-btn-hover: var(--palette-grey-50);
-  --color-btn-cta-bg: var(--palette-grey-600);
+  --color-btn-cta-bg: var(--palette-teal-700);
   --color-btn-cta-fg: var(--palette-white);
   --color-btn-cta-border: var(--palette-slate-300);
   --color-btn-cta-hover: var(--palette-grey-950);
@@ -341,14 +343,15 @@
   --color-banner-bg-av: var(--palette-grey-100);
   --color-banner-bg-photo: var(--palette-green-100);
   --color-banner-bg-social: var(--palette-yellow-100);
-  --color-banner-bg-alt-1: var(--palette-orange-100);
-  --color-banner-bg-alt-2: var(--palette-blue-100);
-  --color-banner-bg-alt-3: var(--palette-pink-100);
-  --color-banner-bg-alt-4: var(--palette-violet-100);
-  --color-banner-bg-alt-5: var(--palette-amber-100);
-  --color-defs: " bg-app=grey-100 bg-content=grey-50 bg-card=white bg-selected-icon=grey-200 bg-selected-cell=grey-100 bg-hover-cell=grey-50 bg-floating=white@90% fg-primary=grey-800 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 border-button=grey-300 border-form-item=slate-500 border-pill=grey-200 border-divider=grey-200 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-400 warning-fill=amber-400@10% warning-hover=amber-400@20% success=green-500 success-fill=green-500@10% success-hover=green-500@20% info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% accent=teal-600 shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@60% btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=grey-600 btn-cta-fg=white btn-cta-border=slate-300 btn-cta-hover=grey-950 btn-alert-bg=red-500@6% btn-alert-fg=red-500 btn-alert-border=red-700 btn-alert-hover=red-500@16% banner-bg-av=grey-100 banner-bg-photo=green-100 banner-bg-social=yellow-100 banner-bg-alt-1=orange-100 banner-bg-alt-2=blue-100 banner-bg-alt-3=pink-100 banner-bg-alt-4=violet-100 banner-bg-alt-5=amber-100"; /* for themes.html */
+  --color-banner-bg-alt-1: var(--palette-blue-200);
+  --color-banner-bg-alt-2: var(--palette-orange-200);
+  --color-banner-bg-alt-3: var(--palette-violet-100);
+  --color-banner-bg-alt-4: var(--palette-pink-200);
+  --color-banner-bg-alt-5: var(--palette-amber-200);
+  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-selected-cell=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-800 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 border-button=grey-300 border-form-item=slate-500 border-pill=grey-200 border-divider=grey-200 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-500 success-fill=green-500@10% success-hover=green-500@20% info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% accent=teal-600 shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@60% btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=teal-700 btn-cta-fg=white btn-cta-border=slate-300 btn-cta-hover=grey-950 btn-alert-bg=red-500@6% btn-alert-fg=red-500 btn-alert-border=red-700 btn-alert-hover=red-500@16% banner-bg-av=grey-100 banner-bg-photo=green-100 banner-bg-social=yellow-100 banner-bg-alt-1=blue-200 banner-bg-alt-2=orange-200 banner-bg-alt-3=violet-100 banner-bg-alt-4=pink-200 banner-bg-alt-5=amber-200";
+  /* for themes.html */
   /* Checkbox tick (fg-inverse), native select arrow and breadcrumb chevron (fg-primary) */
-  --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23f6f8f9' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23fcfcfc' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23232a2e'/%3E%3C/svg%3E");
   --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23232a2e' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
@@ -415,22 +418,22 @@
   --icon-theme-dark: url("../icons/light/theme-dark.svg");
   --icon-theme-system: url("../icons/light/theme-system.svg");
   --icon-current: url("../icons/light/current.svg");
-  --icon-filter: url("../icons/light/filter.svg");
   --icon-gallery-inv: url("../icons/light/gallery-inv.svg");
   --icon-overflow-inv: url("../icons/light/overflow-inv.svg");
   --icon-shoot-plan-inv: url("../icons/light/shoot-plan-inv.svg");
   --color-bg-app: var(--palette-grey-100);
-  --color-bg-content: var(--palette-grey-50);
-  --color-bg-card: var(--palette-white);
+  --color-bg-content: var(--palette-slate-50);
+  --color-bg-card: var(--palette-slate-50);
   --color-bg-selected-icon: var(--palette-grey-200);
   --color-bg-selected-cell: var(--palette-grey-100);
-  --color-bg-hover-cell: var(--palette-grey-50);
-  --color-bg-floating: color-mix(in srgb, var(--palette-white) 90%, transparent);
+  --color-bg-hover-cell: var(--palette-slate-100);
+  --color-bg-floating: var(--palette-white);
   --color-fg-primary: var(--palette-grey-800);
   --color-fg-secondary: var(--palette-slate-500);
   --color-fg-subtle: var(--palette-grey-400);
   --color-fg-inverse: var(--palette-slate-50);
   --color-fg-on-image: var(--palette-grey-50);
+  --color-fg-on-warning: var(--palette-grey-900);
   --color-border-button: var(--palette-grey-300);
   --color-border-form-item: var(--palette-slate-500);
   --color-border-pill: var(--palette-grey-200);
@@ -439,9 +442,9 @@
   --color-alert: var(--palette-red-500);
   --color-alert-fill: color-mix(in srgb, var(--palette-red-500) 10%, transparent);
   --color-alert-hover: color-mix(in srgb, var(--palette-red-500) 20%, transparent);
-  --color-warning: var(--palette-amber-400);
-  --color-warning-fill: color-mix(in srgb, var(--palette-amber-400) 10%, transparent);
-  --color-warning-hover: color-mix(in srgb, var(--palette-amber-400) 20%, transparent);
+  --color-warning: var(--palette-amber-500);
+  --color-warning-fill: color-mix(in srgb, var(--palette-amber-300) 10%, transparent);
+  --color-warning-hover: color-mix(in srgb, var(--palette-amber-300) 20%, transparent);
   --color-success: var(--palette-green-500);
   --color-success-fill: color-mix(in srgb, var(--palette-green-500) 10%, transparent);
   --color-success-hover: color-mix(in srgb, var(--palette-green-500) 20%, transparent);
@@ -458,7 +461,7 @@
   --color-btn-bg: var(--palette-white);
   --color-btn-fg: var(--palette-grey-600);
   --color-btn-hover: var(--palette-grey-50);
-  --color-btn-cta-bg: var(--palette-grey-600);
+  --color-btn-cta-bg: var(--palette-teal-700);
   --color-btn-cta-fg: var(--palette-white);
   --color-btn-cta-border: var(--palette-slate-300);
   --color-btn-cta-hover: var(--palette-grey-950);
@@ -469,14 +472,15 @@
   --color-banner-bg-av: var(--palette-grey-100);
   --color-banner-bg-photo: var(--palette-green-100);
   --color-banner-bg-social: var(--palette-yellow-100);
-  --color-banner-bg-alt-1: var(--palette-orange-100);
-  --color-banner-bg-alt-2: var(--palette-blue-100);
-  --color-banner-bg-alt-3: var(--palette-pink-100);
-  --color-banner-bg-alt-4: var(--palette-violet-100);
-  --color-banner-bg-alt-5: var(--palette-amber-100);
-  --color-defs: " bg-app=grey-100 bg-content=grey-50 bg-card=white bg-selected-icon=grey-200 bg-selected-cell=grey-100 bg-hover-cell=grey-50 bg-floating=white@90% fg-primary=grey-800 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 border-button=grey-300 border-form-item=slate-500 border-pill=grey-200 border-divider=grey-200 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-400 warning-fill=amber-400@10% warning-hover=amber-400@20% success=green-500 success-fill=green-500@10% success-hover=green-500@20% info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% accent=teal-600 shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@60% btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=grey-600 btn-cta-fg=white btn-cta-border=slate-300 btn-cta-hover=grey-950 btn-alert-bg=red-500@6% btn-alert-fg=red-500 btn-alert-border=red-700 btn-alert-hover=red-500@16% banner-bg-av=grey-100 banner-bg-photo=green-100 banner-bg-social=yellow-100 banner-bg-alt-1=orange-100 banner-bg-alt-2=blue-100 banner-bg-alt-3=pink-100 banner-bg-alt-4=violet-100 banner-bg-alt-5=amber-100"; /* for themes.html */
+  --color-banner-bg-alt-1: var(--palette-blue-200);
+  --color-banner-bg-alt-2: var(--palette-orange-200);
+  --color-banner-bg-alt-3: var(--palette-violet-100);
+  --color-banner-bg-alt-4: var(--palette-pink-200);
+  --color-banner-bg-alt-5: var(--palette-amber-200);
+  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-selected-cell=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-800 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 border-button=grey-300 border-form-item=slate-500 border-pill=grey-200 border-divider=grey-200 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-500 success-fill=green-500@10% success-hover=green-500@20% info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% accent=teal-600 shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@60% btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=teal-700 btn-cta-fg=white btn-cta-border=slate-300 btn-cta-hover=grey-950 btn-alert-bg=red-500@6% btn-alert-fg=red-500 btn-alert-border=red-700 btn-alert-hover=red-500@16% banner-bg-av=grey-100 banner-bg-photo=green-100 banner-bg-social=yellow-100 banner-bg-alt-1=blue-200 banner-bg-alt-2=orange-200 banner-bg-alt-3=violet-100 banner-bg-alt-4=pink-200 banner-bg-alt-5=amber-200";
+  /* for themes.html */
   /* Checkbox tick (fg-inverse), native select arrow and breadcrumb chevron (fg-primary) */
-  --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23f6f8f9' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23fcfcfc' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23232a2e'/%3E%3C/svg%3E");
   --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23232a2e' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
@@ -543,22 +547,22 @@
   --icon-theme-dark: url("../icons/dark/theme-dark.svg");
   --icon-theme-system: url("../icons/dark/theme-system.svg");
   --icon-current: url("../icons/dark/current.svg");
-  --icon-filter: url("../icons/dark/filter.svg");
   --icon-gallery-inv: url("../icons/dark/gallery-inv.svg");
   --icon-overflow-inv: url("../icons/dark/overflow-inv.svg");
   --icon-shoot-plan-inv: url("../icons/dark/shoot-plan-inv.svg");
   --color-bg-app: var(--palette-grey-700);
   --color-bg-content: var(--palette-grey-800);
-  --color-bg-card: var(--palette-grey-900);
+  --color-bg-card: var(--palette-grey-800);
   --color-bg-selected-icon: var(--palette-grey-600);
   --color-bg-selected-cell: var(--palette-grey-700);
   --color-bg-hover-cell: color-mix(in srgb, var(--palette-grey-700) 50%, transparent);
   --color-bg-floating: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
-  --color-fg-primary: var(--palette-grey-50);
+  --color-fg-primary: var(--palette-grey-100);
   --color-fg-secondary: var(--palette-slate-400);
-  --color-fg-subtle: var(--palette-grey-500);
+  --color-fg-subtle: var(--palette-slate-500);
   --color-fg-inverse: var(--palette-grey-950);
   --color-fg-on-image: var(--palette-grey-50);
+  --color-fg-on-warning: var(--palette-grey-900);
   --color-border-button: var(--palette-grey-600);
   --color-border-form-item: var(--palette-slate-400);
   --color-border-pill: var(--palette-slate-600);
@@ -567,7 +571,7 @@
   --color-alert: var(--palette-red-400);
   --color-alert-fill: color-mix(in srgb, var(--palette-red-400) 10%, transparent);
   --color-alert-hover: color-mix(in srgb, var(--palette-red-400) 20%, transparent);
-  --color-warning: var(--palette-amber-300);
+  --color-warning: var(--palette-amber-400);
   --color-warning-fill: color-mix(in srgb, var(--palette-amber-300) 10%, transparent);
   --color-warning-hover: color-mix(in srgb, var(--palette-amber-300) 20%, transparent);
   --color-success: var(--palette-green-300);
@@ -586,8 +590,8 @@
   --color-btn-bg: var(--palette-grey-800);
   --color-btn-fg: var(--palette-grey-100);
   --color-btn-hover: var(--palette-grey-700);
-  --color-btn-cta-bg: var(--palette-slate-700);
-  --color-btn-cta-fg: var(--palette-grey-200);
+  --color-btn-cta-bg: var(--palette-slate-600);
+  --color-btn-cta-fg: var(--palette-grey-100);
   --color-btn-cta-border: var(--palette-grey-600);
   --color-btn-cta-hover: var(--palette-slate-600);
   --color-btn-alert-bg: var(--palette-red-800);
@@ -602,11 +606,12 @@
   --color-banner-bg-alt-3: var(--palette-pink-600);
   --color-banner-bg-alt-4: var(--palette-violet-600);
   --color-banner-bg-alt-5: var(--palette-amber-600);
-  --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-900 bg-selected-icon=grey-600 bg-selected-cell=grey-700 bg-hover-cell=grey-700@50% bg-floating=grey-800@90% fg-primary=grey-50 fg-secondary=slate-400 fg-subtle=grey-500 fg-inverse=grey-950 fg-on-image=grey-50 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-700 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-300 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% accent=teal-400 shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% btn-bg=grey-800 btn-fg=grey-100 btn-hover=grey-700 btn-cta-bg=slate-700 btn-cta-fg=grey-200 btn-cta-border=grey-600 btn-cta-hover=slate-600 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600"; /* for themes.html */
+  --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-800 bg-selected-icon=grey-600 bg-selected-cell=grey-700 bg-hover-cell=grey-700@50% bg-floating=grey-800@90% fg-primary=grey-100 fg-secondary=slate-400 fg-subtle=slate-500 fg-inverse=grey-950 fg-on-image=grey-50 fg-on-warning=grey-900 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-700 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-400 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% accent=teal-400 shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% btn-bg=grey-800 btn-fg=grey-100 btn-hover=grey-700 btn-cta-bg=slate-600 btn-cta-fg=grey-100 btn-cta-border=grey-600 btn-cta-hover=slate-600 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600";
+  /* for themes.html */
   /* Checkbox tick (fg-inverse), native select arrow and breadcrumb chevron (fg-primary) */
   --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23161b1e' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23f6f7f7'/%3E%3C/svg%3E");
-  --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23f6f7f7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23f0f2f3'/%3E%3C/svg%3E");
+  --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23f0f2f3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 @media (prefers-color-scheme: dark) {
@@ -672,22 +677,22 @@
     --icon-theme-dark: url("../icons/dark/theme-dark.svg");
     --icon-theme-system: url("../icons/dark/theme-system.svg");
     --icon-current: url("../icons/dark/current.svg");
-    --icon-filter: url("../icons/dark/filter.svg");
     --icon-gallery-inv: url("../icons/dark/gallery-inv.svg");
     --icon-overflow-inv: url("../icons/dark/overflow-inv.svg");
     --icon-shoot-plan-inv: url("../icons/dark/shoot-plan-inv.svg");
     --color-bg-app: var(--palette-grey-700);
     --color-bg-content: var(--palette-grey-800);
-    --color-bg-card: var(--palette-grey-900);
+    --color-bg-card: var(--palette-grey-800);
     --color-bg-selected-icon: var(--palette-grey-600);
     --color-bg-selected-cell: var(--palette-grey-700);
     --color-bg-hover-cell: color-mix(in srgb, var(--palette-grey-700) 50%, transparent);
     --color-bg-floating: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
-    --color-fg-primary: var(--palette-grey-50);
+    --color-fg-primary: var(--palette-grey-100);
     --color-fg-secondary: var(--palette-slate-400);
-    --color-fg-subtle: var(--palette-grey-500);
+    --color-fg-subtle: var(--palette-slate-500);
     --color-fg-inverse: var(--palette-grey-950);
     --color-fg-on-image: var(--palette-grey-50);
+    --color-fg-on-warning: var(--palette-grey-900);
     --color-border-button: var(--palette-grey-600);
     --color-border-form-item: var(--palette-slate-400);
     --color-border-pill: var(--palette-slate-600);
@@ -696,7 +701,7 @@
     --color-alert: var(--palette-red-400);
     --color-alert-fill: color-mix(in srgb, var(--palette-red-400) 10%, transparent);
     --color-alert-hover: color-mix(in srgb, var(--palette-red-400) 20%, transparent);
-    --color-warning: var(--palette-amber-300);
+    --color-warning: var(--palette-amber-400);
     --color-warning-fill: color-mix(in srgb, var(--palette-amber-300) 10%, transparent);
     --color-warning-hover: color-mix(in srgb, var(--palette-amber-300) 20%, transparent);
     --color-success: var(--palette-green-300);
@@ -715,8 +720,8 @@
     --color-btn-bg: var(--palette-grey-800);
     --color-btn-fg: var(--palette-grey-100);
     --color-btn-hover: var(--palette-grey-700);
-    --color-btn-cta-bg: var(--palette-slate-700);
-    --color-btn-cta-fg: var(--palette-grey-200);
+    --color-btn-cta-bg: var(--palette-slate-600);
+    --color-btn-cta-fg: var(--palette-grey-100);
     --color-btn-cta-border: var(--palette-grey-600);
     --color-btn-cta-hover: var(--palette-slate-600);
     --color-btn-alert-bg: var(--palette-red-800);
@@ -731,11 +736,12 @@
     --color-banner-bg-alt-3: var(--palette-pink-600);
     --color-banner-bg-alt-4: var(--palette-violet-600);
     --color-banner-bg-alt-5: var(--palette-amber-600);
-    --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-900 bg-selected-icon=grey-600 bg-selected-cell=grey-700 bg-hover-cell=grey-700@50% bg-floating=grey-800@90% fg-primary=grey-50 fg-secondary=slate-400 fg-subtle=grey-500 fg-inverse=grey-950 fg-on-image=grey-50 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-700 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-300 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% accent=teal-400 shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% btn-bg=grey-800 btn-fg=grey-100 btn-hover=grey-700 btn-cta-bg=slate-700 btn-cta-fg=grey-200 btn-cta-border=grey-600 btn-cta-hover=slate-600 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600"; /* for themes.html */
+    --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-800 bg-selected-icon=grey-600 bg-selected-cell=grey-700 bg-hover-cell=grey-700@50% bg-floating=grey-800@90% fg-primary=grey-100 fg-secondary=slate-400 fg-subtle=slate-500 fg-inverse=grey-950 fg-on-image=grey-50 fg-on-warning=grey-900 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-700 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-400 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% accent=teal-400 shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% btn-bg=grey-800 btn-fg=grey-100 btn-hover=grey-700 btn-cta-bg=slate-600 btn-cta-fg=grey-100 btn-cta-border=grey-600 btn-cta-hover=slate-600 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600";
+    /* for themes.html */
     /* Checkbox tick (fg-inverse), native select arrow and breadcrumb chevron (fg-primary) */
     --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23161b1e' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23f6f7f7'/%3E%3C/svg%3E");
-    --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23f6f7f7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23f0f2f3'/%3E%3C/svg%3E");
+    --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23f0f2f3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   }
 }
 /* What the partials use */
@@ -755,11 +761,92 @@
 /* anything that floats: menus, popovers, modal, drawer, sidebar */
 /* Spacing ---------------------------------------------------------------- */
 /* Typography -------------------------------------------------------------- */
-/*
-  Text styles: every text of the interface uses one of them through
-  @include type(name). Line-heights are multiples of 4, so every text box is.
-  The few big display texts (login title, cover title, weather) set their own.
-*/
+/* Text styles ($type-styles) live in _themes.scss, next to the colours. */
+/* Text styles as custom properties (--type-label-size…): the mixin type()
+   reads them, so themes.html can edit them live. -use is only for themes.html */
+:root {
+  --type-label-size: 10px;
+  --type-label-weight: 600;
+  --type-label-tracking: 0.8px;
+  --type-label-line: 12px;
+  --type-label-case: uppercase;
+  --type-label-use: "column heads, labels, buttons";
+  --type-pill-sm-size: 10px;
+  --type-pill-sm-weight: 600;
+  --type-pill-sm-tracking: 0.2px;
+  --type-pill-sm-line: 16px;
+  --type-pill-sm-case: uppercase;
+  --type-pill-sm-use: "Flow, unit type, small toggles";
+  --type-pill-size: 11px;
+  --type-pill-weight: 600;
+  --type-pill-tracking: 0.2px;
+  --type-pill-line: 16px;
+  --type-pill-case: uppercase;
+  --type-pill-use: "pills, tabs, time values";
+  --type-title-sm-size: 12px;
+  --type-title-sm-weight: 600;
+  --type-title-sm-tracking: 0.8px;
+  --type-title-sm-line: 16px;
+  --type-title-sm-case: uppercase;
+  --type-title-sm-use: "card and modal titles";
+  --type-title-lg-size: 24px;
+  --type-title-lg-weight: 600;
+  --type-title-lg-tracking: -0.8px;
+  --type-title-lg-line: 24px;
+  --type-title-lg-case: none;
+  --type-title-lg-use: "page titles";
+  --type-text-sm-size: 12px;
+  --type-text-sm-weight: 600;
+  --type-text-sm-tracking: -0.2px;
+  --type-text-sm-line: 16px;
+  --type-text-sm-case: none;
+  --type-text-sm-use: "Shoot Plan text, menu options, sidebar";
+  --type-text-size: 13px;
+  --type-text-weight: 600;
+  --type-text-tracking: -0.2px;
+  --type-text-line: 16px;
+  --type-text-case: none;
+  --type-text-use: "list cells";
+  --type-text-lg-size: 14px;
+  --type-text-lg-weight: 600;
+  --type-text-lg-tracking: -0.2px;
+  --type-text-lg-line: 20px;
+  --type-text-lg-case: none;
+  --type-text-lg-use: "facts values, modal text, card titles";
+  --type-body-sm-size: 12px;
+  --type-body-sm-weight: 400;
+  --type-body-sm-tracking: -0.2px;
+  --type-body-sm-line: 16px;
+  --type-body-sm-case: none;
+  --type-body-sm-use: "secondary text: notes, addresses, set & cast, requirements";
+  --type-body-size: 13px;
+  --type-body-weight: 400;
+  --type-body-tracking: -0.2px;
+  --type-body-line: 16px;
+  --type-body-case: none;
+  --type-body-use: "page info, breadcrumb, place names";
+  --type-body-lg-size: 14px;
+  --type-body-lg-weight: 400;
+  --type-body-lg-tracking: -0.2px;
+  --type-body-lg-line: 20px;
+  --type-body-lg-case: none;
+  --type-body-lg-use: "facts labels, login texts";
+  --type-display-size: 28px;
+  --type-display-weight: 300;
+  --type-display-tracking: -0.2px;
+  --type-display-line: 36px;
+  --type-display-case: none;
+  --type-display-use: "cover title";
+  --type-display-lg-size: 40px;
+  --type-display-lg-weight: 300;
+  --type-display-lg-tracking: -1.5px;
+  --type-display-lg-line: 40px;
+  --type-display-lg-case: none;
+  --type-display-lg-use: "weather temperature";
+  --type-styles: "label, pill-sm, pill, title-sm, title-lg, text-sm, text, text-lg, body-sm, body, body-lg, display, display-lg";
+  /* for themes.html */
+}
+
 /* Layout ----------------------------------------------------------------- */
 /* sidebar items and every 32px icon button */
 /* top bar */
@@ -772,6 +859,7 @@
 /* editable time pill inside lists */
 /* shot / image thumbnail */
 /* card header and tabs */
+/* line under the selected tab */
 /* Motion ----------------------------------------------------------------- */
 /****************************************************************************
 
@@ -788,6 +876,7 @@
 /* Flex row with vertically centred items; justify, gap and display are optional */
 /* Fixed-width list cell with its content centred */
 /* Single line cut with "…" */
+/* Numbered circle of a location (.places: list numbers and map pins) */
 /* Square box */
 /* Icon of the current theme as a centred background */
 /* Another icon in the same place (e.g. arrow up while open) */
@@ -852,7 +941,9 @@ button {
 
 [hidden] {
   display: none !important;
-} /* hidden always wins over a component's display */
+}
+
+/* hidden always wins over a component's display */
 /****************************************************************************
 
   ICONS
@@ -1122,10 +1213,6 @@ button {
   --icon: var(--icon-current);
 }
 
-.icon__filter {
-  --icon: var(--icon-filter);
-}
-
 /* Icons with an -inv version (on dark fills, see $icons-inv) */
 .icon__gallery {
   --icon-inv: var(--icon-gallery-inv);
@@ -1161,11 +1248,11 @@ button {
   ($icons-inv); Alert uses the -alert versions (delete-alert.svg, dropdown-alert.svg).
 */
 .btn {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 12px;
-  text-transform: uppercase;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+  line-height: var(--type-label-line);
+  text-transform: var(--type-label-case);
   color: var(--color-btn-fg);
   --icon-size: 28px;
   --btn-height: 32px;
@@ -1272,19 +1359,22 @@ button {
 
 /* Small bordered value with an optional 16px icon */
 .pill {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  line-height: 16px;
-  text-transform: uppercase;
+  font-size: var(--type-pill-size);
+  font-weight: var(--type-pill-weight);
+  letter-spacing: var(--type-pill-tracking);
+  line-height: var(--type-pill-line);
+  text-transform: var(--type-pill-case);
   color: var(--color-fg-secondary);
   --icon-size: 16px;
-  --icon-fit: 28px; /* crops the 32px SVG's margin */
+  --icon-fit: 28px;
+  /* crops the 32px SVG's margin */
   justify-content: center;
   gap: 2px;
   min-width: 46px;
   height: 24px;
   padding: 0 4px 0 2px;
+  background: var(--color-bg-floating);
+  /* white in the light theme */
   border: 1px solid var(--color-border-pill);
   border-radius: 2px;
   /*
@@ -1304,12 +1394,11 @@ button {
   font-family: inherit;
   color: var(--color-fg-primary);
   text-align: center;
-  text-transform: none; /* "20m", not "20M" */
-  background: transparent;
+  text-transform: none;
+  /* "20m", not "20M" */
 }
 .pill--input:focus-visible {
   outline-offset: -1px;
-  background: var(--color-bg-card);
 }
 .pill.is-alert {
   color: var(--color-alert);
@@ -1365,7 +1454,8 @@ button {
   justify-content: flex-end;
   column-gap: 80px;
   min-width: 0;
-  margin-right: 72px; /* the header's gap adds the other 8px */
+  margin-right: 72px;
+  /* the header's gap adds the other 8px */
   /* Narrow windows: groups get closer */
   /* Stacked: one setting per line, label left and control right (Settings modal) */
 }
@@ -1374,11 +1464,11 @@ button {
   gap: 16px;
 }
 .settings__item {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 12px;
-  text-transform: uppercase;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+  line-height: var(--type-label-line);
+  text-transform: var(--type-label-case);
   color: var(--color-fg-secondary);
   display: flex;
   align-items: center;
@@ -1442,7 +1532,8 @@ button {
 .menu[open] > summary {
   position: relative;
   z-index: 2;
-  background: var(--color-bg-card);
+  background: var(--color-bg-floating);
+  /* same fill as its list (panel) */
   border-bottom-color: transparent;
   border-radius: 2px 2px 0 0;
 }
@@ -1455,16 +1546,18 @@ button {
   left: 0;
   z-index: 1;
   min-width: max(100%, var(--menu-width));
-  background: var(--color-bg-card);
-  border: 0.5px solid var(--color-border-button); /* same as the button that opens it */
+  background: var(--color-bg-floating);
+  /* white in the light theme, as cards and modals */
+  border: 0.5px solid var(--color-border-button);
+  /* same as the button that opens it */
   border-radius: 0 2px 2px 2px;
 }
 .menu__item {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 12px;
-  text-transform: uppercase;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+  line-height: var(--type-label-line);
+  text-transform: var(--type-label-case);
   color: var(--color-fg-primary);
   display: flex;
   align-items: center;
@@ -1488,11 +1581,11 @@ button {
 ****************************************************************************/
 /* Native select styled like the buttons; unassigned (value="") looks grey */
 select {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
+  font-size: var(--type-text-size);
+  font-weight: var(--type-text-weight);
+  letter-spacing: var(--type-text-tracking);
+  line-height: var(--type-text-line);
+  text-transform: var(--type-text-case);
   appearance: none;
   max-width: 100%;
   min-width: 160px;
@@ -1541,11 +1634,11 @@ select option {
   /* Short value beside a wide field (Days next to Starting date) */
 }
 .field__label {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 16px;
-  text-transform: uppercase;
+  font-size: var(--type-title-sm-size);
+  font-weight: var(--type-title-sm-weight);
+  letter-spacing: var(--type-title-sm-tracking);
+  line-height: var(--type-title-sm-line);
+  text-transform: var(--type-title-sm-case);
   color: var(--color-fg-secondary);
   line-height: 24px;
 }
@@ -1562,11 +1655,11 @@ select option {
   outline-offset: 1px;
 }
 .field__input {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
+  font-size: var(--type-text-size);
+  font-weight: var(--type-text-weight);
+  letter-spacing: var(--type-text-tracking);
+  line-height: var(--type-text-line);
+  text-transform: var(--type-text-case);
   flex: 1;
   min-width: 0;
   height: 100%;
@@ -1594,7 +1687,8 @@ select option {
   width: calc(100% + 4px);
   min-width: 0;
   height: 24px;
-  margin-left: -4px; /* text stays aligned with the column */
+  margin-left: -4px;
+  /* text stays aligned with the column */
   padding: 0 4px;
   font: inherit;
   letter-spacing: inherit;
@@ -1637,7 +1731,8 @@ input[type=checkbox] {
 }
 input[type=checkbox]:checked {
   background-color: var(--color-fg-primary);
-  background-image: var(--image-check); /* tick in fg-inverse, per theme */
+  background-image: var(--image-check);
+  /* tick in fg-inverse, per theme */
   border-color: var(--color-fg-primary);
 }
 input[type=checkbox]:indeterminate {
@@ -1669,7 +1764,8 @@ input[type=radio]:focus-visible {
 input.switch {
   width: 26px;
   height: 14px;
-  margin: 3px 2px; /* 30 x 20 box */
+  margin: 3px 2px;
+  /* 30 x 20 box */
   background: radial-gradient(circle closest-side, var(--color-fg-primary) 92%, transparent) no-repeat var(--color-bg-card);
   background-position: 2px center;
   background-size: 8px 8px;
@@ -1713,23 +1809,27 @@ input.switch:checked {
   inset: auto;
   margin: 0;
   color: inherit;
-  background: var(--color-bg-card);
-  border: 0.5px solid var(--color-border-button); /* same as the button that opens it */
+  background: var(--color-bg-floating);
+  /* white in the light theme, as cards and modals */
+  border: 0.5px solid var(--color-border-button);
+  /* same as the button that opens it */
   width: 180px;
   max-height: 401px;
   padding: 0;
-  overflow: hidden auto; /* vertical scroll only */
-  overscroll-behavior: contain; /* scrolling never reaches the page */
+  overflow: hidden auto;
+  /* vertical scroll only */
+  overscroll-behavior: contain;
+  /* scrolling never reaches the page */
   scrollbar-width: thin;
   border-radius: 0 2px 2px 2px;
   box-shadow: 1px 3px 8px var(--color-shadow);
 }
 .select-menu__option {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
+  font-size: var(--type-text-sm-size);
+  font-weight: var(--type-text-sm-weight);
+  letter-spacing: var(--type-text-sm-tracking);
+  line-height: var(--type-text-sm-line);
+  text-transform: var(--type-text-sm-case);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1738,7 +1838,6 @@ input.switch:checked {
   white-space: nowrap;
   height: 40px;
   padding: 0 8px;
-  line-height: 16px;
   cursor: pointer;
   /* Larger radio / checkbox than in lists */
 }
@@ -1776,7 +1875,8 @@ input.switch:checked {
   max-height: none;
   padding: 0;
   overflow: hidden;
-  border-color: var(--color-border-floating); /* floats over the cell, not attached to a button */
+  border-color: var(--color-border-floating);
+  /* floats over the cell, not attached to a button */
   box-shadow: 1px 3px 8px var(--color-shadow);
 }
 .select-menu--multi:popover-open {
@@ -1806,15 +1906,16 @@ input.switch:checked {
 
 .select-menu__field {
   flex: 1;
-  width: 0; /* the options, not the field, set the menu width */
+  width: 0;
+  /* the options, not the field, set the menu width */
   min-width: 0;
   height: 24px;
   padding: 4px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
+  font-size: var(--type-text-sm-size);
+  font-weight: var(--type-text-sm-weight);
+  letter-spacing: var(--type-text-sm-tracking);
+  line-height: var(--type-text-sm-line);
+  text-transform: var(--type-text-sm-case);
   color: var(--color-fg-primary);
   background: var(--color-bg-content);
   border: 0.5px solid var(--color-fg-primary);
@@ -1914,7 +2015,8 @@ input.switch:checked {
   width: 12px;
   height: 12px;
   background: var(--banner-bg, var(--color-banner-bg-av));
-  border: 1px solid var(--color-fg-secondary); /* always outlined so it is easy to spot */
+  border: 1px solid var(--color-fg-secondary);
+  /* always outlined so it is easy to spot */
   border-radius: 50%;
 }
 
@@ -1923,18 +2025,20 @@ input.switch:checked {
   inset: auto;
   margin: 0;
   color: inherit;
-  background: var(--color-bg-card);
-  border: 0.5px solid var(--color-border-button); /* same as the button that opens it */
+  background: var(--color-bg-floating);
+  /* white in the light theme, as cards and modals */
+  border: 0.5px solid var(--color-border-button);
+  /* same as the button that opens it */
   padding: 4px 16px 16px;
   border-radius: 6px;
   box-shadow: 1px 3px 8px var(--color-shadow);
 }
 .color-menu__title {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 12px;
-  text-transform: uppercase;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+  line-height: var(--type-label-line);
+  text-transform: var(--type-label-case);
   color: var(--color-fg-secondary);
   line-height: 24px;
 }
@@ -1969,12 +2073,23 @@ input.swatch:checked {
   CARD
 
 ****************************************************************************/
+/* card header with .info: below, buttons go under the title */
 .card {
   background: var(--color-bg-card);
   border-radius: 2px;
   /* Title on the left; any button after it is pushed to the right */
+  /*
+    With a .info (status / summary of the page) the header is a grid:
+    title and info stacked in the first column, the buttons in the next
+    ones, centred on both lines.
+  */
+  /*
+    Narrow screens: title and info on their own lines, the buttons under
+    them, wrapping as needed.
+  */
+  /* Small screens (app pages, not the viewer): the header wraps, the title on its own line */
   /* 32px icon button in a header or over a cover */
-  /* Widget variant (dashboard): tall header, no rule, secondary title */
+  /* Widget variant: tall header, no rule, secondary title (viewer; the Overview dashboard restyles it, _layout.scss) */
   /* Cover image with the title on a gradient */
 }
 .card + .card {
@@ -1985,23 +2100,60 @@ input.swatch:checked {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  min-height: 64px;
-  padding: 16px 16px 16px 24px;
-  border-bottom: 0.5px solid var(--color-border-divider);
+  min-height: 48px;
+  padding: 24px 24px 16px;
 }
 .card__title {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 16px;
-  text-transform: uppercase;
+  font-size: var(--type-title-lg-size);
+  font-weight: var(--type-title-lg-weight);
+  letter-spacing: var(--type-title-lg-tracking);
+  line-height: var(--type-title-lg-line);
+  text-transform: var(--type-title-lg-case);
   color: var(--color-fg-primary);
   margin-right: auto;
-  line-height: 24px;
+}
+.card__header:has(> .info) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-columns: auto;
+  grid-auto-flow: column;
+  gap: 4px 8px;
+}
+.card__header:has(> .info) > :not(.card__title, .info) {
+  grid-row: 1/span 2;
+}
+.card__header:has(> .info) > .card__title,
+.card__header:has(> .info) > .info {
+  grid-column: 1;
+}
+@media (max-width: 1023px) {
+  .card__header:has(> .info) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+    /* 4px under the title, as on wide screens */
+  }
+  .card__header:has(> .info) > .card__title,
+.card__header:has(> .info) > .info {
+    flex-basis: 100%;
+  }
+  .card__header:has(> .info) > .info {
+    margin-top: -4px;
+  }
+}
+@media (max-width: 719px) {
+  .app .card__header {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .app .card__title {
+    flex-basis: 100%;
+  }
 }
 .card__body {
   overflow-x: auto;
-  padding-bottom: 24px;
+  padding: 16px 8px;
 }
 .card__action {
   flex: none;
@@ -2041,13 +2193,16 @@ input.swatch:checked {
   background: linear-gradient(transparent, var(--color-overlay));
 }
 .card__cover h1 {
-  font-size: 28px; /* display */
-  font-weight: 300;
-  line-height: 36px;
-  letter-spacing: -0.2px;
+  font-size: var(--type-display-size);
+  font-weight: var(--type-display-weight);
+  letter-spacing: var(--type-display-tracking);
+  line-height: var(--type-display-line);
+  text-transform: var(--type-display-case);
   color: var(--color-fg-on-image);
 }
-.card__cover .card__action { /* -inv icon over the image */ }
+.card__cover .card__action {
+  /* -inv icon over the image */
+}
 .card__cover .card__action::before {
   background-image: var(--icon-inv, var(--icon));
 }
@@ -2152,40 +2307,185 @@ input.swatch:checked {
   background-image: url("../img/bg/bg_24.png");
 }
 
+/* Status / summary line of a page, under its title (.card__header) */
+.info {
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  letter-spacing: var(--type-body-tracking);
+  line-height: var(--type-body-line);
+  text-transform: var(--type-body-case);
+  color: var(--color-fg-primary);
+  line-height: 24px;
+}
+
+/*
+  Warning note: text that flags something missing or to check, anywhere
+  (inside .info: "1 to cast"; Shoot Plan times: "Overlaps").
+    <span class="warning-note">1 to cast</span>
+*/
+/* null = keeps the weight around it */
+.warning-note {
+  background: var(--color-warning);
+  color: var(--color-fg-on-warning);
+  /* dark in every theme: the fill is the same */
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/****************************************************************************
+
+  STATS
+
+****************************************************************************/
+/*
+  Row of key figures under the tabs (Shoot Plan: one per day). A <dl>,
+  one cell per figure, label on top and value under it:
+
+    <dl class="stats">
+      <div class="stats__item"><dt>Shots</dt><dd>52</dd></div>
+      <div class="stats__item stats__item--alert"><dt>Needs attention</dt><dd>2 overlaps</dd></div>
+    </dl>
+
+  Values can hold editable pills (<span class="stats__range">: two times
+  with a chevron between them).
+  --alert puts a warning dot before the value.
+*/
+/* narrowest cell before they wrap */
+/* label → value */
+/* aligned with the tabs (inside .card__body) */
+/* frame and dividers */
+/* below: figures in a row, needs attention under them */
+/* below: one cell per line */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(160px, max-content)) 1fr;
+  /* figures fit their content; the last cell (needs attention) takes the rest */
+  margin: 0 16px 16px;
+  border: 0.5px solid var(--color-border-divider);
+  border-radius: 2px;
+  background: var(--color-bg-floating);
+  /* Medium: the three figures share the first line, needs attention below */
+  /* Small: one cell per line */
+  /* Call → wrap: two time pills with a chevron between them */
+  /* Something to check: dot in the warning colour before the value */
+}
+.stats__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 24px;
+}
+.stats__item + .stats__item {
+  border-left: 0.5px solid var(--color-border-divider);
+}
+@media (max-width: 1023px) {
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .stats__item:nth-child(n+4) {
+    grid-column: 1/-1;
+    border-top: 0.5px solid var(--color-border-divider);
+    border-left: 0;
+  }
+}
+@media (max-width: 559px) {
+  .stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .stats__item + .stats__item {
+    border-top: 0.5px solid var(--color-border-divider);
+    border-left: 0;
+  }
+}
+.stats dt {
+  font-size: var(--type-pill-size);
+  font-weight: 400;
+  letter-spacing: var(--type-pill-tracking);
+  line-height: var(--type-pill-line);
+  text-transform: var(--type-pill-case);
+  color: var(--color-fg-secondary);
+  text-transform: uppercase;
+}
+.stats dd {
+  font-size: var(--type-text-lg-size);
+  font-weight: var(--type-text-lg-weight);
+  letter-spacing: var(--type-text-lg-tracking);
+  line-height: var(--type-text-lg-line);
+  text-transform: var(--type-text-lg-case);
+  color: var(--color-fg-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+  margin: 0;
+}
+.stats__range {
+  position: relative;
+  display: inline-flex;
+  gap: 16px;
+}
+.stats__range .pill--input {
+  --pill-width: 46px;
+}
+.stats__range::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--icon-chevron-right) center/24px no-repeat;
+  pointer-events: none;
+}
+.stats__item--alert dd::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  background: var(--color-warning);
+  border-radius: 50%;
+}
+
 /****************************************************************************
 
   TABS
 
 ****************************************************************************/
+/*
+  Text tabs on a divider line. Unselected in $color-fg-subtle; hovered
+  and selected in primary, the selected one underlined (it covers the
+  divider). Same weight in both states, so the text never moves.
+*/
 .tabs {
   display: flex;
   align-items: center;
-  gap: 8px;
-  height: 64px;
-  padding: 0 24px;
-  /* Unselected in $color-fg-subtle; selected and hovered in primary */
+  gap: 24px;
+  align-items: stretch;
+  height: 48px;
+  margin: 0 24px;
+  border-bottom: 0.5px solid var(--color-border-button);
 }
 .tabs__tab {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  line-height: 16px;
-  text-transform: uppercase;
+  font-size: var(--type-title-sm-size);
+  font-weight: var(--type-title-sm-weight);
+  letter-spacing: var(--type-title-sm-tracking);
+  line-height: var(--type-title-sm-line);
+  text-transform: var(--type-title-sm-case);
   color: var(--color-fg-subtle);
-  height: 24px;
-  padding: 4px 8px;
-  line-height: 16px;
-  border-radius: 2px;
-  transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1), color 200ms cubic-bezier(0.2, 0, 0, 1);
+  margin-bottom: -0.5px;
+  /* the underline sits on the divider */
+  padding: 0 4px;
+  transition: color 200ms cubic-bezier(0.2, 0, 0, 1), box-shadow 200ms cubic-bezier(0.2, 0, 0, 1);
 }
-.tabs__tab:hover, .tabs__tab[aria-selected=true] {
+.tabs__tab:hover {
   color: var(--color-fg-primary);
-  background: var(--color-bg-selected-cell);
+}
+.tabs__tab[aria-selected=true] {
+  color: var(--color-fg-primary);
+  box-shadow: inset 0 -2px 0 var(--color-fg-primary);
 }
 
 /****************************************************************************
 
-  OVERVIEW WIDGETS: FACTS, WEATHER AND EDITOR
+  OVERVIEW WIDGETS: FACTS, WEATHER, PLACES AND EDITOR
 
 ****************************************************************************/
 /* Label / value pairs (Credits, Contact) */
@@ -2201,18 +2501,18 @@ input.swatch:checked {
   padding: 0 24px;
 }
 .facts dt {
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.2px;
-  line-height: 20px;
-  text-transform: none;
+  font-size: var(--type-body-lg-size);
+  font-weight: var(--type-body-lg-weight);
+  letter-spacing: var(--type-body-lg-tracking);
+  line-height: var(--type-body-lg-line);
+  text-transform: var(--type-body-lg-case);
 }
 .facts dd {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 20px;
-  text-transform: none;
+  font-size: var(--type-text-lg-size);
+  font-weight: var(--type-text-lg-weight);
+  letter-spacing: var(--type-text-lg-tracking);
+  line-height: var(--type-text-lg-line);
+  text-transform: var(--type-text-lg-case);
   margin: 0;
   text-align: right;
 }
@@ -2244,7 +2544,8 @@ input.swatch:checked {
 */
 .logo-field {
   display: grid;
-  justify-content: end; /* one column as wide as the value, on the right */
+  justify-content: end;
+  /* one column as wide as the value, on the right */
   align-items: center;
   /* As wide as its text (field-sizing; js/app.js sets the width where it
      is not supported) and flush with the right edge */
@@ -2302,15 +2603,18 @@ input.swatch:checked {
   object-fit: cover;
 }
 .weather__temp {
-  font-size: 40px;
-  font-weight: 300;
-  line-height: 40px;
-  letter-spacing: -1.5px;
+  font-size: var(--type-display-lg-size);
+  font-weight: var(--type-display-lg-weight);
+  letter-spacing: var(--type-display-lg-tracking);
+  line-height: var(--type-display-lg-line);
+  text-transform: var(--type-display-lg-case);
   color: var(--color-fg-primary);
 }
 .weather__temp small {
+  /* unit: half the size, regular, on the same 40px line */
   font-size: 20px;
-  line-height: 1; /* keeps the 40px line */
+  line-height: 1;
+  /* keeps the 40px line */
   font-weight: 400;
   letter-spacing: 0;
   color: var(--color-fg-secondary);
@@ -2328,21 +2632,274 @@ input.swatch:checked {
   align-items: center;
 }
 .weather__stats dt {
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.2px;
-  line-height: 20px;
-  text-transform: none;
+  font-size: var(--type-body-lg-size);
+  font-weight: var(--type-body-lg-weight);
+  letter-spacing: var(--type-body-lg-tracking);
+  line-height: var(--type-body-lg-line);
+  text-transform: var(--type-body-lg-case);
   line-height: 16px;
 }
 .weather__stats dd {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 20px;
-  text-transform: none;
+  font-size: var(--type-text-lg-size);
+  font-weight: var(--type-text-lg-weight);
+  letter-spacing: var(--type-text-lg-tracking);
+  line-height: var(--type-text-lg-line);
+  text-transform: var(--type-text-lg-case);
   margin: 0;
   line-height: 16px;
+}
+
+/*
+  Places: numbered list of locations next to one map with numbered pins
+  (Overview › Locations). Pointing at a location lights its pin and the
+  other way round (CSS only, :has).
+
+    <div class="places">
+      <ol class="places__list">
+        <li class="places__item"><address><strong>Name</strong> Street<br>City</address></li>
+      </ol>
+      <div class="places__map">
+        <img src="…" alt="Map">
+        <span class="places__pin" style="--x: 30%; --y: 40%">1</span>
+      </div>
+    </div>
+
+  Item n and pin n go together (same position in their lists). The number
+  of each item comes from a CSS counter. --x / --y place a pin on the map
+  (development will place them from the coordinates).
+*/
+/* map share of the width */
+/* map height with few locations */
+/* row padding (top/bottom and sides) */
+/* number circle (rows and pins) */
+/* item ↔ pin pairs linked by :hover */
+.places {
+  display: flex;
+  min-height: 180px;
+  /* Pin: the number, its bottom tip on the point (--x, --y) */
+  /* Pointing at item n lights pin n, and pin n lights item n */
+  /* Small screens: map on top, list under it */
+}
+.places__list {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  counter-reset: place;
+}
+.places__item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px;
+  counter-increment: place;
+  transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+.places__item + .places__item {
+  border-top: 0.5px solid var(--color-border-divider);
+}
+.places__item::before {
+  content: counter(place);
+  font-size: var(--type-pill-sm-size);
+  font-weight: var(--type-pill-sm-weight);
+  letter-spacing: var(--type-pill-sm-tracking);
+  line-height: var(--type-pill-sm-line);
+  text-transform: none;
+  color: var(--color-fg-inverse);
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  background: var(--color-fg-primary);
+  border-radius: 50%;
+}
+.places__item address {
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  letter-spacing: var(--type-body-sm-tracking);
+  line-height: var(--type-body-sm-line);
+  text-transform: var(--type-body-sm-case);
+  color: var(--color-fg-primary);
+  font-style: normal;
+}
+.places__item address strong {
+  display: block;
+  font-weight: 600;
+}
+.places__map {
+  position: relative;
+  flex: none;
+  width: 50%;
+  overflow: hidden;
+}
+.places__map img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.places__pin {
+  font-size: var(--type-pill-sm-size);
+  font-weight: var(--type-pill-sm-weight);
+  letter-spacing: var(--type-pill-sm-tracking);
+  line-height: var(--type-pill-sm-line);
+  text-transform: none;
+  color: var(--color-fg-inverse);
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  background: var(--color-fg-primary);
+  border-radius: 50%;
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  box-shadow: 1px 3px 8px var(--color-shadow);
+  transform: translate(-50%, -100%);
+  transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1), transform 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+.places:has(.places__item:nth-child(1):hover) .places__pin:nth-of-type(1), .places:has(.places__pin:nth-of-type(1):hover) .places__pin:nth-of-type(1) {
+  background: var(--color-accent);
+  transform: translate(-50%, -100%) scale(1.15);
+}
+.places:has(.places__pin:nth-of-type(1):hover) .places__item:nth-child(1) {
+  background: var(--color-bg-hover-cell);
+}
+.places:has(.places__pin:nth-of-type(1):hover) .places__item:nth-child(1)::before {
+  background: var(--color-accent);
+}
+.places:has(.places__item:nth-child(2):hover) .places__pin:nth-of-type(2), .places:has(.places__pin:nth-of-type(2):hover) .places__pin:nth-of-type(2) {
+  background: var(--color-accent);
+  transform: translate(-50%, -100%) scale(1.15);
+}
+.places:has(.places__pin:nth-of-type(2):hover) .places__item:nth-child(2) {
+  background: var(--color-bg-hover-cell);
+}
+.places:has(.places__pin:nth-of-type(2):hover) .places__item:nth-child(2)::before {
+  background: var(--color-accent);
+}
+.places:has(.places__item:nth-child(3):hover) .places__pin:nth-of-type(3), .places:has(.places__pin:nth-of-type(3):hover) .places__pin:nth-of-type(3) {
+  background: var(--color-accent);
+  transform: translate(-50%, -100%) scale(1.15);
+}
+.places:has(.places__pin:nth-of-type(3):hover) .places__item:nth-child(3) {
+  background: var(--color-bg-hover-cell);
+}
+.places:has(.places__pin:nth-of-type(3):hover) .places__item:nth-child(3)::before {
+  background: var(--color-accent);
+}
+.places:has(.places__item:nth-child(4):hover) .places__pin:nth-of-type(4), .places:has(.places__pin:nth-of-type(4):hover) .places__pin:nth-of-type(4) {
+  background: var(--color-accent);
+  transform: translate(-50%, -100%) scale(1.15);
+}
+.places:has(.places__pin:nth-of-type(4):hover) .places__item:nth-child(4) {
+  background: var(--color-bg-hover-cell);
+}
+.places:has(.places__pin:nth-of-type(4):hover) .places__item:nth-child(4)::before {
+  background: var(--color-accent);
+}
+.places:has(.places__item:nth-child(5):hover) .places__pin:nth-of-type(5), .places:has(.places__pin:nth-of-type(5):hover) .places__pin:nth-of-type(5) {
+  background: var(--color-accent);
+  transform: translate(-50%, -100%) scale(1.15);
+}
+.places:has(.places__pin:nth-of-type(5):hover) .places__item:nth-child(5) {
+  background: var(--color-bg-hover-cell);
+}
+.places:has(.places__pin:nth-of-type(5):hover) .places__item:nth-child(5)::before {
+  background: var(--color-accent);
+}
+.places:has(.places__item:nth-child(6):hover) .places__pin:nth-of-type(6), .places:has(.places__pin:nth-of-type(6):hover) .places__pin:nth-of-type(6) {
+  background: var(--color-accent);
+  transform: translate(-50%, -100%) scale(1.15);
+}
+.places:has(.places__pin:nth-of-type(6):hover) .places__item:nth-child(6) {
+  background: var(--color-bg-hover-cell);
+}
+.places:has(.places__pin:nth-of-type(6):hover) .places__item:nth-child(6)::before {
+  background: var(--color-accent);
+}
+.places:has(.places__item:nth-child(7):hover) .places__pin:nth-of-type(7), .places:has(.places__pin:nth-of-type(7):hover) .places__pin:nth-of-type(7) {
+  background: var(--color-accent);
+  transform: translate(-50%, -100%) scale(1.15);
+}
+.places:has(.places__pin:nth-of-type(7):hover) .places__item:nth-child(7) {
+  background: var(--color-bg-hover-cell);
+}
+.places:has(.places__pin:nth-of-type(7):hover) .places__item:nth-child(7)::before {
+  background: var(--color-accent);
+}
+.places:has(.places__item:nth-child(8):hover) .places__pin:nth-of-type(8), .places:has(.places__pin:nth-of-type(8):hover) .places__pin:nth-of-type(8) {
+  background: var(--color-accent);
+  transform: translate(-50%, -100%) scale(1.15);
+}
+.places:has(.places__pin:nth-of-type(8):hover) .places__item:nth-child(8) {
+  background: var(--color-bg-hover-cell);
+}
+.places:has(.places__pin:nth-of-type(8):hover) .places__item:nth-child(8)::before {
+  background: var(--color-accent);
+}
+.places:has(.places__item:nth-child(9):hover) .places__pin:nth-of-type(9), .places:has(.places__pin:nth-of-type(9):hover) .places__pin:nth-of-type(9) {
+  background: var(--color-accent);
+  transform: translate(-50%, -100%) scale(1.15);
+}
+.places:has(.places__pin:nth-of-type(9):hover) .places__item:nth-child(9) {
+  background: var(--color-bg-hover-cell);
+}
+.places:has(.places__pin:nth-of-type(9):hover) .places__item:nth-child(9)::before {
+  background: var(--color-accent);
+}
+.places:has(.places__item:nth-child(10):hover) .places__pin:nth-of-type(10), .places:has(.places__pin:nth-of-type(10):hover) .places__pin:nth-of-type(10) {
+  background: var(--color-accent);
+  transform: translate(-50%, -100%) scale(1.15);
+}
+.places:has(.places__pin:nth-of-type(10):hover) .places__item:nth-child(10) {
+  background: var(--color-bg-hover-cell);
+}
+.places:has(.places__pin:nth-of-type(10):hover) .places__item:nth-child(10)::before {
+  background: var(--color-accent);
+}
+.places:has(.places__item:nth-child(11):hover) .places__pin:nth-of-type(11), .places:has(.places__pin:nth-of-type(11):hover) .places__pin:nth-of-type(11) {
+  background: var(--color-accent);
+  transform: translate(-50%, -100%) scale(1.15);
+}
+.places:has(.places__pin:nth-of-type(11):hover) .places__item:nth-child(11) {
+  background: var(--color-bg-hover-cell);
+}
+.places:has(.places__pin:nth-of-type(11):hover) .places__item:nth-child(11)::before {
+  background: var(--color-accent);
+}
+.places:has(.places__item:nth-child(12):hover) .places__pin:nth-of-type(12), .places:has(.places__pin:nth-of-type(12):hover) .places__pin:nth-of-type(12) {
+  background: var(--color-accent);
+  transform: translate(-50%, -100%) scale(1.15);
+}
+.places:has(.places__pin:nth-of-type(12):hover) .places__item:nth-child(12) {
+  background: var(--color-bg-hover-cell);
+}
+.places:has(.places__pin:nth-of-type(12):hover) .places__item:nth-child(12)::before {
+  background: var(--color-accent);
+}
+.places__item:hover {
+  background: var(--color-bg-hover-cell);
+}
+.places__item:hover::before {
+  background: var(--color-accent);
+}
+@media (max-width: 719px) {
+  .places {
+    flex-direction: column-reverse;
+  }
+  .places__map {
+    width: 100%;
+    height: 180px;
+  }
 }
 
 /* Rich text with a formatting toolbar */
@@ -2363,11 +2920,11 @@ input.swatch:checked {
 }
 
 .prose {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
+  font-size: var(--type-text-sm-size);
+  font-weight: var(--type-text-sm-weight);
+  letter-spacing: var(--type-text-sm-tracking);
+  line-height: var(--type-text-sm-line);
+  text-transform: var(--type-text-sm-case);
   padding: 16px 24px 0;
   line-height: 20px;
   color: var(--color-fg-primary);
@@ -2407,7 +2964,8 @@ input.swatch:checked {
   --thumb-height: 112px;
   position: relative;
   display: flex;
-  gap: 2px; /* between merged images */
+  gap: 2px;
+  /* between merged images */
   width: var(--thumb-width);
   height: var(--thumb-height);
   margin: 0;
@@ -2426,11 +2984,11 @@ input.swatch:checked {
   object-fit: cover;
 }
 .thumb figcaption {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
+  font-size: var(--type-text-sm-size);
+  font-weight: var(--type-text-sm-weight);
+  letter-spacing: var(--type-text-sm-tracking);
+  line-height: var(--type-text-sm-line);
+  text-transform: var(--type-text-sm-case);
   position: absolute;
   top: 3px;
   right: 3px;
@@ -2484,7 +3042,8 @@ input.swatch:checked {
   margin: 0;
   padding: 0;
   color: inherit;
-  background: var(--color-bg-card);
+  background: var(--color-bg-floating);
+  /* as the modals */
   border: 0;
   border-radius: 2px;
   box-shadow: 1px 3px 8px var(--color-shadow);
@@ -2571,11 +3130,11 @@ body:has(.drawer[open]) {
   padding: 0 24px;
 }
 .gallery__title {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 12px;
-  text-transform: uppercase;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+  line-height: var(--type-label-line);
+  text-transform: var(--type-label-case);
   color: var(--color-fg-primary);
   display: flex;
   align-items: center;
@@ -2592,16 +3151,15 @@ body:has(.drawer[open]) {
   background: var(--color-border-button);
 }
 .gallery__select {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  line-height: 16px;
-  text-transform: uppercase;
+  font-size: var(--type-pill-sm-size);
+  font-weight: var(--type-pill-sm-weight);
+  letter-spacing: var(--type-pill-sm-tracking);
+  line-height: var(--type-pill-sm-line);
+  text-transform: var(--type-pill-sm-case);
   color: var(--color-fg-primary);
   display: flex;
   align-items: center;
   gap: 4px;
-  line-height: 16px;
   cursor: pointer;
 }
 .gallery__grid {
@@ -2613,7 +3171,8 @@ body:has(.drawer[open]) {
 .gallery__grid .thumb {
   --thumb-width: 100%;
   --thumb-height: auto;
-  aspect-ratio: 200/112; /* $thumb-width / $thumb-height */
+  aspect-ratio: 200/112;
+  /* $thumb-width / $thumb-height */
 }
 
 /*
@@ -2650,32 +3209,30 @@ body:has(.drawer[open]) {
   /* Inside a modal body: no outer margin, tighter lines (New project) */
 }
 .dropzone__title {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 16px;
-  text-transform: uppercase;
+  font-size: var(--type-title-sm-size);
+  font-weight: var(--type-title-sm-weight);
+  letter-spacing: var(--type-title-sm-tracking);
+  line-height: var(--type-title-sm-line);
+  text-transform: var(--type-title-sm-case);
   color: var(--color-fg-primary);
   --icon-size: 64px;
   flex-direction: column;
   gap: 8px;
-  line-height: 16px;
   text-align: center;
 }
 .dropzone__text {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
-  line-height: 16px;
+  font-size: var(--type-text-sm-size);
+  font-weight: var(--type-text-sm-weight);
+  letter-spacing: var(--type-text-sm-tracking);
+  line-height: var(--type-text-sm-line);
+  text-transform: var(--type-text-sm-case);
 }
 .dropzone__browse {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 16px;
-  text-transform: uppercase;
+  font-size: var(--type-title-sm-size);
+  font-weight: var(--type-title-sm-weight);
+  letter-spacing: var(--type-title-sm-tracking);
+  line-height: var(--type-title-sm-line);
+  text-transform: var(--type-title-sm-case);
   color: var(--color-fg-primary);
   text-decoration: underline;
 }
@@ -2713,8 +3270,10 @@ body:has(.drawer[open]) {
 /* grey box of a banner row */
 /* multiple-choice cells: lines shown before "…" */
 /* space around the box (40px row) */
+/* under every row of a list in a card */
 .list {
-  --list-actions: 130px; /* default */
+  --list-actions: 130px;
+  /* default */
   min-width: 480px;
   /* Actions column width per view */
   /* pill + 2 buttons */
@@ -2722,6 +3281,11 @@ body:has(.drawer[open]) {
   /* pill + 1 button */
   /* Compact list inside a widget (Overview › Locations) */
   /* ROWS ----------------------------------------------------------------- */
+  /*
+    Line under the head and every data row of a list in a card (Talent,
+    Crew, Sites, Calls, Reports, Shoot Plan). Not banners (their own box),
+    the compact Overview list (--places) or the viewer (its own cards).
+  */
   /* CELLS ---------------------------------------------------------------- */
   /*
     Values of a multiple-choice cell: up to $values-max lines, then "…".
@@ -2745,14 +3309,13 @@ body:has(.drawer[open]) {
   padding: 0 16px;
 }
 .list--places .list__cell--fill {
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  letter-spacing: var(--type-body-tracking);
+  line-height: var(--type-body-line);
+  text-transform: var(--type-body-case);
   padding: 0 24px 0 0;
   font-style: normal;
-  line-height: 16px;
   white-space: normal;
 }
 .list--places .list__cell--fill strong {
@@ -2769,15 +3332,18 @@ body:has(.drawer[open]) {
   border: 0.5px solid var(--color-bg-selected-icon);
   border-radius: 2px;
 }
+.card .list:not(.list--places, .viewer *) > .list__row:not(.list__row--banner) {
+  border-bottom: 0.5px solid var(--color-border-divider);
+}
 .list__row {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
+  font-size: var(--type-text-size);
+  font-weight: var(--type-text-weight);
+  letter-spacing: var(--type-text-tracking);
+  line-height: var(--type-text-line);
+  text-transform: var(--type-text-case);
   display: flex;
   align-items: center;
-  min-height: 40px;
+  min-height: 48px;
   padding: 0 4px;
   /* Highlight data rows under the pointer (not heads or banners) */
   /* Banner: group separator (e.g. a day in Shoot Plan) */
@@ -2786,24 +3352,24 @@ body:has(.drawer[open]) {
   background-color: var(--color-bg-hover-cell);
 }
 .list__row--head {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 12px;
-  text-transform: uppercase;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+  line-height: var(--type-label-line);
+  text-transform: var(--type-label-case);
   color: var(--color-fg-secondary);
 }
 .list__row--banner {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 12px;
-  text-transform: uppercase;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+  line-height: var(--type-label-line);
+  text-transform: var(--type-label-case);
   color: var(--color-fg-primary);
   gap: 16px;
   min-height: 0;
   height: 32px;
-  margin: 4px 8px;
+  margin: 4px 0px;
   padding: 0 8px;
   background: var(--color-bg-app);
   border-radius: 2px;
@@ -2843,6 +3409,7 @@ body:has(.drawer[open]) {
     Looks like text; the arrow shows on hover or while the menu is open.
   */
   /* Several values, one per line; the arrow follows the longest one */
+  /* Character names (Talent, Calls): always uppercase, also while typing */
   /* 120×72 thumbnail; the row grows to 80px. 24px before the actions. */
   /*
     Actions aligned to the right, so icons stay in columns even if the
@@ -2853,22 +3420,24 @@ body:has(.drawer[open]) {
   display: flex;
   justify-content: center;
   width: 28px;
-  padding-left: 12px; /* checkbox 6px right of the centre */
+  padding-left: 12px;
+  /* checkbox 6px right of the centre */
 }
 .list__cell--index {
   width: 40px;
   text-align: center;
 }
 .list__row:not(.list__row--head) .list__cell--index {
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  letter-spacing: var(--type-body-sm-tracking);
+  line-height: var(--type-body-sm-line);
+  text-transform: var(--type-body-sm-case);
 }
 .list__cell--fill {
   flex: 1 1 0;
-  padding-right: 8px; /* keeps long texts (e.g. email) apart */
+  padding-right: 8px;
+  /* keeps long texts (e.g. email) apart */
 }
 .list__cell--phone {
   width: 100px;
@@ -2883,7 +3452,8 @@ body:has(.drawer[open]) {
   height: 18px;
   background: var(--icon-dropdown) center/cover no-repeat;
   display: inline-block;
-  margin: -1px 0 -1px 2px; /* 18px arrow on a 16px line */
+  margin: -1px 0 -1px 2px;
+  /* 18px arrow on a 16px line */
   vertical-align: top;
   opacity: 0;
   transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1);
@@ -2902,6 +3472,12 @@ body:has(.drawer[open]) {
 .list__cell--name {
   width: 200px;
   padding-right: 8px;
+}
+.list__cell--character {
+  text-transform: uppercase;
+}
+.list__cell--character ::placeholder {
+  text-transform: none;
 }
 .list__cell--thumb {
   display: flex;
@@ -2977,42 +3553,46 @@ body:has(.drawer[open]) {
 
 ****************************************************************************/
 /*
-  .list--shoot-plan — own head row, day banners, custom banners and shot rows.
+  .list--shoot-plan — head row, custom banners and shot rows. Above the
+  list, the day summary (.summary, _cards.scss).
 
-    Columns:  --slot (check, times) · --shot (thumbnail)
-              --desc (spot, text) · --set · --cast · --reqs · --actions
+    Columns:  --check · --time (start, end, note) · --shot (thumbnail)
+              --desc (spot, action) · --set · --talent
+              --reqs (requirements) · --actions (output: type, flow, delete)
 
-  Every fixed size lives in the $sp-* variables, so they can be tuned here
-  without touching the rules. --desc and --reqs share the remaining width;
-  below $sp-min-width the card scrolls horizontally.
+  Every cell but the thumbnail starts at the same top line ($sp-top), so
+  rows read across. Fixed sizes live in the $sp-* variables; --desc and
+  --reqs share the remaining width; below $sp-min-width the card scrolls
+  horizontally.
+
+  (--slot is the old check + times column, kept for the viewer.)
 */
-/* Sizes (Figma › APP - ALT Shoot Plan) */
+/* Sizes */
 /* between cells */
-/* shot row height */
-/* check + times + type column */
-/* vertical axis of the check and the pills */
-/* top edge → first line of slot and actions */
-/* first line → second (check → start, type → flow) */
-/* the other lines (start → end, flow → delete) */
-/* extra space above delete (it leaves the end-time line) */
+/* shot row height (thumbnail + 8px) */
+/* row top → first line of every cell */
+/* between the lines of a stack (times, output) */
+/* start / end time column */
 /* fixed-size thumbnail (.thumb) */
-/* height of description, set and cast */
-/* 5 lines of requirements; the rest is hidden */
-/* flow and type pills in the actions */
+/* max height of action, set, talent and requirements */
+/* set */
+/* talent (characters) */
+/* requirements: between paragraphs / lists */
+/* output */
+/* shot type in the output */
+/* output: type → flow → delete */
 /* times, type, duration and flow */
 /* time in a shot row */
 /* time in a banner */
-/* .has-warning: next to the check, near the top */
+/* delete button (.icon-button) */
+/* Old slot column (viewer) */
 /* Row out of the flow */
 /* shift */
 /* fill */
 /* left edge */
-/* Body text of the shot cells */
 .list--shoot-plan {
   --list-actions: 80px;
   min-width: 1016px;
-  padding: 8px 0;
-  /* Warning in shot rows: level with the check, not centred in 120px */
   /* Shot row (anything that is not a head or a banner) */
   /*
     Out of the flow ("Flow" unchecked): the row shifts right, as if pulled
@@ -3022,20 +3602,24 @@ body:has(.drawer[open]) {
   /* A banner out of the flow shifts the same way but keeps its colour */
   /* Value pills (times, duration): shorter and in the primary colour */
   /* CELLS ---------------------------------------------------------------- */
-  /*
-    Slot (check, start, end) and actions (type, flow, delete) are two stacks
-    of $sp-pill-h lines with the same top and gaps, so their lines match.
-    The slot is centred on $sp-slot-axis.
-  */
+  /* Every cell of a shot row starts at $sp-top, except the thumbnail */
+  /* Check: centred on the first time line */
+  /* Start and end, one under the other; a note under them ("Overlaps") */
+  /* Note under the times: something to check in this shot */
   /* Fixed-size thumbnail (.thumb) with the shot number ("24", "24 + 15 + 21") */
-  /* Spot on top; the text is centred in the remaining space */
+  /* Action: spot on top, the text under it */
   /*
-    Set and cast: multiple choice cells (data-multi="sets" / "characters"),
-    one value per line, left-aligned and vertically centred. If they do not
-    fit, the bottom is cut.
+    Set and talent: multiple choice cells (data-multi="sets" /
+    "characters"), one value per line from the top; if they do not fit,
+    the bottom is cut. Talent values are characters: uppercase.
   */
-  /* Requirements: ExtraBold label + text. Empty = "-" */
-  /* Type, flow and delete, one per line (see the slot above) */
+  /*
+    Requirements: rich text (paragraphs, bold, lists) as the editor gives
+    it. Empty cell (no whitespace inside) shows data-empty, like the
+    multiple choice cells.
+  */
+  /* Output: type, flow and delete, one per line, centred (the head too) */
+  /* Old slot column: check, start, end (viewer) */
   /* Head row: same cell classes, without the row's content */
   /* BANNERS -------------------------------------------------------------- */
   /*
@@ -3044,27 +3628,18 @@ body:has(.drawer[open]) {
   */
 }
 .list--shoot-plan .list__row {
-  gap: 16px;
-}
-.list--shoot-plan .has-warning {
-  --warning-x: 14px;
-  --warning-y: 21%;
-}
-.list--shoot-plan .list__row--head {
-  padding: 0;
+  gap: 8px;
 }
 .list--shoot-plan .list__row:not(.list__row--head, .list__row--banner) {
   min-height: 120px;
-  padding: 0;
   transition: padding-left 200ms cubic-bezier(0.2, 0, 0, 1), box-shadow 200ms cubic-bezier(0.2, 0, 0, 1), background-color 200ms cubic-bezier(0.2, 0, 0, 1);
 }
-.list--shoot-plan .list__row:has(.pill--flow input:not(:checked)) {
-  --warning-x: 32px;
-  padding-left: 18px;
+.list--shoot-plan .list__row:has(.flow input:not(:checked)) {
+  padding-left: 22px;
   background: var(--color-bg-content);
   box-shadow: inset 8px 0 8px -4px var(--color-shadow-inset);
 }
-.list--shoot-plan .list__row--banner:has(.pill--flow input:not(:checked)) {
+.list--shoot-plan .list__row--banner:has(.flow input:not(:checked)) {
   background: var(--banner-bg, var(--color-bg-app));
 }
 .list--shoot-plan .pill {
@@ -3073,29 +3648,40 @@ body:has(.drawer[open]) {
   height: 20px;
   min-width: 0;
   padding: 0 4px;
-  line-height: 16px;
   color: var(--color-fg-primary);
 }
 .list--shoot-plan .pill--time {
   width: 44px;
   padding: 0;
 }
-.list--shoot-plan .list__cell--slot {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.list--shoot-plan .list__row:not(.list__row--head, .list__row--banner) > .list__cell:not(.list__cell--shot) {
   align-self: flex-start;
-  gap: 2px;
-  width: 48px;
-  padding: 16px 0 0 16px;
-  overflow: visible; /* the 44px pills stick out */
-  /* 10px box on a 20px line */
+  padding-top: 16px;
 }
-.list--shoot-plan .list__cell--slot input[type=checkbox] {
+.list--shoot-plan .list__cell--check input {
   margin-block: 5px;
 }
-.list--shoot-plan .list__cell--slot .pill--time:first-of-type {
-  margin-top: 6px;
+.list--shoot-plan .list__cell--time {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 56px;
+  overflow: visible;
+}
+.list--shoot-plan .list__note {
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  letter-spacing: var(--type-body-sm-tracking);
+  line-height: var(--type-body-sm-line);
+  text-transform: var(--type-body-sm-case);
+  /* colour from .warning-note (_cards.scss) */
+  width: max-content;
+  /* the box (and its background) fits the text */
+  margin-top: 4px;
+  white-space: nowrap;
+  transform: translateX(calc(44px - 100%));
+  /* right edge = the pills' right edge: grows to the left */
 }
 .list--shoot-plan .list__cell--shot {
   --thumb-width: 200px;
@@ -3106,126 +3692,163 @@ body:has(.drawer[open]) {
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
-  height: 104px;
+  gap: 4px;
+  max-height: 104px;
 }
 .list--shoot-plan .list__cell--desc strong {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 12px;
-  text-transform: uppercase;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+  line-height: var(--type-label-line);
+  text-transform: var(--type-label-case);
   color: var(--color-fg-primary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  line-height: 24px;
 }
 .list--shoot-plan .list__cell--desc p {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
-  display: flex;
-  flex: 1;
-  align-items: safe center;
+  font-size: var(--type-text-sm-size);
+  font-weight: var(--type-text-sm-weight);
+  letter-spacing: var(--type-text-sm-tracking);
+  line-height: var(--type-text-sm-line);
+  text-transform: var(--type-text-sm-case);
   overflow: hidden;
   white-space: normal;
 }
 .list--shoot-plan .list__cell--set,
-.list--shoot-plan .list__cell--cast {
-  height: 104px;
-}
-.list--shoot-plan .list__cell--set .list__values,
-.list--shoot-plan .list__cell--cast .list__values {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
+.list--shoot-plan .list__cell--talent {
+  align-items: flex-start;
+  max-height: 104px;
 }
 .list--shoot-plan .list__cell--set {
   width: 120px;
 }
-.list--shoot-plan .list__cell--cast {
-  width: 160px;
+.list--shoot-plan .list__cell--talent {
+  width: 150px;
+}
+.list--shoot-plan .list__cell--set .list__values {
+  font-size: var(--type-text-sm-size);
+  font-weight: var(--type-text-sm-weight);
+  letter-spacing: var(--type-text-sm-tracking);
+  line-height: var(--type-text-sm-line);
+  text-transform: var(--type-text-sm-case);
+  color: var(--color-fg-primary);
+}
+.list--shoot-plan .list__cell--talent .list__values {
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  letter-spacing: var(--type-body-sm-tracking);
+  line-height: var(--type-body-sm-line);
+  text-transform: var(--type-body-sm-case);
+  color: var(--color-fg-primary);
+  /* characters */
+  /* "Add talent", as "Add set" */
+}
+.list--shoot-plan .list__cell--talent .list__values > * {
+  text-transform: uppercase;
+}
+.list--shoot-plan .list__cell--talent .list__values:empty::before {
+  font-weight: 600;
 }
 .list--shoot-plan .list__cell--reqs {
   flex: 1 1 0;
-  max-height: 80px;
-}
-.list--shoot-plan .list__cell--reqs p {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
-  color: var(--color-fg-primary);
+  max-height: 104px;
   white-space: normal;
 }
-.list--shoot-plan .list__cell--reqs b {
-  font-weight: 700;
+.list--shoot-plan .list__cell--reqs > * + * {
+  margin-top: 4px;
+}
+.list--shoot-plan .list__cell--reqs p, .list--shoot-plan .list__cell--reqs ul, .list--shoot-plan .list__cell--reqs ol {
+  margin: 0;
+}
+.list--shoot-plan .list__cell--reqs ul, .list--shoot-plan .list__cell--reqs ol {
+  padding-left: 16px;
+}
+.list--shoot-plan .list__cell--reqs ul {
+  list-style: disc;
+}
+.list--shoot-plan .list__cell--reqs ol {
+  list-style: decimal;
+}
+.list--shoot-plan .list__cell--reqs b, .list--shoot-plan .list__cell--reqs strong {
+  font-weight: 600;
+}
+.list--shoot-plan .list__cell--reqs:empty::before {
+  content: attr(data-empty);
+  font-size: var(--type-text-sm-size);
+  font-weight: var(--type-text-sm-weight);
+  letter-spacing: var(--type-text-sm-tracking);
+  line-height: var(--type-text-sm-line);
+  text-transform: var(--type-text-sm-case);
+  color: var(--color-fg-subtle);
+}
+.list--shoot-plan .list__row:not(.list__row--head) > .list__cell--reqs {
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  letter-spacing: var(--type-body-sm-tracking);
+  line-height: var(--type-body-sm-line);
+  text-transform: var(--type-body-sm-case);
+  color: var(--color-fg-primary);
 }
 .list--shoot-plan .list__cell--actions {
   flex-direction: column;
-  align-self: flex-start;
-  gap: 2px;
-  padding: 16px 0 0;
-  /* Type as wide as Flow, room for the whole name ("Social", "Photo") */
-}
-.list--shoot-plan .list__cell--actions > :nth-child(2) {
-  margin-top: 6px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  /* Shot type: no arrow here, the name centred */
 }
 .list--shoot-plan .list__cell--actions .icon-button {
   --icon-size: 20px;
+  width: 24px;
   height: 20px;
+}
+.list--shoot-plan .list__cell--actions .shot-type {
+  width: 48px;
+  padding: 0 2px;
+}
+.list--shoot-plan .list__cell--actions .shot-type::after {
+  content: none;
+}
+.list--shoot-plan .list__cell--slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: flex-start;
+  gap: 2px;
+  width: 48px;
+  overflow: visible;
+}
+.list--shoot-plan .list__cell--slot input[type=checkbox] {
+  margin-block: 5px;
+}
+.list--shoot-plan .list__cell--slot .pill--time:first-of-type {
   margin-top: 6px;
 }
-.list--shoot-plan .list__cell--actions .pill--flow,
-.list--shoot-plan .list__cell--actions .shot-type {
-  width: 60px;
-}
-.list--shoot-plan .list__cell--actions .shot-type {
-  padding-left: 4px;
-}
-.list--shoot-plan .pill--flow {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  line-height: 16px;
-  text-transform: uppercase;
-  color: var(--color-fg-primary);
-  gap: 2px;
-  padding: 0 5px 0 2px;
-  line-height: 16px;
-  cursor: pointer;
-}
-.list--shoot-plan .list__row--head .list__cell--slot,
-.list--shoot-plan .list__row--head .list__cell--actions {
-  align-self: center;
-  padding-top: 0;
+.list--shoot-plan .list__row--head {
+  /* "Time" centred over the pills */
+  /* as in the rows */
 }
 .list--shoot-plan .list__row--head .list__cell--shot {
   text-align: center;
 }
-.list--shoot-plan .list__row--head .list__cell--desc,
-.list--shoot-plan .list__row--head .list__cell--set,
-.list--shoot-plan .list__row--head .list__cell--cast {
-  height: auto;
+.list--shoot-plan .list__row--head .list__cell--time {
+  align-items: center;
+  padding-right: 12px;
+}
+.list--shoot-plan .list__row--head .list__cell--actions {
+  padding-right: 16px;
 }
 .list--shoot-plan .list__row--banner {
   /* Title: 11px, still uppercase (inherited from the banner row) */
   /* Time range: chevron between the two times */
-  /* "Shooting time: 17h 20m" · "52 shots" */
   /* Custom banner actions: colour + flow */
-  /* Collapse / Expand: arrow up while expanded */
 }
 .list--shoot-plan .list__row--banner h2 {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  line-height: 16px;
-  text-transform: uppercase;
+  font-size: var(--type-pill-size);
+  font-weight: var(--type-pill-weight);
+  letter-spacing: var(--type-pill-tracking);
+  line-height: var(--type-pill-line);
+  text-transform: var(--type-pill-case);
 }
 .list--shoot-plan .list__row--banner .pill--time {
   width: 40px;
@@ -3243,32 +3866,37 @@ body:has(.drawer[open]) {
   background: var(--icon-chevron-right) center/24px no-repeat;
   pointer-events: none;
 }
-.list--shoot-plan .list__row--banner .list__cell--meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--color-fg-secondary);
-}
-.list--shoot-plan .list__row--banner .list__cell--meta .pill {
-  text-transform: none;
-}
 .list--shoot-plan .list__row--banner .list__cell--banner-actions {
   display: flex;
   align-items: center;
   gap: 4px;
   overflow: visible;
 }
-.list--shoot-plan .list__row--banner .btn {
-  --btn-height: 24px;
-  flex: none;
-  padding: 0 4px 0 8px;
-}
-.list--shoot-plan .list__row--banner .btn[aria-expanded=true]::after {
-  background-image: var(--icon-dropdown-alt);
-}
 .list--shoot-plan .list__row--banner-custom {
-  padding: 0 6px;
+  padding: 0 16px 0 8px;
   background: var(--banner-bg, var(--color-banner-bg-av));
+}
+
+/*
+  Flow: label + switch. Off = out of the flow (.list--shoot-plan shifts
+  the row or banner that holds it).
+    <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
+*/
+.flow {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--type-body-sm-weight);
+  letter-spacing: var(--type-body-sm-tracking);
+  line-height: var(--type-body-sm-line);
+  text-transform: var(--type-body-sm-case);
+  color: var(--color-fg-secondary);
+  height: 20px;
+  cursor: pointer;
+}
+.flow .switch {
+  margin: 0;
 }
 
 /*
@@ -3277,17 +3905,18 @@ body:has(.drawer[open]) {
   No modifier = AV · one modifier per key of $type-colors (_tokens.scss)
 */
 .shot-type {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  line-height: 16px;
-  text-transform: uppercase;
+  font-size: var(--type-pill-sm-size);
+  font-weight: var(--type-pill-sm-weight);
+  letter-spacing: var(--type-pill-sm-tracking);
+  line-height: var(--type-pill-sm-line);
+  text-transform: var(--type-pill-sm-case);
   color: var(--color-fg-primary);
   position: relative;
   flex: none;
   width: 44px;
   height: 20px;
-  padding: 0 11px 0 2px; /* 11px = arrow (10px) + 1px */
+  padding: 0 11px 0 2px;
+  /* 11px = arrow (10px) + 1px */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -3341,12 +3970,14 @@ body:has(.drawer[open]) {
 /* time column inside the group */
 /* between the times of the group */
 /* space on each side of the group */
+/* Talent tab: cast list, then extras */
 .list--calls {
+  /* Talent tab: extras under cast (same columns, so they line up) */
   /* Time group: narrower columns, close together and apart from the rest */
   /* aria-pressed="false" → crossed-out eye */
 }
-.list--calls .list__row {
-  padding: 0 8px;
+.list--calls + .list--calls {
+  margin-top: 40px;
 }
 .list--calls .list__cell--call {
   display: flex;
@@ -3388,21 +4019,20 @@ body:has(.drawer[open]) {
   start · final · total · extras. Start and Final (--time) only show the
   time pill; Total and Extras are numbers in --time cells.
 */
-/* checkbox with more room on its right */
+/* no # column: the same room after the check, so Dept lines up with the other lists' first column */
 /* estimated / final */
 /* days */
 .list--reports {
   --list-actions: 80px;
+  /* Talent tab: extras under cast, as in Calls */
   /* Total and Extras: plain numbers set like the text of the time pills */
   /* Days: pill centred under its title */
 }
-.list--reports .list__row {
-  padding: 0 8px;
+.list--reports + .list--reports {
+  margin-top: 40px;
 }
 .list--reports .list__cell--check {
-  justify-content: flex-start;
-  width: 48px;
-  padding-left: 8px;
+  margin-right: 40px;
 }
 .list--reports .list__cell--time {
   display: flex;
@@ -3413,10 +4043,10 @@ body:has(.drawer[open]) {
   --pill-width: 46px;
 }
 .list--reports .list__row:not(.list__row--head) .list__cell--time {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  line-height: 16px;
+  font-size: var(--type-pill-size);
+  font-weight: var(--type-pill-weight);
+  letter-spacing: var(--type-pill-tracking);
+  line-height: var(--type-pill-line);
   text-transform: none;
   color: var(--color-fg-primary);
 }
@@ -3454,7 +4084,8 @@ body:has(.drawer[open]) {
 /* Home, two columns on tablets */
 /* tab width on wide screens */
 /* tab bar, without the safe area */
-/* card header (app widget: 80px) */
+/* card outline and lines between rows */
+/* card header: label title, as the Overview widgets */
 /* facts row (app: 48px) */
 /* read-only time pill */
 /* in Calls */
@@ -3466,7 +4097,8 @@ body:has(.drawer[open]) {
 /* PAGE --------------------------------------------------------------------- */
 .viewer {
   position: relative;
-  isolation: isolate; /* the cover sits under the content, not under the page */
+  isolation: isolate;
+  /* the cover sits under the content, not under the page */
   min-height: 100vh;
   min-height: 100dvh;
   padding-bottom: calc(80px + env(safe-area-inset-bottom));
@@ -3510,12 +4142,14 @@ body:has(.drawer[open]) {
   background: linear-gradient(transparent, var(--color-overlay));
 }
 .viewer__hero h1 {
-  max-width: 960px;
-  font-size: 28px; /* display, as the Overview cover */
-  font-weight: 300;
-  line-height: 36px;
-  letter-spacing: -0.2px;
+  font-size: var(--type-display-size);
+  font-weight: var(--type-display-weight);
+  letter-spacing: var(--type-display-tracking);
+  line-height: var(--type-display-line);
+  text-transform: var(--type-display-case);
   color: var(--color-fg-on-image);
+  /* as the Overview cover */
+  max-width: 960px;
 }
 .viewer__bar {
   display: grid;
@@ -3526,11 +4160,11 @@ body:has(.drawer[open]) {
   /* -inv icon over the image (as on the Overview cover) */
 }
 .viewer__bar h1 {
-  font-size: 16px;
+  font-size: var(--type-title-lg-size);
   font-weight: 600;
-  letter-spacing: -0.4px;
-  line-height: 20px;
-  text-transform: uppercase;
+  letter-spacing: var(--type-title-lg-tracking);
+  line-height: var(--type-title-lg-line);
+  text-transform: var(--type-title-lg-case);
   color: var(--color-fg-on-image);
   grid-column: 2;
   letter-spacing: 0.8px;
@@ -3574,11 +4208,11 @@ body:has(.drawer[open]) {
   }
 }
 .viewer__footer {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 16px;
-  text-transform: uppercase;
+  font-size: var(--type-title-sm-size);
+  font-weight: var(--type-title-sm-weight);
+  letter-spacing: var(--type-title-sm-tracking);
+  line-height: var(--type-title-sm-line);
+  text-transform: var(--type-title-sm-case);
   color: var(--color-fg-subtle);
   padding: 16px 0 24px;
   line-height: 24px;
@@ -3605,11 +4239,11 @@ body:has(.drawer[open]) {
   box-shadow: 0 -2px 4px var(--color-shadow);
 }
 .tabbar__item {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  line-height: 16px;
-  text-transform: uppercase;
+  font-size: var(--type-pill-sm-size);
+  font-weight: var(--type-pill-sm-weight);
+  letter-spacing: var(--type-pill-sm-tracking);
+  line-height: var(--type-pill-sm-line);
+  text-transform: var(--type-pill-sm-case);
   color: var(--color-fg-secondary);
   flex: 1 1 0;
   flex-direction: column;
@@ -3639,34 +4273,50 @@ body:has(.drawer[open]) {
 }
 
 /* CARDS -------------------------------------------------------------------- */
-.viewer { /* the content's gap spaces them */
-  /* Widget: lower header, less space around */
+.viewer {
+  /* the content's gap spaces them */
+  /* Cards as in the app: white (bg-floating) with a hairline outline */
+  /* Widget: short header with a label title (as the Overview widgets) */
   /* Second value in a header (General Call date), styled as the title */
   /* Big value under the header (General Call time) */
   /* Alert: red frame, big icon above the text (Notes) */
+  /* Facts: ruled rows, as Credits and Contact in Overview */
 }
 .viewer .card + .card {
   margin-top: 0;
 }
+.viewer .card {
+  background: var(--color-bg-floating);
+  border: 0.5px solid var(--color-border-divider);
+}
 .viewer .card--widget {
-  padding-bottom: 24px;
+  padding-bottom: 8px;
 }
 .viewer .card--widget .card__header {
-  min-height: 64px;
+  min-height: 40px;
   padding: 0 16px;
 }
+.viewer .card--widget .card__title {
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+  line-height: var(--type-label-line);
+  text-transform: var(--type-label-case);
+  color: var(--color-fg-secondary);
+}
 .viewer .card__header time {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 16px;
-  text-transform: uppercase;
+  font-size: var(--type-title-sm-size);
+  font-weight: var(--type-title-sm-weight);
+  letter-spacing: var(--type-title-sm-tracking);
+  line-height: var(--type-title-sm-line);
+  text-transform: var(--type-title-sm-case);
   color: var(--color-fg-secondary);
   line-height: 24px;
 }
 .viewer .card__display {
   padding: 16px 24px;
-  font-size: 60px; /* display */
+  font-size: 60px;
+  /* display */
   font-weight: 300;
   line-height: 64px;
   letter-spacing: -1.2px;
@@ -3684,11 +4334,11 @@ body:has(.drawer[open]) {
   --icon-size: 64px;
 }
 .viewer .card--alert .prose {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 20px;
-  text-transform: none;
+  font-size: var(--type-body-lg-size);
+  font-weight: var(--type-body-lg-weight);
+  letter-spacing: var(--type-body-lg-tracking);
+  line-height: var(--type-body-lg-line);
+  text-transform: var(--type-body-lg-case);
   color: var(--color-fg-secondary);
   padding: 8px 24px 0;
 }
@@ -3696,12 +4346,31 @@ body:has(.drawer[open]) {
   min-height: 40px;
   padding: 0 16px;
 }
+.viewer .facts > div + div {
+  border-top: 0.5px solid var(--color-border-divider);
+}
 .viewer .weather {
   padding: 16px 24px 0;
 }
 .viewer .weather__stats {
   margin-top: 24px;
   padding: 0 8px;
+}
+
+/* STATS -------------------------------------------------------------------- */
+/* The app's day stats (Shoot Plan): three cells in a row at any width, white */
+.viewer .stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  background: var(--color-bg-floating);
+}
+.viewer .stats .stats__item {
+  padding: 8px 16px;
+}
+.viewer .stats .stats__item + .stats__item {
+  /* the app stacks them on small screens; here they stay in a row */
+  border-top: 0;
+  border-left: 0.5px solid var(--color-border-divider);
 }
 
 /* PILLS AND SHOT TYPE ------------------------------------------------------- */
@@ -3765,20 +4434,20 @@ body:has(.drawer[open]) {
   margin: 0;
 }
 .viewer .list__details dt {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 12px;
-  text-transform: uppercase;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+  line-height: var(--type-label-line);
+  text-transform: var(--type-label-case);
   color: var(--color-fg-secondary);
   line-height: 16px;
 }
 .viewer .list__details dd {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
+  font-size: var(--type-text-sm-size);
+  font-weight: var(--type-text-sm-weight);
+  letter-spacing: var(--type-text-sm-tracking);
+  line-height: var(--type-text-sm-line);
+  text-transform: var(--type-text-sm-case);
   color: var(--color-fg-primary);
   margin: 0;
   white-space: normal;
@@ -3810,10 +4479,13 @@ body:has(.drawer[open]) {
   padding: 0;
   border-radius: 2px;
   transition: box-shadow 200ms cubic-bezier(0.2, 0, 0, 1);
-  /* no hover fill */
+  /* white, as the cards; no hover fill */
 }
 .viewer .list--shoot-plan .list__row:not(.list__row--banner), .viewer .list--shoot-plan .list__row:not(.list__row--banner):hover {
-  background: var(--color-bg-card);
+  background: var(--color-bg-floating);
+}
+.viewer .list--shoot-plan .list__row:not(.list__row--banner) {
+  border: 0.5px solid var(--color-border-divider);
 }
 .viewer .list--shoot-plan .list__row:has(> details[open]) {
   box-shadow: 1px 3px 8px var(--color-shadow);
@@ -3864,7 +4536,7 @@ body:has(.drawer[open]) {
   grid-template-columns: 208px minmax(0, 1fr);
   margin-top: 4px;
   padding: 4px 0 16px;
-  background: linear-gradient(var(--color-border-pill), var(--color-border-pill)) top center/calc(100% - 16px) 1px no-repeat;
+  border-top: 0.5px solid var(--color-border-divider);
 }
 .viewer .list--shoot-plan .list__details > div {
   display: flex;
@@ -3886,11 +4558,11 @@ body:has(.drawer[open]) {
   background: var(--banner-bg, var(--color-banner-bg-av));
 }
 .viewer .list--shoot-plan .list__row--banner h2 {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  line-height: 12px;
-  text-transform: uppercase;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+  line-height: var(--type-label-line);
+  text-transform: var(--type-label-case);
   line-height: 16px;
   text-align: right;
 }
@@ -3913,14 +4585,18 @@ body:has(.drawer[open]) {
 .viewer .list--calls .list__row {
   gap: 4px;
   padding: 0 16px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  line-height: 16px;
-  text-transform: none;
+  font-size: var(--type-text-sm-size);
+  font-weight: var(--type-text-sm-weight);
+  letter-spacing: var(--type-text-sm-tracking);
+  line-height: var(--type-text-sm-line);
+  text-transform: var(--type-text-sm-case);
+  /* ruled rows, as the app lists */
 }
 .viewer .list--calls .list__row:hover {
   background: none;
+}
+.viewer .list--calls .list__row + .list__row {
+  border-top: 0.5px solid var(--color-border-divider);
 }
 .viewer .list--calls .list__cell--fill {
   padding-right: 0;
@@ -3937,7 +4613,7 @@ body:has(.drawer[open]) {
 }
 .viewer .list--calls .list__summary {
   gap: 4px;
-  min-height: 40px;
+  min-height: 48px;
   padding: 0 16px;
 }
 .viewer .list--calls .list__details {

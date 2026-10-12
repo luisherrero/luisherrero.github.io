@@ -15,7 +15,7 @@
 </head>
 
 
-<body class="app">
+<body class="app is-sidebar-expanded">
 
   <!--
     Theme saved in this browser, applied before the page paints.
@@ -74,68 +74,75 @@
   </header>
 
   <main class="content">
-    <!--
-      Project cards: data-status="active | archived" (the sidebar shows one
-      group). The first card always opens the new project form.
-    -->
-    <ul class="projects">
+    <section class="card">
+      <header class="card__header">
+        <h1 class="card__title">Projects</h1>
+        <p class="info">2 active</p>
+        <button class="btn btn--hollow icon icon__add">New Project</button>
+      </header>
 
-      <li data-status="active">
-        <button class="project-card project-card--new" type="button" data-modal="new-project" aria-haspopup="dialog">
-          <span class="project-card__info">
-            <span class="project-card__title">New project</span>
-            <span class="project-card__add icon icon__add" aria-hidden="true"></span>
-          </span>
-          <span class="project-card__pic"></span>
-        </button>
-      </li>
+      <div class="card__body">
+        <!--
+          Project cards: data-status="active | archived" (the sidebar shows one
+          group). The first card always opens the new project form.
+        -->
+        <ul class="projects">
 
-      <li data-status="active">
-        <article class="project-card">
-          <a class="project-card__link" href="overview.html">
-            <span class="project-card__info">
-              <span class="project-card__title">Reflexiones in the sky when things goes bad</span>
-              <span class="project-card__client">IRYO</span>
-              <img class="project-card__logo" src="img/production_co/hawai.svg" alt="Hawai" width="80" height="40">
-            </span>
-            <span class="project-card__pic bg_05"></span>
-          </a>
-          <span class="project-card__days pill icon icon__calendar" title="Shooting days">2</span>
-          <button class="project-card__menu icon icon__overflow" type="button" aria-label="Project options"></button>
-        </article>
-      </li>
+          <li data-status="active">
+            <button class="project-card project-card--new" type="button" data-modal="new-project" aria-haspopup="dialog">
+              <span class="project-card__add icon icon__add" aria-hidden="true"></span>
+              New project
+            </button>
+          </li>
 
-      <li data-status="active">
-        <article class="project-card">
-          <a class="project-card__link" href="overview.html">
-            <span class="project-card__info">
-              <span class="project-card__title">Salvajada</span>
-              <span class="project-card__client">KFC</span>
-              <img class="project-card__logo" src="img/production_co/landia.svg" alt="Landia" width="80" height="40">
-            </span>
-            <span class="project-card__pic bg_12"></span>
-          </a>
-          <span class="project-card__days pill icon icon__calendar" title="Shooting days">2</span>
-          <button class="project-card__menu icon icon__overflow" type="button" aria-label="Project options"></button>
-        </article>
-      </li>
+        <li data-status="active">
+          <article class="project-card">
+            <a class="project-card__link" href="overview.html">
+              <span class="project-card__pic bg_05"></span>
+              <span class="project-card__info">
+                <span class="project-card__title">Reflexiones in the sky when things goes bad</span>
+                <span class="project-card__client">IRYO</span>
+                <span class="project-card__days icon icon__calendar">2 shooting days</span>
+                <img class="project-card__logo" src="img/production_co/hawai.svg" alt="Hawai" width="80" height="40">
+              </span>
+            </a>
+            <button class="project-card__menu icon icon__overflow" type="button" aria-label="Project options"></button>
+          </article>
+        </li>
 
-      <li data-status="archived" hidden>
-        <article class="project-card">
-          <a class="project-card__link" href="overview.html">
-            <span class="project-card__info">
-              <span class="project-card__title">Summer drop</span>
-              <span class="project-card__client">Under Armour</span>
-              <img class="project-card__logo" src="img/production_co/agosto.svg" alt="Agosto" width="80" height="40">
-            </span>
-            <span class="project-card__pic bg_18"></span>
-          </a>
-          <span class="project-card__days pill icon icon__calendar" title="Shooting days">3</span>
-          <button class="project-card__menu icon icon__overflow" type="button" aria-label="Project options"></button>
-        </article>
-      </li>
+        <li data-status="active">
+          <article class="project-card">
+            <a class="project-card__link" href="overview.html">
+              <span class="project-card__pic project-card__pic--empty">No frames yet</span>
+              <span class="project-card__info">
+                <span class="project-card__title">Salvajada</span>
+                <span class="project-card__client">KFC</span>
+                <span class="project-card__days icon icon__calendar">2 shooting days</span>
+                <img class="project-card__logo" src="img/production_co/landia.svg" alt="Landia" width="80" height="40">
+              </span>
+            </a>
+            <button class="project-card__menu icon icon__overflow" type="button" aria-label="Project options"></button>
+          </article>
+        </li>
 
-    </ul>
+        <li data-status="archived" hidden>
+          <article class="project-card">
+            <a class="project-card__link" href="overview.html">
+              <span class="project-card__pic bg_18"></span>
+              <span class="project-card__info">
+                <span class="project-card__title">Summer drop</span>
+                <span class="project-card__client">Under Armour</span>
+                <span class="project-card__days icon icon__calendar">3 shooting days</span>
+                <img class="project-card__logo" src="img/production_co/agosto.svg" alt="Agosto" width="80" height="40">
+              </span>
+            </a>
+            <button class="project-card__menu icon icon__overflow" type="button" aria-label="Project options"></button>
+          </article>
+        </li>
+
+        </ul>
+      </div>
+    </section>
   </main>
 
 
