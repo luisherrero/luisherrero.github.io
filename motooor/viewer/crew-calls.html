@@ -20,12 +20,16 @@
   <!-- Cover image of the project, blurred behind the top of every page -->
   <div class="viewer__cover bg_08" aria-hidden="true"></div>
   
-  <!-- Page title over the cover (Kit variable "title"); the buttons have no action yet -->
-    <header class="viewer__bar">
-      <h1>Crew Calls</h1>
-      <button class="card__action icon icon__overflow" type="button" aria-label="More"></button>
-    </header>
-    
+  <!--
+            Page title over the cover and one button on its right. Each page sets the
+            Kit variables first: title, bar-icon (icon name), bar-label (the button's
+            name) and bar-sheet (id of the bottom sheet it opens; "none" = no action yet).
+          -->
+          <header class="viewer__bar">
+            <h1>Crew Calls</h1>
+            <button class="card__action icon icon__filter" type="button" aria-label="Sort options" data-sheet="sort-sheet"></button>
+          </header>
+          
 
   <main class="viewer__content">
     <!-- One card per department: name · title · set call -->
@@ -145,6 +149,27 @@
       </ul>
     </section>
   </main>
+
+  <!--
+    Sort options, as a bottom sheet (opened by the filter button of the bar).
+    The order itself is not built yet. CSS: .sheet, viewer/_mobile.scss.
+  -->
+  <dialog class="sheet" id="sort-sheet" aria-labelledby="sort-sheet-title">
+    <form class="sheet__panel" method="dialog">
+      <header class="sheet__header">
+        <h2 class="sheet__title" id="sort-sheet-title">Sort options</h2>
+        <button class="card__action icon icon__close-alt" value="close" aria-label="Close"></button>
+      </header>
+      <div class="sheet__options" role="radiogroup" aria-labelledby="sort-sheet-title">
+        <label class="sheet__option"><input type="radio" name="crew-sort" value="time">By Time</label>
+        <label class="sheet__option"><input type="radio" name="crew-sort" value="department" checked>By Department</label>
+        <label class="sheet__option"><input type="radio" name="crew-sort" value="name">Alphabetically</label>
+      </div>
+      <footer class="sheet__footer">
+        <button class="sheet__button" value="done">Done</button>
+      </footer>
+    </form>
+  </dialog>
 
   <p class="viewer__footer">© Motooor 2026</p>
   

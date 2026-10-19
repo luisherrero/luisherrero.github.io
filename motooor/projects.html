@@ -25,31 +25,36 @@
   <script>(function () { try { var t = localStorage.getItem("motooor-theme") || "light"; if (t !== "system") { document.documentElement.setAttribute("data-theme", t); } } catch (e) { /* private mode */ } }());</script>
   
 
-  <!-- Sidebar of this page only: active and archived projects (js/app.js filters the cards) -->
+  <!--
+    Account sidebar (projects.kit, settings.kit): active and archived projects.
+    On the projects page app.js filters the cards; elsewhere they are plain
+    links to that page.
+  -->
   <aside class="sidebar" id="sidebar">
-
+  
     <header class="sidebar__header">
-      <img class="sidebar__logo" src="img/logo_motooor.svg" alt="Motooor" width="80" height="24">
-      <button class="sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu"></button>
+      <span class="sidebar__logo" role="img" aria-label="Motooor"></span>
+      <span class="sidebar__iso" role="img" aria-label="Motooor"></span>
     </header>
-
+  
     <nav>
       <ul class="sidebar__nav">
-        <li><button class="sidebar__item icon icon__current" data-project-filter="active">Active projects</button></li>
-        <li><button class="sidebar__item icon icon__archived" data-project-filter="archived">Archived</button></li>
+        <li><a class="sidebar__item icon icon__current" href="projects.html" data-project-filter="active">Active projects</a></li>
+        <li><a class="sidebar__item icon icon__archived" href="projects.html#archived" data-project-filter="archived">Archived</a></li>
       </ul>
     </nav>
-
-    <!-- Sidebar bottom: avatar and profile menu (imported by _sidebar.kit and projects.kit) -->
+  
+    <!-- Sidebar bottom: avatar and profile menu, then the open / close toggle (imported by _sidebar.kit and projects.kit) -->
     <footer class="sidebar__footer">
       <button class="sidebar__item sidebar__profile" popovertarget="profile-menu" aria-haspopup="true"><img class="avatar" src="img/avatar.png" alt="" width="28" height="28">Luis Herrero</button>
+      <button class="sidebar__item sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu">Close</button>
     </footer>
     
     <!-- Profile menu: opens beside the avatar (js/app.js) -->
     <div class="profile-menu" id="profile-menu" popover>
       <p class="profile-menu__name">Luis Herrero</p>
       <a class="profile-menu__item" href="#">Account</a>
-      <a class="profile-menu__item" href="#">Settings</a>
+      <a class="profile-menu__item" href="settings.html">Settings</a>
       <a class="profile-menu__item" href="#">Docs</a>
       <a class="profile-menu__item" href="#">Contact</a>
       <div class="profile-menu__item profile-menu__theme">
@@ -63,8 +68,9 @@
       <a class="profile-menu__item profile-menu__logout icon icon__log-out" href="index.html">Log out</a>
     </div>
     
-
+  
   </aside>
+  
 
   <header class="topbar">
     <ol class="breadcrumb">

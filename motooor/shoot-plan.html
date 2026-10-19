@@ -30,8 +30,8 @@
   <aside class="sidebar" id="sidebar">
   
     <header class="sidebar__header">
-      <img class="sidebar__logo" src="img/logo_motooor.svg" alt="Motooor" width="80" height="24">
-      <button class="sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu"></button>
+      <span class="sidebar__logo" role="img" aria-label="Motooor"></span>
+      <span class="sidebar__iso" role="img" aria-label="Motooor"></span>
     </header>
     
     <nav>
@@ -46,16 +46,17 @@
       </ul>
     </nav>
   
-    <!-- Sidebar bottom: avatar and profile menu (imported by _sidebar.kit and projects.kit) -->
+    <!-- Sidebar bottom: avatar and profile menu, then the open / close toggle (imported by _sidebar.kit and projects.kit) -->
     <footer class="sidebar__footer">
       <button class="sidebar__item sidebar__profile" popovertarget="profile-menu" aria-haspopup="true"><img class="avatar" src="img/avatar.png" alt="" width="28" height="28">Luis Herrero</button>
+      <button class="sidebar__item sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu">Close</button>
     </footer>
     
     <!-- Profile menu: opens beside the avatar (js/app.js) -->
     <div class="profile-menu" id="profile-menu" popover>
       <p class="profile-menu__name">Luis Herrero</p>
       <a class="profile-menu__item" href="#">Account</a>
-      <a class="profile-menu__item" href="#">Settings</a>
+      <a class="profile-menu__item" href="settings.html">Settings</a>
       <a class="profile-menu__item" href="#">Docs</a>
       <a class="profile-menu__item" href="#">Contact</a>
       <div class="profile-menu__item profile-menu__theme">
@@ -79,13 +80,15 @@
       <li><a href="#">IRYO “Reflexiones”</a></li>
       <li aria-current="page">Shoot Plan</li>
     </ol>
+    <button class="icon icon__help" aria-label="Help"></button>
+    <button class="status status--warning" type="button" data-modal="project-status" aria-haspopup="dialog">Needs attention</button>
   </header>
 
   <main class="content">
     <section class="card">
       <header class="card__header">
         <h1 class="card__title">Shoot Plan</h1>
-        <p class="info">52 shots · 2 days</p>
+        <p class="info"><strong>09:30</strong> → <strong>17:50</strong> · Shooting time: <strong>17h 20m</strong> ( 52 shots )</p>
 
         <details class="menu">
           <summary class="btn btn--hollow btn--dropdown">Add</summary>
@@ -95,27 +98,36 @@
           </ul>
         </details>
 
-        <button class="btn btn--hollow btn--square icon icon__group" aria-label="Group"></button>
-        <button class="btn btn--hollow btn--square icon icon__ungroup" aria-label="Ungroup"></button>
-        <button class="btn btn--hollow btn--square icon icon__merge" aria-label="Merge"></button>
-        <button class="btn btn--hollow btn--square icon icon__split" aria-label="Split"></button>
 
         <!--
-        <details class="menu">
-          <summary class="btn btn--hollow btn--dropdown">Actions</summary>
-          <ul class="menu__list">
-            <li><button class="menu__item">Group</button></li>
-            <li><button class="menu__item">Ungroup</button></li>
-            <li><button class="menu__item">Merge</button></li>
-            <li><button class="menu__item">Split</button></li>
-          </ul>
-        </details>
+          Selection toolbar, shown by app.js only while one or more shots are
+          checked; it covers the top bar (CSS: .float-tools, _overlays.scss).
+          Other lists import kit/_float-tools.kit; this one adds the shot actions.
         -->
+        <div class="float-tools" role="toolbar" aria-label="Selected shots" hidden>
+          <div class="float-tools__selection">
+            <p class="float-tools__count" aria-live="polite"><span data-selection-count>0</span> selected</p>
+            <button class="btn btn--soft" type="button" data-deselect>Select none</button>
+          </div>
+          <div class="float-tools__actions">
+            <details class="menu">
+              <summary class="btn btn--hollow btn--dropdown">Move to</summary>
+              <ul class="menu__list">
+                <li><button class="menu__item">Day 1</button></li>
+                <li><button class="menu__item">Day 2</button></li>
+              </ul>
+            </details>
+            <button class="btn btn--hollow btn--square icon icon__group" aria-label="Group"></button>
+            <button class="btn btn--hollow btn--square icon icon__ungroup" aria-label="Ungroup"></button>
+            <button class="btn btn--hollow btn--square icon icon__merge" aria-label="Merge"></button>
+            <button class="btn btn--hollow btn--square icon icon__split" aria-label="Split"></button>
+          </div>
+          <button class="btn btn--alert icon icon__delete-alert float-tools__delete" type="button" data-modal="modal-delete" aria-haspopup="dialog">Delete</button>
+        </div>
 
         <button class="btn btn--hollow icon icon__time" data-modal="modal-settings" aria-haspopup="dialog">Settings</button>
         <button class="btn btn--hollow icon icon__draft">Draft</button>
         <button class="btn btn--cta icon icon__gallery" data-modal="gallery" aria-haspopup="dialog">Gallery</button>
-        <button class="icon icon__help" aria-label="Help"></button>
       </header>
 
       <nav class="tabs">
@@ -124,18 +136,6 @@
       </nav>
 
       <div class="card__body" id="shoot-plan-main">
-
-
-
-        <!-- Day summary: call and wrap (editable), totals and what needs attention -->
-        <dl class="stats">
-          <div class="stats__item"><dt>Call · Wrap</dt><dd>09:30 · 17:50</dd></div>
-          <div class="stats__item"><dt>Total shooting time</dt><dd>17h 20m</dd></div>
-          <div class="stats__item"><dt>Total shots</dt><dd>52 (40 + 12)</dd></div>
-          <div class="stats__item stats__item--alert"><dt>Needs attention</dt><dd>Overlap · Set TBD · Talent TBD</dd></div>
-        </dl>
-
-
 
         <ul class="list list--shoot-plan">
           <li class="list__row list__row--head">
@@ -146,12 +146,13 @@
             <span class="list__cell list__cell--set">Set</span>
             <span class="list__cell list__cell--talent">Talent</span>
             <span class="list__cell list__cell--reqs">Requirements</span>
-            <span class="list__cell list__cell--actions">Output</span>
+            <span class="list__cell list__cell--actions"></span>
           </li>
 
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
             <div class="list__cell list__cell--time">
+              <button class="shot-type">AV</button>
               <button class="pill pill--time">9:30</button>
               <button class="pill pill--time">9:50</button>
             </div>
@@ -175,8 +176,6 @@
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
-              <button class="shot-type">AV</button>
-              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
@@ -184,9 +183,9 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
             <div class="list__cell list__cell--time">
+              <button class="shot-type">AV</button>
               <button class="pill pill--time">10:00</button>
               <button class="pill pill--time">10:20</button>
-              <span class="list__note warning-note">Overlap</span>
             </div>
             <figure class="list__cell list__cell--shot thumb">
               <img src="img/ad/002.png" alt="">
@@ -208,8 +207,6 @@
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
-              <button class="shot-type">AV</button>
-              <label class="flow">Flow <input type="checkbox" class="switch" role="switch"></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
@@ -217,9 +214,9 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
             <div class="list__cell list__cell--time">
+              <button class="shot-type shot-type--social">Social</button>
               <button class="pill pill--time">10:00</button>
               <button class="pill pill--time">10:20</button>
-              <span class="list__note warning-note">Overlap</span>
             </div>
             <figure class="list__cell list__cell--shot thumb">
               <img src="img/ad/003.png" alt="">
@@ -237,13 +234,14 @@
             </button>
             <div class="list__cell list__cell--reqs" data-empty="Add requirements"></div>
             <div class="list__cell list__cell--actions">
-              <button class="shot-type shot-type--social">Social</button>
-              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
 
           <li class="list__row list__row--banner list__row--banner-custom" data-color="0">
+            <span class="list__cell list__cell--scope">
+              <button class="shot-type" data-select="scopes" value="2" aria-label="Shots it moves">All</button>
+            </span>
             <span class="list__cell list__cell--range">
               <button class="pill pill--time">9:30</button>
               <button class="pill pill--time">17:50</button>
@@ -251,13 +249,14 @@
             <h2 class="list__cell list__cell--fill">New banner</h2>
             <span class="list__cell list__cell--banner-actions">
               <button class="color-button" data-color-menu aria-label="Banner color"></button>
-              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
+              <button class="icon-button icon icon__delete" aria-label="Delete banner"></button>
             </span>
           </li>
 
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
             <div class="list__cell list__cell--time">
+              <button class="shot-type">AV</button>
               <button class="pill pill--time">10:30</button>
               <button class="pill pill--time">11:20</button>
             </div>
@@ -277,8 +276,6 @@
             </button>
             <div class="list__cell list__cell--reqs" data-empty="Add requirements"></div>
             <div class="list__cell list__cell--actions">
-              <button class="shot-type">AV</button>
-              <label class="flow">Flow <input type="checkbox" class="switch" role="switch"></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
@@ -286,6 +283,7 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
             <div class="list__cell list__cell--time">
+              <button class="shot-type shot-type--photo">Photo</button>
               <button class="pill pill--time">10:30</button>
               <button class="pill pill--time">10:50</button>
             </div>
@@ -312,8 +310,6 @@
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
-              <button class="shot-type shot-type--photo">Photo</button>
-              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
@@ -321,6 +317,7 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
             <div class="list__cell list__cell--time">
+              <button class="shot-type">AV</button>
               <button class="pill pill--time">10:50</button>
               <button class="pill pill--time">11:10</button>
             </div>
@@ -344,13 +341,14 @@
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
-              <button class="shot-type">AV</button>
-              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
 
           <li class="list__row list__row--banner list__row--banner-custom" data-color="0">
+            <span class="list__cell list__cell--scope">
+              <button class="shot-type" data-select="scopes" value="1" aria-label="Shots it moves">None</button>
+            </span>
             <span class="list__cell list__cell--range">
               <button class="pill pill--time">9:30</button>
               <button class="pill pill--time">17:50</button>
@@ -358,13 +356,14 @@
             <h2 class="list__cell list__cell--fill">New banner</h2>
             <span class="list__cell list__cell--banner-actions">
               <button class="color-button" data-color-menu aria-label="Banner color"></button>
-              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
+              <button class="icon-button icon icon__delete" aria-label="Delete banner"></button>
             </span>
           </li>
 
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
             <div class="list__cell list__cell--time">
+              <button class="shot-type">AV</button>
               <button class="pill pill--time">10:30</button>
               <button class="pill pill--time">11:20</button>
             </div>
@@ -384,8 +383,6 @@
             </button>
             <div class="list__cell list__cell--reqs" data-empty="Add requirements"></div>
             <div class="list__cell list__cell--actions">
-              <button class="shot-type">AV</button>
-              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
@@ -393,6 +390,7 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
             <div class="list__cell list__cell--time">
+              <button class="shot-type shot-type--photo">Photo</button>
               <button class="pill pill--time">10:30</button>
               <button class="pill pill--time">10:50</button>
             </div>
@@ -419,8 +417,6 @@
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
-              <button class="shot-type shot-type--photo">Photo</button>
-              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
@@ -428,6 +424,7 @@
           <li class="list__row">
             <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select shot"></label>
             <div class="list__cell list__cell--time">
+              <button class="shot-type">AV</button>
               <button class="pill pill--time">10:50</button>
               <button class="pill pill--time">11:10</button>
             </div>
@@ -451,8 +448,6 @@
               <p><b>Producto</b>: Big Mac.</p>
             </div>
             <div class="list__cell list__cell--actions">
-              <button class="shot-type">AV</button>
-              <label class="flow">Flow <input type="checkbox" class="switch" role="switch" checked></label>
               <button class="icon-button icon icon__delete" aria-label="Delete"></button>
             </div>
           </li>
@@ -492,12 +487,6 @@
             <span class="unit-types__name">Social</span>
             <label class="settings__item">Duration <input class="pill pill--input" name="social-duration" value="25m"></label>
             <label class="settings__item">Gap <input class="pill pill--input" name="social-gap" value="10m"></label>
-          </li>
-          <li class="unit-types__item" data-type="banner">
-            <span class="color-button" aria-hidden="true"></span>
-            <span class="unit-types__name">Banner</span>
-            <label class="settings__item">Duration <input class="pill pill--input" name="banner-duration" value="60m"></label>
-            <label class="settings__item">Gap <input class="pill pill--input" name="banner-gap" value="0m"></label>
           </li>
         </ul>
 
@@ -652,7 +641,96 @@
     </div>
   </dialog>
 
+  <!-- Delete the checked shots (selection toolbar) -->
+  <!--
+        Confirms the deletion of the checked rows, opened by Delete in the
+        selection toolbar. Set $selection (plural noun) and $delete-from (where they
+        are removed from) before importing it.
+      -->
+      <dialog class="modal" id="modal-delete" aria-labelledby="modal-delete-title">
+        <form method="dialog">
+          <h2 class="modal__title icon icon__warning-alert" id="modal-delete-title">Delete selected shots?</h2>
+          <p class="modal__text">This action will remove the selected shots from the shoot plan.</p>
+          <footer class="modal__buttons">
+            <button class="btn" value="cancel">Cancel</button>
+            <button class="btn btn--alert" value="delete">Delete</button>
+          </footer>
+        </form>
+      </dialog>
+      
 
+    <!--
+      Project status drawer, opened by the status badge of the top bar
+      (data-modal="project-status"). One link per view: a warning dot and its
+      warnings, or a green dot and no list when the view has none. The whole
+      item goes to that view. CSS: .drawer--full / --sm (_gallery.scss) and
+      .status-list (_layout.scss, TOP BAR).
+    -->
+    <dialog class="drawer drawer--full drawer--sm" id="project-status" aria-labelledby="project-status-title">
+      <header class="modal__header">
+        <h2 class="modal__heading" id="project-status-title">Project status</h2>
+        <form method="dialog"><button class="card__action icon icon__close-alt" aria-label="Close"></button></form>
+      </header>
+      <div class="drawer__body">
+        <ul class="status-list">
+          <li>
+            <a class="status-list__view status-list__view--warning" href="talent.html">
+              <h3 class="status-list__title">Talent</h3>
+              <ul class="status-list__issues">
+                <li>Character needs to be cast</li>
+                <li>Number of extras needs to be specified</li>
+              </ul>
+            </a>
+          </li>
+          <li>
+            <a class="status-list__view status-list__view--warning" href="crew.html">
+              <h3 class="status-list__title">Crew</h3>
+              <ul class="status-list__issues">
+                <li>Contact crew members need to be designated</li>
+                <li>Credits crew members need to be designated</li>
+                <li>Some crew information is missing</li>
+              </ul>
+            </a>
+          </li>
+          <li>
+            <a class="status-list__view status-list__view--warning" href="sites.html">
+              <h3 class="status-list__title">Locations</h3>
+              <ul class="status-list__issues">
+                <li>Location sets need to be defined</li>
+                <li>Some location information is missing</li>
+              </ul>
+            </a>
+          </li>
+          <li>
+            <a class="status-list__view status-list__view--warning" href="shoot-plan.html">
+              <h3 class="status-list__title">Shoot Plan</h3>
+              <ul class="status-list__issues">
+                <li>Some shot information is missing</li>
+                <li>Some shot times overlap</li>
+              </ul>
+            </a>
+          </li>
+          <li>
+            <a class="status-list__view status-list__view--warning" href="calls.html">
+              <h3 class="status-list__title">Calls</h3>
+              <ul class="status-list__issues">
+                <li>Review the Agency and Client calls</li>
+              </ul>
+            </a>
+          </li>
+          <li>
+            <a class="status-list__view status-list__view--warning" href="reports.html">
+              <h3 class="status-list__title">Reports</h3>
+              <ul class="status-list__issues">
+                <li>Talent has exceeded 13 hours</li>
+                <li>Crew member has exceeded 16 hours</li>
+              </ul>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </dialog>
+  
 
 </body>
 </html>

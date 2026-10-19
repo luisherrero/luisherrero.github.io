@@ -26,8 +26,11 @@
   <script>(function () { try { var t = localStorage.getItem("motooor-theme") || "light"; if (t !== "system") { document.documentElement.setAttribute("data-theme", t); } } catch (e) { /* private mode */ } }());</script>
   
 
+  <!-- Background video: decorative only (muted, looping, no controls). CSS: .auth__video -->
+  <video class="auth__video" src="img/video_bg-web.mp4" poster="img/video_bg-poster.jpg" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback preload="auto" aria-hidden="true" tabindex="-1"></video>
+
   <main class="auth__panel">
-    <img class="auth__logo" src="img/logo_motooor.svg" alt="Motooor" width="210" height="60">
+    <span class="auth__logo" role="img" aria-label="Motooor"></span>
 
     <!-- Prototype: signing in goes to the projects list -->
     <form class="auth__form" action="projects.html">

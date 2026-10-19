@@ -30,8 +30,8 @@
   <aside class="sidebar" id="sidebar">
   
     <header class="sidebar__header">
-      <img class="sidebar__logo" src="img/logo_motooor.svg" alt="Motooor" width="80" height="24">
-      <button class="sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu"></button>
+      <span class="sidebar__logo" role="img" aria-label="Motooor"></span>
+      <span class="sidebar__iso" role="img" aria-label="Motooor"></span>
     </header>
     
     <nav>
@@ -46,16 +46,17 @@
       </ul>
     </nav>
   
-    <!-- Sidebar bottom: avatar and profile menu (imported by _sidebar.kit and projects.kit) -->
+    <!-- Sidebar bottom: avatar and profile menu, then the open / close toggle (imported by _sidebar.kit and projects.kit) -->
     <footer class="sidebar__footer">
       <button class="sidebar__item sidebar__profile" popovertarget="profile-menu" aria-haspopup="true"><img class="avatar" src="img/avatar.png" alt="" width="28" height="28">Luis Herrero</button>
+      <button class="sidebar__item sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu">Close</button>
     </footer>
     
     <!-- Profile menu: opens beside the avatar (js/app.js) -->
     <div class="profile-menu" id="profile-menu" popover>
       <p class="profile-menu__name">Luis Herrero</p>
       <a class="profile-menu__item" href="#">Account</a>
-      <a class="profile-menu__item" href="#">Settings</a>
+      <a class="profile-menu__item" href="settings.html">Settings</a>
       <a class="profile-menu__item" href="#">Docs</a>
       <a class="profile-menu__item" href="#">Contact</a>
       <div class="profile-menu__item profile-menu__theme">
@@ -79,6 +80,8 @@
       <li><a href="#">IRYO “Reflexiones”</a></li>
       <li aria-current="page">Overview</li>
     </ol>
+    <button class="icon icon__help" aria-label="Help"></button>
+    <button class="status status--warning" type="button" data-modal="project-status" aria-haspopup="dialog">Needs attention</button>
   </header>
 
   <main class="content">
@@ -99,11 +102,13 @@
             <li><button class="menu__item">Call Sheet</button></li>
           </ul>
         </details>
+        <button class="btn btn--hollow icon icon__settings" data-modal="modal-settings" aria-haspopup="dialog">Settings</button>
+
       </header>
 
       <!--
         Dashboard: one grid, each widget in its area (see .dashboard in
-        _layout.scss). Cover · weather · needs attention on top; credits and
+        _layout.scss). Cover · weather · general notes on top; credits and
         contact on the left; locations, requirements and catering on the right.
       -->
       <div class="dashboard">
@@ -127,10 +132,13 @@
           </dl>
         </section>
 
-        <!-- What needs attention that day (same .stats as the Shoot Plan) -->
-        <dl class="stats dashboard__attention">
-          <div class="stats__item stats__item--alert"><dt>Needs attention</dt><dd>Overlaps · Set TBD · Talent TBD</dd></div>
-        </dl>
+        <!-- General notes: plain text, edited in place; the viewer shows it as its notice -->
+        <section class="card card--widget dashboard__notes">
+          <header class="card__header">
+            <h2 class="card__title" id="general-notes">General Notes</h2>
+          </header>
+          <p class="prose" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-labelledby="general-notes" data-empty="Add general notes">For confidentiality reasons, taking photographs and posting any information on social media are strictly prohibited.</p>
+        </section>
 
         <!-- Credits and contact, one under the other -->
         <div class="dashboard__people">
@@ -280,5 +288,134 @@
       </div>
     </section>
   </main>
+
+
+  <!--
+    Shooting days (Settings): the days in order. A day ("Day n · date", with
+    a calendar icon on its left) is one button that opens the date picker of
+    the row's date input, which only offers
+    dates after the day before and before the day after; Add new day appends
+    the day after the last one; Delete asks first (#modal-delete-day) and the
+    days after it move up one number (js/app.js, "Shooting days").
+  -->
+  <dialog class="modal modal--form modal--wide" id="modal-settings" aria-labelledby="modal-settings-title">
+    <form method="dialog">
+      <header class="modal__header">
+        <h2 class="modal__heading" id="modal-settings-title">Shooting days</h2>
+        <button class="card__action icon icon__close-alt" value="cancel" aria-label="Close"></button>
+      </header>
+      <div class="modal__body">
+        <button class="btn btn--hollow" type="button" data-day-add aria-controls="days-list">Add new day</button>
+
+        <ol class="unit-types unit-types--scroll shoot-days" id="days-list" aria-label="Shooting days" data-days>
+          <li class="unit-types__item shoot-day">
+            <button class="shoot-day__pick icon icon__calendar" type="button" data-day-pick title="Change the date">
+              <span class="unit-types__name"><span data-day-name>Day 1</span> · <time data-day-date datetime="2026-09-27">27 September 2026</time></span>
+            </button>
+            <input class="shoot-day__input" type="date" name="day-date" value="2026-09-27" tabindex="-1" aria-hidden="true">
+            <button class="card__action icon icon__delete" type="button" data-day-delete data-modal="modal-delete-day" aria-haspopup="dialog" aria-label="Delete Day 1"></button>
+          </li>
+          <li class="unit-types__item shoot-day">
+            <button class="shoot-day__pick icon icon__calendar" type="button" data-day-pick title="Change the date">
+              <span class="unit-types__name"><span data-day-name>Day 2</span> · <time data-day-date datetime="2026-09-28">28 September 2026</time></span>
+            </button>
+            <input class="shoot-day__input" type="date" name="day-date" value="2026-09-28" tabindex="-1" aria-hidden="true">
+            <button class="card__action icon icon__delete" type="button" data-day-delete data-modal="modal-delete-day" aria-haspopup="dialog" aria-label="Delete Day 2"></button>
+          </li>
+        </ol>
+        <hr class="modal__rule">
+      </div>
+      <footer class="modal__buttons">
+        <button class="btn" value="cancel">Cancel</button>
+        <button class="btn btn--cta" value="done">Done</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- Confirms deleting a shooting day; app.js names the day -->
+  <dialog class="modal" id="modal-delete-day" aria-labelledby="modal-delete-day-title">
+    <form method="dialog">
+      <h2 class="modal__title icon icon__warning-alert" id="modal-delete-day-title">Delete <span data-day-target>Day 2</span>?</h2>
+      <p class="modal__text">Its shoot plan and calls will be removed from the project, and the days after it move up one number.</p>
+      <footer class="modal__buttons">
+        <button class="btn" value="cancel">Cancel</button>
+        <button class="btn btn--alert" value="delete">Delete</button>
+      </footer>
+    </form>
+  </dialog>
+
+    <!--
+      Project status drawer, opened by the status badge of the top bar
+      (data-modal="project-status"). One link per view: a warning dot and its
+      warnings, or a green dot and no list when the view has none. The whole
+      item goes to that view. CSS: .drawer--full / --sm (_gallery.scss) and
+      .status-list (_layout.scss, TOP BAR).
+    -->
+    <dialog class="drawer drawer--full drawer--sm" id="project-status" aria-labelledby="project-status-title">
+      <header class="modal__header">
+        <h2 class="modal__heading" id="project-status-title">Project status</h2>
+        <form method="dialog"><button class="card__action icon icon__close-alt" aria-label="Close"></button></form>
+      </header>
+      <div class="drawer__body">
+        <ul class="status-list">
+          <li>
+            <a class="status-list__view status-list__view--warning" href="talent.html">
+              <h3 class="status-list__title">Talent</h3>
+              <ul class="status-list__issues">
+                <li>Character needs to be cast</li>
+                <li>Number of extras needs to be specified</li>
+              </ul>
+            </a>
+          </li>
+          <li>
+            <a class="status-list__view status-list__view--warning" href="crew.html">
+              <h3 class="status-list__title">Crew</h3>
+              <ul class="status-list__issues">
+                <li>Contact crew members need to be designated</li>
+                <li>Credits crew members need to be designated</li>
+                <li>Some crew information is missing</li>
+              </ul>
+            </a>
+          </li>
+          <li>
+            <a class="status-list__view status-list__view--warning" href="sites.html">
+              <h3 class="status-list__title">Locations</h3>
+              <ul class="status-list__issues">
+                <li>Location sets need to be defined</li>
+                <li>Some location information is missing</li>
+              </ul>
+            </a>
+          </li>
+          <li>
+            <a class="status-list__view status-list__view--warning" href="shoot-plan.html">
+              <h3 class="status-list__title">Shoot Plan</h3>
+              <ul class="status-list__issues">
+                <li>Some shot information is missing</li>
+                <li>Some shot times overlap</li>
+              </ul>
+            </a>
+          </li>
+          <li>
+            <a class="status-list__view status-list__view--warning" href="calls.html">
+              <h3 class="status-list__title">Calls</h3>
+              <ul class="status-list__issues">
+                <li>Review the Agency and Client calls</li>
+              </ul>
+            </a>
+          </li>
+          <li>
+            <a class="status-list__view status-list__view--warning" href="reports.html">
+              <h3 class="status-list__title">Reports</h3>
+              <ul class="status-list__issues">
+                <li>Talent has exceeded 13 hours</li>
+                <li>Crew member has exceeded 16 hours</li>
+              </ul>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </dialog>
+  
+
 </body>
 </html>

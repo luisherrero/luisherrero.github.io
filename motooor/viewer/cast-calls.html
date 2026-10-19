@@ -28,193 +28,271 @@
     
 
   <main class="viewer__content">
-    <!-- One card per call time: character · artist · set call; tap a row for HMUP, dress, ready and motor -->
+    <!-- One card for cast and one for extras: character · artist (or how many) · set call; a row opens its details -->
     <section class="card card--widget">
       <header class="card__header">
-        <h2 class="card__title">Call</h2>
+        <h2 class="card__title">Cast</h2>
         <span class="pill pill--time">13:00</span>
       </header>
       <ul class="list list--calls">
         <li class="list__row">
-          <details>
-            <summary class="list__summary">
-              <span class="list__cell list__cell--fill list__cell--character">Principal</span>
-              <span class="list__cell list__cell--fill">Celia Muñoz</span>
-              <span class="list__cell list__cell--call"><span class="pill pill--time">14:00</span></span>
-            </summary>
-            <dl class="list__details">
-              <div><dt>HMUP</dt><dd><span class="pill pill--time">13:00</span></dd></div>
-              <div><dt>Dress</dt><dd><span class="pill pill--time">13:30</span></dd></div>
-              <div><dt>Ready</dt><dd><span class="pill pill--time">13:45</span></dd></div>
-              <div><dt>Motor</dt><dd><span class="pill pill--time">14:10</span></dd></div>
-            </dl>
-          </details>
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Principal</span>
+            <span class="list__cell list__cell--fill">Celia Muñoz</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">14:00</span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Principal</span><span>Celia Muñoz</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">14:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">13:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">13:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">13:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">14:10</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 12</li>
+              <li>Spot 1 · 17</li>
+              <li>Spot 1 · 24 + 15 + 21</li>
+              <li>Spot 1 · 14 + 15</li>
+            </ul>
+            <p class="talent__notes">Este actor es vegetariano y tiene misofonía, con lo que ha de tener un espacio apartado a la hora de comer.</p>
+          </template>
         </li>
         <li class="list__row">
-          <details>
-            <summary class="list__summary">
-              <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
-              <span class="list__cell list__cell--fill">Sara Madoz</span>
-              <span class="list__cell list__cell--call"><span class="pill pill--time">14:00</span></span>
-            </summary>
-            <dl class="list__details">
-              <div><dt>HMUP</dt><dd><span class="pill pill--time">13:00</span></dd></div>
-              <div><dt>Dress</dt><dd><span class="pill pill--time">13:30</span></dd></div>
-              <div><dt>Ready</dt><dd><span class="pill pill--time">13:45</span></dd></div>
-              <div><dt>Motor</dt><dd><span class="pill pill--time">14:10</span></dd></div>
-            </dl>
-          </details>
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
+            <span class="list__cell list__cell--fill">Sara Madoz</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">14:00</span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Bailarinas RRSS</span><span>Sara Madoz</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">14:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">13:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">13:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">13:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">14:10</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 3</li>
+              <li>Spot 2 · 8 + 9</li>
+            </ul>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Fitness RRSS</span>
+            <span class="list__cell list__cell--fill">Hanna</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">14:30</span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Fitness RRSS</span><span>Hanna</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">14:30</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">13:30</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">14:00</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">14:15</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">14:40</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 2 · 4</li>
+              <li>Spot 2 · 11</li>
+              <li>Spot 2 · 18</li>
+            </ul>
+            <p class="talent__notes">Trae su propio vestuario de entrenamiento.</p>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Salto de altura RRSS</span>
+            <span class="list__cell list__cell--fill">Fatuomata</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">14:30</span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Salto de altura RRSS</span><span>Fatuomata</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">14:30</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">13:30</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">14:00</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">14:15</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">14:40</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 12</li>
+              <li>Spot 1 · 17</li>
+              <li>Spot 1 · 24 + 15 + 21</li>
+              <li>Spot 1 · 14 + 15</li>
+            </ul>
+            <p class="talent__notes">Este actor es vegetariano y tiene misofonía, con lo que ha de tener un espacio apartado a la hora de comer.</p>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
+            <span class="list__cell list__cell--fill">Berta Contijoch</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Bailarinas RRSS</span><span>Berta Contijoch</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">15:30</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">14:30</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">15:00</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">15:15</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">15:40</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 3</li>
+              <li>Spot 2 · 8 + 9</li>
+            </ul>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
+            <span class="list__cell list__cell--fill">Laura Bitca</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Bailarinas RRSS</span><span>Laura Bitca</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">15:30</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">14:30</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">15:00</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">15:15</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">15:40</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 2 · 4</li>
+              <li>Spot 2 · 11</li>
+              <li>Spot 2 · 18</li>
+            </ul>
+            <p class="talent__notes">Trae su propio vestuario de entrenamiento.</p>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
+            <span class="list__cell list__cell--fill">Samanta Dodu</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Bailarinas RRSS</span><span>Samanta Dodu</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">15:30</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">14:30</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">15:00</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">15:15</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">15:40</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 12</li>
+              <li>Spot 1 · 17</li>
+              <li>Spot 1 · 24 + 15 + 21</li>
+              <li>Spot 1 · 14 + 15</li>
+            </ul>
+            <p class="talent__notes">Este actor es vegetariano y tiene misofonía, con lo que ha de tener un espacio apartado a la hora de comer.</p>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
+            <span class="list__cell list__cell--fill">Veronica Bosque</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Bailarinas RRSS</span><span>Veronica Bosque</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">15:30</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">14:30</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">15:00</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">15:15</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">15:40</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 3</li>
+              <li>Spot 2 · 8 + 9</li>
+            </ul>
+          </template>
         </li>
       </ul>
     </section>
 
     <section class="card card--widget">
       <header class="card__header">
-        <h2 class="card__title">Call</h2>
-        <span class="pill pill--time">13:30</span>
-      </header>
-      <ul class="list list--calls">
-        <li class="list__row">
-          <details>
-            <summary class="list__summary">
-              <span class="list__cell list__cell--fill list__cell--character">Fitness RRSS</span>
-              <span class="list__cell list__cell--fill">Hanna</span>
-              <span class="list__cell list__cell--call"><span class="pill pill--time">14:30</span></span>
-            </summary>
-            <dl class="list__details">
-              <div><dt>HMUP</dt><dd><span class="pill pill--time">13:30</span></dd></div>
-              <div><dt>Dress</dt><dd><span class="pill pill--time">14:00</span></dd></div>
-              <div><dt>Ready</dt><dd><span class="pill pill--time">14:15</span></dd></div>
-              <div><dt>Motor</dt><dd><span class="pill pill--time">14:40</span></dd></div>
-            </dl>
-          </details>
-        </li>
-        <li class="list__row">
-          <details>
-            <summary class="list__summary">
-              <span class="list__cell list__cell--fill list__cell--character">Salto de altura RRSS</span>
-              <span class="list__cell list__cell--fill">Fatuomata</span>
-              <span class="list__cell list__cell--call"><span class="pill pill--time">14:30</span></span>
-            </summary>
-            <dl class="list__details">
-              <div><dt>HMUP</dt><dd><span class="pill pill--time">13:30</span></dd></div>
-              <div><dt>Dress</dt><dd><span class="pill pill--time">14:00</span></dd></div>
-              <div><dt>Ready</dt><dd><span class="pill pill--time">14:15</span></dd></div>
-              <div><dt>Motor</dt><dd><span class="pill pill--time">14:40</span></dd></div>
-            </dl>
-          </details>
-        </li>
-      </ul>
-    </section>
-
-    <section class="card card--widget">
-      <header class="card__header">
-        <h2 class="card__title">Call</h2>
-        <span class="pill pill--time">14:30</span>
-      </header>
-      <ul class="list list--calls">
-        <li class="list__row">
-          <details>
-            <summary class="list__summary">
-              <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
-              <span class="list__cell list__cell--fill">Berta Contijoch</span>
-              <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
-            </summary>
-            <dl class="list__details">
-              <div><dt>HMUP</dt><dd><span class="pill pill--time">14:30</span></dd></div>
-              <div><dt>Dress</dt><dd><span class="pill pill--time">15:00</span></dd></div>
-              <div><dt>Ready</dt><dd><span class="pill pill--time">15:15</span></dd></div>
-              <div><dt>Motor</dt><dd><span class="pill pill--time">15:40</span></dd></div>
-            </dl>
-          </details>
-        </li>
-        <li class="list__row">
-          <details>
-            <summary class="list__summary">
-              <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
-              <span class="list__cell list__cell--fill">Laura Bitca</span>
-              <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
-            </summary>
-            <dl class="list__details">
-              <div><dt>HMUP</dt><dd><span class="pill pill--time">14:30</span></dd></div>
-              <div><dt>Dress</dt><dd><span class="pill pill--time">15:00</span></dd></div>
-              <div><dt>Ready</dt><dd><span class="pill pill--time">15:15</span></dd></div>
-              <div><dt>Motor</dt><dd><span class="pill pill--time">15:40</span></dd></div>
-            </dl>
-          </details>
-        </li>
-        <li class="list__row">
-          <details>
-            <summary class="list__summary">
-              <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
-              <span class="list__cell list__cell--fill">Samanta Dodu</span>
-              <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
-            </summary>
-            <dl class="list__details">
-              <div><dt>HMUP</dt><dd><span class="pill pill--time">14:30</span></dd></div>
-              <div><dt>Dress</dt><dd><span class="pill pill--time">15:00</span></dd></div>
-              <div><dt>Ready</dt><dd><span class="pill pill--time">15:15</span></dd></div>
-              <div><dt>Motor</dt><dd><span class="pill pill--time">15:40</span></dd></div>
-            </dl>
-          </details>
-        </li>
-        <li class="list__row">
-          <details>
-            <summary class="list__summary">
-              <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
-              <span class="list__cell list__cell--fill">Veronica Bosque</span>
-              <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
-            </summary>
-            <dl class="list__details">
-              <div><dt>HMUP</dt><dd><span class="pill pill--time">14:30</span></dd></div>
-              <div><dt>Dress</dt><dd><span class="pill pill--time">15:00</span></dd></div>
-              <div><dt>Ready</dt><dd><span class="pill pill--time">15:15</span></dd></div>
-              <div><dt>Motor</dt><dd><span class="pill pill--time">15:40</span></dd></div>
-            </dl>
-          </details>
-        </li>
-      </ul>
-    </section>
-
-    <section class="card card--widget">
-      <header class="card__header">
-        <h2 class="card__title">Call</h2>
+        <h2 class="card__title">Extras</h2>
         <span class="pill pill--time">15:20</span>
       </header>
       <ul class="list list--calls">
         <li class="list__row">
-          <details>
-            <summary class="list__summary">
-              <span class="list__cell list__cell--fill list__cell--character">Velocista FE</span>
-              <span class="list__cell list__cell--fill">Celia Caro</span>
-              <span class="list__cell list__cell--call"><span class="pill pill--time">16:20</span></span>
-            </summary>
-            <dl class="list__details">
-              <div><dt>HMUP</dt><dd><span class="pill pill--time">15:20</span></dd></div>
-              <div><dt>Dress</dt><dd><span class="pill pill--time">15:50</span></dd></div>
-              <div><dt>Ready</dt><dd><span class="pill pill--time">16:05</span></dd></div>
-              <div><dt>Motor</dt><dd><span class="pill pill--time">16:30</span></dd></div>
-            </dl>
-          </details>
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Gang Members</span>
+            <span class="list__cell list__cell--fill">12</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">16:20</span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Gang Members</span><span>12</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">16:20</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">15:20</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">15:50</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">16:05</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">16:30</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 2 · 4</li>
+              <li>Spot 2 · 11</li>
+              <li>Spot 2 · 18</li>
+            </ul>
+            <p class="talent__notes">Trae su propio vestuario de entrenamiento.</p>
+          </template>
         </li>
         <li class="list__row">
-          <details>
-            <summary class="list__summary">
-              <span class="list__cell list__cell--fill list__cell--character">Velocista FE</span>
-              <span class="list__cell list__cell--fill">Claudia Camacho</span>
-              <span class="list__cell list__cell--call"><span class="pill pill--time">16:20</span></span>
-            </summary>
-            <dl class="list__details">
-              <div><dt>HMUP</dt><dd><span class="pill pill--time">15:20</span></dd></div>
-              <div><dt>Dress</dt><dd><span class="pill pill--time">15:50</span></dd></div>
-              <div><dt>Ready</dt><dd><span class="pill pill--time">16:05</span></dd></div>
-              <div><dt>Motor</dt><dd><span class="pill pill--time">16:30</span></dd></div>
-            </dl>
-          </details>
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Passers-by</span>
+            <span class="list__cell list__cell--fill">5</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">16:20</span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Passers-by</span><span>5</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">16:20</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">15:20</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">15:50</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">16:05</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">16:30</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 12</li>
+              <li>Spot 1 · 17</li>
+              <li>Spot 1 · 24 + 15 + 21</li>
+              <li>Spot 1 · 14 + 15</li>
+            </ul>
+            <p class="talent__notes">Este actor es vegetariano y tiene misofonía, con lo que ha de tener un espacio apartado a la hora de comer.</p>
+          </template>
         </li>
       </ul>
     </section>
   </main>
+
+  <!--
+    Talent details, as a bottom sheet: a row's button (data-sheet) copies its
+    <template> into [data-sheet-body] and opens it (js/app.js, "Bottom sheet").
+    CSS: .sheet and .talent, viewer/_mobile.scss.
+  -->
+  <dialog class="sheet" id="talent-sheet" aria-labelledby="talent-sheet-title">
+    <form class="sheet__panel" method="dialog">
+      <header class="sheet__header">
+        <h2 class="sheet__title" id="talent-sheet-title">Details</h2>
+        <button class="card__action icon icon__close-alt" value="close" aria-label="Close"></button>
+      </header>
+      <div class="sheet__body" data-sheet-body></div>
+      <footer class="sheet__footer">
+        <button class="sheet__button" value="done">Done</button>
+      </footer>
+    </form>
+  </dialog>
 
   <p class="viewer__footer">© Motooor 2026</p>
   

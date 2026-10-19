@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+      Shared head of every app page. Each page sets its title first:
+        $title = Crew   (written as a Kit variable comment before this import)
+    -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>MOTOOOR - Settings</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+      <link rel="stylesheet" href="styles.css">
+      <script src="app-min.js" defer></script>
+    
+</head>
+
+
+<body class="app is-sidebar-expanded">
+
+  <!--
+    Theme saved in this browser, applied before the page paints.
+    Included first in <body> of every page (by _sidebar.kit, and by index.kit).
+  -->
+  <!-- js/app.js keeps the theme switch in sync -->
+  <script>(function () { try { var t = localStorage.getItem("motooor-theme") || "light"; if (t !== "system") { document.documentElement.setAttribute("data-theme", t); } } catch (e) { /* private mode */ } }());</script>
+  
+  <!--
+      Account sidebar (projects.kit, settings.kit): active and archived projects.
+      On the projects page app.js filters the cards; elsewhere they are plain
+      links to that page.
+    -->
+    <aside class="sidebar" id="sidebar">
+    
+      <header class="sidebar__header">
+        <span class="sidebar__logo" role="img" aria-label="Motooor"></span>
+        <span class="sidebar__iso" role="img" aria-label="Motooor"></span>
+      </header>
+    
+      <nav>
+        <ul class="sidebar__nav">
+          <li><a class="sidebar__item icon icon__current" href="projects.html" data-project-filter="active">Active projects</a></li>
+          <li><a class="sidebar__item icon icon__archived" href="projects.html#archived" data-project-filter="archived">Archived</a></li>
+        </ul>
+      </nav>
+    
+      <!-- Sidebar bottom: avatar and profile menu, then the open / close toggle (imported by _sidebar.kit and projects.kit) -->
+      <footer class="sidebar__footer">
+        <button class="sidebar__item sidebar__profile" popovertarget="profile-menu" aria-haspopup="true"><img class="avatar" src="img/avatar.png" alt="" width="28" height="28">Luis Herrero</button>
+        <button class="sidebar__item sidebar__toggle icon icon__sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Menu">Close</button>
+      </footer>
+      
+      <!-- Profile menu: opens beside the avatar (js/app.js) -->
+      <div class="profile-menu" id="profile-menu" popover>
+        <p class="profile-menu__name">Luis Herrero</p>
+        <a class="profile-menu__item" href="#">Account</a>
+        <a class="profile-menu__item" href="settings.html">Settings</a>
+        <a class="profile-menu__item" href="#">Docs</a>
+        <a class="profile-menu__item" href="#">Contact</a>
+        <div class="profile-menu__item profile-menu__theme">
+          Theme
+          <span class="profile-menu__themes" role="group" aria-label="Theme">
+            <button class="icon-button icon icon__theme-light" data-theme-choice="light" aria-pressed="false" aria-label="Light" title="Light"></button>
+            <button class="icon-button icon icon__theme-dark" data-theme-choice="dark" aria-pressed="false" aria-label="Dark" title="Dark"></button>
+            <button class="icon-button icon icon__theme-system" data-theme-choice="system" aria-pressed="false" aria-label="System" title="System"></button>
+          </span>
+        </div>
+        <a class="profile-menu__item profile-menu__logout icon icon__log-out" href="index.html">Log out</a>
+      </div>
+      
+    
+    </aside>
+    
+
+  <header class="topbar">
+    <ol class="breadcrumb">
+      <li aria-current="page">Settings</li>
+    </ol>
+    <button class="icon icon__help" aria-label="Help"></button>
+  </header>
+
+  <main class="content">
+    <section class="card">
+      <header class="card__header">
+        <h1 class="card__title">Settings</h1>
+        <p class="info">Luis Herrero · Starter plan</p>
+  
+        <button class="btn btn--cta ">Change Plan</button>
+
+      </header>
+
+      <nav class="tabs">
+        <button class="tabs__tab" aria-selected="true" aria-controls="settings-profile">Profile</button>
+        <button class="tabs__tab" aria-selected="false" aria-controls="settings-subscription">Subscription</button>
+        <button class="tabs__tab" aria-selected="false" aria-controls="settings-configuration">Configuration</button>
+        <button class="tabs__tab" aria-selected="false" aria-controls="settings-security">Security</button>
+      </nav>
+
+      <!-- PROFILE -->
+      <div class="card__body account" id="settings-profile">
+        <section class="account__section">
+          <h2 class="account__title">Photo</h2>
+          <div class="account__photo">
+            <img class="avatar avatar--lg" src="img/avatar.png" alt="" width="96" height="96">
+            <label class="btn icon icon__image" role="button" tabindex="0">Change photo<input type="file" accept="image/*" hidden></label>
+          </div>
+        </section>
+
+        <section class="account__section">
+          <h2 class="account__title">Personal details</h2>
+          <div class="account__fields">
+              <div class="field">
+                <label class="field__label" for="name">Name</label>
+                <div class="field__box"><input class="field__input" id="name" name="name" type="text" value="Luis"></div>
+              </div>
+              <div class="field">
+                <label class="field__label" for="last-name">Last name</label>
+                <div class="field__box"><input class="field__input" id="last-name" name="last-name" type="text" value="Herrero"></div>
+              </div>
+              <div class="field">
+                <label class="field__label" for="role">Role</label>
+                <div class="field__box"><input class="field__input" id="role" name="role" type="text" placeholder="Add role"></div>
+              </div>
+              <div class="field">
+                <label class="field__label" for="country">Country</label>
+                <div class="field__box"><input class="field__input" id="country" name="country" type="text" value="Spain"></div>
+              </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- SUBSCRIPTION -->
+      <div class="card__body account" id="settings-subscription" hidden>
+        <section class="account__section">
+          <h2 class="account__title">Current plan</h2>
+          <dl class="stats">
+            <div class="stats__item"><dt>Plan</dt><dd>Starter</dd></div>
+            <div class="stats__item"><dt>Price</dt><dd>39.00 € / month</dd></div>
+            <div class="stats__item">
+              <dt>Payment method</dt>
+              <dd>
+                Credit card
+                <!-- Card brand: generic icon; swap for the brand's official logo (img/cards/…) -->
+                <span class="account__card icon icon__credit-card" data-brand="mastercard">Card ends with 4242</span>
+                <button class="btn" type="button">Change payment method</button>
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="account__section">
+          <h2 class="account__title">Purchase history</h2>
+          <ul class="list">
+            <li class="list__row list__row--head">
+              <span class="list__cell list__cell--fill">Date</span>
+              <span class="list__cell list__cell--fill">Plan</span>
+              <span class="list__cell list__cell--fill">Amount</span>
+              <span class="list__cell list__cell--fill">Method</span>
+            </li>
+            <li class="list__row">
+              <span class="list__cell list__cell--fill">04/08/2025</span>
+              <span class="list__cell list__cell--fill">Starter</span>
+              <span class="list__cell list__cell--fill">39.00 €</span>
+              <span class="list__cell list__cell--fill">Credit card</span>
+            </li>
+            <li class="list__row">
+              <span class="list__cell list__cell--fill">04/07/2025</span>
+              <span class="list__cell list__cell--fill">Starter</span>
+              <span class="list__cell list__cell--fill">39.00 €</span>
+              <span class="list__cell list__cell--fill">Credit card</span>
+            </li>
+            <li class="list__row">
+              <span class="list__cell list__cell--fill">04/06/2025</span>
+              <span class="list__cell list__cell--fill">Starter</span>
+              <span class="list__cell list__cell--fill">39.00 €</span>
+              <span class="list__cell list__cell--fill">Credit card</span>
+            </li>
+            <li class="list__row">
+              <span class="list__cell list__cell--fill">04/05/2025</span>
+              <span class="list__cell list__cell--fill">Starter</span>
+              <span class="list__cell list__cell--fill">39.00 €</span>
+              <span class="list__cell list__cell--fill">Credit card</span>
+            </li>
+            <li class="list__row">
+              <span class="list__cell list__cell--fill">04/04/2025</span>
+              <span class="list__cell list__cell--fill">Starter</span>
+              <span class="list__cell list__cell--fill">39.00 €</span>
+              <span class="list__cell list__cell--fill">Credit card</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="account__section">
+          <h2 class="account__title">Cancel subscription</h2>
+          <p class="account__text">Cancels the Starter plan. You can subscribe again at any time.</p>
+          <button class="btn btn--alert" type="button">Cancel subscription</button>
+        </section>
+      </div>
+
+      <!-- CONFIGURATION -->
+      <div class="card__body account" id="settings-configuration" hidden>
+        <div class="account__columns">
+          <section class="account__section">
+            <h2 class="account__title">Time parameters</h2>
+            <p class="account__text">Configure the time blocks for your production. These settings apply to the entire project.</p>
+            <ul class="unit-types unit-types--ruled" aria-label="Time parameters">
+              <li class="unit-types__item"><label class="unit-types__name" for="time-hmup">HMUP</label><input class="pill pill--input" id="time-hmup" name="time-hmup" value="30m"><button class="hint icon icon__info" type="button" data-hint="Explain HMUP here" aria-label="Explain HMUP here"></button></li>
+              <li class="unit-types__item"><label class="unit-types__name" for="time-dress">Dress</label><input class="pill pill--input" id="time-dress" name="time-dress" value="15m"><button class="hint icon icon__info" type="button" data-hint="Explain Dress here" aria-label="Explain Dress here"></button></li>
+              <li class="unit-types__item"><label class="unit-types__name" for="time-ready">Ready</label><input class="pill pill--input" id="time-ready" name="time-ready" value="10m"><button class="hint icon icon__info" type="button" data-hint="Explain Ready here" aria-label="Explain Ready here"></button></li>
+              <li class="separator" aria-hidden="true"></li>
+              <li class="unit-types__item"><label class="unit-types__name" for="time-shot">Shot</label><input class="pill pill--input" id="time-shot" name="time-shot" value="20m"><button class="hint icon icon__info" type="button" data-hint="Explain Shot here" aria-label="Explain Shot here"></button></li>
+              <li class="unit-types__item"><label class="unit-types__name" for="time-between">In between shots</label><input class="pill pill--input" id="time-between" name="time-between" value="10m"><button class="hint icon icon__info" type="button" data-hint="Explain In between shots here" aria-label="Explain In between shots here"></button></li>
+              <li class="separator" aria-hidden="true"></li>
+              <li class="unit-types__item"><label class="unit-types__name" for="time-agency-call">Agency call</label><input class="pill pill--input" id="time-agency-call" name="time-agency-call" value="1h"><button class="hint icon icon__info" type="button" data-hint="Explain Agency call here" aria-label="Explain Agency call here"></button></li>
+              <li class="unit-types__item"><label class="unit-types__name" for="time-client-call">Client call</label><input class="pill pill--input" id="time-client-call" name="time-client-call" value="30m"><button class="hint icon icon__info" type="button" data-hint="Explain Client call here" aria-label="Explain Client call here"></button></li>
+              <li class="separator" aria-hidden="true"></li>
+              <li class="unit-types__item"><label class="unit-types__name" for="time-working-hours">Working hours</label><input class="pill pill--input" id="time-working-hours" name="time-working-hours" value="8h"><button class="hint icon icon__info" type="button" data-hint="Explain Working hours here" aria-label="Explain Working hours here"></button></li>
+              <li class="unit-types__item"><label class="unit-types__name" for="time-lunch">Lunch break</label><input class="pill pill--input" id="time-lunch" name="time-lunch" value="1h"><button class="hint icon icon__info" type="button" data-hint="Explain Lunch break here" aria-label="Explain Lunch break here"></button></li>
+            </ul>
+          </section>
+
+          <section class="account__section">
+            <h2 class="account__title">Date &amp; time format</h2>
+            <p class="account__text">Configure how times and dates are displayed for your production. These settings apply across the entire project.</p>
+            <h3 class="account__title" id="format-date">Date</h3>
+            <div class="account__options" role="radiogroup" aria-labelledby="format-date">
+                <label class="select-menu__option"><input type="radio" name="date-format" value="dmy" checked>Day / Month / Year</label>
+                <label class="select-menu__option"><input type="radio" name="date-format" value="ymd">Year / Month / Day</label>
+                <label class="select-menu__option"><input type="radio" name="date-format" value="mdy">Month / Day / Year</label>
+            </div>
+            <h3 class="account__title" id="format-time">Time</h3>
+            <div class="account__options" role="radiogroup" aria-labelledby="format-time">
+                <label class="select-menu__option"><input type="radio" name="time-format" value="24" checked>24 hours</label>
+                <label class="select-menu__option"><input type="radio" name="time-format" value="12">12 hours (AM / PM)</label>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- SECURITY -->
+      <div class="card__body account" id="settings-security" hidden>
+        <div class="account__columns">
+          <section class="account__section">
+            <h2 class="account__title">Password</h2>
+            <p class="account__text">Update your account password to help keep it secure and prevent unauthorized access.</p>
+            <button class="btn icon icon__edit" type="button">Change password</button>
+          </section>
+
+          <section class="account__section">
+            <h2 class="account__title">Two-factor authentication</h2>
+            <p class="account__text">Enable or manage two-factor authentication to add an extra layer of security to your account.</p>
+            <button class="btn" type="button">Enable 2FA</button>
+          </section>
+        </div>
+
+        <section class="account__section">
+          <h2 class="account__title">Session history</h2>
+          <ul class="list list--sessions">
+            <li class="list__row list__row--head">
+              <span class="list__cell list__cell--fill">Client</span>
+              <span class="list__cell list__cell--fill">IP address</span>
+              <span class="list__cell list__cell--fill">Country</span>
+              <span class="list__cell list__cell--fill">Most recent</span>
+              <span class="list__cell list__cell--actions">Status</span>
+            </li>
+            <li class="list__row">
+              <span class="list__cell list__cell--fill">Chrome</span>
+              <span class="list__cell list__cell--fill">92.158.136.241</span>
+              <span class="list__cell list__cell--fill">Spain</span>
+              <span class="list__cell list__cell--fill">11/05/2025 · 16:42</span>
+              <span class="list__cell list__cell--actions"><span class="pill pill--strong">Current</span></span>
+            </li>
+            <li class="list__row">
+              <span class="list__cell list__cell--fill">Chrome</span>
+              <span class="list__cell list__cell--fill">92.158.136.241</span>
+              <span class="list__cell list__cell--fill">Spain</span>
+              <span class="list__cell list__cell--fill">11/05/2025 · 16:42</span>
+              <span class="list__cell list__cell--actions"><button class="pill" type="button" title="Log out this session">Logged in</button></span>
+            </li>
+            <li class="list__row">
+              <span class="list__cell list__cell--fill">Chrome</span>
+              <span class="list__cell list__cell--fill">92.158.136.241</span>
+              <span class="list__cell list__cell--fill">Spain</span>
+              <span class="list__cell list__cell--fill">11/05/2025 · 16:42</span>
+              <span class="list__cell list__cell--actions"><button class="pill" type="button" title="Log out this session">Logged in</button></span>
+            </li>
+            <li class="list__row">
+              <span class="list__cell list__cell--fill">Chrome</span>
+              <span class="list__cell list__cell--fill">92.158.136.241</span>
+              <span class="list__cell list__cell--fill">Spain</span>
+              <span class="list__cell list__cell--fill">11/05/2025 · 16:42</span>
+              <span class="list__cell list__cell--actions"><button class="pill" type="button" title="Log out this session">Logged in</button></span>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
