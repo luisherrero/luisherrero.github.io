@@ -88,6 +88,14 @@
     <section class="card">
       <header class="card__header">
         <h1 class="card__title">IRYO “Reflexiones”</h1>
+
+        <div class="settings">
+          <div class="settings__group" role="group" aria-label="Calls">
+            <label class="settings__item">Agency call <input class="pill pill--input" value="10:00" inputmode="numeric"></label>
+            <label class="settings__item">Client call <input class="pill pill--input" value="10:30" inputmode="numeric"></label>
+          </div>
+        </div>
+
         <details class="menu">
           <summary class="btn btn--hollow btn--dropdown">Day 1 · 27 September 2026</summary>
           <ul class="menu__list">
@@ -189,6 +197,7 @@
             </dl>
           </section>
 
+
           <section class="card card--widget">
             <header class="card__header">
               <h2 class="card__title">Contact</h2>
@@ -227,7 +236,7 @@
           <!-- Requirements: rich text -->
           <section class="card card--widget">
             <header class="card__header">
-              <h2 class="card__title">Requirements</h2>
+              <h2 class="card__title">General Requirements</h2>
             </header>
             <div class="editor">
               <div class="editor__toolbar">
@@ -298,13 +307,17 @@
     the day after the last one; Delete asks first (#modal-delete-day) and the
     days after it move up one number (js/app.js, "Shooting days").
   -->
-  <dialog class="modal modal--form modal--wide" id="modal-settings" aria-labelledby="modal-settings-title">
+  <dialog class="modal modal--form" id="modal-settings" aria-labelledby="modal-settings-title">
     <form method="dialog">
       <header class="modal__header">
         <h2 class="modal__heading" id="modal-settings-title">Shooting days</h2>
         <button class="card__action icon icon__close-alt" value="cancel" aria-label="Close"></button>
       </header>
       <div class="modal__body">
+
+        <p class="modal__hint">Manage the shootings days of your project</p>
+        <hr class="modal__rule">
+
         <button class="btn btn--hollow" type="button" data-day-add aria-controls="days-list">Add new day</button>
 
         <ol class="unit-types unit-types--scroll shoot-days" id="days-list" aria-label="Shooting days" data-days>

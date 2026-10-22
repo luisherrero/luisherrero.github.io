@@ -142,7 +142,7 @@
             <label class="list__cell list__cell--check"><input type="checkbox" aria-label="Select all"></label>
             <span class="list__cell list__cell--time">Time</span>
             <span class="list__cell list__cell--shot">Shot</span>
-            <span class="list__cell list__cell--desc">Action</span>
+            <span class="list__cell list__cell--desc">Description</span>
             <span class="list__cell list__cell--set">Set</span>
             <span class="list__cell list__cell--talent">Talent</span>
             <span class="list__cell list__cell--reqs">Requirements</span>
@@ -345,19 +345,8 @@
             </div>
           </li>
 
-          <li class="list__row list__row--banner list__row--banner-custom" data-color="0">
-            <span class="list__cell list__cell--scope">
-              <button class="shot-type" data-select="scopes" value="1" aria-label="Shots it moves">None</button>
-            </span>
-            <span class="list__cell list__cell--range">
-              <button class="pill pill--time">9:30</button>
-              <button class="pill pill--time">17:50</button>
-            </span>
-            <h2 class="list__cell list__cell--fill">New banner</h2>
-            <span class="list__cell list__cell--banner-actions">
-              <button class="color-button" data-color-menu aria-label="Banner color"></button>
-              <button class="icon-button icon icon__delete" aria-label="Delete banner"></button>
-            </span>
+          <li class="list__row list__row--banner list__row--banner-daychange">
+            <h2 class="list__cell list__cell--fill">DAY CHANGE</h2>
           </li>
 
           <li class="list__row">
@@ -465,6 +454,11 @@
         <button class="card__action icon icon__close-alt" value="cancel" aria-label="Close"></button>
       </header>
       <div class="modal__body">
+
+
+        <p class="modal__hint">Manage the units you're using in your shooting plan</p>
+        <hr class="modal__rule">
+
         <div class="settings settings--stack">
           <label class="settings__item">Show units <input type="checkbox" class="switch" role="switch" name="show-types" checked></label>
         </div>
@@ -490,7 +484,6 @@
           </li>
         </ul>
 
-        <hr class="modal__rule">
         <button class="btn btn--hollow" type="button" data-add="unit-type-new" aria-controls="unit-types-custom">Add new unit</button>
 
         <ul class="unit-types" id="unit-types-custom" aria-label="Custom types">

@@ -90,19 +90,8 @@
         <h1 class="card__title">Calls</h1>
         <p class="info"> </p>
         
-        <div class="settings">
-          <div class="settings__group" role="group" aria-label="Preparation (minutes)">
-            <label class="settings__item">HMUP <input class="pill pill--input" value="30" inputmode="numeric"></label>
-            <label class="settings__item">Dress <input class="pill pill--input" value="15" inputmode="numeric"></label>
-            <label class="settings__item">Ready <input class="pill pill--input" value="10" inputmode="numeric"></label>
-          </div>
 
-
-          <div class="settings__group" role="group" aria-label="Calls">
-            <label class="settings__item">Agency call <input class="pill pill--input" value="10:00" inputmode="numeric"></label>
-            <label class="settings__item">Client call <input class="pill pill--input" value="10:30" inputmode="numeric"></label>
-          </div>
-        </div>
+        <button class="btn btn--hollow icon icon__time" data-modal="modal-settings" aria-haspopup="dialog">Settings</button>
 
         <details class="menu">
           <summary class="btn btn--hollow btn--dropdown">Day 1</summary>
@@ -299,6 +288,37 @@
 
     </section>
   </main>
+
+
+
+  <dialog class="modal modal--form" id="modal-settings" aria-labelledby="modal-settings-title">
+    <form method="dialog">
+      <header class="modal__header">
+        <h2 class="modal__heading" id="modal-settings-title">Talent Time Settings</h2>
+        <button class="card__action icon icon__close-alt" value="cancel" aria-label="Close"></button>
+      </header>
+      <div class="modal__body">
+
+        <p class="modal__hint">Define the amount of time for talent preparation</p>
+        <hr class="modal__rule">
+
+          <div class="settings__group settings__group--spread" role="group" aria-label="Preparation (minutes)">
+            <label class="settings__item">HMUP <input class="pill pill--input" value="30" inputmode="numeric"></label>
+            <label class="settings__item">Dress <input class="pill pill--input" value="15" inputmode="numeric"></label>
+            <label class="settings__item">Ready <input class="pill pill--input" value="10" inputmode="numeric"></label>
+          </div>
+
+        <hr class="modal__rule">
+      </div>
+      <footer class="modal__buttons">
+        <button class="btn" value="cancel">Cancel</button>
+        <button class="btn btn--cta" value="done">Done</button>
+      </footer>
+    </form>
+  </dialog>
+
+
+
 
     <!--
       Project status drawer, opened by the status badge of the top bar

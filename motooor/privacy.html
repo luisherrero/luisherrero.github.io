@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    Privacy Policy for the waitlist. Standalone like waitlist.html: same
+    background, type and colours; its styles live here.
+    Bracketed [placeholders] are marked in yellow: fill them before publishing.
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Motooor · Privacy Policy</title>
+  <meta name="description" content="How Motooor handles the personal data you share when you join the waitlist.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap">
+  <style>
+    :root {
+      --wl-bg:          rgb(24 48 54 / 1);
+      --wl-video-blur:  6px;
+      --wl-video-alpha: .5;
+      --wl-glow:        radial-gradient(110% 100% at 15% 50%, rgb(24 48 54 / 1) 0%, rgb(24 48 54 / 1) 15%, rgb(40 76 84 / 0.4) 100%);
+      --wl-inset:       clamp(24px, 10vw, 160px);
+      --pp-width:       640px;                   /* wider than the waitlist: long reading text */
+
+      --wl-brand:       #00c2ee;
+      --wl-tagline:     #d5e5ee;
+      --wl-text:        #e6e7e7;
+      --wl-note:        #aeaeae;
+      --wl-field-bg:    rgb(15 26 29 / .4);
+      --wl-hairline:    .5px;
+      --wl-radius:      2px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 64px var(--wl-inset) 96px;
+      overflow-x: hidden;
+      font: 400 16px/26px "Open Sans", system-ui, sans-serif;
+      letter-spacing: -.1px;
+      color: var(--wl-text);
+      background: var(--wl-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wl-video,
+    .wl-glow {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .wl-video {
+      z-index: -2;
+      object-fit: cover;
+      opacity: var(--wl-video-alpha);
+      filter: blur(var(--wl-video-blur));
+      transform: scale(1.1);
+    }
+    .wl-glow { background: var(--wl-glow); }
+
+    .pp { max-width: var(--pp-width); }
+
+    /* Header: logo back to the waitlist, then the title */
+    .pp .pp-home, .pp .pp-home:hover { display: inline-block; color: #fff; }
+    .pp-home:focus-visible { outline: 2px solid var(--wl-brand); outline-offset: 4px; }
+    .wl-logo { display: block; width: 165px; height: 36px; }
+
+    .pp-title {
+      margin: 48px 0 8px;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--wl-tagline);
+    }
+    .pp-updated { margin: 0; font-size: 13px; line-height: 16px; color: var(--wl-note); }
+
+    /* Sections */
+    .pp section {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: var(--wl-hairline) solid rgb(0 194 238 / .35);
+    }
+    .pp h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 26px;
+      color: #fff;
+    }
+    .pp p  { margin: 0 0 12px; }
+    .pp ul { margin: 0 0 12px; padding-left: 20px; }
+    .pp li { margin-bottom: 6px; }
+    .pp li::marker { color: var(--wl-brand); }
+    .pp strong { font-weight: 700; color: #fff; }
+
+    .pp a { font-weight: 600; color: var(--wl-brand); text-underline-offset: 3px; }
+    .pp a:hover { color: #fff; }
+
+    /* Providers table */
+    .pp-table-wrap { overflow-x: auto; margin: 4px 0 16px; }
+    .pp table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      line-height: 20px;
+      background: var(--wl-field-bg);
+      border: var(--wl-hairline) solid var(--wl-brand);
+      border-radius: var(--wl-radius);
+    }
+    .pp th, .pp td { padding: 10px 12px; text-align: left; vertical-align: top; }
+    .pp th {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--wl-tagline);
+      border-bottom: var(--wl-hairline) solid var(--wl-brand);
+    }
+    .pp td + td, .pp th + th { border-left: var(--wl-hairline) solid rgb(0 194 238 / .25); }
+    .pp tr + tr td { border-top: var(--wl-hairline) solid rgb(0 194 238 / .25); }
+
+    /* Placeholders to fill before publishing */
+    .pp-todo {
+      padding: 0 3px;
+      color: #1b2a2e;
+      background: #f5d76e;
+      border-radius: var(--wl-radius);
+    }
+
+    .pp-back { margin-top: 48px; font-size: 13px; color: var(--wl-note); }
+    .pp-back a { color: #fff; font-weight: 700; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wl-video { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="pp">
+    <header>
+      <a class="pp-home" href="waitlist.html" aria-label="Motooor, back to the waitlist">
+        <svg class="wl-logo" viewBox="0 8 220 48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="68" cy="31" r="17" stroke="currentColor" stroke-width="6"/>
+          <circle cx="152" cy="31" r="17" stroke="currentColor" stroke-width="6"/>
+          <path d="M129.777 17C130.419 17 130.805 17.7213 130.478 18.2732C128.268 22.0012 127 26.3524 127 31C127 38.3171 130.144 44.8994 135.154 49.4712C135.722 49.9892 135.371 51 134.602 51H127.981C127.375 51 126.798 50.7268 126.432 50.2422C122.395 44.8866 120 38.2235 120 31C120 26.4232 120.962 22.0714 122.693 18.1343C123.001 17.4341 123.704 17 124.469 17H129.777Z" fill="currentColor"/>
+          <path d="M179.531 17C180.296 17 180.999 17.4341 181.307 18.1343C183.038 22.0714 184 26.4232 184 31C184 38.2235 181.605 44.8866 177.568 50.2422C177.202 50.7268 176.625 51 176.019 51H169.398C168.629 51 168.278 49.9892 168.846 49.4712C173.856 44.8994 177 38.3171 177 31C177 26.3524 175.732 22.0012 173.522 18.2732C173.195 17.7213 173.581 17 174.223 17H179.531Z" fill="currentColor"/>
+          <path d="M119 17H107V51H100V17H88V11H119V17Z" fill="currentColor"/>
+          <rect x="43" y="11" width="40" height="6" transform="rotate(90 43 11)" fill="currentColor"/>
+          <rect x="8" y="11" width="40" height="6" transform="rotate(90 8 11)" fill="currentColor"/>
+          <path d="M8.5 11L26 42L19 42L2 11L8.5 11Z" fill="currentColor"/>
+          <path d="M36.5 11L19 42L26 42L43 11L36.5 11Z" fill="currentColor"/>
+          <mask id="pp-logo-r" fill="white">
+            <path d="M204 35C207.183 35 210.235 33.7357 212.485 31.4853C214.736 29.2348 216 26.1826 216 23C216 19.8174 214.736 16.7652 212.485 14.5147C210.235 12.2643 207.183 11 204 11L204 16.9943C205.593 16.9943 207.12 17.6271 208.247 18.7534C209.373 19.8796 210.006 21.4072 210.006 23C210.006 24.5928 209.373 26.1204 208.247 27.2466C207.12 28.3729 205.593 29.0057 204 29.0057L204 35Z"/>
+          </mask>
+          <path d="M204 35C207.183 35 210.235 33.7357 212.485 31.4853C214.736 29.2348 216 26.1826 216 23C216 19.8174 214.736 16.7652 212.485 14.5147C210.235 12.2643 207.183 11 204 11L204 16.9943C205.593 16.9943 207.12 17.6271 208.247 18.7534C209.373 19.8796 210.006 21.4072 210.006 23C210.006 24.5928 209.373 26.1204 208.247 27.2466C207.12 28.3729 205.593 29.0057 204 29.0057L204 35Z" stroke="currentColor" stroke-width="8" mask="url(#pp-logo-r)"/>
+          <rect x="194" y="11" width="40" height="6" transform="rotate(90 194 11)" fill="currentColor"/>
+          <rect x="204" y="29" width="6" height="12" transform="rotate(90 204 29)" fill="currentColor"/>
+          <rect x="204" y="11" width="6" height="12" transform="rotate(90 204 11)" fill="currentColor"/>
+          <path d="M218 51H210L200.438 33H207.875L218 51ZM194 19V20.8818L193 19H194Z" fill="currentColor"/>
+        </svg>
+      </a>
+      <h1 class="pp-title">Privacy Policy</h1>
+      <p class="pp-updated">Last updated: 21 October 2026</p>
+    </header>
+
+    <section>
+      <h2>Who we are</h2>
+      <p>This policy explains how <b>Motooor</b> handles the personal data you share when you join our waitlist.</p>
+      <p>The data controller is <b>Inari Studio SL</b>, with registered address at calle Lopez de Hoyos, 123, 28002, Madrid, Spain and CIF <b>B87904694</b>. For any privacy question, contact us at <a href="mailto:privacy@motooor.com">privacy@motooor.com</a>.</p>
+    </section>
+
+    <section>
+      <h2>What data we collect</h2>
+      <p>We only collect what we need to manage the waitlist:</p>
+      <ul>
+        <li><strong>Email address</strong>, which you enter in the waitlist form.</li>
+        <li><strong>Signup details</strong>, such as the date and time you joined and the page you joined from.</li>
+        <li><strong>Technical data</strong>, such as your IP address and browser type, which our hosting and email providers log automatically for security and delivery purposes.</li>
+      </ul>
+      <p>We do not ask for sensitive data, and the waitlist is not intended for people under 16.</p>
+    </section>
+
+    <section>
+      <h2>Why we use it and on what legal basis</h2>
+      <p>We use your email to:</p>
+      <ul>
+        <li>Confirm that you have joined the waitlist.</li>
+        <li>Tell you when you can access <b>Motooor</b> and send occasional updates about the launch.</li>
+        <li>Ask, optionally, for your feedback as an early user.</li>
+      </ul>
+      <p>The legal basis is your <strong>consent</strong> (Article 6(1)(a) GDPR), given when you submit the form. You can withdraw it at any time by clicking the unsubscribe link in any email or by writing to us. Withdrawing consent does not affect processing carried out before.</p>
+    </section>
+
+    <section>
+      <h2>Who we share it with</h2>
+      <p>We never sell your data. We only share it with providers that help us run the waitlist, under data processing agreements:</p>
+      <div class="pp-table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Provider</th><th scope="col">Purpose</th><th scope="col">Location</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Loops (<a href="https://loops.so" target="_blank" rel="noopener">loops.so</a>)</td><td>Storing waitlist contacts and sending emails</td><td>United States</td></tr>
+            <tr><td><mark class="pp-todo">[Hosting provider]</mark></td><td>Hosting the website</td><td><mark class="pp-todo">[Location]</mark></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>When data is transferred outside the European Economic Area, it is protected by appropriate safeguards, such as the European Commission’s Standard Contractual Clauses or the EU-US Data Privacy Framework where the provider is certified.</p>
+      <p>We may also disclose data when required by law.</p>
+    </section>
+
+    <section>
+      <h2>How long we keep it</h2>
+      <p>We keep your email while the waitlist is active and you remain subscribed. If you unsubscribe or ask us to delete your data, we remove it within 30 days. If <b>Motooor</b> does not launch, we delete the whole list within 12 months of closing the waitlist.</p>
+    </section>
+
+    <section>
+      <h2>Your rights</h2>
+      <p>You can, at any time and free of charge:</p>
+      <ul>
+        <li>Access the data we hold about you.</li>
+        <li>Correct it if it is inaccurate.</li>
+        <li>Ask us to delete it.</li>
+        <li>Restrict or object to its processing.</li>
+        <li>Receive it in a portable format.</li>
+        <li>Withdraw your consent.</li>
+      </ul>
+      <p>To exercise these rights, email <a href="mailto:privacy@motooor.com">privacy@motooor.com</a>. We will reply within one month.</p>
+      <p>If you believe we have not handled your data properly, you can complain to the Spanish Data Protection Agency (<a href="https://www.aepd.es" target="_blank" rel="noopener">AEPD</a>) or the authority in your country.</p>
+    </section>
+
+    <section>
+      <h2>Cookies</h2>
+      <p>This landing page does not use advertising or tracking cookies.</p>
+    </section>
+
+    <section>
+      <h2>Security</h2>
+      <p>We apply reasonable technical and organisational measures to protect your data, and our providers do the same under their agreements with us.</p>
+    </section>
+
+    <section>
+      <h2>Changes to this policy</h2>
+      <p>We may update this policy as Motooor evolves. We will post any change on this page with a new date, and notify you by email if the change is significant.</p>
+    </section>
+
+    <p class="pp-back"><a href="waitlist.html">← Back to the waitlist</a></p>
+  </main>
+
+</body>
+</html>

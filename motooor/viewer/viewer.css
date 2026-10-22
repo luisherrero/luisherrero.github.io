@@ -112,6 +112,13 @@
   single quotes, no line breaks, # < > as %23 %3C %3E, #414D53 as
   currentColor and color='COLOR' on the <svg>.
 */
+/*
+  Which tokens a stylesheet carries. The app (styles.css) carries all of
+  them: the theme lab, which runs on it, edits the viewer's too. The viewer
+  (viewer.scss passes "viewer") only carries its own viewer-* tokens and
+  the palette, so it never depends on an app token.
+*/
+/* The tokens of $colors this stylesheet carries */
 /* Every token of a theme as --color-name, its colour scheme and images */
 :root {
   --palette-white: #ffffff;
@@ -242,8 +249,10 @@
   --palette-pink-800: #3e262f;
   --palette-pink-900: #2d1e24;
   --palette-pink-950: #21171b;
-  --palette-names: "white, black, accent-lightest, accent-light, accent, accent-dark, accent-darkest, grey-50, grey-100, grey-200, grey-300, grey-400, grey-500, grey-600, grey-700, grey-800, grey-900, grey-950, slate-50, slate-100, slate-200, slate-300, slate-400, slate-500, slate-600, slate-700, slate-800, slate-900, slate-950, red-50, red-100, red-200, red-300, red-400, red-500, red-600, red-700, red-800, red-900, red-950, orange-50, orange-100, orange-200, orange-300, orange-400, orange-500, orange-600, orange-700, orange-800, orange-900, orange-950, amber-50, amber-100, amber-200, amber-300, amber-400, amber-500, amber-600, amber-700, amber-800, amber-900, amber-950, yellow-50, yellow-100, yellow-200, yellow-300, yellow-400, yellow-500, yellow-600, yellow-700, yellow-800, yellow-900, yellow-950, green-50, green-100, green-200, green-300, green-400, green-500, green-600, green-700, green-800, green-900, green-950, teal-50, teal-100, teal-200, teal-300, teal-400, teal-500, teal-600, teal-700, teal-800, teal-900, teal-950, blue-50, blue-100, blue-200, blue-300, blue-400, blue-500, blue-600, blue-700, blue-800, blue-900, blue-950, violet-50, violet-100, violet-200, violet-300, violet-400, violet-500, violet-600, violet-700, violet-800, violet-900, violet-950, pink-50, pink-100, pink-200, pink-300, pink-400, pink-500, pink-600, pink-700, pink-800, pink-900, pink-950"; /* for themes.html */
-  --color-tokens: "bg-app, bg-content, bg-card, bg-selected-icon, bg-hover-control, bg-hover-cell, bg-floating, fg-primary, fg-secondary, fg-subtle, fg-inverse, fg-on-image, fg-on-warning, fg-placeholder, border-button, border-form-item, border-pill, border-divider, border-floating, alert, alert-fill, alert-hover, warning, warning-fill, warning-hover, success, success-fill, success-hover, info, info-fill, info-hover, busy, logo, accent, shadow, shadow-inset, overlay, overlay-soft, backdrop, sidebar-hover, sidebar-border, topbar-border, avatar-border, breadcrumb-chevron, btn-bg, btn-fg, btn-hover, btn-cta-bg, btn-cta-fg, btn-cta-border, btn-cta-hover, btn-alert-bg, btn-alert-fg, btn-alert-border, btn-alert-hover, btn-soft-bg, btn-soft-hover, select-bg, select-border, select-arrow, field-bg, field-border, check-bg, check-on, check-mark, switch-bg, switch-border, switch-knob, switch-on, switch-knob-on, input-focus-bg, pill-bg, pill-strong-bg, pill-strong-fg, float-tools-bg, float-tools-border, swatch-border, swatch-ring, swatch-ring-gap, color-dot-border, toolbar-divider, editor-toolbar-border, tabs-border, tabs-fg, tabs-indicator, list-row-border, list-banner-bg, list-thumb-border, list-warning-border, banner-bg-av, banner-bg-photo, banner-bg-social, banner-bg-alt-1, banner-bg-alt-2, banner-bg-alt-3, banner-bg-alt-4, banner-bg-alt-5, banner-scope-none, banner-scope-all-bg, banner-scope-all-fg, stats-bg, places-bg, places-hover, places-active, places-number-bg, places-number-fg, gallery-title-rule, gallery-thumb-bg, gallery-thumb-border, gallery-caption-bg, gallery-caption-fg, dropzone-bg, dropzone-border, drawer-toolbar-border, drawer-bg, project-card-bg, project-card-border, project-pic-bg, project-new-border, modal-rule-1, modal-rule-2, viewer-bg, viewer-tabbar-bg, viewer-card-bg, viewer-alert-bg, viewer-pill-bg, viewer-hover, viewer-fg-primary, viewer-fg-secondary, viewer-fg-subtle, viewer-fg-on-image, viewer-rule, viewer-pill-border, viewer-alert, viewer-focus, viewer-shadow, viewer-cover-shade, viewer-overlay-soft, viewer-tabbar-border, viewer-tabbar-hover, viewer-tab-current, viewer-thumb-bg, viewer-thumb-border, viewer-thumb-caption-bg, viewer-thumb-caption-fg, viewer-places-number-bg, viewer-places-number-fg, viewer-banner-av, viewer-banner-photo, viewer-banner-social, viewer-banner-alt-1, viewer-banner-alt-2, viewer-banner-alt-3, viewer-banner-alt-4, viewer-banner-alt-5, viewer-sheet-bg, viewer-sheet-border, viewer-sheet-rule-1, viewer-sheet-rule-2, viewer-backdrop, viewer-pill-strong-bg, viewer-pill-strong-fg, viewer-btn-bg, viewer-btn-fg, viewer-btn-border, viewer-radio-bg, viewer-radio-border, viewer-radio-on, viewer-day-tab-fg"; /* for themes.html */
+  --palette-names: "white, black, accent-lightest, accent-light, accent, accent-dark, accent-darkest, grey-50, grey-100, grey-200, grey-300, grey-400, grey-500, grey-600, grey-700, grey-800, grey-900, grey-950, slate-50, slate-100, slate-200, slate-300, slate-400, slate-500, slate-600, slate-700, slate-800, slate-900, slate-950, red-50, red-100, red-200, red-300, red-400, red-500, red-600, red-700, red-800, red-900, red-950, orange-50, orange-100, orange-200, orange-300, orange-400, orange-500, orange-600, orange-700, orange-800, orange-900, orange-950, amber-50, amber-100, amber-200, amber-300, amber-400, amber-500, amber-600, amber-700, amber-800, amber-900, amber-950, yellow-50, yellow-100, yellow-200, yellow-300, yellow-400, yellow-500, yellow-600, yellow-700, yellow-800, yellow-900, yellow-950, green-50, green-100, green-200, green-300, green-400, green-500, green-600, green-700, green-800, green-900, green-950, teal-50, teal-100, teal-200, teal-300, teal-400, teal-500, teal-600, teal-700, teal-800, teal-900, teal-950, blue-50, blue-100, blue-200, blue-300, blue-400, blue-500, blue-600, blue-700, blue-800, blue-900, blue-950, violet-50, violet-100, violet-200, violet-300, violet-400, violet-500, violet-600, violet-700, violet-800, violet-900, violet-950, pink-50, pink-100, pink-200, pink-300, pink-400, pink-500, pink-600, pink-700, pink-800, pink-900, pink-950";
+  /* for themes.html */
+  --color-tokens: "bg-app, bg-content, bg-card, bg-selected-icon, bg-hover-control, bg-hover-cell, bg-floating, fg-primary, fg-secondary, fg-subtle, fg-inverse, fg-on-image, fg-on-warning, fg-placeholder, border-button, border-form-item, border-pill, border-divider, border-floating, alert, alert-fill, alert-hover, warning, warning-fill, warning-hover, success, success-fill, success-hover, info, info-fill, info-hover, busy, logo, accent, shadow, overlay, overlay-soft, backdrop, sidebar-hover, sidebar-border, topbar-border, avatar-border, breadcrumb-chevron, btn-bg, btn-fg, btn-hover, btn-cta-bg, btn-cta-fg, btn-cta-border, btn-cta-hover, btn-alert-bg, btn-alert-fg, btn-alert-border, btn-alert-hover, btn-soft-bg, btn-soft-hover, select-bg, select-border, select-arrow, field-bg, field-border, check-bg, check-on, check-mark, switch-bg, switch-border, switch-knob, switch-on, switch-knob-on, input-focus-bg, pill-bg, pill-strong-bg, pill-strong-fg, float-tools-bg, float-tools-border, swatch-border, swatch-ring, swatch-ring-gap, color-dot-border, toolbar-divider, editor-toolbar-border, tabs-border, tabs-fg, tabs-indicator, list-row-border, list-banner-bg, list-thumb-border, list-warning-border, banner-bg-av, banner-bg-photo, banner-bg-social, banner-bg-alt-1, banner-bg-alt-2, banner-bg-alt-3, banner-bg-alt-4, banner-bg-alt-5, banner-scope-none, banner-scope-all-bg, banner-scope-all-fg, stats-bg, places-bg, places-hover, places-active, places-number-bg, places-number-fg, gallery-title-rule, gallery-thumb-bg, gallery-thumb-border, gallery-caption-bg, gallery-caption-fg, dropzone-bg, dropzone-border, drawer-toolbar-border, drawer-bg, project-card-bg, project-card-border, project-pic-bg, project-new-border, modal-rule-1, modal-rule-2, viewer-bg, viewer-card-bg, viewer-alert-bg, viewer-pill-bg, viewer-hover, viewer-fg-primary, viewer-fg-secondary, viewer-fg-subtle, viewer-fg-on-image, viewer-rule, viewer-pill-border, viewer-alert, viewer-focus, viewer-logo, viewer-shadow, viewer-cover-shade, viewer-overlay-soft, viewer-menu-current, viewer-thumb-bg, viewer-thumb-border, viewer-thumb-caption-bg, viewer-thumb-caption-fg, viewer-places-number-bg, viewer-places-number-fg, viewer-banner-av, viewer-banner-photo, viewer-banner-social, viewer-banner-alt-1, viewer-banner-alt-2, viewer-banner-alt-3, viewer-banner-alt-4, viewer-banner-alt-5, viewer-sheet-bg, viewer-sheet-border, viewer-sheet-rule-1, viewer-sheet-rule-2, viewer-backdrop, viewer-pill-strong-bg, viewer-pill-strong-fg, viewer-btn-bg, viewer-btn-fg, viewer-btn-border, viewer-radio-bg, viewer-radio-border, viewer-radio-on, viewer-day-tab-fg";
+  /* for themes.html */
   color-scheme: light;
   /* Icons of this theme (see $icons) */
   --icon-cast: url("../icons/light/cast.svg");
@@ -295,7 +304,6 @@
   --color-logo: var(--palette-grey-600);
   --color-accent: var(--palette-accent);
   --color-shadow: color-mix(in srgb, var(--palette-grey-950) 16%, transparent);
-  --color-shadow-inset: color-mix(in srgb, var(--palette-grey-600) 18%, transparent);
   --color-overlay: color-mix(in srgb, var(--palette-black) 40%, transparent);
   --color-overlay-soft: color-mix(in srgb, var(--palette-black) 15%, transparent);
   --color-backdrop: color-mix(in srgb, var(--palette-grey-50) 60%, transparent);
@@ -382,7 +390,6 @@
   --color-modal-rule-1: var(--palette-grey-200);
   --color-modal-rule-2: var(--palette-grey-100);
   --color-viewer-bg: var(--palette-grey-100);
-  --color-viewer-tabbar-bg: var(--palette-grey-50);
   --color-viewer-card-bg: var(--palette-white);
   --color-viewer-alert-bg: var(--palette-white);
   --color-viewer-pill-bg: var(--palette-white);
@@ -395,12 +402,11 @@
   --color-viewer-pill-border: var(--palette-grey-200);
   --color-viewer-alert: var(--palette-red-500);
   --color-viewer-focus: var(--palette-accent);
+  --color-viewer-logo: var(--palette-grey-600);
   --color-viewer-shadow: color-mix(in srgb, var(--palette-grey-950) 16%, transparent);
   --color-viewer-cover-shade: var(--palette-black);
   --color-viewer-overlay-soft: color-mix(in srgb, var(--palette-black) 15%, transparent);
-  --color-viewer-tabbar-border: var(--palette-slate-50);
-  --color-viewer-tabbar-hover: var(--palette-slate-200);
-  --color-viewer-tab-current: var(--palette-grey-50);
+  --color-viewer-menu-current: var(--palette-grey-50);
   --color-viewer-thumb-bg: var(--palette-slate-50);
   --color-viewer-thumb-border: var(--palette-grey-300);
   --color-viewer-thumb-caption-bg: var(--palette-grey-800);
@@ -429,7 +435,8 @@
   --color-viewer-radio-border: var(--palette-accent);
   --color-viewer-radio-on: var(--palette-accent);
   --color-viewer-day-tab-fg: color-mix(in srgb, var(--palette-white) 80%, transparent);
-  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent logo=grey-600 accent=accent shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 viewer-bg=grey-100 viewer-tabbar-bg=grey-50 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-900 viewer-fg-secondary=slate-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=slate-300 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-shadow=grey-950@16% viewer-cover-shade=black viewer-overlay-soft=black@15% viewer-tabbar-border=slate-50 viewer-tabbar-hover=slate-200 viewer-tab-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-800 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-800 viewer-places-number-fg=slate-50 viewer-banner-av=grey-200 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=orange-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-tab-fg=white@80%"; /* for themes.html */
+  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent logo=grey-600 accent=accent shadow=grey-950@16% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 viewer-bg=grey-100 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-900 viewer-fg-secondary=slate-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=slate-300 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-logo=grey-600 viewer-shadow=grey-950@16% viewer-cover-shade=black viewer-overlay-soft=black@15% viewer-menu-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-800 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-800 viewer-places-number-fg=slate-50 viewer-banner-av=grey-200 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=orange-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-tab-fg=white@80%";
+  /* for themes.html */
   /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
   --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23fcfcfc' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23232a2e'/%3E%3C/svg%3E");
@@ -491,7 +498,6 @@
   --color-logo: var(--palette-grey-600);
   --color-accent: var(--palette-accent);
   --color-shadow: color-mix(in srgb, var(--palette-grey-950) 16%, transparent);
-  --color-shadow-inset: color-mix(in srgb, var(--palette-grey-600) 18%, transparent);
   --color-overlay: color-mix(in srgb, var(--palette-black) 40%, transparent);
   --color-overlay-soft: color-mix(in srgb, var(--palette-black) 15%, transparent);
   --color-backdrop: color-mix(in srgb, var(--palette-grey-50) 60%, transparent);
@@ -578,7 +584,6 @@
   --color-modal-rule-1: var(--palette-grey-200);
   --color-modal-rule-2: var(--palette-grey-100);
   --color-viewer-bg: var(--palette-grey-100);
-  --color-viewer-tabbar-bg: var(--palette-grey-50);
   --color-viewer-card-bg: var(--palette-white);
   --color-viewer-alert-bg: var(--palette-white);
   --color-viewer-pill-bg: var(--palette-white);
@@ -591,12 +596,11 @@
   --color-viewer-pill-border: var(--palette-grey-200);
   --color-viewer-alert: var(--palette-red-500);
   --color-viewer-focus: var(--palette-accent);
+  --color-viewer-logo: var(--palette-grey-600);
   --color-viewer-shadow: color-mix(in srgb, var(--palette-grey-950) 16%, transparent);
   --color-viewer-cover-shade: var(--palette-black);
   --color-viewer-overlay-soft: color-mix(in srgb, var(--palette-black) 15%, transparent);
-  --color-viewer-tabbar-border: var(--palette-slate-50);
-  --color-viewer-tabbar-hover: var(--palette-slate-200);
-  --color-viewer-tab-current: var(--palette-grey-50);
+  --color-viewer-menu-current: var(--palette-grey-50);
   --color-viewer-thumb-bg: var(--palette-slate-50);
   --color-viewer-thumb-border: var(--palette-grey-300);
   --color-viewer-thumb-caption-bg: var(--palette-grey-800);
@@ -625,7 +629,8 @@
   --color-viewer-radio-border: var(--palette-accent);
   --color-viewer-radio-on: var(--palette-accent);
   --color-viewer-day-tab-fg: color-mix(in srgb, var(--palette-white) 80%, transparent);
-  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent logo=grey-600 accent=accent shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 viewer-bg=grey-100 viewer-tabbar-bg=grey-50 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-900 viewer-fg-secondary=slate-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=slate-300 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-shadow=grey-950@16% viewer-cover-shade=black viewer-overlay-soft=black@15% viewer-tabbar-border=slate-50 viewer-tabbar-hover=slate-200 viewer-tab-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-800 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-800 viewer-places-number-fg=slate-50 viewer-banner-av=grey-200 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=orange-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-tab-fg=white@80%"; /* for themes.html */
+  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent logo=grey-600 accent=accent shadow=grey-950@16% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 viewer-bg=grey-100 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-900 viewer-fg-secondary=slate-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=slate-300 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-logo=grey-600 viewer-shadow=grey-950@16% viewer-cover-shade=black viewer-overlay-soft=black@15% viewer-menu-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-800 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-800 viewer-places-number-fg=slate-50 viewer-banner-av=grey-200 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=orange-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-tab-fg=white@80%";
+  /* for themes.html */
   /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
   --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23fcfcfc' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23232a2e'/%3E%3C/svg%3E");
@@ -687,7 +692,6 @@
   --color-logo: var(--palette-grey-100);
   --color-accent: var(--palette-accent-lightest);
   --color-shadow: color-mix(in srgb, var(--palette-black) 50%, transparent);
-  --color-shadow-inset: color-mix(in srgb, var(--palette-black) 40%, transparent);
   --color-overlay: color-mix(in srgb, var(--palette-black) 40%, transparent);
   --color-overlay-soft: color-mix(in srgb, var(--palette-black) 25%, transparent);
   --color-backdrop: color-mix(in srgb, var(--palette-grey-900) 60%, transparent);
@@ -774,7 +778,6 @@
   --color-modal-rule-1: var(--palette-slate-600);
   --color-modal-rule-2: var(--palette-grey-700);
   --color-viewer-bg: var(--palette-grey-950);
-  --color-viewer-tabbar-bg: var(--palette-grey-700);
   --color-viewer-card-bg: color-mix(in srgb, var(--palette-grey-700) 90%, transparent);
   --color-viewer-alert-bg: color-mix(in srgb, var(--palette-red-400) 2.4%, transparent);
   --color-viewer-pill-bg: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
@@ -787,12 +790,11 @@
   --color-viewer-pill-border: var(--palette-slate-600);
   --color-viewer-alert: var(--palette-red-400);
   --color-viewer-focus: var(--palette-accent-lightest);
+  --color-viewer-logo: var(--palette-grey-100);
   --color-viewer-shadow: color-mix(in srgb, var(--palette-black) 50%, transparent);
   --color-viewer-cover-shade: var(--palette-black);
   --color-viewer-overlay-soft: color-mix(in srgb, var(--palette-black) 25%, transparent);
-  --color-viewer-tabbar-border: var(--palette-grey-800);
-  --color-viewer-tabbar-hover: color-mix(in srgb, var(--palette-grey-600) 60%, transparent);
-  --color-viewer-tab-current: var(--palette-grey-600);
+  --color-viewer-menu-current: var(--palette-grey-600);
   --color-viewer-thumb-bg: var(--palette-grey-800);
   --color-viewer-thumb-border: var(--palette-grey-600);
   --color-viewer-thumb-caption-bg: var(--palette-grey-100);
@@ -821,7 +823,8 @@
   --color-viewer-radio-border: var(--palette-slate-400);
   --color-viewer-radio-on: var(--palette-grey-50);
   --color-viewer-day-tab-fg: color-mix(in srgb, var(--palette-grey-100) 70%, transparent);
-  --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-800 bg-selected-icon=grey-600 bg-hover-control=grey-700 bg-hover-cell=grey-700 bg-floating=grey-800 fg-primary=grey-200 fg-secondary=grey-400 fg-subtle=slate-500 fg-inverse=grey-950 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=slate-500 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-600 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-400 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% busy=accent-lightest logo=grey-100 accent=accent-lightest shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% sidebar-border=slate-700 topbar-border=slate-700 avatar-border=grey-600 breadcrumb-chevron=grey-100 btn-bg=grey-800 btn-fg=grey-200 btn-hover=grey-700 btn-cta-bg=slate-600 btn-cta-fg=grey-100 btn-cta-border=grey-600 btn-cta-hover=slate-600 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 btn-soft-bg=grey-700 btn-soft-hover=grey-600 select-bg=grey-800 select-border=grey-600 select-arrow=grey-100 field-bg=grey-800 field-border=grey-100 check-bg=grey-800 check-on=grey-50 check-mark=black switch-bg=grey-800 switch-border=grey-600 switch-knob=grey-100 switch-on=grey-100 switch-knob-on=grey-950 input-focus-bg=grey-800 pill-bg=grey-800@90% pill-strong-bg=slate-600 pill-strong-fg=grey-100 float-tools-bg=grey-800 float-tools-border=slate-700 swatch-border=slate-600 swatch-ring=grey-100 swatch-ring-gap=grey-800 color-dot-border=slate-400 toolbar-divider=grey-600 editor-toolbar-border=grey-700 tabs-border=grey-600 tabs-fg=slate-500 tabs-indicator=grey-100 list-row-border=slate-700 list-banner-bg=grey-700 list-thumb-border=grey-600 list-warning-border=black@40% banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600 banner-scope-none=grey-100 banner-scope-all-bg=grey-100 banner-scope-all-fg=grey-800 stats-bg=grey-800@90% places-bg=grey-700@50% places-hover=grey-700@50% places-active=accent-lightest places-number-bg=grey-100 places-number-fg=grey-950 gallery-title-rule=grey-600 gallery-thumb-bg=grey-800 gallery-thumb-border=grey-600 gallery-caption-bg=grey-100 gallery-caption-fg=grey-950 dropzone-bg=grey-800 dropzone-border=slate-400 drawer-toolbar-border=grey-700 drawer-bg=grey-800 project-card-bg=grey-800@90% project-card-border=slate-700 project-pic-bg=grey-600 project-new-border=grey-600 modal-rule-1=slate-600 modal-rule-2=grey-700 viewer-bg=grey-950 viewer-tabbar-bg=grey-700 viewer-card-bg=grey-700@90% viewer-alert-bg=red-400@2.4% viewer-pill-bg=grey-800@90% viewer-hover=grey-700 viewer-fg-primary=grey-200 viewer-fg-secondary=grey-400 viewer-fg-subtle=slate-500 viewer-fg-on-image=grey-50 viewer-rule=slate-600 viewer-pill-border=slate-600 viewer-alert=red-400 viewer-focus=accent-lightest viewer-shadow=black@50% viewer-cover-shade=black viewer-overlay-soft=black@25% viewer-tabbar-border=grey-800 viewer-tabbar-hover=grey-600@60% viewer-tab-current=grey-600 viewer-thumb-bg=grey-800 viewer-thumb-border=grey-600 viewer-thumb-caption-bg=grey-100 viewer-thumb-caption-fg=grey-950 viewer-places-number-bg=grey-100 viewer-places-number-fg=grey-950 viewer-banner-av=grey-700 viewer-banner-photo=green-600 viewer-banner-social=yellow-600 viewer-banner-alt-1=orange-600 viewer-banner-alt-2=blue-600 viewer-banner-alt-3=pink-600 viewer-banner-alt-4=violet-600 viewer-banner-alt-5=amber-600 viewer-sheet-bg=grey-800 viewer-sheet-border=slate-600 viewer-sheet-rule-1=slate-600 viewer-sheet-rule-2=grey-700 viewer-backdrop=black@70% viewer-pill-strong-bg=slate-600 viewer-pill-strong-fg=grey-100 viewer-btn-bg=slate-600 viewer-btn-fg=grey-100 viewer-btn-border=grey-600 viewer-radio-bg=grey-800 viewer-radio-border=slate-400 viewer-radio-on=grey-50 viewer-day-tab-fg=grey-100@70%"; /* for themes.html */
+  --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-800 bg-selected-icon=grey-600 bg-hover-control=grey-700 bg-hover-cell=grey-700 bg-floating=grey-800 fg-primary=grey-200 fg-secondary=grey-400 fg-subtle=slate-500 fg-inverse=grey-950 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=slate-500 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-600 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-400 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% busy=accent-lightest logo=grey-100 accent=accent-lightest shadow=black@50% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% sidebar-border=slate-700 topbar-border=slate-700 avatar-border=grey-600 breadcrumb-chevron=grey-100 btn-bg=grey-800 btn-fg=grey-200 btn-hover=grey-700 btn-cta-bg=slate-600 btn-cta-fg=grey-100 btn-cta-border=grey-600 btn-cta-hover=slate-600 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 btn-soft-bg=grey-700 btn-soft-hover=grey-600 select-bg=grey-800 select-border=grey-600 select-arrow=grey-100 field-bg=grey-800 field-border=grey-100 check-bg=grey-800 check-on=grey-50 check-mark=black switch-bg=grey-800 switch-border=grey-600 switch-knob=grey-100 switch-on=grey-100 switch-knob-on=grey-950 input-focus-bg=grey-800 pill-bg=grey-800@90% pill-strong-bg=slate-600 pill-strong-fg=grey-100 float-tools-bg=grey-800 float-tools-border=slate-700 swatch-border=slate-600 swatch-ring=grey-100 swatch-ring-gap=grey-800 color-dot-border=slate-400 toolbar-divider=grey-600 editor-toolbar-border=grey-700 tabs-border=grey-600 tabs-fg=slate-500 tabs-indicator=grey-100 list-row-border=slate-700 list-banner-bg=grey-700 list-thumb-border=grey-600 list-warning-border=black@40% banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600 banner-scope-none=grey-100 banner-scope-all-bg=grey-100 banner-scope-all-fg=grey-800 stats-bg=grey-800@90% places-bg=grey-700@50% places-hover=grey-700@50% places-active=accent-lightest places-number-bg=grey-100 places-number-fg=grey-950 gallery-title-rule=grey-600 gallery-thumb-bg=grey-800 gallery-thumb-border=grey-600 gallery-caption-bg=grey-100 gallery-caption-fg=grey-950 dropzone-bg=grey-800 dropzone-border=slate-400 drawer-toolbar-border=grey-700 drawer-bg=grey-800 project-card-bg=grey-800@90% project-card-border=slate-700 project-pic-bg=grey-600 project-new-border=grey-600 modal-rule-1=slate-600 modal-rule-2=grey-700 viewer-bg=grey-950 viewer-card-bg=grey-700@90% viewer-alert-bg=red-400@2.4% viewer-pill-bg=grey-800@90% viewer-hover=grey-700 viewer-fg-primary=grey-200 viewer-fg-secondary=grey-400 viewer-fg-subtle=slate-500 viewer-fg-on-image=grey-50 viewer-rule=slate-600 viewer-pill-border=slate-600 viewer-alert=red-400 viewer-focus=accent-lightest viewer-logo=grey-100 viewer-shadow=black@50% viewer-cover-shade=black viewer-overlay-soft=black@25% viewer-menu-current=grey-600 viewer-thumb-bg=grey-800 viewer-thumb-border=grey-600 viewer-thumb-caption-bg=grey-100 viewer-thumb-caption-fg=grey-950 viewer-places-number-bg=grey-100 viewer-places-number-fg=grey-950 viewer-banner-av=grey-700 viewer-banner-photo=green-600 viewer-banner-social=yellow-600 viewer-banner-alt-1=orange-600 viewer-banner-alt-2=blue-600 viewer-banner-alt-3=pink-600 viewer-banner-alt-4=violet-600 viewer-banner-alt-5=amber-600 viewer-sheet-bg=grey-800 viewer-sheet-border=slate-600 viewer-sheet-rule-1=slate-600 viewer-sheet-rule-2=grey-700 viewer-backdrop=black@70% viewer-pill-strong-bg=slate-600 viewer-pill-strong-fg=grey-100 viewer-btn-bg=slate-600 viewer-btn-fg=grey-100 viewer-btn-border=grey-600 viewer-radio-bg=grey-800 viewer-radio-border=slate-400 viewer-radio-on=grey-50 viewer-day-tab-fg=grey-100@70%";
+  /* for themes.html */
   /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
   --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23000000' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23f0f2f3'/%3E%3C/svg%3E");
@@ -884,7 +887,6 @@
     --color-logo: var(--palette-grey-100);
     --color-accent: var(--palette-accent-lightest);
     --color-shadow: color-mix(in srgb, var(--palette-black) 50%, transparent);
-    --color-shadow-inset: color-mix(in srgb, var(--palette-black) 40%, transparent);
     --color-overlay: color-mix(in srgb, var(--palette-black) 40%, transparent);
     --color-overlay-soft: color-mix(in srgb, var(--palette-black) 25%, transparent);
     --color-backdrop: color-mix(in srgb, var(--palette-grey-900) 60%, transparent);
@@ -971,7 +973,6 @@
     --color-modal-rule-1: var(--palette-slate-600);
     --color-modal-rule-2: var(--palette-grey-700);
     --color-viewer-bg: var(--palette-grey-950);
-    --color-viewer-tabbar-bg: var(--palette-grey-700);
     --color-viewer-card-bg: color-mix(in srgb, var(--palette-grey-700) 90%, transparent);
     --color-viewer-alert-bg: color-mix(in srgb, var(--palette-red-400) 2.4%, transparent);
     --color-viewer-pill-bg: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
@@ -984,12 +985,11 @@
     --color-viewer-pill-border: var(--palette-slate-600);
     --color-viewer-alert: var(--palette-red-400);
     --color-viewer-focus: var(--palette-accent-lightest);
+    --color-viewer-logo: var(--palette-grey-100);
     --color-viewer-shadow: color-mix(in srgb, var(--palette-black) 50%, transparent);
     --color-viewer-cover-shade: var(--palette-black);
     --color-viewer-overlay-soft: color-mix(in srgb, var(--palette-black) 25%, transparent);
-    --color-viewer-tabbar-border: var(--palette-grey-800);
-    --color-viewer-tabbar-hover: color-mix(in srgb, var(--palette-grey-600) 60%, transparent);
-    --color-viewer-tab-current: var(--palette-grey-600);
+    --color-viewer-menu-current: var(--palette-grey-600);
     --color-viewer-thumb-bg: var(--palette-grey-800);
     --color-viewer-thumb-border: var(--palette-grey-600);
     --color-viewer-thumb-caption-bg: var(--palette-grey-100);
@@ -1018,7 +1018,8 @@
     --color-viewer-radio-border: var(--palette-slate-400);
     --color-viewer-radio-on: var(--palette-grey-50);
     --color-viewer-day-tab-fg: color-mix(in srgb, var(--palette-grey-100) 70%, transparent);
-    --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-800 bg-selected-icon=grey-600 bg-hover-control=grey-700 bg-hover-cell=grey-700 bg-floating=grey-800 fg-primary=grey-200 fg-secondary=grey-400 fg-subtle=slate-500 fg-inverse=grey-950 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=slate-500 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-600 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-400 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% busy=accent-lightest logo=grey-100 accent=accent-lightest shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% sidebar-border=slate-700 topbar-border=slate-700 avatar-border=grey-600 breadcrumb-chevron=grey-100 btn-bg=grey-800 btn-fg=grey-200 btn-hover=grey-700 btn-cta-bg=slate-600 btn-cta-fg=grey-100 btn-cta-border=grey-600 btn-cta-hover=slate-600 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 btn-soft-bg=grey-700 btn-soft-hover=grey-600 select-bg=grey-800 select-border=grey-600 select-arrow=grey-100 field-bg=grey-800 field-border=grey-100 check-bg=grey-800 check-on=grey-50 check-mark=black switch-bg=grey-800 switch-border=grey-600 switch-knob=grey-100 switch-on=grey-100 switch-knob-on=grey-950 input-focus-bg=grey-800 pill-bg=grey-800@90% pill-strong-bg=slate-600 pill-strong-fg=grey-100 float-tools-bg=grey-800 float-tools-border=slate-700 swatch-border=slate-600 swatch-ring=grey-100 swatch-ring-gap=grey-800 color-dot-border=slate-400 toolbar-divider=grey-600 editor-toolbar-border=grey-700 tabs-border=grey-600 tabs-fg=slate-500 tabs-indicator=grey-100 list-row-border=slate-700 list-banner-bg=grey-700 list-thumb-border=grey-600 list-warning-border=black@40% banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600 banner-scope-none=grey-100 banner-scope-all-bg=grey-100 banner-scope-all-fg=grey-800 stats-bg=grey-800@90% places-bg=grey-700@50% places-hover=grey-700@50% places-active=accent-lightest places-number-bg=grey-100 places-number-fg=grey-950 gallery-title-rule=grey-600 gallery-thumb-bg=grey-800 gallery-thumb-border=grey-600 gallery-caption-bg=grey-100 gallery-caption-fg=grey-950 dropzone-bg=grey-800 dropzone-border=slate-400 drawer-toolbar-border=grey-700 drawer-bg=grey-800 project-card-bg=grey-800@90% project-card-border=slate-700 project-pic-bg=grey-600 project-new-border=grey-600 modal-rule-1=slate-600 modal-rule-2=grey-700 viewer-bg=grey-950 viewer-tabbar-bg=grey-700 viewer-card-bg=grey-700@90% viewer-alert-bg=red-400@2.4% viewer-pill-bg=grey-800@90% viewer-hover=grey-700 viewer-fg-primary=grey-200 viewer-fg-secondary=grey-400 viewer-fg-subtle=slate-500 viewer-fg-on-image=grey-50 viewer-rule=slate-600 viewer-pill-border=slate-600 viewer-alert=red-400 viewer-focus=accent-lightest viewer-shadow=black@50% viewer-cover-shade=black viewer-overlay-soft=black@25% viewer-tabbar-border=grey-800 viewer-tabbar-hover=grey-600@60% viewer-tab-current=grey-600 viewer-thumb-bg=grey-800 viewer-thumb-border=grey-600 viewer-thumb-caption-bg=grey-100 viewer-thumb-caption-fg=grey-950 viewer-places-number-bg=grey-100 viewer-places-number-fg=grey-950 viewer-banner-av=grey-700 viewer-banner-photo=green-600 viewer-banner-social=yellow-600 viewer-banner-alt-1=orange-600 viewer-banner-alt-2=blue-600 viewer-banner-alt-3=pink-600 viewer-banner-alt-4=violet-600 viewer-banner-alt-5=amber-600 viewer-sheet-bg=grey-800 viewer-sheet-border=slate-600 viewer-sheet-rule-1=slate-600 viewer-sheet-rule-2=grey-700 viewer-backdrop=black@70% viewer-pill-strong-bg=slate-600 viewer-pill-strong-fg=grey-100 viewer-btn-bg=slate-600 viewer-btn-fg=grey-100 viewer-btn-border=grey-600 viewer-radio-bg=grey-800 viewer-radio-border=slate-400 viewer-radio-on=grey-50 viewer-day-tab-fg=grey-100@70%"; /* for themes.html */
+    --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-800 bg-selected-icon=grey-600 bg-hover-control=grey-700 bg-hover-cell=grey-700 bg-floating=grey-800 fg-primary=grey-200 fg-secondary=grey-400 fg-subtle=slate-500 fg-inverse=grey-950 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=slate-500 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-600 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-400 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% busy=accent-lightest logo=grey-100 accent=accent-lightest shadow=black@50% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% sidebar-border=slate-700 topbar-border=slate-700 avatar-border=grey-600 breadcrumb-chevron=grey-100 btn-bg=grey-800 btn-fg=grey-200 btn-hover=grey-700 btn-cta-bg=slate-600 btn-cta-fg=grey-100 btn-cta-border=grey-600 btn-cta-hover=slate-600 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 btn-soft-bg=grey-700 btn-soft-hover=grey-600 select-bg=grey-800 select-border=grey-600 select-arrow=grey-100 field-bg=grey-800 field-border=grey-100 check-bg=grey-800 check-on=grey-50 check-mark=black switch-bg=grey-800 switch-border=grey-600 switch-knob=grey-100 switch-on=grey-100 switch-knob-on=grey-950 input-focus-bg=grey-800 pill-bg=grey-800@90% pill-strong-bg=slate-600 pill-strong-fg=grey-100 float-tools-bg=grey-800 float-tools-border=slate-700 swatch-border=slate-600 swatch-ring=grey-100 swatch-ring-gap=grey-800 color-dot-border=slate-400 toolbar-divider=grey-600 editor-toolbar-border=grey-700 tabs-border=grey-600 tabs-fg=slate-500 tabs-indicator=grey-100 list-row-border=slate-700 list-banner-bg=grey-700 list-thumb-border=grey-600 list-warning-border=black@40% banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600 banner-scope-none=grey-100 banner-scope-all-bg=grey-100 banner-scope-all-fg=grey-800 stats-bg=grey-800@90% places-bg=grey-700@50% places-hover=grey-700@50% places-active=accent-lightest places-number-bg=grey-100 places-number-fg=grey-950 gallery-title-rule=grey-600 gallery-thumb-bg=grey-800 gallery-thumb-border=grey-600 gallery-caption-bg=grey-100 gallery-caption-fg=grey-950 dropzone-bg=grey-800 dropzone-border=slate-400 drawer-toolbar-border=grey-700 drawer-bg=grey-800 project-card-bg=grey-800@90% project-card-border=slate-700 project-pic-bg=grey-600 project-new-border=grey-600 modal-rule-1=slate-600 modal-rule-2=grey-700 viewer-bg=grey-950 viewer-card-bg=grey-700@90% viewer-alert-bg=red-400@2.4% viewer-pill-bg=grey-800@90% viewer-hover=grey-700 viewer-fg-primary=grey-200 viewer-fg-secondary=grey-400 viewer-fg-subtle=slate-500 viewer-fg-on-image=grey-50 viewer-rule=slate-600 viewer-pill-border=slate-600 viewer-alert=red-400 viewer-focus=accent-lightest viewer-logo=grey-100 viewer-shadow=black@50% viewer-cover-shade=black viewer-overlay-soft=black@25% viewer-menu-current=grey-600 viewer-thumb-bg=grey-800 viewer-thumb-border=grey-600 viewer-thumb-caption-bg=grey-100 viewer-thumb-caption-fg=grey-950 viewer-places-number-bg=grey-100 viewer-places-number-fg=grey-950 viewer-banner-av=grey-700 viewer-banner-photo=green-600 viewer-banner-social=yellow-600 viewer-banner-alt-1=orange-600 viewer-banner-alt-2=blue-600 viewer-banner-alt-3=pink-600 viewer-banner-alt-4=violet-600 viewer-banner-alt-5=amber-600 viewer-sheet-bg=grey-800 viewer-sheet-border=slate-600 viewer-sheet-rule-1=slate-600 viewer-sheet-rule-2=grey-700 viewer-backdrop=black@70% viewer-pill-strong-bg=slate-600 viewer-pill-strong-fg=grey-100 viewer-btn-bg=slate-600 viewer-btn-fg=grey-100 viewer-btn-border=grey-600 viewer-radio-bg=grey-800 viewer-radio-border=slate-400 viewer-radio-on=grey-50 viewer-day-tab-fg=grey-100@70%";
+    /* for themes.html */
     /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
     --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23000000' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23f0f2f3'/%3E%3C/svg%3E");
@@ -1139,7 +1140,8 @@
   --type-display-lg-line: 40px;
   --type-display-lg-case: none;
   --type-display-lg-use: "weather temperature";
-  --type-styles: "label, pill-sm, pill, title-sm, title-md, title-lg, text-sm, text, text-lg, body-sm, body, body-lg, display, display-lg"; /* for themes.html */
+  --type-styles: "label, pill-sm, pill, title-sm, title-md, title-lg, text-sm, text, text-lg, body-sm, body, body-lg, display, display-lg";
+  /* for themes.html */
 }
 
 /* Layout ----------------------------------------------------------------- */
@@ -1236,7 +1238,9 @@ button {
 
 [hidden] {
   display: none !important;
-} /* hidden always wins over a component's display */
+}
+
+/* hidden always wins over a component's display */
 /****************************************************************************
 
   ICONS
@@ -1339,10 +1343,11 @@ button {
   hardly any interaction and no editing, so it does not load the app's
   partials: this file holds every rule the viewer pages draw, taken from
   the app's components (card, facts, weather, places, stats, list, thumb,
-  pill, shot type) and already narrowed to what the viewer shows. Tokens,
-  text styles, spacing and radii still come from _tokens.scss, so the
-  viewer follows the app's design decisions; component sizes that differ
-  live in the $vw-* variables below.
+  pill, shot type) and already narrowed to what the viewer shows. Colours
+  are only viewer-* tokens (viewer.css carries no app token); text styles,
+  spacing and radii come from _tokens.scss, so the viewer follows the
+  app's type and spacing decisions; component sizes that differ live in
+  the $vw-* variables below. Its behaviour is viewer/viewer.js.
 
     body.viewer
      ├─ .viewer__cover     cover image behind the top of the page, fading into it
@@ -1364,11 +1369,21 @@ button {
 /* one column on tablets */
 /* Home, two columns on tablets */
 /* page title and menu button, from the top */
-/* page title over the cover (not Home) */
+/* page title to the content (not Home) */
+/* Icons: every icon and icon button of the viewer (bar, menu, sheets, cards) */
+/* blank margin inside the icon drawings at $vw-icon-size (a quarter: 8 of their 32): lines up the drawing, not its box. 40px → 10px; change it with the size (no math.div: CodeKit's Dart Sass lacks it) */
+/* Where the icons and titles line up at the sides */
+/* phones: with the text inside the cards */
+/* tablets: with the edge of the cards (content column) */
 /* Phones (narrower than $breakpoint-md) */
 /* cards from edge to edge: no side margin, side borders or corners */
-/* every text style this much bigger (size and line height); 0 = as on tablets */
-/* styles that keep their size: big ones, and pill-sm (unit type in a fixed 40px pill) */
+/* …except the notice (card--alert): this margin at the sides, red frame all round */
+/* text styles this much bigger (size and line height); 0 = as on tablets */
+/* titles this much bigger: page titles, the project title, the menu */
+/* what counts as a title */
+/* styles that keep their size: the unit type (fixed 40px pill) and the temperature */
+/* shot description in Shoot Plan (instead of $vw-type-step; its style, text-sm, is shared) */
+/* times in pills, everywhere (instead of $vw-type-step; its style, pill, is shared) */
 /* card outline and lines between rows */
 /* card header: label title, as the Overview widgets */
 /* facts row */
@@ -1403,7 +1418,8 @@ button {
 /* PAGE --------------------------------------------------------------------- */
 .viewer {
   position: relative;
-  isolation: isolate; /* the cover sits under the content, not under the page */
+  isolation: isolate;
+  /* the cover sits under the content, not under the page */
   min-height: 100vh;
   min-height: 100dvh;
   padding-bottom: env(safe-area-inset-bottom);
@@ -1412,6 +1428,7 @@ button {
      into the page (viewer-bg). The image comes from a .bg_NN class. */
   /* Home: title at the bottom of the cover, on a dark gradient */
   /* Other pages: title and a button, over the cover */
+  /* The left column is the menu button's place (it is drawn by .viewer__menu) */
   /* Cards, one under the other */
 }
 .viewer__cover {
@@ -1442,6 +1459,7 @@ button {
   gap: 8px;
   height: 240px;
   padding: 24px 24px 20px;
+  /* Tablets: the title lines up with the edge of the cards */
 }
 .viewer__hero h1 {
   font-size: var(--type-display-size);
@@ -1453,12 +1471,21 @@ button {
   /* as the Overview cover */
   max-width: 960px;
 }
+@media (min-width: 720px) {
+  .viewer__hero {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+}
 .viewer__bar {
   display: grid;
-  grid-template-columns: 32px 1fr 32px;
+  grid-template-columns: 40px 1fr 40px;
   align-items: center;
-  padding: 64px 8px 16px;
-  /* -inv icon over the image */
+  padding: 64px 0 16px;
+  /* -inv icon over the image; its drawing lines up as the menu button's */
+  /* Tablets: as wide as the content, the button's drawing on the cards' right edge */
 }
 .viewer__bar h1 {
   font-size: var(--type-title-md-size);
@@ -1470,11 +1497,25 @@ button {
   grid-column: 2;
   text-align: center;
 }
+.viewer__bar .card__action {
+  justify-self: end;
+  /* so its side margin moves it */
+  margin-right: 6px;
+}
 .viewer__bar .card__action::before {
   background-image: var(--icon-inv, var(--icon));
 }
 .viewer__bar .card__action:hover {
   background-color: var(--color-viewer-overlay-soft);
+}
+@media (min-width: 720px) {
+  .viewer__bar {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .viewer__bar .card__action {
+    margin-right: -2px;
+  }
 }
 .viewer__content {
   display: flex;
@@ -1514,16 +1555,31 @@ button {
   text-align: center;
 }
 
+/* Icons: one size for the whole viewer ($vw-icon-size); the notice sets its own */
+.viewer .icon {
+  --icon-size: 40px;
+}
+
+/*
+  Left position of the menu button (and its close button) so the drawing,
+  not the box, lines up: on phones with the text in the cards, on tablets
+  with the edge of the content column ($col wide, centred, $vw-gutter inside).
+*/
+/* A text style $step bigger than its base size, only inside this element */
 /* Phones: larger text, and the cards use the whole width ----------------- */
 @media (max-width: 719px) {
   .viewer {
-    /* Every text style $vw-type-step bigger (the dialogs live in <body>, so they follow) */
+    /* Text styles $vw-type-step bigger, titles $vw-title-step (the dialogs live in <body>, so they follow) */
     --type-label-size: 12px;
     --type-label-line: 14px;
     --type-pill-size: 13px;
     --type-pill-line: 18px;
     --type-title-sm-size: 13px;
     --type-title-sm-line: 18px;
+    --type-title-md-size: 22px;
+    --type-title-md-line: 26px;
+    --type-title-lg-size: 26px;
+    --type-title-lg-line: 26px;
     --type-text-sm-size: 15px;
     --type-text-sm-line: 18px;
     --type-text-size: 15px;
@@ -1536,15 +1592,33 @@ button {
     --type-body-line: 18px;
     --type-body-lg-size: 16px;
     --type-body-lg-line: 22px;
+    --type-display-size: 30px;
+    --type-display-line: 38px;
+    /* Pieces with their own step, their style is shared with other places */
+  }
+  .viewer .list--shoot-plan .list__text {
+    --type-text-sm-size: 14px;
+    --type-text-sm-line: 17px;
+  }
+  .viewer .pill--time {
+    --type-pill-size: 11px;
+    --type-pill-line: 16px;
   }
   .viewer__content {
     padding-right: 0;
     padding-left: 0;
+    /* The notice keeps a margin and its red frame all round */
   }
   .viewer__content .card {
     border-right: 0;
     border-left: 0;
     border-radius: 0;
+  }
+  .viewer__content .card--alert {
+    margin-right: 16px;
+    margin-left: 16px;
+    border: 2px solid var(--color-viewer-alert);
+    border-radius: 2px;
   }
   .viewer .days__tab {
     border-radius: 0;
@@ -1650,9 +1724,9 @@ button {
 /* MENU ----------------------------------------------------------------------- */
 /*
   A button at the top left of every page opens the sections full screen:
-  the Motooor logo and a link per page, the open one marked (js/app.js marks
+  the Motooor logo and a link per page, the open one marked (viewer/viewer.js marks
   .is-current, as in the app's sidebar). The menu is a <dialog> opened like
-  the bottom sheets (data-sheet, js/app.js "Bottom sheet"); its close button
+  the bottom sheets (data-sheet, viewer/viewer.js); its close button
   sits where the menu button was, and Esc closes it too. kit/_menu.kit.
 
     <button class="viewer__menu card__action icon icon__menu" data-sheet="viewer-menu">
@@ -1667,9 +1741,18 @@ button {
 .viewer__menu {
   position: absolute;
   top: 64px;
-  left: 8px;
   z-index: 1;
+  left: 6px;
   /* over the cover */
+}
+@media (min-width: 720px) {
+  .viewer__menu {
+    left: calc(max(0px, (100% - 600px) / 2) + 8px - 10px);
+    /* Home: wider column */
+  }
+  .viewer:has(.viewer__hero) .viewer__menu {
+    left: calc(max(0px, (100% - 960px) / 2) + 8px - 10px);
+  }
 }
 .viewer__menu::before {
   background-image: var(--icon-inv, var(--icon));
@@ -1708,14 +1791,24 @@ button {
 .viewer-menu__close {
   position: absolute;
   top: calc(64px + env(safe-area-inset-top));
-  left: 8px;
+  left: 6px;
+}
+@media (min-width: 720px) {
+  .viewer-menu__close {
+    left: calc(max(0px, (100% - 600px) / 2) + 8px - 10px);
+    /* Home: wider column */
+  }
+  .viewer:has(.viewer__hero) .viewer-menu__close {
+    left: calc(max(0px, (100% - 960px) / 2) + 8px - 10px);
+  }
 }
 .viewer-menu__logo {
   display: block;
   width: 176px;
   aspect-ratio: 220/64;
   margin: 40px 0 40px;
-  background: var(--image-logo) center/contain no-repeat; /* colour: logo token */
+  background: var(--image-logo) center/contain no-repeat;
+  /* colour: viewer-logo token */
 }
 .viewer-menu__nav {
   display: flex;
@@ -1742,7 +1835,7 @@ button {
 }
 .viewer-menu__item.is-current {
   color: var(--color-viewer-fg-primary);
-  background: var(--color-viewer-tab-current);
+  background: var(--color-viewer-menu-current);
 }
 .viewer-menu__footer {
   font-size: var(--type-title-sm-size);
@@ -1796,7 +1889,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  min-height: 40px;
+  min-height: 44px;
   padding: 24px 16px;
   /* Second value in a header (General Call date), styled as the title */
 }
@@ -1820,8 +1913,8 @@ button {
 }
 .card__action {
   flex: none;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 2px;
 }
 .card__action:hover {
@@ -1830,7 +1923,8 @@ button {
 .card__display {
   padding: 16px 24px;
   font-size: 60px;
-  font-weight: 300; /* as the display text styles */
+  font-weight: 300;
+  /* as the display text styles */
   line-height: 64px;
   letter-spacing: -1.2px;
   text-align: center;
@@ -1871,7 +1965,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0 16px;
   border-bottom: 0.5px solid var(--color-viewer-rule);
 }
@@ -2120,7 +2214,7 @@ button {
 /*
   A tab per day over the day's card. The chosen tab takes the card's fill,
   so tab and card read as one piece; the other tabs sit on the cover. Each
-  tab points to its card with aria-controls (js/app.js, "Tabs", shows it and
+  tab points to its card with aria-controls (viewer/viewer.js, "Day tabs", shows it and
   hides the others). The card holds the day's figures and its shots.
 
     <div class="days">
@@ -2479,7 +2573,7 @@ button {
   Crew Calls › Sort options). A button with
   data-sheet="id" opens it, first copying the <template> of its row (if
   any) into [data-sheet-body]; Close, Done, Esc or a tap on the backdrop close it
-  (js/app.js, "Bottom sheet"). On tablets it keeps the content's width.
+  (viewer/viewer.js, "Bottom sheets"). On tablets it keeps the content's width.
 
     <dialog class="sheet" id="talent-sheet" aria-labelledby="…">
       <form class="sheet__panel" method="dialog">
@@ -2493,7 +2587,8 @@ button {
   width: 100%;
   max-width: 600px;
   max-height: calc(100% - 80px);
-  margin: auto auto 0; /* at the bottom, centred on wide screens */
+  margin: auto auto 0;
+  /* at the bottom, centred on wide screens */
   padding: 0;
   overflow: visible;
   color: var(--color-viewer-fg-primary);
@@ -2548,7 +2643,8 @@ button {
   flex: 0 1 auto;
   min-height: 0;
   overflow-y: auto;
-  overscroll-behavior: contain; /* scrolling the sheet does not scroll the page behind */
+  overscroll-behavior: contain;
+  /* scrolling the sheet does not scroll the page behind */
 }
 .sheet__footer {
   flex: none;

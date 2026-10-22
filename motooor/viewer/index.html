@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
   <!--
-  Shared head of the viewer pages; each page sets its title first (Kit
-  variable "title"). Same JS as the app (../app-min.js). No theme switch:
-  the viewer follows the system (light / dark).
--->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>MOTOOOR · Call sheet - Home</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
-  <link rel="stylesheet" href="viewer.css">
-  <script src="../app-min.js" defer></script>
-
+      Shared head of the viewer pages; each page sets its title first (Kit
+      variable "title"). Its own stylesheet and script (viewer.css,
+      viewer-min.js), independent of the app's. No theme switch: the viewer
+      follows the system (light / dark).
+    -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+      <title>MOTOOOR · Call sheet - Home</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+      <link rel="stylesheet" href="viewer.css">
+      <script src="viewer-min.js" defer></script>
+    
 </head>
 
 <body class="viewer">
 
   <!-- Cover image of the project, blurred behind the top of every page -->
-<div class="viewer__cover bg_08" aria-hidden="true"></div>
-
+  <div class="viewer__cover bg_08" aria-hidden="true"></div>
+  
   <!--
-  Menu: a button at the top left (over the cover) opens the sections full
-  screen, with the Motooor logo; its close button sits in the same place.
-  Opened like the bottom sheets (data-sheet, js/app.js "Bottom sheet");
-  app.js marks the open page (.is-current). CSS: MENU, viewer/_mobile.scss.
--->
-<button class="viewer__menu card__action icon icon__menu" type="button" aria-label="Menu" aria-haspopup="dialog" data-sheet="viewer-menu"></button>
-<dialog class="viewer-menu" id="viewer-menu" aria-label="Menu">
-  <form class="viewer-menu__panel" method="dialog">
-    <button class="viewer-menu__close card__action icon icon__close-alt" value="close" aria-label="Close menu"></button>
-    <span class="viewer-menu__logo" role="img" aria-label="Motooor"></span>
-    <nav class="viewer-menu__nav" aria-label="Call sheet">
-      <a class="viewer-menu__item icon icon__home" href="index.html">Home</a>
-      <a class="viewer-menu__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
-      <a class="viewer-menu__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
-      <a class="viewer-menu__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
-    </nav>
-    <p class="viewer-menu__footer">© Motooor 2026</p>
-  </form>
-</dialog>
-
+      Menu: a button at the top left (over the cover) opens the sections full
+      screen, with the Motooor logo; its close button sits in the same place.
+      Opened like the bottom sheets (data-sheet, viewer/viewer.js); viewer.js
+      marks the open page (.is-current). CSS: MENU, viewer/_mobile.scss.
+    -->
+    <button class="viewer__menu card__action icon icon__menu" type="button" aria-label="Menu" aria-haspopup="dialog" data-sheet="viewer-menu"></button>
+    <dialog class="viewer-menu" id="viewer-menu" aria-label="Menu">
+      <form class="viewer-menu__panel" method="dialog">
+        <button class="viewer-menu__close card__action icon icon__close-alt" value="close" aria-label="Close menu"></button>
+        <span class="viewer-menu__logo" role="img" aria-label="Motooor"></span>
+        <nav class="viewer-menu__nav" aria-label="Call sheet">
+          <a class="viewer-menu__item icon icon__home" href="index.html">Home</a>
+          <a class="viewer-menu__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+          <a class="viewer-menu__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+          <a class="viewer-menu__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+        </nav>
+        <p class="viewer-menu__footer">© Motooor 2026</p>
+      </form>
+    </dialog>
+    
 
   <header class="viewer__hero">
     <h1>IRYO “Reflexiones”</h1>
@@ -129,7 +129,7 @@
   </main>
 
   <p class="viewer__footer">© Motooor 2026</p>
-
+  
 
 </body>
 </html>

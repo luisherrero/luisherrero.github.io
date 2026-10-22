@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    Waitlist: the landing before the website (Figma › Waitlist). A
+    standalone page: its styles live here (shared ones in
+    waitlist/_style.kit, imported below) and it loads no app script.
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Motooor · Join the waitlist</title>
+  <meta name="description" content="Motooor creates, organizes and distributes call sheets for film, TV and commercial productions.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap">
+  <style>
+        /* Shared by the waitlist pages (waitlist.kit, privacy.kit), imported
+           inside each page's <style>: they stay standalone (no styles.css, no
+           app script) and independent of the app and the viewer. A page sets
+           its own values after this, in its own :root. */
+    
+        /* Values to tune ------------------------------------------------------- */
+        :root {
+          --wl-bg:          rgb(24 48 54 / 1);       /* under the video, and while it loads */
+          --wl-video-blur:  6px;                     /* background video blur */
+          --wl-video-alpha: 1;                       /* video opacity over --wl-bg */
+          /* Radial gradient over the video: lighter behind the text, darker at the edges */
+          --wl-glow:        radial-gradient(110% 100% at 15% 50%, rgb(24 48 54 / 1) 0%, rgb(24 48 54 / 1) 15%, rgb(40 76 84 / 0.4) 90%);
+          --wl-inset:       clamp(24px, 10vw, 120px);   /* left margin of the content */
+    
+          --wl-brand:       #00c2ee;                 /* "Motooor", links, field and button borders */
+          --wl-tagline:     #d5e5ee;
+          --wl-text:        #e6e7e7;
+          --wl-note:        #aeaeae;
+          --wl-field-bg:    rgb(15 26 29 / .4);
+          --wl-hairline:    .5px;
+          --wl-radius:      2px;
+        }
+    
+        *, *::before, *::after { box-sizing: border-box; }
+    
+        body {
+          margin: 0;
+          overflow-x: hidden;
+          color: var(--wl-text);
+          background: var(--wl-bg);
+          -webkit-font-smoothing: antialiased;
+        }
+    
+        /* Background (waitlist/_background.kit): blurred video, scaled up so the
+           blur has no soft edges, then the gradient */
+        .wl-video,
+        .wl-glow {
+          position: fixed;
+          inset: 0;
+          z-index: -1;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+        }
+    
+        .wl-video {
+          z-index: -2;
+          object-fit: cover;
+          opacity: var(--wl-video-alpha);
+          filter: blur(var(--wl-video-blur));
+          transform: scale(1.1);
+        }
+    
+        .wl-glow { background: var(--wl-glow); }
+    
+        /* Logo (waitlist/_logo.kit); each page sets its size */
+        .wl-logo { display: block; }
+    
+        @media (prefers-reduced-motion: reduce) {
+          .wl-video { display: none; }               /* the background colour stays, no moving image */
+        }
+    
+
+    /* This page ------------------------------------------------------------ */
+    :root {
+      --wl-width:       480px;                   /* content width */
+      --wl-placeholder: #97a8ac;
+      --wl-button-bg:   #15697f;
+      --wl-button-hover:#1a7f99;
+      --wl-error:       #ff9b8f;                 /* message when joining fails */
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      display: flex;
+      align-items: center;                       /* content centred vertically… */
+      min-height: 100%;
+      padding: 48px var(--wl-inset);             /* …and on the left */
+      font: 600 16px/24px "Open Sans", system-ui, sans-serif;
+      letter-spacing: -.2px;
+    }
+
+    /* Content */
+    .wl {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+      max-width: var(--wl-width);
+    }
+
+    .wl p,
+    .wl-title { margin: 0; }
+
+    .wl-logo {
+      width: 220px;
+      height: 48px;
+      overflow: visible;                         /* the shouting O grows past the logo's box */
+      color: #fff;
+    }
+
+    .wl-tagline {
+      font-size: 16px;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--wl-tagline);
+    }
+
+    .wl-brand {
+      font-weight: 700;
+      color: var(--wl-brand);
+    }
+
+    .wl .wl-invite { margin-top: 32px; }   /* 56px from the text above (an 8px spacer between two 24px gaps) */
+
+    /* Email + Join */
+    .wl-form {
+      display: flex;
+      gap: 16px;
+    }
+
+    .wl-form[hidden] { display: none; }
+
+    .wl-field {
+      flex: 1;
+      min-width: 0;
+      height: 40px;
+      padding: 0 12px;
+      font: 400 14px/16px "Open Sans", system-ui, sans-serif;
+      letter-spacing: 0;
+      color: var(--wl-text);
+      background: var(--wl-field-bg);
+      border: var(--wl-hairline) solid var(--wl-brand);
+      border-radius: var(--wl-radius);
+    }
+
+    .wl-field::placeholder { color: var(--wl-placeholder); opacity: 1; }
+
+    .wl-button {
+      flex: none;
+      width: 120px;
+      height: 40px;
+      font: 600 14px/24px "Open Sans", system-ui, sans-serif;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--wl-button-bg);
+      border: var(--wl-hairline) solid var(--wl-brand);
+      border-radius: var(--wl-radius);
+      cursor: pointer;
+      transition: background-color 200ms cubic-bezier(.2, 0, 0, 1);
+    }
+
+    .wl-button:hover { background: var(--wl-button-hover); }
+
+    /* Sending: the button waits ("Joining…") until Loops answers */
+    .wl-button:disabled {
+      cursor: progress;
+      background: var(--wl-button-bg);
+      opacity: .6;
+    }
+
+    /* Spam trap: a field people never see; bots fill it in */
+    .wl-trap {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .wl-field:focus-visible,
+    .wl-button:focus-visible {
+      outline: 2px solid var(--wl-brand);
+      outline-offset: 2px;
+    }
+
+    .wl-note {
+      font-size: 13px;
+      color: var(--wl-note);
+      line-height: 16px;
+    }
+    .wl-note a {
+      font-weight: 900;
+      color: #fff;
+    }
+
+    /* After joining: the form gives way to the confirmation */
+    .wl-done { color: var(--wl-tagline); }
+    .wl-done[hidden] { display: none; }
+
+    .wl .wl-error {
+      margin-top: -12px;                         /* closer to the form it belongs to */
+      font-size: 14px;
+      color: var(--wl-error);
+    }
+    .wl-error[hidden] { display: none; }
+
+    /* Phones: the line break of the invitation is dropped so the text flows (the space after <br> keeps the words apart) */
+    @media (max-width: 520px) {
+      .wl-invite br { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wl-button { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!--
+    Background of the waitlist pages: the login video (decorative: muted,
+    looping, no controls), blurred, under a radial gradient. CSS: .wl-video,
+    .wl-glow in waitlist/_style.kit; values in --wl-video-* and --wl-glow.
+  -->
+    <video class="wl-video" src="img/video_bg-web.mp4" poster="img/video_bg-poster.jpg" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback preload="auto" aria-hidden="true" tabindex="-1"></video>
+    <div class="wl-glow" aria-hidden="true"></div>
+  
+
+  <main class="wl">
+    <header>
+      <h1 class="wl-title">
+        <!-- Logo (img/logo_motooor.svg, cropped to the letters and drawn in currentColor) -->
+        <svg class="wl-logo" viewBox="0 8 220 48" fill="none" role="img" aria-label="Motooor" xmlns="http://www.w3.org/2000/svg">
+          <!--
+            Motooor logo for the waitlist pages: the shapes of img/logo_motooor.svg,
+            cropped to the letters (the page's <svg viewBox="0 8 220 48">) and drawn in
+            currentColor. Grouped so the waitlist's logo shout can move its parts:
+            .wl-logo-mot (M, O, T), .wl-logo-o (the second O), .wl-logo-arc-l / -r
+            (the arcs around it), .wl-logo-rr (the R).
+          -->
+          <g class="wl-logo-mot">
+            <circle cx="68" cy="31" r="17" stroke="currentColor" stroke-width="6"/>
+            <path d="M119 17H107V51H100V17H88V11H119V17Z" fill="currentColor"/>
+            <rect x="43" y="11" width="40" height="6" transform="rotate(90 43 11)" fill="currentColor"/>
+            <rect x="8" y="11" width="40" height="6" transform="rotate(90 8 11)" fill="currentColor"/>
+            <path d="M8.5 11L26 42L19 42L2 11L8.5 11Z" fill="currentColor"/>
+            <path d="M36.5 11L19 42L26 42L43 11L36.5 11Z" fill="currentColor"/>
+          </g>
+          <circle class="wl-logo-o" cx="152" cy="31" r="17" stroke="currentColor" stroke-width="6"/>
+          <path class="wl-logo-arc-l" d="M129.777 17C130.419 17 130.805 17.7213 130.478 18.2732C128.268 22.0012 127 26.3524 127 31C127 38.3171 130.144 44.8994 135.154 49.4712C135.722 49.9892 135.371 51 134.602 51H127.981C127.375 51 126.798 50.7268 126.432 50.2422C122.395 44.8866 120 38.2235 120 31C120 26.4232 120.962 22.0714 122.693 18.1343C123.001 17.4341 123.704 17 124.469 17H129.777Z" fill="currentColor"/>
+          <path class="wl-logo-arc-r" d="M179.531 17C180.296 17 180.999 17.4341 181.307 18.1343C183.038 22.0714 184 26.4232 184 31C184 38.2235 181.605 44.8866 177.568 50.2422C177.202 50.7268 176.625 51 176.019 51H169.398C168.629 51 168.278 49.9892 168.846 49.4712C173.856 44.8994 177 38.3171 177 31C177 26.3524 175.732 22.0012 173.522 18.2732C173.195 17.7213 173.581 17 174.223 17H179.531Z" fill="currentColor"/>
+          <g class="wl-logo-rr">
+            <mask id="wl-logo-r" fill="white">
+              <path d="M204 35C207.183 35 210.235 33.7357 212.485 31.4853C214.736 29.2348 216 26.1826 216 23C216 19.8174 214.736 16.7652 212.485 14.5147C210.235 12.2643 207.183 11 204 11L204 16.9943C205.593 16.9943 207.12 17.6271 208.247 18.7534C209.373 19.8796 210.006 21.4072 210.006 23C210.006 24.5928 209.373 26.1204 208.247 27.2466C207.12 28.3729 205.593 29.0057 204 29.0057L204 35Z"/>
+            </mask>
+            <path d="M204 35C207.183 35 210.235 33.7357 212.485 31.4853C214.736 29.2348 216 26.1826 216 23C216 19.8174 214.736 16.7652 212.485 14.5147C210.235 12.2643 207.183 11 204 11L204 16.9943C205.593 16.9943 207.12 17.6271 208.247 18.7534C209.373 19.8796 210.006 21.4072 210.006 23C210.006 24.5928 209.373 26.1204 208.247 27.2466C207.12 28.3729 205.593 29.0057 204 29.0057L204 35Z" stroke="currentColor" stroke-width="8" mask="url(#wl-logo-r)"/>
+            <rect x="194" y="11" width="40" height="6" transform="rotate(90 194 11)" fill="currentColor"/>
+            <rect x="204" y="29" width="6" height="12" transform="rotate(90 204 29)" fill="currentColor"/>
+            <rect x="204" y="11" width="6" height="12" transform="rotate(90 204 11)" fill="currentColor"/>
+            <path d="M218 51H210L200.438 33H207.875L218 51ZM194 19V20.8818L193 19H194Z" fill="currentColor"/>
+          </g>
+          
+        </svg>
+      </h1>
+      <p class="wl-tagline">Ready when you call it</p>
+    </header>
+
+    <div>
+      <p><strong class="wl-brand">MOTOOOR</strong> creates, organizes and distributes call sheets for film, TV and commercial productions.</p>
+      <p>Less time in spreadsheets, more time on set.</p>
+    </div>
+
+    <p class="wl-invite">We’re opening MOTOOOR to a small group of productions first.<br> Join the waitlist and get early access</p>
+
+    <!-- Join: sends the email to Loops (script "Join" below); on success the form gives way to the confirmation -->
+    <form class="wl-form" id="wl-form" action="#" method="post" novalidate>
+      <input class="wl-field" name="email" type="email" placeholder="Your email" aria-label="Email" aria-describedby="wl-error" autocomplete="email" required>
+      <div class="wl-trap" aria-hidden="true"><input name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <button class="wl-button" type="submit">Join</button>
+    </form>
+    <p class="wl-error" id="wl-error" role="alert" hidden></p>
+    <p class="wl-done" id="wl-done" role="status" hidden>You’re on the list. We’ll write when your access is ready.</p>
+
+    <div class="wl-note">
+      <p>By submitting this form, you are accepting our <a href="privacy.html">Privacy Policy</a>.</p>
+    </div>
+
+  </main>
+
+  <script>
+    /*
+      Logo shout: hovering the logo, the second O grows to the size of the arcs
+      around it and shakes for a moment, like someone yelling "Motooor!"; then
+      it settles back. Drawn frame by frame (requestAnimationFrame) by changing
+      the circle's radius, position and stroke, so every step can be tuned below.
+      Sizes are in logo units (the SVG viewBox: the logo is 220 units wide).
+    */
+    (function () {
+      /* Values to tune ----------------------------------------------------- */
+      var CFG = {
+        /* Grow */
+        growRadius:   28,   /* radius at full size. 17 at rest; 28.5 = the ring of the arcs */
+        growStroke:   7,      /* stroke at full size. 6 at rest; 7 = as thick as the arcs */
+        growTime:     150,    /* ms */
+        growOvershoot: 1.5,   /* how far it overshoots before settling (0 = none) */
+
+        /* Shake */
+        shakeTime:    1000,   /* ms */
+        shakeMove:    1.6,    /* units it jumps around at the start of the shake */
+        shakeSize:    1.4,    /* units the radius trembles */
+        shakeRate:    [24, 36], /* jolts per second: random between these, every jolt */
+        shakeDecay:   1.4,    /* how the shake dies down: 0 = steady to the end, higher = fades sooner */
+
+        /* Return */
+        returnTime:   420,    /* ms */
+
+        /* The arcs make room: pushed outwards and faded while the O is big */
+        arcsPush:     14,      /* units each arc moves out (0 = they stay put, the O merges with them) */
+        /* Make room: MOT slides left and the R right, so nothing bumps into the big O or the arcs */
+        makeRoom:     true,
+        roomShift:    null,   /* units each side moves; null = the same as arcsPush (keeps the spacing the logo has at rest) */
+
+        arcsFade:     0,      /* 0–1 */
+
+        /* When */
+        cooldown:     500,    /* ms after settling before it can shout again */
+        onJoin:       true,   /* also shout when joining the waitlist works */
+        onTap:        true    /* touch screens: tapping the logo shouts */
+      };
+
+      var logo = document.querySelector(".wl-logo");
+      var o = logo && logo.querySelector(".wl-logo-o");
+      if (!o || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var arcL = logo.querySelector(".wl-logo-arc-l");
+      var arcR = logo.querySelector(".wl-logo-arc-r");
+      var mot = logo.querySelector(".wl-logo-mot");
+      var letterR = logo.querySelector(".wl-logo-rr");
+      var shift = CFG.roomShift == null ? CFG.arcsPush : CFG.roomShift;
+
+      var REST = {
+        cx: +o.getAttribute("cx"), cy: +o.getAttribute("cy"),
+        r: +o.getAttribute("r"), sw: +o.getAttribute("stroke-width")
+      };
+
+      function rnd(v) { return Array.isArray(v) ? v[0] + Math.random() * (v[1] - v[0]) : v; }
+      function outBack(x) { var c = CFG.growOvershoot, c3 = c + 1; return 1 + c3 * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); }
+      function inOut(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+      function smooth(x) { return x * x * (3 - 2 * x); }
+
+      /* Shake: random jolts, each blended smoothly into the next */
+      var jolt = { from: [0, 0, 0], to: [0, 0, 0], at: 0, len: 1 };
+      function nextJolt(now) {
+        jolt.from = jolt.to;
+        jolt.to = [Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1];
+        jolt.at = now;
+        jolt.len = 1000 / rnd(CFG.shakeRate);
+      }
+
+      function set(p, dx, dy, dr) {
+        o.setAttribute("r", (REST.r + (CFG.growRadius - REST.r) * p + dr).toFixed(2));
+        o.setAttribute("cx", (REST.cx + dx).toFixed(2));
+        o.setAttribute("cy", (REST.cy + dy).toFixed(2));
+        o.setAttribute("stroke-width", (REST.sw + (CFG.growStroke - REST.sw) * p).toFixed(2));
+        var push = CFG.arcsPush * Math.max(0, Math.min(1, p)), fade = 1 - CFG.arcsFade * Math.max(0, Math.min(1, p));
+        if (arcL) { arcL.setAttribute("transform", "translate(" + (-push).toFixed(2) + " 0)"); arcL.style.opacity = fade; }
+        if (arcR) { arcR.setAttribute("transform", "translate(" + push.toFixed(2) + " 0)"); arcR.style.opacity = fade; }
+        if (CFG.makeRoom) {
+          var room = shift * p;                    /* follows the O, overshoot included, so the letters give a little too */
+          if (mot) mot.setAttribute("transform", "translate(" + (-room).toFixed(2) + " 0)");
+          if (letterR) letterR.setAttribute("transform", "translate(" + room.toFixed(2) + " 0)");
+        }
+      }
+
+      var busy = false, readyAt = 0;
+      function shout() {
+        var now0 = performance.now();
+        if (busy || now0 < readyAt) return;
+        busy = true;
+        var g = CFG.growTime, s = CFG.shakeTime, r = CFG.returnTime, start = now0;
+        nextJolt(start);
+
+        function frame(now) {
+          var t = now - start, p = 1, dx = 0, dy = 0, dr = 0;
+          if (t < g) {
+            p = outBack(t / g);
+          } else if (t < g + s) {
+            var u = (t - g) / s, env = Math.pow(1 - u, CFG.shakeDecay);
+            if (now - jolt.at >= jolt.len) nextJolt(now);
+            var k = smooth(Math.min(1, (now - jolt.at) / jolt.len));
+            dx = (jolt.from[0] + (jolt.to[0] - jolt.from[0]) * k) * CFG.shakeMove * env;
+            dy = (jolt.from[1] + (jolt.to[1] - jolt.from[1]) * k) * CFG.shakeMove * env;
+            dr = (jolt.from[2] + (jolt.to[2] - jolt.from[2]) * k) * CFG.shakeSize * env;
+          } else if (t < g + s + r) {
+            p = 1 - inOut((t - g - s) / r);
+          } else {
+            set(0, 0, 0, 0);
+            busy = false;
+            readyAt = now + CFG.cooldown;
+            return;
+          }
+          set(p, dx, dy, dr);
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+
+      logo.addEventListener("mouseenter", shout);
+      if (CFG.onTap) logo.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse") shout(); });
+      var form = document.getElementById("wl-form");
+      if (CFG.onJoin && form) form.addEventListener("wl:joined", shout);   /* sent by the Join script */
+    })();
+  </script>
+
+  <script>
+    /*
+      Join: stores the email in Loops (loops.so) as a contact, through the
+      form endpoint of a Loops form (no API key: safe in a public page).
+      Loops then sends the thank-you email: a Loop triggered by "Contact
+      added" (or "Contact added to list" with LOOPS.list), set up in Loops.
+      Without a form id (LOOPS.formId empty) it only shows the
+      confirmation, as the prototype did.
+    */
+    (function () {
+      /* Values to fill ------------------------------------------------------ */
+      var LOOPS = {
+        formId:    "cmvib70k100t20j18eg7azl6i",            /* Loops › Forms › your form › Settings › Form Endpoint: the id at the end of the URL */
+        userGroup: "Waitlist",    /* contact property in Loops; "" = none */
+        source:    "Waitlist",    /* where they joined from (Loops shows it on the contact) */
+        list:      ""             /* mailing list id(s), comma-separated, public lists only; "" = none */
+      };
+
+      var MESSAGES = {
+        invalid:  "Please enter a valid email address.",
+        tooMany:  "Too many attempts. Please wait a minute and try again.",
+        failed:   "Something went wrong. Please try again in a moment.",
+        sending:  "Joining…"
+      };
+
+      var form = document.getElementById("wl-form");
+      var field = form.elements.email;
+      var trap = form.elements.website;
+      var button = form.querySelector(".wl-button");
+      var error = document.getElementById("wl-error");
+      var done = document.getElementById("wl-done");
+      var label = button.textContent;
+
+      function showError(text) {
+        error.textContent = text;
+        error.hidden = !text;
+        field.setAttribute("aria-invalid", text ? "true" : "false");
+      }
+
+      function joined() {
+        form.hidden = true;
+        error.hidden = true;
+        done.hidden = false;
+        form.dispatchEvent(new CustomEvent("wl:joined"));   /* the logo shouts */
+      }
+
+      function sending(on) {
+        button.disabled = on;
+        field.readOnly = on;
+        button.textContent = on ? MESSAGES.sending : label;
+      }
+
+      field.addEventListener("input", function () { if (!error.hidden) { showError(""); } });
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (button.disabled) { return; }
+
+        if (!field.value.trim() || !field.checkValidity()) {
+          showError(MESSAGES.invalid);
+          field.focus();
+          return;
+        }
+        showError("");
+
+        /* A bot filled the trap: act as if it worked, send nothing */
+        if (trap.value) { joined(); return; }
+
+        /* No Loops form yet (prototype) */
+        if (!LOOPS.formId) { joined(); return; }
+
+        var body = "email=" + encodeURIComponent(field.value.trim());
+        if (LOOPS.userGroup) { body += "&userGroup=" + encodeURIComponent(LOOPS.userGroup); }
+        if (LOOPS.source) { body += "&source=" + encodeURIComponent(LOOPS.source); }
+        if (LOOPS.list) { body += "&mailingLists=" + encodeURIComponent(LOOPS.list); }
+
+        sending(true);
+        fetch("https://app.loops.so/api/newsletter-form/" + LOOPS.formId, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: body
+        })
+          .then(function (response) {
+            if (response.status === 429) { throw new Error(MESSAGES.tooMany); }
+            return response.json().catch(function () { return {}; }).then(function (data) {
+              if (!response.ok || !data.success) { throw new Error(data.message || MESSAGES.failed); }
+            });
+          })
+          .then(joined)
+          .catch(function (err) {
+            sending(false);
+            showError(err && err.message && err.message !== "Failed to fetch" ? err.message : MESSAGES.failed);
+          });
+      });
+    }());
+  </script>
+
+</body>
+</html>
