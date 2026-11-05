@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head>
+<body>
+<title>Editor logo Motooor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: control rail on the left (stacks on phones), stage of live previews on the right. */
+:root {
+  --bg: #ECEEEE;
+  --panel: #FFFFFF;
+  --fg: #1C1F21;
+  --muted: #586064;
+  --line: #D3D8D9;
+  --accent: #D9342A;
+  --accent-fg: #FFFFFF;
+  --focus: #2F6BFF;
+  --paper: #FFF;
+  --ink: #00090f;
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111415; --panel: #191D1F; --fg: #E8EBEB; --muted: #9AA3A7; --line: #2C3336;
+    --accent: #FF5B4F; --accent-fg: #111415; --focus: #7FA4FF; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111415; --panel: #191D1F; --fg: #E8EBEB; --muted: #9AA3A7; --line: #2C3336;
+  --accent: #FF5B4F; --accent-fg: #111415; --focus: #7FA4FF; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 14px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 32px;
+}
+.app { max-width: 1440px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+
+header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+header .brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+header .brand svg { height: 22px; width: auto; display: block; }
+header h1 { margin: 0; font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: 0.01em; }
+.header-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+button { font: inherit; cursor: pointer; }
+.btn {
+  border: 1px solid var(--line); background: var(--panel); color: var(--fg);
+  border-radius: 8px; padding: 8px 12px; font-size: 13px; font-weight: 500; min-height: 36px;
+}
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn.primary:hover { opacity: 0.9; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.layout { display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch; }
+.rail {
+  flex: 1 1 300px; max-width: 360px; min-width: 0;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  display: flex; flex-direction: column; padding: 16px 0;
+  /* Same height as the previews column: its own content doesn't size it
+     (contain: size), the row stretches it, and it scrolls inside. */
+  contain: size; overflow-y: auto; overscroll-behavior: contain;
+}
+.stage { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+/* Below this width the rail wraps above the previews: let it size to its content. */
+@media (max-width: 940px) { .rail { max-width: none; contain: none; overflow: visible; } }
+
+/* Wide screens: the app fills the window exactly, so the page itself never scrolls.
+   The rail scrolls inside; the previews shrink to fit the remaining height. */
+@media (min-width: 941px) {
+  html, body { height: 100%; }
+  body { overflow: hidden; padding-block: 20px; display: flex; flex-direction: column; }
+  .app { flex: 1 1 auto; min-height: 0; width: 100%; }
+  header { flex: 0 0 auto; }
+  .layout { flex: 1 1 auto; min-height: 0; flex-wrap: nowrap; }
+  .rail { contain: none; min-height: 0; position: relative; }
+  .rail > fieldset { flex-shrink: 0; }
+  .stage { min-height: 0; overflow-y: auto; }
+  .stage > .card { flex: 1 1 0; min-height: 120px; display: flex; flex-direction: column; }
+  .stage > .card .card-body { flex: 1 1 auto; min-height: 0; padding: 12px clamp(20px, 5vw, 64px) 24px; }
+  .stage > .card .card-body > svg { width: 100%; height: 100%; }
+  .stage > .grid3 { flex: 0 0 auto; }
+  .grid3 .card-body { padding: 12px 16px 20px; }
+  .grid3 .iso-body svg { width: auto; height: 120px; }
+  .grid3 .appicon { width: 120px; height: 120px; border-radius: 27px; }
+}
+
+/* Export dialog */
+dialog.export-modal {
+  border: 1px solid var(--line); border-radius: 14px; padding: 0;
+  background: var(--panel); color: var(--fg);
+  width: min(560px, calc(100% - 32px)); max-height: calc(100dvh - 48px);
+}
+dialog.export-modal::backdrop { background: rgba(10, 12, 13, 0.55); }
+.modal-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+.modal-head h2 { margin: 0; font-size: 15px; font-weight: 600; }
+.icon-btn { border: 0; background: none; color: var(--muted); width: 36px; height: 36px; border-radius: 8px; display: grid; place-items: center; }
+.icon-btn:hover { color: var(--fg); background: var(--bg); }
+.modal-body { padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 14px; }
+
+fieldset { border: 0; margin: 0; padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+fieldset + fieldset { border-top: 1px solid var(--line); }
+legend {
+  padding: 0; float: left; width: 100%; margin-bottom: 2px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+legend + * { clear: both; }
+
+.ctl { display: flex; flex-direction: column; gap: 6px; }
+.ctl-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.ctl label { font-size: 13px; }
+.ctl output { font-family: var(--font-data); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ctl.disabled { opacity: 0.45; }
+input[type="range"] { width: 100%; accent-color: var(--fg); margin: 0; height: 20px; }
+
+.seg { position: relative; display: flex; border: 1px solid var(--line); border-radius: 8px; padding: 2px; gap: 2px; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label {
+  flex: 1; text-align: center; padding: 6px 8px; border-radius: 6px; font-size: 13px; cursor: pointer; color: var(--muted);
+}
+.seg input:checked + label { background: var(--fg); color: var(--bg); }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+.check { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.check input { width: 16px; height: 16px; accent-color: var(--fg); margin: 0; }
+.color-row { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.color-row input[type="color"] { width: 36px; height: 28px; border: 1px solid var(--line); border-radius: 6px; padding: 0; background: none; flex: 0 0 auto; }
+.color-row label { flex: 1 1 auto; min-width: 0; }
+.color-row input.hex {
+  width: 96px; flex: 0 0 auto; height: 30px; padding: 0 8px;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg);
+  font-family: var(--font-data); font-size: 12px; text-transform: uppercase;
+}
+.color-row input.hex.invalid { border-color: var(--accent); }
+.ctl.disabled .hex { pointer-events: none; }
+
+.card { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+.card-label {
+  display: flex; justify-content: space-between; gap: 8px; padding: 10px 14px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.card.paper { background: var(--paper); color: var(--ink); }
+.card.ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.card-label > * { opacity: 0.68; }
+.card-body { display: flex; align-items: center; justify-content: center; padding: 28px 24px 40px; }
+.card-body > svg { width: 100%; height: auto; display: block; }
+.hero .card-body { padding: 40px clamp(20px, 6vw, 72px) 56px; }
+
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 760px) { .grid2, .grid3 { grid-template-columns: minmax(0, 1fr); } }
+
+.iso-body svg { width: min(180px, 70%); }
+.appicon { width: 132px; height: 132px; border-radius: 30px; display: flex; align-items: center; justify-content: center; }
+.appicon svg { width: 72%; }
+.sizes { display: flex; align-items: flex-end; justify-content: center; gap: 28px; }
+.sizes figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.sizes figcaption { font-family: var(--font-data); font-size: 11px; }
+
+.export { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+.export h2 { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.export-table { display: grid; grid-template-columns: auto repeat(2, minmax(0, 1fr)); gap: 8px 12px; align-items: center; }
+.export-table .rowlabel { font-size: 13px; font-weight: 500; }
+.export-table .colhead { font-size: 12px; color: var(--muted); }
+.export-cell { display: flex; flex-wrap: wrap; gap: 6px; }
+.export-cell .btn { flex: 1 1 auto; }
+.note { margin: 0; font-size: 12px; color: var(--muted); max-width: 65ch; }
+
+.toast {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: 13px;
+  max-width: calc(100% - 32px); z-index: 20;
+}
+@media (prefers-reduced-motion: no-preference) { .toast { transition: opacity .2s; } }
+</style>
+
+<div class="app">
+  <header>
+    <div class="brand">
+      <span id="brandMark" aria-hidden="true"></span>
+      <h1>Editor de logo</h1>
+    </div>
+    <div class="header-actions">
+      <button class="btn" id="saveParams" type="button">Guardar ajustes</button>
+      <button class="btn" id="loadParams" type="button">Cargar ajustes</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn" id="reset" type="button">Restablecer</button>
+      <button class="btn primary" id="openExport" type="button" aria-haspopup="dialog">Exportar SVG</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <form class="rail" id="controls" autocomplete="off"></form>
+
+    <main class="stage">
+      <section class="card paper hero" aria-label="Logotipo sobre claro">
+        <div class="card-label"><span>Logotipo · tinta</span><span id="dims"></span></div>
+        <div class="card-body" id="pvLogoLight"></div>
+      </section>
+      <section class="card ink" aria-label="Logotipo sobre oscuro">
+        <div class="card-label"><span>Logotipo · papel</span></div>
+        <div class="card-body" id="pvLogoDark"></div>
+      </section>
+      <div class="grid3">
+        <section class="card paper" aria-label="Isotipo sobre claro">
+          <div class="card-label"><span>Isotipo</span></div>
+          <div class="card-body iso-body" id="pvIso"></div>
+        </section>
+        <section class="card paper" aria-label="Icono de app">
+          <div class="card-label"><span>Icono de app</span></div>
+          <div class="card-body"><div class="appicon" id="pvApp" style="background: var(--ink)"></div></div>
+        </section>
+        <section class="card paper" aria-label="Tamaños pequeños">
+          <div class="card-label"><span>Tamaño real</span></div>
+          <div class="card-body sizes" id="pvSizes"></div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<dialog class="export-modal" id="exportModal" aria-labelledby="exportTitle">
+  <div class="modal-head">
+    <h2 id="exportTitle">Exportar SVG</h2>
+    <button class="icon-btn" id="closeExport" type="button" aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14"/></svg>
+    </button>
+  </div>
+  <div class="modal-body">
+        <div class="export-table">
+          <span></span><span class="colhead">Tinta</span><span class="colhead">Papel</span>
+          <span class="rowlabel">Logotipo</span>
+          <div class="export-cell">
+            <button class="btn primary" type="button" data-export="logotipo" data-color="tinta">Descargar</button>
+            <button class="btn" type="button" data-copy="logotipo" data-color="tinta">Copiar</button>
+          </div>
+          <div class="export-cell">
+            <button class="btn primary" type="button" data-export="logotipo" data-color="papel">Descargar</button>
+            <button class="btn" type="button" data-copy="logotipo" data-color="papel">Copiar</button>
+          </div>
+          <span class="rowlabel">Isotipo</span>
+          <div class="export-cell">
+            <button class="btn primary" type="button" data-export="isotipo" data-color="tinta">Descargar</button>
+            <button class="btn" type="button" data-copy="isotipo" data-color="tinta">Copiar</button>
+          </div>
+          <div class="export-cell">
+            <button class="btn primary" type="button" data-export="isotipo" data-color="papel">Descargar</button>
+            <button class="btn" type="button" data-copy="isotipo" data-color="papel">Copiar</button>
+          </div>
+        </div>
+        <p class="note">Los SVG salen con todo convertido en formas rellenas y el viewBox ajustado al contorno. Si el eco en color de acento está activado, se exporta con ese color.</p>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- Parameters ----------
+  const DEFAULTS = {
+    weight: 18, optical: 1,
+    mStyle: "afilada", mWidth: 123, mDepth: 194,
+    tStyle: "claqueta", tBar: 108, tFollow: true, tAngleL: 33, tAngleR: 33,
+    rStyle: "afilada", rMid: 164, rAngle: 33,
+    spacing: 10, tGap: 8,
+    ecoTop: 33, ecoBottom: 44, ecoCut: "horizontal", ecoGap: 12, ecoRound: 4,
+    ecoFollow: true, ecoWeight: 19,
+    ink: "#1C1F21", paper: "#F4F2EE", ecoAccent: false, accent: "#E5352B"
+  };
+
+  const SCHEMA = [
+    { legend: "Peso", items: [
+      { k: "weight", label: "Grosor global", type: "range", min: 4, max: 44, step: 0.5 },
+      { k: "optical", label: "Compensación óptica", type: "range", min: 0, max: 8, step: 0.5 }
+    ]},
+    { legend: "M", items: [
+      { k: "mStyle", label: "Estilo", type: "seg", options: [["afilada", "Afilada"], ["base", "Base"]] },
+      { k: "mWidth", label: "Ancho entre palos", type: "range", min: 70, max: 240, step: 1 },
+      { k: "mDepth", label: "Profundidad del vértice", type: "range", min: 130, max: 240, step: 1, only: (p) => p.mStyle === "afilada" }
+    ]},
+    { legend: "T", items: [
+      { k: "tStyle", label: "Estilo", type: "seg", options: [["claqueta", "Claqueta"], ["base", "Base"]] },
+      { k: "tBar", label: "Ancho de la barra", type: "range", min: 40, max: 240, step: 1 },
+      { k: "tFollow", label: "Mismo ángulo que la M", type: "check", only: (p) => p.tStyle === "claqueta" },
+      { k: "tAngleL", label: "Ángulo del extremo izquierdo", type: "range", min: -70, max: 70, step: 0.5, unit: "°", only: (p) => p.tStyle === "claqueta" && !p.tFollow },
+      { k: "tAngleR", label: "Ángulo del extremo derecho", type: "range", min: -70, max: 70, step: 0.5, unit: "°", only: (p) => p.tStyle === "claqueta" && !p.tFollow }
+    ]},
+    { legend: "R", items: [
+      { k: "rStyle", label: "Pata", type: "seg", options: [["afilada", "Desde el fuste"], ["base", "Desde el bucle"]] },
+      { k: "rMid", label: "Altura del cierre del bucle", type: "range", min: 125, max: 210, step: 1 },
+      { k: "rAngle", label: "Ángulo de la pata", type: "range", min: 0, max: 70, step: 0.5, unit: "°" }
+    ]},
+    { legend: "Espaciado", items: [
+      { k: "spacing", label: "Espaciado general", type: "range", min: 0, max: 80, step: 0.5 },
+      { k: "tGap", label: "Aire de la T", type: "range", min: 0, max: 60, step: 0.5 }
+    ]},
+    { legend: "Eco", items: [
+      { k: "ecoCut", label: "Corte", type: "seg", options: [["horizontal", "Horizontal"], ["radial", "Radial"]] },
+      { k: "ecoFollow", label: "Mismo grosor que la O", type: "check" },
+      { k: "ecoWeight", label: "Grosor del eco", type: "range", min: 2, max: 50, step: 0.5, only: (p) => !p.ecoFollow },
+      { k: "ecoTop", label: "Apertura superior", type: "range", min: 2, max: 85, step: 1, unit: "°" },
+      { k: "ecoBottom", label: "Apertura inferior", type: "range", min: 2, max: 85, step: 1, unit: "°" },
+      { k: "ecoGap", label: "Separación con la O", type: "range", min: 0, max: 60, step: 0.5 },
+      { k: "ecoRound", label: "Redondeo de esquinas", type: "range", min: 0, max: 25, step: 0.5 }
+    ]},
+    { legend: "Color", items: [
+      { k: "ink", label: "Tinta", type: "color" },
+      { k: "paper", label: "Papel", type: "color" },
+      { k: "ecoAccent", label: "Eco en color de acento", type: "check" },
+      { k: "accent", label: "Acento", type: "color", only: (p) => p.ecoAccent }
+    ]}
+  ];
+
+  // Hex helpers: accept #RGB, #RRGGBB, with or without "#"; return #RRGGBB or null.
+  function normHex(v) {
+    const m = String(v || "").trim().replace(/^#/, "");
+    if (/^[0-9a-f]{3}$/i.test(m)) return ("#" + m.split("").map((c) => c + c).join("")).toUpperCase();
+    if (/^[0-9a-f]{6}$/i.test(m)) return ("#" + m).toUpperCase();
+    return null;
+  }
+
+  // Ink and paper defaults come from the CSS tokens (--ink, --paper), so editing
+  // them in the <style> block is enough to change the defaults.
+  const OLD_DEFAULTS = { ink: "#1C1F21", paper: "#F4F2EE" };
+  (function readCssDefaults() {
+    const cs = getComputedStyle(document.documentElement);
+    const ink = normHex(cs.getPropertyValue("--ink"));
+    const paper = normHex(cs.getPropertyValue("--paper"));
+    if (ink) DEFAULTS.ink = ink;
+    if (paper) DEFAULTS.paper = paper;
+  })();
+
+  const STORE_KEY = "motooor-logo-editor-v1";
+  let p = Object.assign({}, DEFAULTS);
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+    if (saved && typeof saved === "object") {
+      for (const k of Object.keys(DEFAULTS)) if (k in saved && typeof saved[k] === typeof DEFAULTS[k]) p[k] = saved[k];
+      // A color still at the previous built-in default follows the new default.
+      for (const k of ["ink", "paper"]) {
+        if (normHex(saved[k]) === OLD_DEFAULTS[k]) p[k] = DEFAULTS[k];
+      }
+    }
+  } catch (e) { /* storage unavailable: use defaults */ }
+  const persist = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(p)); } catch (e) {} };
+
+  // ---------- Geometry ----------
+  const n = (v) => Math.round(v * 100) / 100;
+
+  function ring(cx, cy, Ro, Ri) {
+    const c = (R) => `M${n(cx - R)} ${cy}A${n(R)} ${n(R)} 0 1 0 ${n(cx + R)} ${cy}A${n(R)} ${n(R)} 0 1 0 ${n(cx - R)} ${cy}Z`;
+    return c(Ro) + " " + c(Ri);
+  }
+
+  function ecoPiece(cx, cy, Ro, Ri, a, round, mirror) {
+    const P = (R, t) => [cx + R * Math.cos(t), cy + R * Math.sin(t)];
+    const along = (A, B, d) => { const dx = B[0] - A[0], dy = B[1] - A[1], L = Math.hypot(dx, dy) || 1; return [A[0] + dx * d / L, A[1] + dy * d / L]; };
+    const OT = P(Ro, a.ot), OB = P(Ro, a.ob), IT = P(Ri, a.it), IB = P(Ri, a.ib);
+    const cutT = Math.hypot(IT[0] - OT[0], IT[1] - OT[1]);
+    const cutB = Math.hypot(IB[0] - OB[0], IB[1] - OB[1]);
+    const rho = Math.max(0, Math.min(round, cutT / 2 - 0.05, cutB / 2 - 0.05));
+    const pt = (q) => n(mirror ? 2 * cx - q[0] : q[0]) + " " + n(q[1]);
+    const so = mirror ? 0 : 1, si = mirror ? 1 : 0;
+    const RO = n(Ro), RI = n(Ri);
+    if (rho <= 0.01) {
+      return `M${pt(OT)}A${RO} ${RO} 0 0 ${so} ${pt(OB)}L${pt(IB)}A${RI} ${RI} 0 0 ${si} ${pt(IT)}Z`;
+    }
+    const s1 = along(OT, IT, rho), s2 = P(Ro, a.ot + rho / Ro);
+    const s3 = P(Ro, a.ob - rho / Ro), s4 = along(OB, IB, rho);
+    const s5 = along(IB, OB, rho), s6 = P(Ri, a.ib - rho / Ri);
+    const s7 = P(Ri, a.it + rho / Ri), s8 = along(IT, OT, rho);
+    return `M${pt(s1)}Q${pt(OT)} ${pt(s2)}A${RO} ${RO} 0 0 ${so} ${pt(s3)}Q${pt(OB)} ${pt(s4)}L${pt(s5)}Q${pt(IB)} ${pt(s6)}A${RI} ${RI} 0 0 ${si} ${pt(s7)}Q${pt(IT)} ${pt(s8)}Z`;
+  }
+
+  function build(p) {
+    const W = p.weight;
+    const C = W + p.optical;          // curves read thinner: a touch heavier
+    const H = Math.max(W - p.optical, 1); // horizontals read heavier: a touch lighter
+    const E = p.ecoFollow ? C : p.ecoWeight; // eco stroke
+    const cy = 160;
+    const Ro1 = 62.5;                 // O outer radius: 2.5 overshoot on a 120 cap height
+    const Ri1 = Math.max(Ro1 - C, 2);
+
+    // M
+    const mW = p.mWidth, half = mW / 2;
+    const stems = `M0 100H${n(W)}V220H0Z M${n(mW - W)} 100H${n(mW)}V220H${n(mW - W)}Z `;
+    let mPath, slM;
+    if (p.mStyle === "afilada") {
+      slM = half / (p.mDepth - 100);
+      const w = W * Math.sqrt(1 + slM * slM);
+      const yi = 100 + Math.max(half - w, 0) / slM;
+      mPath = stems + `M0 100H${n(w)}L${n(half)} ${n(yi)}L${n(mW - w)} 100H${n(mW)}L${n(half)} ${p.mDepth}Z`;
+    } else {
+      slM = half / 93;
+      const w = W * Math.sqrt(1 + slM * slM);
+      mPath = stems +
+        `M0 100H${n(w)}L${n(half + w / 2)} 193H${n(half - w / 2)}Z ` +
+        `M${n(mW - w)} 100H${n(mW)}L${n(half + w / 2)} 193H${n(half - w / 2)}Z`;
+    }
+
+    // First O
+    const cx1 = n(mW + p.spacing + Ro1);
+
+    // T: lower-left corner of the bar keeps tGap from the first O (true distance)
+    // Each end of the bar has its own cut. Positive = top leans right (/), negative = (\).
+    const tan = (deg) => Math.tan(deg * Math.PI / 180);
+    const claq = p.tStyle === "claqueta";
+    const slL = !claq ? 0 : (p.tFollow ? slM : tan(p.tAngleL));
+    const slR = !claq ? 0 : (p.tFollow ? slM : tan(p.tAngleR));
+    const lim = p.tBar * 0.9;
+    const offL = Math.max(-lim, Math.min(lim, H * slL));
+    const offR = Math.max(-lim, Math.min(lim, H * slR));
+    const dyB = cy - (100 + H);
+    const reach = Ro1 + p.tGap;
+    const barLB = cx1 + Math.sqrt(Math.max(reach * reach - dyB * dyB, 0));
+    let c = barLB + p.tBar / 2 + offL / 2; // bottom-left corner sits at barLB
+    c = Math.max(c, cx1 + Ro1 + 24 + W / 2);
+    const tPath =
+      `M${n(c - p.tBar / 2 + offL / 2)} 100H${n(c + p.tBar / 2 + offR / 2)}L${n(c + p.tBar / 2 - offR / 2)} ${n(100 + H)}H${n(c - p.tBar / 2 - offL / 2)}Z ` +
+      `M${n(c - W / 2)} 100H${n(c + W / 2)}V220H${n(c - W / 2)}Z`;
+
+    // Eco geometry
+    const top = p.ecoTop * Math.PI / 180, bot = p.ecoBottom * Math.PI / 180;
+    const r = Ro1 + p.ecoGap + E / 2;
+    const RoE = r + E / 2, RiE = r - E / 2;
+    let a;
+    if (p.ecoCut === "radial") {
+      a = { ot: -top, it: -top, ob: bot, ib: bot };
+    } else {
+      const dt = -r * Math.sin(top), db = r * Math.sin(bot);
+      const ang = (R, d) => Math.atan2(d, Math.sqrt(Math.max(R * R - d * d, 0)));
+      a = { ot: ang(RoE, dt), it: ang(RiE, dt), ob: ang(RoE, db), ib: ang(RiE, db) };
+    }
+
+    // Second O: eco tip keeps tGap from the T bar, perpendicular to its slanted end
+    const otDx = RoE * Math.cos(a.ot), otY = cy + RoE * Math.sin(a.ot);
+    const yl = Math.min(Math.max(otY, 100), 100 + H);
+    const barRightAt = c + p.tBar / 2 + offR / 2 - offR * (yl - 100) / H;
+    const hGap = p.tGap * Math.sqrt(1 + (offR / H) * (offR / H));
+    let cx2 = barRightAt + hGap + otDx;
+    cx2 = n(Math.max(cx2, c + W / 2 + 24 + RoE));
+
+    const eco = ecoPiece(cx2, cy, RoE, RiE, a, p.ecoRound, false) + " " + ecoPiece(cx2, cy, RoE, RiE, a, p.ecoRound, true);
+
+    // R
+    const X = n(cx2 + RoE + p.spacing + 2);
+    const b = X + W;
+    // Bowl: closes at rMid; horizontal radius fixed, vertical radius follows the height.
+    const mid = p.rMid;
+    const bowlRx = 32, bowlRy = (mid - 100) / 2, bowlRun = 24;
+    let bowl =
+      `M${n(b)} 100H${n(b + bowlRun)}A${bowlRx} ${n(bowlRy)} 0 0 1 ${n(b + bowlRun)} ${n(mid)}H${n(b)}Z `;
+    const holeTop = 100 + H, holeBot = mid - H;
+    const irx = bowlRx - C, iry = (holeBot - holeTop) / 2;
+    if (holeBot - holeTop > 1 && irx > 1) {
+      bowl += `M${n(b)} ${n(holeTop)}V${n(holeBot)}H${n(b + bowlRun)}A${n(irx)} ${n(iry)} 0 0 0 ${n(b + bowlRun)} ${n(holeTop)}Z `;
+    }
+    // R leg angle is its own parameter: never derived from the M.
+    const sR = Math.tan(p.rAngle * Math.PI / 180);
+    const wL = W * Math.sqrt(1 + sR * sR);
+    let tl, yL;
+    if (p.rStyle === "afilada") { tl = b; yL = mid - H; } else { tl = b + 9; yL = mid - 6; }
+    const bl = tl + sR * (220 - yL);
+    const leg = `M${n(tl)} ${n(yL)}H${n(tl + wL)}L${n(bl + wL)} 220H${n(bl)}Z`;
+    const rPath = `M${n(X)} 100H${n(b)}V220H${n(X)}Z ` + bowl + leg;
+    const right = Math.max(bl + wL, b + bowlRun + bowlRx);
+
+    return {
+      letters: mPath + " " + tPath + " " + rPath,
+      rings1: ring(cx1, cy, Ro1, Ri1),
+      rings2: ring(cx2, cy, Ro1, Ri1),
+      eco, cx2, RoE, right: n(right),
+      y0: Math.min(100, cy - Ro1), y1: Math.max(220, cy + Ro1, p.mStyle === "afilada" ? p.mDepth : 0)
+    };
+  }
+
+  // ---------- SVG markup ----------
+  function logoSVG(g, ink, ecoCol, opts) {
+    const w = n(g.right), h = n(g.y1 - g.y0);
+    const size = opts && opts.file ? ` width="${w}" height="${h}"` : "";
+    const a11y = opts && opts.file ? "" : ' role="img" aria-label="Motooor"';
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 ${n(g.y0)} ${w} ${h}"${size}${a11y}>` +
+      (opts && opts.file ? "\n  <title>Motooor</title>\n  " : "") +
+      `<path fill="${ink}" d="${g.letters}"/>` + (opts && opts.file ? "\n  " : "") +
+      `<path fill="${ink}" fill-rule="evenodd" d="${g.rings1} ${g.rings2}"/>` + (opts && opts.file ? "\n  " : "") +
+      `<path fill="${ecoCol}" d="${g.eco}"/>` + (opts && opts.file ? "\n" : "") + `</svg>`;
+  }
+
+  function isoSVG(g, ink, ecoCol, opts) {
+    const s = n(2 * g.RoE), x = n(g.cx2 - g.RoE), y = n(160 - g.RoE);
+    const size = opts && opts.file ? ` width="${s}" height="${s}"` : (opts && opts.px ? ` width="${opts.px}" height="${opts.px}"` : "");
+    const a11y = opts && opts.file ? "" : ' role="img" aria-label="Isotipo Motooor"';
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x} ${y} ${s} ${s}"${size}${a11y}>` +
+      (opts && opts.file ? "\n  <title>Motooor isotipo</title>\n  " : "") +
+      `<path fill="${ink}" fill-rule="evenodd" d="${g.rings2}"/>` + (opts && opts.file ? "\n  " : "") +
+      `<path fill="${ecoCol}" d="${g.eco}"/>` + (opts && opts.file ? "\n" : "") + `</svg>`;
+  }
+
+  function colorsFor(mode) {
+    const ink = mode === "papel" ? p.paper : p.ink;
+    return { ink, eco: p.ecoAccent ? p.accent : ink };
+  }
+
+  // ---------- Controls ----------
+  const form = document.getElementById("controls");
+  const ctlRefs = {};
+
+  function fmt(item, v) {
+    if (item.type !== "range") return "";
+    const s = Number.isInteger(item.step) ? String(Math.round(v)) : Number(v).toFixed(1).replace(/\.0$/, "");
+    return s + (item.unit || "");
+  }
+
+  function renderControls() {
+    form.innerHTML = "";
+    for (const group of SCHEMA) {
+      const fs = document.createElement("fieldset");
+      const lg = document.createElement("legend");
+      lg.textContent = group.legend;
+      fs.appendChild(lg);
+      for (const item of group.items) {
+        const id = "p-" + item.k;
+        const wrap = document.createElement("div");
+        wrap.className = "ctl";
+        if (item.type === "range") {
+          wrap.innerHTML =
+            `<div class="ctl-head"><label for="${id}"></label><output for="${id}" id="${id}-out"></output></div>` +
+            `<input type="range" id="${id}" min="${item.min}" max="${item.max}" step="${item.step}">`;
+          wrap.querySelector("label").textContent = item.label;
+          const input = wrap.querySelector("input");
+          input.value = p[item.k];
+          input.addEventListener("input", () => { p[item.k] = Number(input.value); update(); });
+          ctlRefs[item.k] = { wrap, input, out: wrap.querySelector("output"), item };
+        } else if (item.type === "seg") {
+          const seg = document.createElement("div");
+          seg.className = "seg";
+          seg.setAttribute("role", "radiogroup");
+          seg.setAttribute("aria-label", group.legend + ": " + item.label);
+          for (const [val, txt] of item.options) {
+            const rid = id + "-" + val;
+            const r = document.createElement("input");
+            r.type = "radio"; r.name = id; r.id = rid; r.value = val; r.checked = p[item.k] === val;
+            r.addEventListener("change", () => { if (r.checked) { p[item.k] = val; update(); } });
+            const l = document.createElement("label");
+            l.htmlFor = rid; l.textContent = txt;
+            seg.append(r, l);
+          }
+          const head = document.createElement("div");
+          head.className = "ctl-head";
+          const hl = document.createElement("span");
+          hl.style.fontSize = "13px";
+          hl.textContent = item.label;
+          head.appendChild(hl);
+          wrap.append(head, seg);
+          ctlRefs[item.k] = { wrap, item };
+        } else if (item.type === "check") {
+          wrap.innerHTML = `<label class="check" for="${id}"><input type="checkbox" id="${id}"><span></span></label>`;
+          wrap.querySelector("span").textContent = item.label;
+          const input = wrap.querySelector("input");
+          input.checked = !!p[item.k];
+          input.addEventListener("change", () => { p[item.k] = input.checked; update(); });
+          ctlRefs[item.k] = { wrap, input, item };
+        } else if (item.type === "color") {
+          wrap.innerHTML =
+            `<div class="color-row"><input type="color" id="${id}" aria-label="">` +
+            `<label for="${id}-hex"></label>` +
+            `<input type="text" class="hex" id="${id}-hex" inputmode="text" spellcheck="false" maxlength="7" autocomplete="off"></div>`;
+          wrap.querySelector("label").textContent = item.label;
+          const input = wrap.querySelector('input[type="color"]');
+          input.setAttribute("aria-label", item.label + " (selector)");
+          const hex = wrap.querySelector("input.hex");
+          input.value = (normHex(p[item.k]) || "#000000").toLowerCase();
+          hex.value = normHex(p[item.k]) || p[item.k];
+          input.addEventListener("input", () => {
+            p[item.k] = input.value.toUpperCase();
+            hex.value = p[item.k];
+            hex.classList.remove("invalid");
+            update();
+          });
+          hex.addEventListener("input", () => {
+            const v = normHex(hex.value);
+            hex.classList.toggle("invalid", !v && hex.value.trim() !== "");
+            if (v) { p[item.k] = v; input.value = v.toLowerCase(); update(); }
+          });
+          hex.addEventListener("blur", () => {
+            hex.value = normHex(p[item.k]) || p[item.k];
+            hex.classList.remove("invalid");
+          });
+          hex.addEventListener("keydown", (ev) => { if (ev.key === "Enter") { ev.preventDefault(); hex.blur(); } });
+          ctlRefs[item.k] = { wrap, input, hex, item };
+        }
+        fs.appendChild(wrap);
+      }
+      form.appendChild(fs);
+    }
+  }
+
+  function syncControls() {
+    for (const ref of Object.values(ctlRefs)) {
+      const { item } = ref;
+      if (ref.out) ref.out.textContent = fmt(item, p[item.k]);
+      if (item.only) {
+        const on = item.only(p);
+        ref.wrap.classList.toggle("disabled", !on);
+        if (ref.input) ref.input.disabled = !on;
+        if (ref.hex) ref.hex.disabled = !on;
+      }
+    }
+  }
+
+  // ---------- Preview ----------
+  const el = (id) => document.getElementById(id);
+  let g = build(p);
+
+  function update() {
+    g = build(p);
+    const stage = document.querySelector(".stage");
+    stage.style.setProperty("--ink", p.ink);
+    stage.style.setProperty("--paper", p.paper);
+    const t = colorsFor("tinta"), b = colorsFor("papel");
+    el("pvLogoLight").innerHTML = logoSVG(g, t.ink, t.eco);
+    el("pvLogoDark").innerHTML = logoSVG(g, b.ink, b.eco);
+    el("pvIso").innerHTML = isoSVG(g, t.ink, t.eco);
+    el("pvApp").innerHTML = isoSVG(g, b.ink, b.eco);
+    el("pvSizes").innerHTML = [64, 32, 16].map((px) =>
+      `<figure>${isoSVG(g, t.ink, t.eco, { px })}<figcaption>${px} px</figcaption></figure>`).join("");
+    el("brandMark").innerHTML = logoSVG(g, "currentColor", p.ecoAccent ? p.accent : "currentColor");
+    el("dims").textContent = `${Math.round(g.right)} × ${Math.round(g.y1 - g.y0)}`;
+    syncControls();
+    persist();
+  }
+
+  // ---------- Export ----------
+  const toastEl = el("toast");
+  let toastTimer = 0;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toastEl.hidden = true; }, 2600);
+  }
+
+  function fileFor(kind, mode) {
+    const col = colorsFor(mode);
+    const svg = kind === "logotipo" ? logoSVG(g, col.ink, col.eco, { file: true }) : isoSVG(g, col.ink, col.eco, { file: true });
+    const suffix = mode + (p.ecoAccent ? "-acento" : "");
+    return { filename: `motooor-${kind}-${suffix}.svg`, data: svg + "\n" };
+  }
+
+  const dlPromise = (window.claude && typeof window.claude.use === "function")
+    ? window.claude.use("downloads").catch(() => null)
+    : Promise.resolve(null);
+  let downloads = null;
+  const inViewer = !!(window.claude && typeof window.claude.use === "function");
+  dlPromise.then((d) => {
+    downloads = d;
+    // Inside claude.ai without the download capability: hide the button.
+    // Opened as a local file: plain browser download is used instead.
+    if (!d && inViewer) {
+      document.querySelectorAll("[data-export]").forEach((btn) => { btn.hidden = true; });
+    }
+  });
+
+  function localDownload(f) {
+    const type = f.filename.endsWith(".json") ? "application/json" : "image/svg+xml";
+    const url = URL.createObjectURL(new Blob([f.data], { type }));
+    const a = document.createElement("a");
+    a.href = url; a.download = f.filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async function copyText(text, okMsg) {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast(okMsg);
+      return;
+    } catch (e) { /* try the older method below */ }
+    // Fallback for local files, where the Clipboard API is often unavailable.
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed"; ta.style.opacity = "0"; ta.style.top = "0"; ta.style.left = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    ta.remove();
+    toast(ok ? okMsg : "No se ha podido copiar en este navegador.");
+  }
+
+  // Save / load settings as a JSON file.
+  async function saveFile(f) {
+    if (!inViewer) { localDownload(f); return; }
+    if (!downloads) { toast("Este entorno no permite descargar archivos."); return; }
+    try {
+      await downloads.save(f);
+    } catch (err) {
+      const code = err && err.code;
+      if (code === "declined") return;
+      if (code === "rate_limited") { toast("Ya hay una descarga pendiente de confirmar."); return; }
+      toast("No se ha podido guardar el archivo.");
+    }
+  }
+
+  function applySettings(obj) {
+    if (!obj || typeof obj !== "object") return 0;
+    let count = 0;
+    const next = Object.assign({}, DEFAULTS);
+    // Older files had a single T angle: use it for both ends.
+    if (typeof obj.tAngle === "number") {
+      if (!("tAngleL" in obj)) obj.tAngleL = obj.tAngle;
+      if (!("tAngleR" in obj)) obj.tAngleR = obj.tAngle;
+    }
+    for (const k of Object.keys(DEFAULTS)) {
+      if (k in obj && typeof obj[k] === typeof DEFAULTS[k]) { next[k] = obj[k]; count++; }
+    }
+    if (!count) return 0;
+    p = next;
+    renderControls();
+    update();
+    return count;
+  }
+
+  document.addEventListener("click", async (ev) => {
+    const exp = ev.target.closest("[data-export]");
+    const cpy = ev.target.closest("[data-copy]");
+    if (exp) {
+      const f = fileFor(exp.dataset.export, exp.dataset.color);
+      if (!downloads) {
+        if (!inViewer) { localDownload(f); return; }
+        copyText(f.data, "SVG copiado al portapapeles."); return;
+      }
+      try {
+        await downloads.save(f);
+      } catch (err) {
+        const code = err && err.code;
+        if (code === "declined") return;
+        if (code === "rate_limited") { toast("Ya hay una descarga pendiente de confirmar."); return; }
+        toast("No se ha podido descargar. Usa Copiar y pega el SVG.");
+      }
+    } else if (cpy) {
+      const f = fileFor(cpy.dataset.copy, cpy.dataset.color);
+      copyText(f.data, "SVG copiado al portapapeles.");
+    }
+  });
+
+  const modal = el("exportModal");
+  el("openExport").addEventListener("click", () => {
+    if (typeof modal.showModal === "function") modal.showModal(); else modal.setAttribute("open", "");
+  });
+  el("closeExport").addEventListener("click", () => modal.close ? modal.close() : modal.removeAttribute("open"));
+  // Click on the backdrop closes the dialog.
+  modal.addEventListener("click", (ev) => { if (ev.target === modal) modal.close(); });
+
+  el("saveParams").addEventListener("click", () => {
+    const d = new Date(), pad = (v) => String(v).padStart(2, "0");
+    const stamp = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}`;
+    saveFile({ filename: `motooor-logo-ajustes-${stamp}.json`, data: JSON.stringify(p, null, 2) + "\n" });
+  });
+  el("loadParams").addEventListener("click", () => el("loadFile").click());
+  el("loadFile").addEventListener("change", (ev) => {
+    const file = ev.target.files && ev.target.files[0];
+    ev.target.value = "";
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      let obj = null;
+      try { obj = JSON.parse(String(reader.result)); } catch (e) { obj = null; }
+      const n = applySettings(obj);
+      toast(n ? `Ajustes cargados de ${file.name}.` : "Ese archivo no contiene ajustes del editor.");
+    };
+    reader.onerror = () => toast("No se ha podido leer el archivo.");
+    reader.readAsText(file);
+  });
+  el("reset").addEventListener("click", () => {
+    p = Object.assign({}, DEFAULTS);
+    renderControls();
+    update();
+    toast("Ajustes restablecidos.");
+  });
+
+  renderControls();
+  update();
+})();
+</script>
+
+</body>
+</html>
