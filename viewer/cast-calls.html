@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <!--
+  Shared head of the viewer pages; each page sets its title first (Kit
+  variable "title"). JS: viewer-min.js (CodeKit builds it from viewer.js;
+  the viewer does not load the app's app.js). No theme switch:
+  the viewer follows the system (light / dark).
+-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MOTOOOR · Call sheet - Talent Calls</title>
+  <meta name="theme-color" content="#f7f8f8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161b1e" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="viewer.css">
+  <script src="viewer-min.js" defer></script>
+
+</head>
+
+<!--
+  Talent Calls (Figma › Viewer › Talent Calls). The bar with the page name;
+  the project image; then a card per call group: a row per person
+  (character · artist · set call; tablets: the five times instead). A row
+  opens the person's details (its <template>, title from data-title) in
+  #talent-sheet. CSS: _calls.scss, _lists.scss (CALLS), _sheet.scss.
+-->
+<body class="viewer viewer--calls viewer--talent" data-menu="bottom-right">
+
+  <header class="topbar topbar--static">Talent Calls</header>
+
+  <!-- The project image under the bar, darkened (as Shoot Plan, without figures) -->
+  <div class="figures figures--plain" aria-hidden="true">
+    <img class="figures__img" src="images/bg_project.webp" alt="" width="1600" height="1000" fetchpriority="high" decoding="async">
+  </div>
+
+  <main class="viewer__content">
+    <!-- A card per group (call time in its header): character · artist (or how many) · set call; tablets: the five times. A row opens the talent's details -->
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Cast</h2>
+        <span class="pill pill--time">08:00</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row" data-title="Dani Castilla">
+          <button class="list__summary" type="button" data-sheet-open="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character list__cell--strong">Dani Castilla</span>
+            <span class="list__cell list__cell--fill">Dani Castilla</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name">Dani Castilla</p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></li>
+            </ol>
+            <dl class="detail__facts talent__shots">
+              <div><dt>Shots</dt><dd>The Moty Job · 2<br>The Moty Job · 12</dd></div>
+            </dl>
+            <p class="talent__notes">Llega con su propio vestuario. Vegetariano.</p>
+          </template>
+        </li>
+        <li class="list__row" data-title="Belén Aguilera">
+          <button class="list__summary" type="button" data-sheet-open="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character list__cell--strong">Belén Aguilera</span>
+            <span class="list__cell list__cell--fill">Belén Aguilera</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name">Belén Aguilera</p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></li>
+            </ol>
+            <dl class="detail__facts talent__shots">
+              <div><dt>Shots</dt><dd>The Moty Job · 2<br>The Moty Job · 12</dd></div>
+            </dl>
+            <p class="talent__notes">Llega con su propio vestuario. Vegetariano.</p>
+          </template>
+        </li>
+        <li class="list__row" data-title="Dani Borrás">
+          <button class="list__summary" type="button" data-sheet-open="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character list__cell--strong">Dani Borrás</span>
+            <span class="list__cell list__cell--fill">Dani Borrás</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name">Dani Borrás</p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></li>
+            </ol>
+            <dl class="detail__facts talent__shots">
+              <div><dt>Shots</dt><dd>The Moty Job · 2<br>The Moty Job · 12</dd></div>
+            </dl>
+            <p class="talent__notes">Llega con su propio vestuario. Vegetariano.</p>
+          </template>
+        </li>
+        <li class="list__row" data-title="Métrika">
+          <button class="list__summary" type="button" data-sheet-open="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character list__cell--strong">Métrika</span>
+            <span class="list__cell list__cell--fill">Métrika</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name">Métrika</p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></li>
+            </ol>
+            <dl class="detail__facts talent__shots">
+              <div><dt>Shots</dt><dd>The Moty Job · 2<br>The Moty Job · 12</dd></div>
+            </dl>
+            <p class="talent__notes">Llega con su propio vestuario. Vegetariano.</p>
+          </template>
+        </li>
+        <li class="list__row" data-title="Maria Barrier">
+          <button class="list__summary" type="button" data-sheet-open="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character list__cell--strong">Maria Barrier</span>
+            <span class="list__cell list__cell--fill">Maria Barrier</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name">Maria Barrier</p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></li>
+            </ol>
+            <dl class="detail__facts talent__shots">
+              <div><dt>Shots</dt><dd>The Moty Job · 2<br>The Moty Job · 12</dd></div>
+            </dl>
+            <p class="talent__notes">Llega con su propio vestuario. Vegetariano.</p>
+          </template>
+        </li>
+        <li class="list__row" data-title="Samantha Hudson">
+          <button class="list__summary" type="button" data-sheet-open="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character list__cell--strong">Samantha Hudson</span>
+            <span class="list__cell list__cell--fill">Samantha Hudson</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name">Samantha Hudson</p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></li>
+            </ol>
+            <dl class="detail__facts talent__shots">
+              <div><dt>Shots</dt><dd>The Moty Job · 2<br>The Moty Job · 12</dd></div>
+            </dl>
+            <p class="talent__notes">Llega con su propio vestuario. Vegetariano.</p>
+          </template>
+        </li>
+        <li class="list__row" data-title="Martín Urrutia">
+          <button class="list__summary" type="button" data-sheet-open="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character list__cell--strong">Martín Urrutia</span>
+            <span class="list__cell list__cell--fill">Martín Urrutia</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name">Martín Urrutia</p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></li>
+            </ol>
+            <dl class="detail__facts talent__shots">
+              <div><dt>Shots</dt><dd>The Moty Job · 2<br>The Moty Job · 12</dd></div>
+            </dl>
+            <p class="talent__notes">Llega con su propio vestuario. Vegetariano.</p>
+          </template>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Extras</h2>
+        <span class="pill pill--time">07:30</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row" data-title="Fisio">
+          <button class="list__summary" type="button" data-sheet-open="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character list__cell--strong">Fisio</span>
+            <span class="list__cell list__cell--fill">1</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name">1</p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></li>
+            </ol>
+            <dl class="detail__facts talent__shots">
+              <div><dt>Shots</dt><dd>The Moty Job · 5</dd></div>
+            </dl>
+            <p class="talent__notes">Trae su propio vestuario de entrenamiento.</p>
+          </template>
+        </li>
+        <li class="list__row" data-title="Regidor (crew)">
+          <button class="list__summary" type="button" data-sheet-open="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character list__cell--strong">Regidor (crew)</span>
+            <span class="list__cell list__cell--fill">1</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name">1</p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></li>
+            </ol>
+            <dl class="detail__facts talent__shots">
+              <div><dt>Shots</dt><dd>The Moty Job · 5</dd></div>
+            </dl>
+            <p class="talent__notes">Trae su propio vestuario de entrenamiento.</p>
+          </template>
+        </li>
+        <li class="list__row" data-title="Camareros">
+          <button class="list__summary" type="button" data-sheet-open="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character list__cell--strong">Camareros</span>
+            <span class="list__cell list__cell--fill">2</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name">2</p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">08:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">07:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">07:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">07:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">08:10</span></li>
+            </ol>
+            <dl class="detail__facts talent__shots">
+              <div><dt>Shots</dt><dd>The Moty Job · 5</dd></div>
+            </dl>
+            <p class="talent__notes">Trae su propio vestuario de entrenamiento.</p>
+          </template>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Details of a person: the title and the cross stay, the rest scrolls under them (viewer.js, "Sheet"; CSS: _sheet.scss) -->
+  <dialog class="sheet sheet--fit" id="talent-sheet" aria-labelledby="talent-sheet-title">
+    <header class="sheet__head" data-sheet-grip>
+      <h2 class="sheet__title" id="talent-sheet-title"></h2>
+      <button class="sheet__close icon icon__close-alt" type="button" aria-label="Close" data-sheet-close></button>
+    </header>
+    <div class="sheet__body">
+      <div class="talent" data-sheet-body></div>
+    </div>
+  </dialog>
+
+  <footer class="viewer__footer">© Motooor 2026</footer>
+
+  <!--
+  Navigation: a round button always on screen (bottom right by default; the
+  page sets data-menu on <body>) opens the sections full screen over a
+  blurred veil: the Motooor logo and a link per page. The dialog has its own
+  button in the very same place, whose three lines turn into a cross; the
+  logo, the sections and the © line come in one after another. viewer.js
+  "Navigation" opens and closes it (Esc too) and marks the open page
+  (.is-current). CSS: _nav.scss.
+-->
+<button class="fab" type="button" aria-label="Menu" aria-haspopup="dialog" aria-controls="viewer-menu" data-nav-open><span class="fab__lines" aria-hidden="true"></span></button>
+<dialog class="viewer-menu" id="viewer-menu" aria-label="Menu">
+  <nav class="viewer-menu__nav" aria-label="Call sheet">
+    <span class="viewer-menu__logo" role="img" aria-label="Motooor"></span>
+    <a class="viewer-menu__item icon icon__home" href="index.html">Home</a>
+    <a class="viewer-menu__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+    <a class="viewer-menu__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+    <a class="viewer-menu__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+  </nav>
+  <p class="viewer-menu__footer">© Motooor 2026</p>
+  <button class="fab fab--close" type="button" aria-label="Close menu" data-nav-close autofocus><span class="fab__lines" aria-hidden="true"></span></button>
+</dialog>
+
+
+</body>
+</html>

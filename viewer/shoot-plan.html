@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <!--
+  Shared head of the viewer pages; each page sets its title first (Kit
+  variable "title"). JS: viewer-min.js (CodeKit builds it from viewer.js;
+  the viewer does not load the app's app.js). No theme switch:
+  the viewer follows the system (light / dark).
+-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MOTOOOR · Call sheet - Shoot Plan</title>
+  <meta name="theme-color" content="#f7f8f8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161b1e" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="viewer.css">
+  <script src="viewer-min.js" defer></script>
+
+</head>
+
+<!--
+  Shoot Plan (Figma › Viewer › Shoot Plan): one day per page. The bar with
+  the page name; the day's figures over the project image; then a row per
+  shot and the banners. A shot swipes to the right to mark it done (again
+  to undo; viewer.js "Shoot Plan"); a tap opens its details in the sheet
+  (#shot-sheet), with Mark as done / undone. CSS: _shoot-plan.scss, _sheet.scss.
+-->
+<body class="viewer viewer--plan" data-menu="bottom-right">
+
+  <header class="topbar topbar--static">Shoot Plan</header>
+
+  <!-- The day's figures over the project image -->
+  <section class="figures" aria-label="Day figures">
+    <img class="figures__img" src="images/bg_project.webp" alt="" width="1600" height="1000" fetchpriority="high" decoding="async">
+    <dl class="figures__list">
+      <div class="figures__item figures__item--range">
+        <dt>Call <span aria-hidden="true">→</span> Wrap</dt>
+        <dd><time>07:30</time> <time>19:30</time></dd>
+      </div>
+      <div class="figures__item"><dt>Shooting</dt><dd>8h 25m</dd></div>
+      <div class="figures__item"><dt>Shots</dt><dd>10</dd></div>
+    </dl>
+    <a class="figures__pdf icon icon__download" href="#" download aria-label="Download the shoot plan as PDF">PDF</a>
+  </section>
+
+  <main class="plan">
+    <ul class="plan__list">
+        <li class="shot" data-title="The Moty Job · 5">
+          <button class="shot__body" type="button" aria-haspopup="dialog">
+            <span class="shot__slot"><span class="shot-type">Main</span><span class="pill pill--time">07:30</span><span class="pill pill--time">07:50</span></span>
+            <span class="shot__thumb"><img src="images/ad/001.webp" alt="" width="160" height="90" loading="lazy" decoding="async"><span class="shot__number">5</span></span>
+            <span class="shot__info"><strong>El equipo</strong><span>INT/VESTUARIO/DÍA</span><span class="shot__desc">Un DEPORTISTA habla por teléfono en una sesión de fisioterapia.</span></span>
+            <span class="shot__extra shot__set">Vestuario</span>
+            <span class="shot__extra shot__talent">DEPORTISTA · FISIO</span>
+            <span class="shot__extra shot__reqs"><span><b>Cámara</b>: Fijo + Steady.</span><span><b>Arte</b>: Camilla, toallas y material de fisioterapia.</span></span>
+            <span class="shot__done">Done!</span>
+          </button>
+          <template>
+            <figure class="detail__pic"><img src="images/ad/001.webp" alt="" width="800" height="450" decoding="async"><figcaption class="detail__done">Done!</figcaption></figure>
+            <div class="detail__main">
+              <p class="shot__slot shot__slot--lg"><span class="shot-type">Main</span><span class="pill pill--time">07:30</span><span class="pill pill--time">07:50</span></p>
+              <div class="detail__text">
+                <p class="detail__scene"><strong>El equipo</strong><br>INT/VESTUARIO/DÍA<br>Un DEPORTISTA habla por teléfono en una sesión de fisioterapia.</p>
+                <dl class="detail__facts">
+                  <div><dt>Set</dt><dd>Vestuario</dd></div>
+                  <div><dt>Talent</dt><dd>DEPORTISTA · FISIO</dd></div>
+                </dl>
+                <div class="detail__reqs"><p><b>Cámara</b>: Fijo + Steady.</p><p><b>Arte</b>: Camilla, toallas y material de fisioterapia.</p></div>
+              </div>
+            </div>
+          </template>
+        </li>
+        <li class="shot" data-title="The Moty Job · 9">
+          <button class="shot__body" type="button" aria-haspopup="dialog">
+            <span class="shot__slot"><span class="shot-type">Main</span><span class="pill pill--time">08:00</span><span class="pill pill--time">08:30</span></span>
+            <span class="shot__thumb"><img src="images/ad/002.webp" alt="" width="160" height="90" loading="lazy" decoding="async"><span class="shot__number">9</span></span>
+            <span class="shot__info"><strong>El equipo</strong><span>INT/TEATRO/NOCHE</span><span class="shot__desc">Una cantante ensaya al piano mientras habla por teléfono.</span></span>
+            <span class="shot__extra shot__set">Teatro</span>
+            <span class="shot__extra shot__talent">CANTANTE</span>
+            <span class="shot__extra shot__reqs"><span><b>Cámara</b>: Grúa y travelling.</span><span><b>Arte</b>: Piano de cola. Atriles.</span></span>
+            <span class="shot__done">Done!</span>
+          </button>
+          <template>
+            <figure class="detail__pic"><img src="images/ad/002.webp" alt="" width="800" height="450" decoding="async"><figcaption class="detail__done">Done!</figcaption></figure>
+            <div class="detail__main">
+              <p class="shot__slot shot__slot--lg"><span class="shot-type">Main</span><span class="pill pill--time">08:00</span><span class="pill pill--time">08:30</span></p>
+              <div class="detail__text">
+                <p class="detail__scene"><strong>El equipo</strong><br>INT/TEATRO/NOCHE<br>Una cantante ensaya al piano mientras habla por teléfono.</p>
+                <dl class="detail__facts">
+                  <div><dt>Set</dt><dd>Teatro</dd></div>
+                  <div><dt>Talent</dt><dd>CANTANTE</dd></div>
+                </dl>
+                <div class="detail__reqs"><p><b>Cámara</b>: Grúa y travelling.</p><p><b>Arte</b>: Piano de cola. Atriles.</p></div>
+              </div>
+            </div>
+          </template>
+        </li>
+        <li class="shot" data-title="The Moty Job · 12">
+          <button class="shot__body" type="button" aria-haspopup="dialog">
+            <span class="shot__slot"><span class="shot-type">Main</span><span class="pill pill--time">08:40</span><span class="pill pill--time">09:10</span></span>
+            <span class="shot__thumb"><img src="images/ad/003.webp" alt="" width="160" height="90" loading="lazy" decoding="async"><span class="shot__number">12</span></span>
+            <span class="shot__info"><strong>El equipo</strong><span>INT/HABITACIÓN/NOCHE</span><span class="shot__desc">Diversos PC de MÉTRIKA maquillándose y ajustando el vestuario. Acabamos con un PG en la que la vemos lista.</span></span>
+            <span class="shot__extra shot__set">Habitación hotel</span>
+            <span class="shot__extra shot__talent">MÉTRIKA</span>
+            <span class="shot__extra shot__reqs"><span><b>Cámara</b>: Fijo. Óptica macro para los PD.</span><span><b>Vestuario</b>: Vestido de gala de MÉTRIKA.</span></span>
+            <span class="shot__done">Done!</span>
+          </button>
+          <template>
+            <figure class="detail__pic"><img src="images/ad/003.webp" alt="" width="800" height="450" decoding="async"><figcaption class="detail__done">Done!</figcaption></figure>
+            <div class="detail__main">
+              <p class="shot__slot shot__slot--lg"><span class="shot-type">Main</span><span class="pill pill--time">08:40</span><span class="pill pill--time">09:10</span></p>
+              <div class="detail__text">
+                <p class="detail__scene"><strong>El equipo</strong><br>INT/HABITACIÓN/NOCHE<br>Diversos PC de MÉTRIKA maquillándose y ajustando el vestuario. Acabamos con un PG en la que la vemos lista.</p>
+                <dl class="detail__facts">
+                  <div><dt>Set</dt><dd>Habitación hotel</dd></div>
+                  <div><dt>Talent</dt><dd>MÉTRIKA</dd></div>
+                </dl>
+                <div class="detail__reqs"><p><b>Cámara</b>: Fijo. Óptica macro para los PD.</p><p><b>Vestuario</b>: Vestido de gala de MÉTRIKA.</p></div>
+              </div>
+            </div>
+          </template>
+        </li>
+        <li class="shot" data-title="The Moty Job · 22">
+          <button class="shot__body" type="button" aria-haspopup="dialog">
+            <span class="shot__slot"><span class="shot-type">Main</span><span class="pill pill--time">09:20</span><span class="pill pill--time">10:00</span></span>
+            <span class="shot__thumb"><img src="images/ad/004.webp" alt="" width="160" height="90" loading="lazy" decoding="async"><span class="shot__number">22</span></span>
+            <span class="shot__info"><strong>La traición</strong><span>INT/DESPACHO/DÍA</span><span class="shot__desc">CHIVATO traiciona a MÉTRIKA.</span></span>
+            <span class="shot__extra shot__set">Despacho Dani</span>
+            <span class="shot__extra shot__talent">CHIVATO · MÉTRIKA</span>
+            <span class="shot__extra shot__reqs"><span><b>Cámara</b>: Cámara en mano.</span><span><b>Arte</b>: Documentos y sobres.</span></span>
+            <span class="shot__done">Done!</span>
+          </button>
+          <template>
+            <figure class="detail__pic"><img src="images/ad/004.webp" alt="" width="800" height="450" decoding="async"><figcaption class="detail__done">Done!</figcaption></figure>
+            <div class="detail__main">
+              <p class="shot__slot shot__slot--lg"><span class="shot-type">Main</span><span class="pill pill--time">09:20</span><span class="pill pill--time">10:00</span></p>
+              <div class="detail__text">
+                <p class="detail__scene"><strong>La traición</strong><br>INT/DESPACHO/DÍA<br>CHIVATO traiciona a MÉTRIKA.</p>
+                <dl class="detail__facts">
+                  <div><dt>Set</dt><dd>Despacho Dani</dd></div>
+                  <div><dt>Talent</dt><dd>CHIVATO · MÉTRIKA</dd></div>
+                </dl>
+                <div class="detail__reqs"><p><b>Cámara</b>: Cámara en mano.</p><p><b>Arte</b>: Documentos y sobres.</p></div>
+              </div>
+            </div>
+          </template>
+        </li>
+        <li class="banner" data-color="1">
+          <span class="pill pill--time">10:30</span><span class="pill pill--time">11:30</span>
+          <h2 class="banner__title">Avanzadilla comida (10 pax)</h2>
+        </li>
+        <li class="banner" data-color="1">
+          <span class="pill pill--time">10:30</span><span class="pill pill--time">11:30</span>
+          <h2 class="banner__title">Cambio vestuario Métrika</h2>
+        </li>
+        <li class="shot" data-title="The Moty Job · 2">
+          <button class="shot__body" type="button" aria-haspopup="dialog">
+            <span class="shot__slot"><span class="shot-type">Main</span><span class="pill pill--time">11:30</span><span class="pill pill--time">12:10</span></span>
+            <span class="shot__thumb"><img src="images/ad/005.webp" alt="" width="160" height="90" loading="lazy" decoding="async"><span class="shot__number">2</span></span>
+            <span class="shot__info"><strong>La reunión</strong><span>INT/DESPACHO/DÍA</span><span class="shot__desc">DANI habla por teléfono. Cuelga. Habla con MÉTRIKA, ella se va enfadada, dice que va a hacer algo extraordinario.</span></span>
+            <span class="shot__extra shot__set">Despacho Dani</span>
+            <span class="shot__extra shot__talent">DANI BORRÁS · MÉTRIKA</span>
+            <span class="shot__extra shot__reqs"><span><b>Cámara</b>: Fijo + Steady.</span><span><b>Arte</b>: Sillones y mesita. Fotos de los premios y portadas de GQ. Foto del anillo. Teléfono móvil DANI.</span></span>
+            <span class="shot__done">Done!</span>
+          </button>
+          <template>
+            <figure class="detail__pic"><img src="images/ad/005.webp" alt="" width="800" height="450" decoding="async"><figcaption class="detail__done">Done!</figcaption></figure>
+            <div class="detail__main">
+              <p class="shot__slot shot__slot--lg"><span class="shot-type">Main</span><span class="pill pill--time">11:30</span><span class="pill pill--time">12:10</span></p>
+              <div class="detail__text">
+                <p class="detail__scene"><strong>La reunión</strong><br>INT/DESPACHO/DÍA<br>DANI habla por teléfono. Cuelga. Habla con MÉTRIKA, ella se va enfadada, dice que va a hacer algo extraordinario.</p>
+                <dl class="detail__facts">
+                  <div><dt>Set</dt><dd>Despacho Dani</dd></div>
+                  <div><dt>Talent</dt><dd>DANI BORRÁS · MÉTRIKA</dd></div>
+                </dl>
+                <div class="detail__reqs"><p><b>Cámara</b>: Fijo + Steady.</p><p><b>Arte</b>: Sillones y mesita. Fotos de los premios y portadas de GQ. Foto del anillo. Teléfono móvil DANI.</p></div>
+              </div>
+            </div>
+          </template>
+        </li>
+        <li class="banner" data-color="1">
+          <span class="pill pill--time">13:30</span><span class="pill pill--time">14:30</span>
+          <h2 class="banner__title">Comida unidad principal</h2>
+        </li>
+        <li class="shot" data-title="The Moty Job · 7">
+          <button class="shot__body" type="button" aria-haspopup="dialog">
+            <span class="shot__slot"><span class="shot-type">Main</span><span class="pill pill--time">14:30</span><span class="pill pill--time">15:10</span></span>
+            <span class="shot__thumb"><img src="images/ad/006.webp" alt="" width="160" height="90" loading="lazy" decoding="async"><span class="shot__number">7</span></span>
+            <span class="shot__info"><strong>El plan</strong><span>INT/GARAJE/NOCHE</span><span class="shot__desc">MÉTRIKA y CHIVATO repasan el plan sobre el capó de un coche.</span></span>
+            <span class="shot__extra shot__set">Garaje</span>
+            <span class="shot__extra shot__talent">MÉTRIKA · CHIVATO</span>
+            <span class="shot__extra shot__reqs"><span><b>Cámara</b>: Travelling lateral.</span><span><b>Arte</b>: Coche clásico. Planos del edificio.</span></span>
+            <span class="shot__done">Done!</span>
+          </button>
+          <template>
+            <figure class="detail__pic"><img src="images/ad/006.webp" alt="" width="800" height="450" decoding="async"><figcaption class="detail__done">Done!</figcaption></figure>
+            <div class="detail__main">
+              <p class="shot__slot shot__slot--lg"><span class="shot-type">Main</span><span class="pill pill--time">14:30</span><span class="pill pill--time">15:10</span></p>
+              <div class="detail__text">
+                <p class="detail__scene"><strong>El plan</strong><br>INT/GARAJE/NOCHE<br>MÉTRIKA y CHIVATO repasan el plan sobre el capó de un coche.</p>
+                <dl class="detail__facts">
+                  <div><dt>Set</dt><dd>Garaje</dd></div>
+                  <div><dt>Talent</dt><dd>MÉTRIKA · CHIVATO</dd></div>
+                </dl>
+                <div class="detail__reqs"><p><b>Cámara</b>: Travelling lateral.</p><p><b>Arte</b>: Coche clásico. Planos del edificio.</p></div>
+              </div>
+            </div>
+          </template>
+        </li>
+        <li class="shot" data-title="The Moty Job · 14">
+          <button class="shot__body" type="button" aria-haspopup="dialog">
+            <span class="shot__slot"><span class="shot-type">Main</span><span class="pill pill--time">15:20</span><span class="pill pill--time">16:00</span></span>
+            <span class="shot__thumb"><img src="images/ad/007.webp" alt="" width="160" height="90" loading="lazy" decoding="async"><span class="shot__number">14</span></span>
+            <span class="shot__info"><strong>La huida</strong><span>EXT/AZOTEA/NOCHE</span><span class="shot__desc">MÉTRIKA corre por la azotea mientras suenan las sirenas.</span></span>
+            <span class="shot__extra shot__set">Azotea</span>
+            <span class="shot__extra shot__talent">MÉTRIKA</span>
+            <span class="shot__extra shot__reqs"><span><b>Cámara</b>: Dron + Steady.</span><span><b>Producción</b>: Permiso de azotea. Seguridad.</span></span>
+            <span class="shot__done">Done!</span>
+          </button>
+          <template>
+            <figure class="detail__pic"><img src="images/ad/007.webp" alt="" width="800" height="450" decoding="async"><figcaption class="detail__done">Done!</figcaption></figure>
+            <div class="detail__main">
+              <p class="shot__slot shot__slot--lg"><span class="shot-type">Main</span><span class="pill pill--time">15:20</span><span class="pill pill--time">16:00</span></p>
+              <div class="detail__text">
+                <p class="detail__scene"><strong>La huida</strong><br>EXT/AZOTEA/NOCHE<br>MÉTRIKA corre por la azotea mientras suenan las sirenas.</p>
+                <dl class="detail__facts">
+                  <div><dt>Set</dt><dd>Azotea</dd></div>
+                  <div><dt>Talent</dt><dd>MÉTRIKA</dd></div>
+                </dl>
+                <div class="detail__reqs"><p><b>Cámara</b>: Dron + Steady.</p><p><b>Producción</b>: Permiso de azotea. Seguridad.</p></div>
+              </div>
+            </div>
+          </template>
+        </li>
+        <li class="shot" data-title="The Moty Job · 3">
+          <button class="shot__body" type="button" aria-haspopup="dialog">
+            <span class="shot__slot"><span class="shot-type">Main</span><span class="pill pill--time">16:10</span><span class="pill pill--time">16:40</span></span>
+            <span class="shot__thumb"><img src="images/ad/008.webp" alt="" width="160" height="90" loading="lazy" decoding="async"><span class="shot__number">3</span></span>
+            <span class="shot__info"><strong>El encuentro</strong><span>INT/BAR/NOCHE</span><span class="shot__desc">DANI y MÉTRIKA se miran a través de la barra.</span></span>
+            <span class="shot__extra shot__set">Bar</span>
+            <span class="shot__extra shot__talent">DANI BORRÁS · MÉTRIKA · CAMARERO</span>
+            <span class="shot__extra shot__reqs"><span><b>Cámara</b>: Fijo. Contraplano.</span><span><b>Arte</b>: Copas y botellas.</span></span>
+            <span class="shot__done">Done!</span>
+          </button>
+          <template>
+            <figure class="detail__pic"><img src="images/ad/008.webp" alt="" width="800" height="450" decoding="async"><figcaption class="detail__done">Done!</figcaption></figure>
+            <div class="detail__main">
+              <p class="shot__slot shot__slot--lg"><span class="shot-type">Main</span><span class="pill pill--time">16:10</span><span class="pill pill--time">16:40</span></p>
+              <div class="detail__text">
+                <p class="detail__scene"><strong>El encuentro</strong><br>INT/BAR/NOCHE<br>DANI y MÉTRIKA se miran a través de la barra.</p>
+                <dl class="detail__facts">
+                  <div><dt>Set</dt><dd>Bar</dd></div>
+                  <div><dt>Talent</dt><dd>DANI BORRÁS · MÉTRIKA · CAMARERO</dd></div>
+                </dl>
+                <div class="detail__reqs"><p><b>Cámara</b>: Fijo. Contraplano.</p><p><b>Arte</b>: Copas y botellas.</p></div>
+              </div>
+            </div>
+          </template>
+        </li>
+        <li class="banner" data-color="1">
+          <span class="pill pill--time">16:40</span><span class="pill pill--time">17:00</span>
+          <h2 class="banner__title">Cambio de set</h2>
+        </li>
+        <li class="shot" data-title="The Moty Job · 18">
+          <button class="shot__body" type="button" aria-haspopup="dialog">
+            <span class="shot__slot"><span class="shot-type">Main</span><span class="pill pill--time">17:00</span><span class="pill pill--time">17:40</span></span>
+            <span class="shot__thumb"><img src="images/ad/009.webp" alt="" width="160" height="90" loading="lazy" decoding="async"><span class="shot__number">18</span></span>
+            <span class="shot__info"><strong>El anillo</strong><span>INT/JOYERÍA/DÍA</span><span class="shot__desc">PD del anillo en el escaparate. MÉTRIKA lo observa.</span></span>
+            <span class="shot__extra shot__set">Joyería</span>
+            <span class="shot__extra shot__talent">MÉTRIKA</span>
+            <span class="shot__extra shot__reqs"><span><b>Cámara</b>: Macro.</span><span><b>Producto</b>: Anillo de la campaña.</span></span>
+            <span class="shot__done">Done!</span>
+          </button>
+          <template>
+            <figure class="detail__pic"><img src="images/ad/009.webp" alt="" width="800" height="450" decoding="async"><figcaption class="detail__done">Done!</figcaption></figure>
+            <div class="detail__main">
+              <p class="shot__slot shot__slot--lg"><span class="shot-type">Main</span><span class="pill pill--time">17:00</span><span class="pill pill--time">17:40</span></p>
+              <div class="detail__text">
+                <p class="detail__scene"><strong>El anillo</strong><br>INT/JOYERÍA/DÍA<br>PD del anillo en el escaparate. MÉTRIKA lo observa.</p>
+                <dl class="detail__facts">
+                  <div><dt>Set</dt><dd>Joyería</dd></div>
+                  <div><dt>Talent</dt><dd>MÉTRIKA</dd></div>
+                </dl>
+                <div class="detail__reqs"><p><b>Cámara</b>: Macro.</p><p><b>Producto</b>: Anillo de la campaña.</p></div>
+              </div>
+            </div>
+          </template>
+        </li>
+        <li class="shot" data-title="The Moty Job · 25">
+          <button class="shot__body" type="button" aria-haspopup="dialog">
+            <span class="shot__slot"><span class="shot-type">Main</span><span class="pill pill--time">17:50</span><span class="pill pill--time">18:30</span></span>
+            <span class="shot__thumb"><img src="images/ad/010.webp" alt="" width="160" height="90" loading="lazy" decoding="async"><span class="shot__number">25</span></span>
+            <span class="shot__info"><strong>El final</strong><span>EXT/CALLE/ATARDECER</span><span class="shot__desc">MÉTRIKA se aleja calle abajo con el anillo puesto.</span></span>
+            <span class="shot__extra shot__set">Calle</span>
+            <span class="shot__extra shot__talent">MÉTRIKA</span>
+            <span class="shot__extra shot__reqs"><span><b>Cámara</b>: Grúa.</span><span><b>Producción</b>: Corte de calle 30 min.</span></span>
+            <span class="shot__done">Done!</span>
+          </button>
+          <template>
+            <figure class="detail__pic"><img src="images/ad/010.webp" alt="" width="800" height="450" decoding="async"><figcaption class="detail__done">Done!</figcaption></figure>
+            <div class="detail__main">
+              <p class="shot__slot shot__slot--lg"><span class="shot-type">Main</span><span class="pill pill--time">17:50</span><span class="pill pill--time">18:30</span></p>
+              <div class="detail__text">
+                <p class="detail__scene"><strong>El final</strong><br>EXT/CALLE/ATARDECER<br>MÉTRIKA se aleja calle abajo con el anillo puesto.</p>
+                <dl class="detail__facts">
+                  <div><dt>Set</dt><dd>Calle</dd></div>
+                  <div><dt>Talent</dt><dd>MÉTRIKA</dd></div>
+                </dl>
+                <div class="detail__reqs"><p><b>Cámara</b>: Grúa.</p><p><b>Producción</b>: Corte de calle 30 min.</p></div>
+              </div>
+            </div>
+          </template>
+        </li>
+    </ul>
+  </main>
+
+  <!-- Details of a shot: the title and the cross stay, the rest scrolls under them -->
+  <dialog class="sheet" id="shot-sheet" aria-labelledby="shot-sheet-title">
+    <header class="sheet__head" data-sheet-grip>
+      <h2 class="sheet__title" id="shot-sheet-title"></h2>
+      <button class="sheet__close icon icon__close-alt" type="button" aria-label="Close" data-sheet-close></button>
+    </header>
+    <div class="sheet__body">
+      <div data-sheet-body></div>
+      <button class="sheet__toggle" type="button" data-done-toggle><span class="sheet__mark">Mark as done</span><span class="sheet__unmark">Mark as undone</span></button>
+    </div>
+  </dialog>
+
+  <footer class="viewer__footer">© Motooor 2026</footer>
+
+  <!--
+  Navigation: a round button always on screen (bottom right by default; the
+  page sets data-menu on <body>) opens the sections full screen over a
+  blurred veil: the Motooor logo and a link per page. The dialog has its own
+  button in the very same place, whose three lines turn into a cross; the
+  logo, the sections and the © line come in one after another. viewer.js
+  "Navigation" opens and closes it (Esc too) and marks the open page
+  (.is-current). CSS: _nav.scss.
+-->
+<button class="fab" type="button" aria-label="Menu" aria-haspopup="dialog" aria-controls="viewer-menu" data-nav-open><span class="fab__lines" aria-hidden="true"></span></button>
+<dialog class="viewer-menu" id="viewer-menu" aria-label="Menu">
+  <nav class="viewer-menu__nav" aria-label="Call sheet">
+    <span class="viewer-menu__logo" role="img" aria-label="Motooor"></span>
+    <a class="viewer-menu__item icon icon__home" href="index.html">Home</a>
+    <a class="viewer-menu__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+    <a class="viewer-menu__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+    <a class="viewer-menu__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+  </nav>
+  <p class="viewer-menu__footer">© Motooor 2026</p>
+  <button class="fab fab--close" type="button" aria-label="Close menu" data-nav-close autofocus><span class="fab__lines" aria-hidden="true"></span></button>
+</dialog>
+
+
+</body>
+</html>

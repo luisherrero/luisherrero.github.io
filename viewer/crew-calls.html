@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <!--
+  Shared head of the viewer pages; each page sets its title first (Kit
+  variable "title"). JS: viewer-min.js (CodeKit builds it from viewer.js;
+  the viewer does not load the app's app.js). No theme switch:
+  the viewer follows the system (light / dark).
+-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MOTOOOR · Call sheet - Crew Calls</title>
+  <meta name="theme-color" content="#f7f8f8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161b1e" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="viewer.css">
+  <script src="viewer-min.js" defer></script>
+
+</head>
+
+<!--
+  Crew Calls (Figma › Viewer › Crew Calls). The bar with the page name; the
+  project image; then a card per department: a row per person
+  (name · role · set call). Read-only: no sheet. CSS: _calls.scss,
+  _lists.scss (CALLS).
+-->
+<body class="viewer viewer--calls viewer--crew" data-menu="bottom-right">
+
+  <header class="topbar topbar--static">Crew Calls</header>
+
+  <!-- The project image under the bar, darkened (as Shoot Plan, without figures) -->
+  <div class="figures figures--plain" aria-hidden="true">
+    <img class="figures__img" src="images/bg_project.webp" alt="" width="1600" height="1000" fetchpriority="high" decoding="async">
+  </div>
+
+  <main class="viewer__content">
+    <!-- A card per department (call time in its header): name · role · set call -->
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Realizador</h2>
+        <span class="pill pill--time">08:00</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Imanol Ruiz de Lara</span>
+          <span class="list__cell list__cell--fill list__cell--strong">Director</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+        </li>
+      </ul>
+    </section>
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Dirección</h2>
+        <span class="pill pill--time">08:00</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Jose Calero</span>
+          <span class="list__cell list__cell--fill list__cell--strong">1st AD</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">David Vega</span>
+          <span class="list__cell list__cell--fill list__cell--strong">2nd AD</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+        </li>
+      </ul>
+    </section>
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">DOP</h2>
+        <span class="pill pill--time">08:00</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Rafa Reparaz</span>
+          <span class="list__cell list__cell--fill list__cell--strong">DOP</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+        </li>
+      </ul>
+    </section>
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Camera</h2>
+        <span class="pill pill--time">08:00</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Lucía Prieto</span>
+          <span class="list__cell list__cell--fill list__cell--strong">Camera Operator</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Pablo Gil</span>
+          <span class="list__cell list__cell--fill list__cell--strong">1st AC</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Irene Soto</span>
+          <span class="list__cell list__cell--fill list__cell--strong">2nd AC</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">08:00</span></span>
+        </li>
+      </ul>
+    </section>
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Production</h2>
+        <span class="pill pill--time">07:30</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Sofia Kim</span>
+          <span class="list__cell list__cell--fill list__cell--strong">Producer</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">07:30</span></span>
+        </li>
+        <li class="list__row">
+          <span class="list__cell list__cell--fill">Carl Weathers</span>
+          <span class="list__cell list__cell--fill list__cell--strong">Production Manager</span>
+          <span class="list__cell list__cell--call"><span class="pill pill--time">07:30</span></span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="viewer__footer">© Motooor 2026</footer>
+
+  <!--
+  Navigation: a round button always on screen (bottom right by default; the
+  page sets data-menu on <body>) opens the sections full screen over a
+  blurred veil: the Motooor logo and a link per page. The dialog has its own
+  button in the very same place, whose three lines turn into a cross; the
+  logo, the sections and the © line come in one after another. viewer.js
+  "Navigation" opens and closes it (Esc too) and marks the open page
+  (.is-current). CSS: _nav.scss.
+-->
+<button class="fab" type="button" aria-label="Menu" aria-haspopup="dialog" aria-controls="viewer-menu" data-nav-open><span class="fab__lines" aria-hidden="true"></span></button>
+<dialog class="viewer-menu" id="viewer-menu" aria-label="Menu">
+  <nav class="viewer-menu__nav" aria-label="Call sheet">
+    <span class="viewer-menu__logo" role="img" aria-label="Motooor"></span>
+    <a class="viewer-menu__item icon icon__home" href="index.html">Home</a>
+    <a class="viewer-menu__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+    <a class="viewer-menu__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+    <a class="viewer-menu__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+  </nav>
+  <p class="viewer-menu__footer">© Motooor 2026</p>
+  <button class="fab fab--close" type="button" aria-label="Close menu" data-nav-close autofocus><span class="fab__lines" aria-hidden="true"></span></button>
+</dialog>
+
+
+</body>
+</html>

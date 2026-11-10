@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <!--
+  Shared head of the viewer pages; each page sets its title first (Kit
+  variable "title"). JS: viewer-min.js (CodeKit builds it from viewer.js;
+  the viewer does not load the app's app.js). No theme switch:
+  the viewer follows the system (light / dark).
+-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MOTOOOR · Call sheet - Home</title>
+  <meta name="theme-color" content="#f7f8f8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161b1e" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="viewer.css">
+  <script src="viewer-min.js" defer></script>
+
+</head>
+
+<!--
+  Home (Figma › Viewer › Home). Project settings, on <body>:
+    style="--vw-cover-h: 70svh"   cover height, a share of the screen (default $vw-cover-h: 70svh, clamped 320–720px)
+    data-menu                     menu button: bottom-right (default), bottom-left, bottom-center
+  The cover image is the project's: images/bg_project.webp (47 KB), its PNG as the fallback.
+-->
+<body class="viewer viewer--home" data-menu="bottom-right">
+
+  <!-- Bar with the project title: slides in once the cover has scrolled away (viewer.js, "Cover") -->
+  <div class="topbar" aria-hidden="true">GQ “The Moty Job”</div>
+
+  <!-- Cover: the project image moves slower than the page, the title a little faster as it fades (parallax) -->
+  <header class="cover" data-cover>
+    <div class="cover__layer">
+      <picture>
+        <source srcset="images/bg_project.webp" type="image/webp">
+        <img class="cover__img" src="images/bg_project.png" alt="" width="1600" height="1000" fetchpriority="high" decoding="async">
+      </picture>
+    </div>
+    <h1 class="cover__title">GQ “The Moty Job”</h1>
+  </header>
+
+  <p class="updated">Last update <time datetime="2026-11-09T16:00">20 hours ago</time></p>
+
+  <main class="viewer__content viewer__content--columns">
+
+    <!-- Credits: the client, agency and production company logos, then the people -->
+    <section class="card card--widget" aria-labelledby="credits-title">
+      <h2 class="visually-hidden" id="credits-title">Credits</h2>
+      <ul class="logos">
+        <li><img src="images/logos/247.svg" alt="Client: 24/7" width="80" height="40" loading="lazy"></li>
+        <li><img src="images/logos/lee.svg" alt="Agency: Lee" width="80" height="40" loading="lazy"></li>
+        <li><img src="images/logos/agosto.svg" alt="Production company: Agosto" width="80" height="40" loading="lazy"></li>
+      </ul>
+      <dl class="facts">
+        <div><dt>Executive Producer</dt><dd>Richard Hammond</dd></div>
+        <div><dt>Producer</dt><dd>Kevin Bacon</dd></div>
+        <div><dt>Director</dt><dd>Erik Morales</dd></div>
+        <div><dt>D.O.P.</dt><dd>Hoyte van Hoytema</dd></div>
+      </dl>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">General Call</h2>
+        <time datetime="2026-11-09">9 November 2026</time>
+      </header>
+      <p class="card__display">14:00</p>
+      <dl class="facts">
+        <div><dt>Ready to Shoot</dt><dd>15:00</dd></div>
+        <div><dt>Estimated End Time</dt><dd>02:00</dd></div>
+        <div><dt>Agency Call</dt><dd>13:30</dd></div>
+        <div><dt>Client Call</dt><dd>13:30</dd></div>
+      </dl>
+    </section>
+
+    <!-- Locations: the map on top, then each place with its nearest hospital -->
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Locations</h2>
+      </header>
+      <div class="places places--stack">
+        <ol class="places__list">
+          <li class="places__item">
+            <div class="places__text">
+              <address>
+                <strong><a href="https://maps.google.com/?q=Calle+Cifuentes+30,+19003+Guadalajara" target="_blank" rel="noopener">Multilocalización</a></strong>
+                Calle Cifuentes 30, 19003 Guadalajara, Spain
+              </address>
+              <p class="places__hospital"><span>Nearest hospital</span>Hospital Universitario de Guadalajara<br>Calle Donante de Sangre, 19002<br>Guadalajara, Spain (2.1km, Público)</p>
+            </div>
+          </li>
+        </ol>
+        <div class="places__map">
+          <img src="images/map.webp" alt="Map of the location" loading="lazy" decoding="async">
+          <span class="places__pin" style="--x: 50%; --y: 55%">1</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Weather</h2>
+        <button class="card__action icon icon__reload" type="button" aria-label="Reload"></button>
+      </header>
+      <div class="weather">
+        <img class="weather__icon" src="images/weather/icon_partly_cloudy.png" alt="Partly cloudy" width="140" height="80" loading="lazy" decoding="async">
+        <p class="weather__temp">31·22 <small>ºC</small></p>
+        <dl class="weather__stats">
+          <div><dt>Sunrise</dt><dd>06:24</dd></div>
+          <div><dt>Sunset</dt><dd>21:28</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">General Requirements</h2>
+      </header>
+      <div class="prose">
+        <p>Walkie Talkies</p>
+        <p>Lugar para maquillaje y vestuario</p>
+        <p>Uso del Piano</p>
+      </div>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Catering</h2>
+      </header>
+      <div class="prose">
+        <p>Desayuno listo 07:15 hrs.</p>
+        <p>Bocata listo a las 10:15 hrs.</p>
+        <p>Avanzadilla comida lista a las 13:30 hrs. para 10 personas.</p>
+        <p>Comida unidad principal 15:00 hrs.</p>
+      </div>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Approved By</h2>
+      </header>
+      <dl class="facts">
+        <div><dt>Head of Production</dt><dd>Jimbo</dd></div>
+        <div><dt>Assistant Director</dt><dd>Jose Calero</dd></div>
+      </dl>
+    </section>
+
+    <section class="card card--widget card--alert">
+      <header class="card__header">
+        <span class="icon icon__warning-alert" role="img" aria-label="Notice"></span>
+      </header>
+      <div class="prose">
+        <p>Por razones de confidencialidad está terminantemente prohibido tomar fotografías ni subir ningún tipo de información a Internet y RRSS acerca del producto y la campaña que rodamos.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="viewer__footer">© Motooor 2026</footer>
+
+  <!--
+  Navigation: a round button always on screen (bottom right by default; the
+  page sets data-menu on <body>) opens the sections full screen over a
+  blurred veil: the Motooor logo and a link per page. The dialog has its own
+  button in the very same place, whose three lines turn into a cross; the
+  logo, the sections and the © line come in one after another. viewer.js
+  "Navigation" opens and closes it (Esc too) and marks the open page
+  (.is-current). CSS: _nav.scss.
+-->
+<button class="fab" type="button" aria-label="Menu" aria-haspopup="dialog" aria-controls="viewer-menu" data-nav-open><span class="fab__lines" aria-hidden="true"></span></button>
+<dialog class="viewer-menu" id="viewer-menu" aria-label="Menu">
+  <nav class="viewer-menu__nav" aria-label="Call sheet">
+    <span class="viewer-menu__logo" role="img" aria-label="Motooor"></span>
+    <a class="viewer-menu__item icon icon__home" href="index.html">Home</a>
+    <a class="viewer-menu__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+    <a class="viewer-menu__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+    <a class="viewer-menu__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+  </nav>
+  <p class="viewer-menu__footer">© Motooor 2026</p>
+  <button class="fab fab--close" type="button" aria-label="Close menu" data-nav-close autofocus><span class="fab__lines" aria-hidden="true"></span></button>
+</dialog>
+
+
+</body>
+</html>
