@@ -389,7 +389,7 @@
   --color-viewer-fg-secondary: var(--palette-grey-500);
   --color-viewer-fg-subtle: var(--palette-grey-400);
   --color-viewer-fg-on-image: var(--palette-grey-50);
-  --color-viewer-rule: var(--palette-grey-300);
+  --color-viewer-rule: var(--palette-grey-400);
   --color-viewer-pill-border: var(--palette-grey-200);
   --color-viewer-alert: var(--palette-red-500);
   --color-viewer-focus: var(--palette-accent);
@@ -441,7 +441,7 @@
   --color-viewer-fab-shadow: color-mix(in srgb, var(--palette-black) 32%, transparent);
   --color-viewer-nav-bg: color-mix(in srgb, var(--palette-grey-150) 80%, transparent);
   --color-viewer-nav-current: var(--palette-white);
-  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent accent=accent shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest menu-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white pill-static-bg=grey-100 float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 modal-key=slate-500 viewer-bg=grey-50 viewer-tabbar-bg=grey-50 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-600 viewer-fg-secondary=grey-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=grey-300 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-shadow=grey-950@16% viewer-cover-shade=black@80% viewer-overlay-soft=black@15% viewer-tabbar-border=slate-50 viewer-tabbar-hover=slate-200 viewer-tab-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-800 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-600 viewer-places-number-fg=slate-50 viewer-banner-av=grey-200 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=orange-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-bg=grey-100 viewer-day-fg=grey-900 viewer-day-hover=white viewer-updated-bg=amber-100 viewer-updated-border=amber-500 viewer-band-bg=grey-150 viewer-fg-accent=accent-muted viewer-fg-muted=slate-500 viewer-bar-bg=white viewer-bar-border=grey-200 viewer-fab-bg=grey-600 viewer-fab-fg=white viewer-fab-shadow=black@32% viewer-nav-bg=grey-150@80% viewer-nav-current=white";
+  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent accent=accent shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest menu-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white pill-static-bg=grey-100 float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 modal-key=slate-500 viewer-bg=grey-50 viewer-tabbar-bg=grey-50 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-600 viewer-fg-secondary=grey-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=grey-400 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-shadow=grey-950@16% viewer-cover-shade=black@80% viewer-overlay-soft=black@15% viewer-tabbar-border=slate-50 viewer-tabbar-hover=slate-200 viewer-tab-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-800 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-600 viewer-places-number-fg=slate-50 viewer-banner-av=grey-200 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=orange-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-bg=grey-100 viewer-day-fg=grey-900 viewer-day-hover=white viewer-updated-bg=amber-100 viewer-updated-border=amber-500 viewer-band-bg=grey-150 viewer-fg-accent=accent-muted viewer-fg-muted=slate-500 viewer-bar-bg=white viewer-bar-border=grey-200 viewer-fab-bg=grey-600 viewer-fab-fg=white viewer-fab-shadow=black@32% viewer-nav-bg=grey-150@80% viewer-nav-current=white";
   /* for themes.html */
   /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
   --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23fcfcfc' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -599,7 +599,7 @@
   --color-viewer-fg-secondary: var(--palette-grey-500);
   --color-viewer-fg-subtle: var(--palette-grey-400);
   --color-viewer-fg-on-image: var(--palette-grey-50);
-  --color-viewer-rule: var(--palette-grey-300);
+  --color-viewer-rule: var(--palette-grey-400);
   --color-viewer-pill-border: var(--palette-grey-200);
   --color-viewer-alert: var(--palette-red-500);
   --color-viewer-focus: var(--palette-accent);
@@ -651,7 +651,7 @@
   --color-viewer-fab-shadow: color-mix(in srgb, var(--palette-black) 32%, transparent);
   --color-viewer-nav-bg: color-mix(in srgb, var(--palette-grey-150) 80%, transparent);
   --color-viewer-nav-current: var(--palette-white);
-  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent accent=accent shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest menu-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white pill-static-bg=grey-100 float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 modal-key=slate-500 viewer-bg=grey-50 viewer-tabbar-bg=grey-50 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-600 viewer-fg-secondary=grey-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=grey-300 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-shadow=grey-950@16% viewer-cover-shade=black@80% viewer-overlay-soft=black@15% viewer-tabbar-border=slate-50 viewer-tabbar-hover=slate-200 viewer-tab-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-800 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-600 viewer-places-number-fg=slate-50 viewer-banner-av=grey-200 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=orange-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-bg=grey-100 viewer-day-fg=grey-900 viewer-day-hover=white viewer-updated-bg=amber-100 viewer-updated-border=amber-500 viewer-band-bg=grey-150 viewer-fg-accent=accent-muted viewer-fg-muted=slate-500 viewer-bar-bg=white viewer-bar-border=grey-200 viewer-fab-bg=grey-600 viewer-fab-fg=white viewer-fab-shadow=black@32% viewer-nav-bg=grey-150@80% viewer-nav-current=white";
+  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent accent=accent shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest menu-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white pill-static-bg=grey-100 float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 modal-key=slate-500 viewer-bg=grey-50 viewer-tabbar-bg=grey-50 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-600 viewer-fg-secondary=grey-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=grey-400 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-shadow=grey-950@16% viewer-cover-shade=black@80% viewer-overlay-soft=black@15% viewer-tabbar-border=slate-50 viewer-tabbar-hover=slate-200 viewer-tab-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-800 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-600 viewer-places-number-fg=slate-50 viewer-banner-av=grey-200 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=orange-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-bg=grey-100 viewer-day-fg=grey-900 viewer-day-hover=white viewer-updated-bg=amber-100 viewer-updated-border=amber-500 viewer-band-bg=grey-150 viewer-fg-accent=accent-muted viewer-fg-muted=slate-500 viewer-bar-bg=white viewer-bar-border=grey-200 viewer-fab-bg=grey-600 viewer-fab-fg=white viewer-fab-shadow=black@32% viewer-nav-bg=grey-150@80% viewer-nav-current=white";
   /* for themes.html */
   /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
   --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23fcfcfc' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -1406,6 +1406,8 @@ button {
 /* …and is gone when the cover has scrolled this much */
 /* title (Figma 80 16 40) */
 /* dark gradient at the cover's foot, under the title */
+/* …the image grows to this scale… */
+/* …and fades to this opacity, by the time the cover has gone */
 /* bar with the project title (Figma 24 12 8; plus the notch) */
 /* it slides in / out */
 /* last update band */
@@ -1434,6 +1436,7 @@ button {
 /* card header on phones */
 /* facts row on phones */
 /* blank at the foot of each card on phones */
+/* every viewer text this much bigger than Figma (phones; on Home, tablets too) */
 /* text styles this much bigger (size and line height); 0 = as on tablets */
 /* titles this much bigger: page titles, the project title, the menu */
 /* what counts as a title */
@@ -1446,7 +1449,7 @@ button {
 /* card header: label title, as the Overview widgets */
 /* facts row */
 /* General Call time */
-/* width height */
+/* width height (Figma 140 × 80, ×1.2) */
 /* ºC after the temperature */
 /* map height with few locations */
 /* number circle (list and pins) */
@@ -1683,20 +1686,20 @@ button {
 @media (max-width: 719px) {
   .viewer {
     /* Text styles $vw-type-step bigger, titles $vw-title-step (the dialogs live in <body>, so they follow) */
-    --type-text-xs-size: 12px;
-    --type-text-xs-line: 14px;
-    --type-text-s-size: 13px;
-    --type-text-s-line: 18px;
-    --type-text-m-size: 15px;
-    --type-text-m-line: 18px;
-    --type-text-l-size: 16px;
-    --type-text-l-line: 22px;
-    --type-text-xxl-size: 22px;
-    --type-text-xxl-line: 26px;
-    --type-display-s-size: 26px;
-    --type-display-s-line: 26px;
-    --type-display-m-size: 30px;
-    --type-display-m-line: 38px;
+    --type-text-xs-size: 13px;
+    --type-text-xs-line: 15px;
+    --type-text-s-size: 14px;
+    --type-text-s-line: 19px;
+    --type-text-m-size: 16px;
+    --type-text-m-line: 19px;
+    --type-text-l-size: 17px;
+    --type-text-l-line: 23px;
+    --type-text-xxl-size: 23px;
+    --type-text-xxl-line: 27px;
+    --type-display-s-size: 27px;
+    --type-display-s-line: 27px;
+    --type-display-m-size: 31px;
+    --type-display-m-line: 39px;
     /* Pieces with their own step, their style is shared with other places */
     /* Cards one on another, no gaps: a rule under each, a blank at its foot */
   }
@@ -2088,7 +2091,8 @@ html:has(.viewer-menu[open]) {
     body.viewer.viewer--home  (style="--vw-cover-h: 60svh", data-menu)
      ├─ .topbar                 project title (aria-hidden: the h1 says it); .is-shown
      ├─ header.cover            view timeline --vw-cover
-     │   ├─ picture.cover__layer  the project image (WebP, PNG fallback), parallax
+     │   ├─ .cover__layer         the project image (picture: WebP, PNG fallback):
+     │   │                        parallax, grows ($vw-cover-zoom) and fades ($vw-cover-dim)
      │   └─ h1.cover__title       rises and fades, over the gradient (::after)
      ├─ p.updated               Last update · <time>
      └─ main.viewer__content--columns   cards (Credits: ul.logos + .facts)
@@ -2119,8 +2123,8 @@ html:has(.viewer-menu[open]) {
   line-height: var(--type-text-l-line);
   text-transform: uppercase;
   color: var(--color-viewer-fg-secondary);
-  --type-text-l-size: 14px;
-  --type-text-l-line: 20px;
+  --type-text-l-size: 15px;
+  --type-text-l-line: 21px;
   position: fixed;
   inset: 0 0 auto;
   z-index: 20;
@@ -2150,7 +2154,7 @@ html:has(.viewer-menu[open]) {
 /* Cover: the image and the title, in a layer that moves down as the cover leaves */
 .cover {
   position: relative;
-  height: clamp(320px, var(--vw-cover-h, 52svh), 560px);
+  height: clamp(320px, var(--vw-cover-h, 60svh), 640px);
   overflow: hidden;
   background: var(--color-viewer-band-bg);
   /* until the image arrives */
@@ -2161,6 +2165,10 @@ html:has(.viewer-menu[open]) {
 .cover__layer {
   position: absolute;
   inset: 0;
+}
+.cover__layer picture {
+  display: block;
+  height: 100%;
 }
 .cover__img {
   display: block;
@@ -2176,9 +2184,9 @@ html:has(.viewer-menu[open]) {
   text-transform: var(--type-display-m-case);
   color: var(--color-viewer-fg-on-image);
   z-index: 1;
-  --type-display-m-size: 28px;
-  --type-display-m-line: 36px;
-  /* 28px on phones too */
+  --type-display-m-size: 29px;
+  --type-display-m-line: 37px;
+  /* Figma's 28px, plus the bump, on phones too */
   position: absolute;
   inset: auto 0 0;
   margin: 0;
@@ -2204,8 +2212,11 @@ html:has(.viewer-menu[open]) {
 
 /* Scroll-driven parallax where the browser has it */
 @supports (animation-timeline: view()) {
-  .cover__layer,
-.cover__title {
+  .cover__layer {
+    will-change: transform, opacity;
+  }
+
+  .cover__title {
     will-change: transform;
   }
 
@@ -2223,10 +2234,12 @@ html:has(.viewer-menu[open]) {
 }
 @keyframes vw-cover-parallax {
   from {
-    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
   }
   to {
-    transform: translate3d(0, 70%, 0);
+    opacity: 0.4;
+    transform: translate3d(0, 70%, 0) scale(1.15);
   }
 }
 @keyframes vw-cover-title {
@@ -2316,8 +2329,8 @@ html:has(.viewer-menu[open]) {
   line-height: var(--type-text-l-line);
   text-transform: uppercase;
   color: var(--color-viewer-fg-secondary);
-  --type-text-l-size: 14px;
-  --type-text-l-line: 20px;
+  --type-text-l-size: 15px;
+  --type-text-l-line: 21px;
 }
 .viewer--home .viewer__content .card__title {
   letter-spacing: 0.95px;
@@ -2358,8 +2371,8 @@ html:has(.viewer-menu[open]) {
   color: var(--color-viewer-fg-muted);
 }
 .viewer--home .viewer__content .weather__stats {
-  --type-text-l-size: 14px;
-  --type-text-l-line: 20px;
+  --type-text-l-size: 15px;
+  --type-text-l-line: 21px;
   align-items: center;
   min-height: 48px;
   margin-top: 0;
@@ -2376,8 +2389,8 @@ html:has(.viewer-menu[open]) {
   line-height: 24px;
   text-transform: var(--type-text-l-case);
   color: var(--color-viewer-places-number-fg);
-  --type-text-l-size: 14px;
-  --type-text-l-line: 20px;
+  --type-text-l-size: 15px;
+  --type-text-l-line: 21px;
   width: 24px;
   height: 24px;
 }
@@ -2419,8 +2432,8 @@ html:has(.viewer-menu[open]) {
   line-height: 20px;
   text-transform: var(--type-text-l-case);
   color: var(--color-viewer-alert);
-  --type-text-l-size: 14px;
-  --type-text-l-line: 20px;
+  --type-text-l-size: 15px;
+  --type-text-l-line: 21px;
   padding: 8px 16px 8px;
 }
 
@@ -2561,8 +2574,8 @@ html:has(.viewer-menu[open]) {
   padding: 16px 24px 24px;
 }
 .weather__icon {
-  width: 140px;
-  height: 80px;
+  width: 168px;
+  height: 96px;
   object-fit: cover;
 }
 .weather__temp {
@@ -2734,9 +2747,9 @@ html:has(.viewer-menu[open]) {
   letter-spacing: 0.4px;
   line-height: 16px;
   text-transform: var(--type-text-xs-case);
-  --type-text-xs-size: 10px;
-  --type-text-xs-line: 12px;
-  /* 10px on phones too */
+  --type-text-xs-size: 11px;
+  --type-text-xs-line: 13px;
+  /* Figma's 10px, plus the bump, on phones too */
   display: block;
   margin-bottom: 8px;
 }

@@ -21,7 +21,7 @@
 
 <!--
   Home (Figma › Viewer › Home). Project settings, on <body>:
-    style="--vw-cover-h: 60svh"   cover height, a share of the screen (default 52svh)
+    style="--vw-cover-h: 60svh"   cover height, a share of the screen (default 60svh)
     data-menu                     menu button: bottom-right (default), bottom-left, bottom-center
   The cover image is the project's: images/bg_project.webp (47 KB), its PNG as the fallback.
 -->
@@ -32,10 +32,12 @@
 
   <!-- Cover: the project image moves slower than the page, the title a little faster as it fades (parallax) -->
   <header class="cover" data-cover>
-    <picture class="cover__layer">
-      <source srcset="images/bg_project.webp" type="image/webp">
-      <img class="cover__img" src="images/bg_project.png" alt="" width="1600" height="1000" fetchpriority="high" decoding="async">
-    </picture>
+    <div class="cover__layer">
+      <picture>
+        <source srcset="images/bg_project.webp" type="image/webp">
+        <img class="cover__img" src="images/bg_project.png" alt="" width="1600" height="1000" fetchpriority="high" decoding="async">
+      </picture>
+    </div>
     <h1 class="cover__title">GQ “The Moty Job”</h1>
   </header>
 
