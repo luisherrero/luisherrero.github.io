@@ -238,14 +238,16 @@
   --palette-pink-950: #21171b;
   --palette-names: "white, black, accent-lightest, accent-light, accent, accent-dark, accent-darkest, accent-muted, grey-50, grey-100, grey-150, grey-200, grey-300, grey-400, grey-500, grey-600, grey-700, grey-800, grey-900, grey-950, slate-50, slate-100, slate-200, slate-300, slate-400, slate-500, slate-600, slate-700, slate-800, slate-900, slate-950, red-50, red-100, red-200, red-300, red-400, red-500, red-600, red-700, red-800, red-900, red-950, orange-50, orange-100, orange-200, orange-300, orange-400, orange-500, orange-600, orange-700, orange-800, orange-900, orange-950, amber-50, amber-100, amber-200, amber-300, amber-400, amber-500, amber-600, amber-700, amber-800, amber-900, amber-950, yellow-50, yellow-100, yellow-200, yellow-300, yellow-400, yellow-500, yellow-600, yellow-700, yellow-800, yellow-900, yellow-950, green-50, green-100, green-200, green-300, green-400, green-500, green-600, green-700, green-800, green-900, green-950, teal-50, teal-100, teal-200, teal-300, teal-400, teal-500, teal-600, teal-700, teal-800, teal-900, teal-950, blue-50, blue-100, blue-200, blue-300, blue-400, blue-500, blue-600, blue-700, blue-800, blue-900, blue-950, violet-50, violet-100, violet-200, violet-300, violet-400, violet-500, violet-600, violet-700, violet-800, violet-900, violet-950, pink-50, pink-100, pink-200, pink-300, pink-400, pink-500, pink-600, pink-700, pink-800, pink-900, pink-950";
   /* for themes.html */
-  --color-tokens: "bg-app, bg-content, bg-card, bg-selected-icon, bg-hover-control, bg-hover-cell, bg-floating, fg-primary, fg-secondary, fg-subtle, fg-inverse, fg-on-image, fg-on-warning, fg-placeholder, border-button, border-form-item, border-pill, border-divider, border-floating, alert, alert-fill, alert-hover, warning, warning-fill, warning-hover, success, success-fill, success-hover, info, info-fill, info-hover, busy, accent, shadow, shadow-inset, overlay, overlay-soft, backdrop, sidebar-hover, sidebar-border, topbar-border, avatar-border, breadcrumb-chevron, btn-bg, btn-fg, btn-hover, btn-cta-bg, btn-cta-fg, btn-cta-border, btn-cta-hover, menu-cta-hover, btn-alert-bg, btn-alert-fg, btn-alert-border, btn-alert-hover, btn-soft-bg, btn-soft-hover, select-bg, select-border, select-arrow, field-bg, field-border, check-bg, check-on, check-mark, switch-bg, switch-border, switch-knob, switch-on, switch-knob-on, input-focus-bg, pill-bg, pill-strong-bg, pill-strong-fg, pill-static-bg, float-tools-bg, float-tools-border, swatch-border, swatch-ring, swatch-ring-gap, color-dot-border, toolbar-divider, editor-toolbar-border, tabs-border, tabs-fg, tabs-indicator, list-row-border, list-banner-bg, list-thumb-border, list-warning-border, banner-bg-av, banner-bg-photo, banner-bg-social, banner-bg-alt-1, banner-bg-alt-2, banner-bg-alt-3, banner-bg-alt-4, banner-bg-alt-5, banner-scope-none, banner-scope-all-bg, banner-scope-all-fg, stats-bg, places-bg, places-hover, places-active, places-number-bg, places-number-fg, gallery-title-rule, gallery-thumb-bg, gallery-thumb-border, gallery-caption-bg, gallery-caption-fg, dropzone-bg, dropzone-border, drawer-toolbar-border, drawer-bg, project-card-bg, project-card-border, project-pic-bg, project-new-border, modal-rule-1, modal-rule-2, modal-key, viewer-bg, viewer-tabbar-bg, viewer-card-bg, viewer-alert-bg, viewer-pill-bg, viewer-hover, viewer-fg-primary, viewer-fg-secondary, viewer-fg-subtle, viewer-fg-on-image, viewer-rule, viewer-pill-border, viewer-alert, viewer-focus, viewer-shadow, viewer-cover-shade, viewer-overlay-soft, viewer-tabbar-border, viewer-tabbar-hover, viewer-tab-current, viewer-thumb-bg, viewer-thumb-border, viewer-thumb-caption-bg, viewer-thumb-caption-fg, viewer-places-number-bg, viewer-places-number-fg, viewer-banner-av, viewer-banner-photo, viewer-banner-social, viewer-banner-alt-1, viewer-banner-alt-2, viewer-banner-alt-3, viewer-banner-alt-4, viewer-banner-alt-5, viewer-sheet-bg, viewer-sheet-border, viewer-sheet-rule-1, viewer-sheet-rule-2, viewer-backdrop, viewer-pill-strong-bg, viewer-pill-strong-fg, viewer-btn-bg, viewer-btn-fg, viewer-btn-border, viewer-radio-bg, viewer-radio-border, viewer-radio-on, viewer-day-bg, viewer-day-fg, viewer-day-hover, viewer-updated-bg, viewer-updated-border, viewer-band-bg, viewer-fg-accent, viewer-fg-muted, viewer-bar-bg, viewer-bar-border, viewer-fab-bg, viewer-fab-fg, viewer-fab-shadow, viewer-nav-bg, viewer-nav-current";
+  --color-tokens: "bg-app, bg-content, bg-card, bg-selected-icon, bg-hover-control, bg-hover-cell, bg-floating, fg-primary, fg-secondary, fg-subtle, fg-inverse, fg-on-image, fg-on-warning, fg-placeholder, border-button, border-form-item, border-pill, border-divider, border-floating, alert, alert-fill, alert-hover, warning, warning-fill, warning-hover, success, success-fill, success-hover, info, info-fill, info-hover, busy, accent, shadow, shadow-inset, overlay, overlay-soft, backdrop, sidebar-hover, sidebar-border, topbar-border, avatar-border, breadcrumb-chevron, btn-bg, btn-fg, btn-hover, btn-cta-bg, btn-cta-fg, btn-cta-border, btn-cta-hover, menu-cta-hover, btn-alert-bg, btn-alert-fg, btn-alert-border, btn-alert-hover, btn-soft-bg, btn-soft-hover, select-bg, select-border, select-arrow, field-bg, field-border, check-bg, check-on, check-mark, switch-bg, switch-border, switch-knob, switch-on, switch-knob-on, input-focus-bg, pill-bg, pill-strong-bg, pill-strong-fg, pill-static-bg, float-tools-bg, float-tools-border, swatch-border, swatch-ring, swatch-ring-gap, color-dot-border, toolbar-divider, editor-toolbar-border, tabs-border, tabs-fg, tabs-indicator, list-row-border, list-banner-bg, list-thumb-border, list-warning-border, banner-bg-av, banner-bg-photo, banner-bg-social, banner-bg-alt-1, banner-bg-alt-2, banner-bg-alt-3, banner-bg-alt-4, banner-bg-alt-5, banner-scope-none, banner-scope-all-bg, banner-scope-all-fg, stats-bg, places-bg, places-hover, places-active, places-number-bg, places-number-fg, gallery-title-rule, gallery-thumb-bg, gallery-thumb-border, gallery-caption-bg, gallery-caption-fg, dropzone-bg, dropzone-border, drawer-toolbar-border, drawer-bg, project-card-bg, project-card-border, project-pic-bg, project-new-border, modal-rule-1, modal-rule-2, modal-key, viewer-bg, viewer-tabbar-bg, viewer-card-bg, viewer-alert-bg, viewer-pill-bg, viewer-hover, viewer-fg-primary, viewer-fg-secondary, viewer-fg-subtle, viewer-fg-on-image, viewer-rule, viewer-pill-border, viewer-alert, viewer-focus, viewer-shadow, viewer-cover-shade, viewer-overlay-soft, viewer-tabbar-border, viewer-tabbar-hover, viewer-tab-current, viewer-thumb-bg, viewer-thumb-border, viewer-thumb-caption-bg, viewer-thumb-caption-fg, viewer-places-number-bg, viewer-places-number-fg, viewer-banner-av, viewer-banner-photo, viewer-banner-social, viewer-banner-alt-1, viewer-banner-alt-2, viewer-banner-alt-3, viewer-banner-alt-4, viewer-banner-alt-5, viewer-sheet-bg, viewer-sheet-border, viewer-sheet-rule-1, viewer-sheet-rule-2, viewer-backdrop, viewer-pill-strong-bg, viewer-pill-strong-fg, viewer-btn-bg, viewer-btn-fg, viewer-btn-border, viewer-radio-bg, viewer-radio-border, viewer-radio-on, viewer-day-bg, viewer-day-fg, viewer-day-hover, viewer-updated-bg, viewer-updated-border, viewer-band-bg, viewer-fg-accent, viewer-fg-muted, viewer-bar-bg, viewer-bar-border, viewer-fab-bg, viewer-fab-fg, viewer-fab-shadow, viewer-nav-bg, viewer-nav-current, viewer-row-border, viewer-done-veil, viewer-done-reveal, viewer-cover-dim, viewer-action-bg, viewer-action-fg";
   /* for themes.html */
   color-scheme: light;
   /* Icons of this theme (see $icons) */
   --icon-cast: url("icons/light/cast.svg");
+  --icon-check-circle: url("icons/light/check-circle.svg");
   --icon-chevron-right: url("icons/light/chevron-right.svg");
   --icon-close-alt: url("icons/light/close-alt.svg");
   --icon-crew: url("icons/light/crew.svg");
+  --icon-download: url("icons/light/download.svg");
   --icon-dropdown: url("icons/light/dropdown.svg");
   --icon-filter: url("icons/light/filter.svg");
   --icon-home: url("icons/light/home.svg");
@@ -401,15 +403,15 @@
   --color-viewer-tab-current: var(--palette-grey-50);
   --color-viewer-thumb-bg: var(--palette-slate-50);
   --color-viewer-thumb-border: var(--palette-grey-300);
-  --color-viewer-thumb-caption-bg: var(--palette-grey-800);
+  --color-viewer-thumb-caption-bg: var(--palette-grey-600);
   --color-viewer-thumb-caption-fg: var(--palette-slate-50);
   --color-viewer-places-number-bg: var(--palette-grey-600);
   --color-viewer-places-number-fg: var(--palette-slate-50);
-  --color-viewer-banner-av: var(--palette-grey-200);
+  --color-viewer-banner-av: var(--palette-grey-150);
   --color-viewer-banner-photo: var(--palette-green-100);
   --color-viewer-banner-social: var(--palette-yellow-200);
   --color-viewer-banner-alt-1: var(--palette-teal-200);
-  --color-viewer-banner-alt-2: var(--palette-orange-100);
+  --color-viewer-banner-alt-2: var(--palette-blue-100);
   --color-viewer-banner-alt-3: var(--palette-violet-100);
   --color-viewer-banner-alt-4: var(--palette-yellow-200);
   --color-viewer-banner-alt-5: var(--palette-amber-200);
@@ -441,7 +443,13 @@
   --color-viewer-fab-shadow: color-mix(in srgb, var(--palette-black) 32%, transparent);
   --color-viewer-nav-bg: color-mix(in srgb, var(--palette-grey-150) 80%, transparent);
   --color-viewer-nav-current: var(--palette-white);
-  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent accent=accent shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest menu-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white pill-static-bg=grey-100 float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 modal-key=slate-500 viewer-bg=grey-50 viewer-tabbar-bg=grey-50 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-600 viewer-fg-secondary=grey-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=grey-400 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-shadow=grey-950@16% viewer-cover-shade=black@80% viewer-overlay-soft=black@15% viewer-tabbar-border=slate-50 viewer-tabbar-hover=slate-200 viewer-tab-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-800 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-600 viewer-places-number-fg=slate-50 viewer-banner-av=grey-200 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=orange-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-bg=grey-100 viewer-day-fg=grey-900 viewer-day-hover=white viewer-updated-bg=amber-100 viewer-updated-border=amber-500 viewer-band-bg=grey-150 viewer-fg-accent=accent-muted viewer-fg-muted=slate-500 viewer-bar-bg=white viewer-bar-border=grey-200 viewer-fab-bg=grey-600 viewer-fab-fg=white viewer-fab-shadow=black@32% viewer-nav-bg=grey-150@80% viewer-nav-current=white";
+  --color-viewer-row-border: var(--palette-grey-200);
+  --color-viewer-done-veil: color-mix(in srgb, var(--palette-white) 96%, transparent);
+  --color-viewer-done-reveal: var(--palette-grey-100);
+  --color-viewer-cover-dim: color-mix(in srgb, var(--palette-black) 60%, transparent);
+  --color-viewer-action-bg: var(--palette-grey-600);
+  --color-viewer-action-fg: var(--palette-white);
+  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent accent=accent shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest menu-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white pill-static-bg=grey-100 float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 modal-key=slate-500 viewer-bg=grey-50 viewer-tabbar-bg=grey-50 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-600 viewer-fg-secondary=grey-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=grey-400 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-shadow=grey-950@16% viewer-cover-shade=black@80% viewer-overlay-soft=black@15% viewer-tabbar-border=slate-50 viewer-tabbar-hover=slate-200 viewer-tab-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-600 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-600 viewer-places-number-fg=slate-50 viewer-banner-av=grey-150 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=blue-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-bg=grey-100 viewer-day-fg=grey-900 viewer-day-hover=white viewer-updated-bg=amber-100 viewer-updated-border=amber-500 viewer-band-bg=grey-150 viewer-fg-accent=accent-muted viewer-fg-muted=slate-500 viewer-bar-bg=white viewer-bar-border=grey-200 viewer-fab-bg=grey-600 viewer-fab-fg=white viewer-fab-shadow=black@32% viewer-nav-bg=grey-150@80% viewer-nav-current=white viewer-row-border=grey-200 viewer-done-veil=white@96% viewer-done-reveal=grey-100 viewer-cover-dim=black@60% viewer-action-bg=grey-600 viewer-action-fg=white";
   /* for themes.html */
   /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
   --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23fcfcfc' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -453,9 +461,11 @@
   color-scheme: light;
   /* Icons of this theme (see $icons) */
   --icon-cast: url("icons/light/cast.svg");
+  --icon-check-circle: url("icons/light/check-circle.svg");
   --icon-chevron-right: url("icons/light/chevron-right.svg");
   --icon-close-alt: url("icons/light/close-alt.svg");
   --icon-crew: url("icons/light/crew.svg");
+  --icon-download: url("icons/light/download.svg");
   --icon-dropdown: url("icons/light/dropdown.svg");
   --icon-filter: url("icons/light/filter.svg");
   --icon-home: url("icons/light/home.svg");
@@ -611,15 +621,15 @@
   --color-viewer-tab-current: var(--palette-grey-50);
   --color-viewer-thumb-bg: var(--palette-slate-50);
   --color-viewer-thumb-border: var(--palette-grey-300);
-  --color-viewer-thumb-caption-bg: var(--palette-grey-800);
+  --color-viewer-thumb-caption-bg: var(--palette-grey-600);
   --color-viewer-thumb-caption-fg: var(--palette-slate-50);
   --color-viewer-places-number-bg: var(--palette-grey-600);
   --color-viewer-places-number-fg: var(--palette-slate-50);
-  --color-viewer-banner-av: var(--palette-grey-200);
+  --color-viewer-banner-av: var(--palette-grey-150);
   --color-viewer-banner-photo: var(--palette-green-100);
   --color-viewer-banner-social: var(--palette-yellow-200);
   --color-viewer-banner-alt-1: var(--palette-teal-200);
-  --color-viewer-banner-alt-2: var(--palette-orange-100);
+  --color-viewer-banner-alt-2: var(--palette-blue-100);
   --color-viewer-banner-alt-3: var(--palette-violet-100);
   --color-viewer-banner-alt-4: var(--palette-yellow-200);
   --color-viewer-banner-alt-5: var(--palette-amber-200);
@@ -651,7 +661,13 @@
   --color-viewer-fab-shadow: color-mix(in srgb, var(--palette-black) 32%, transparent);
   --color-viewer-nav-bg: color-mix(in srgb, var(--palette-grey-150) 80%, transparent);
   --color-viewer-nav-current: var(--palette-white);
-  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent accent=accent shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest menu-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white pill-static-bg=grey-100 float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 modal-key=slate-500 viewer-bg=grey-50 viewer-tabbar-bg=grey-50 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-600 viewer-fg-secondary=grey-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=grey-400 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-shadow=grey-950@16% viewer-cover-shade=black@80% viewer-overlay-soft=black@15% viewer-tabbar-border=slate-50 viewer-tabbar-hover=slate-200 viewer-tab-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-800 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-600 viewer-places-number-fg=slate-50 viewer-banner-av=grey-200 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=orange-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-bg=grey-100 viewer-day-fg=grey-900 viewer-day-hover=white viewer-updated-bg=amber-100 viewer-updated-border=amber-500 viewer-band-bg=grey-150 viewer-fg-accent=accent-muted viewer-fg-muted=slate-500 viewer-bar-bg=white viewer-bar-border=grey-200 viewer-fab-bg=grey-600 viewer-fab-fg=white viewer-fab-shadow=black@32% viewer-nav-bg=grey-150@80% viewer-nav-current=white";
+  --color-viewer-row-border: var(--palette-grey-200);
+  --color-viewer-done-veil: color-mix(in srgb, var(--palette-white) 96%, transparent);
+  --color-viewer-done-reveal: var(--palette-grey-100);
+  --color-viewer-cover-dim: color-mix(in srgb, var(--palette-black) 60%, transparent);
+  --color-viewer-action-bg: var(--palette-grey-600);
+  --color-viewer-action-fg: var(--palette-white);
+  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent accent=accent shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest menu-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white pill-static-bg=grey-100 float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 modal-key=slate-500 viewer-bg=grey-50 viewer-tabbar-bg=grey-50 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-600 viewer-fg-secondary=grey-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=grey-400 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-shadow=grey-950@16% viewer-cover-shade=black@80% viewer-overlay-soft=black@15% viewer-tabbar-border=slate-50 viewer-tabbar-hover=slate-200 viewer-tab-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-600 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-600 viewer-places-number-fg=slate-50 viewer-banner-av=grey-150 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=blue-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-bg=grey-100 viewer-day-fg=grey-900 viewer-day-hover=white viewer-updated-bg=amber-100 viewer-updated-border=amber-500 viewer-band-bg=grey-150 viewer-fg-accent=accent-muted viewer-fg-muted=slate-500 viewer-bar-bg=white viewer-bar-border=grey-200 viewer-fab-bg=grey-600 viewer-fab-fg=white viewer-fab-shadow=black@32% viewer-nav-bg=grey-150@80% viewer-nav-current=white viewer-row-border=grey-200 viewer-done-veil=white@96% viewer-done-reveal=grey-100 viewer-cover-dim=black@60% viewer-action-bg=grey-600 viewer-action-fg=white";
   /* for themes.html */
   /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
   --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23fcfcfc' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -663,9 +679,11 @@
   color-scheme: dark;
   /* Icons of this theme (see $icons) */
   --icon-cast: url("icons/dark/cast.svg");
+  --icon-check-circle: url("icons/dark/check-circle.svg");
   --icon-chevron-right: url("icons/dark/chevron-right.svg");
   --icon-close-alt: url("icons/dark/close-alt.svg");
   --icon-crew: url("icons/dark/crew.svg");
+  --icon-download: url("icons/dark/download.svg");
   --icon-dropdown: url("icons/dark/dropdown.svg");
   --icon-filter: url("icons/dark/filter.svg");
   --icon-home: url("icons/dark/home.svg");
@@ -861,7 +879,13 @@
   --color-viewer-fab-shadow: color-mix(in srgb, var(--palette-black) 60%, transparent);
   --color-viewer-nav-bg: color-mix(in srgb, var(--palette-grey-950) 80%, transparent);
   --color-viewer-nav-current: var(--palette-grey-800);
-  --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-800 bg-selected-icon=grey-600 bg-hover-control=grey-700 bg-hover-cell=grey-700 bg-floating=grey-800 fg-primary=grey-200 fg-secondary=grey-400 fg-subtle=slate-500 fg-inverse=grey-950 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=slate-500 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-600 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-400 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% busy=accent-lightest accent=accent-lightest shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% sidebar-border=slate-700 topbar-border=slate-700 avatar-border=grey-600 breadcrumb-chevron=grey-100 btn-bg=grey-800 btn-fg=grey-200 btn-hover=grey-700 btn-cta-bg=slate-600 btn-cta-fg=grey-100 btn-cta-border=grey-600 btn-cta-hover=slate-600 menu-cta-hover=slate-500 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 btn-soft-bg=grey-700 btn-soft-hover=grey-600 select-bg=grey-800 select-border=grey-600 select-arrow=grey-100 field-bg=grey-800 field-border=grey-100 check-bg=grey-800 check-on=grey-50 check-mark=black switch-bg=grey-800 switch-border=grey-600 switch-knob=grey-100 switch-on=grey-100 switch-knob-on=grey-950 input-focus-bg=grey-800 pill-bg=grey-800@90% pill-strong-bg=slate-600 pill-strong-fg=grey-100 pill-static-bg=grey-700 float-tools-bg=grey-800 float-tools-border=slate-700 swatch-border=slate-600 swatch-ring=grey-100 swatch-ring-gap=grey-800 color-dot-border=slate-400 toolbar-divider=grey-600 editor-toolbar-border=grey-700 tabs-border=grey-600 tabs-fg=slate-500 tabs-indicator=grey-100 list-row-border=slate-700 list-banner-bg=grey-700 list-thumb-border=grey-600 list-warning-border=black@40% banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600 banner-scope-none=grey-100 banner-scope-all-bg=grey-100 banner-scope-all-fg=grey-800 stats-bg=grey-800@90% places-bg=grey-700@50% places-hover=grey-700@50% places-active=accent-lightest places-number-bg=grey-100 places-number-fg=grey-950 gallery-title-rule=grey-600 gallery-thumb-bg=grey-800 gallery-thumb-border=grey-600 gallery-caption-bg=grey-100 gallery-caption-fg=grey-950 dropzone-bg=grey-800 dropzone-border=slate-400 drawer-toolbar-border=grey-700 drawer-bg=grey-800 project-card-bg=grey-800@90% project-card-border=slate-700 project-pic-bg=grey-600 project-new-border=grey-600 modal-rule-1=slate-600 modal-rule-2=grey-700 modal-key=slate-500 viewer-bg=grey-950 viewer-tabbar-bg=grey-700 viewer-card-bg=grey-700@90% viewer-alert-bg=red-400@2.4% viewer-pill-bg=grey-800@90% viewer-hover=grey-700 viewer-fg-primary=grey-200 viewer-fg-secondary=grey-400 viewer-fg-subtle=slate-500 viewer-fg-on-image=grey-50 viewer-rule=slate-600 viewer-pill-border=slate-600 viewer-alert=red-400 viewer-focus=accent-lightest viewer-shadow=black@50% viewer-cover-shade=black@80% viewer-overlay-soft=black@25% viewer-tabbar-border=grey-800 viewer-tabbar-hover=grey-600@60% viewer-tab-current=grey-600 viewer-thumb-bg=grey-800 viewer-thumb-border=grey-600 viewer-thumb-caption-bg=grey-100 viewer-thumb-caption-fg=grey-950 viewer-places-number-bg=grey-100 viewer-places-number-fg=grey-950 viewer-banner-av=grey-700 viewer-banner-photo=green-600 viewer-banner-social=yellow-600 viewer-banner-alt-1=orange-600 viewer-banner-alt-2=blue-600 viewer-banner-alt-3=pink-600 viewer-banner-alt-4=violet-600 viewer-banner-alt-5=amber-600 viewer-sheet-bg=grey-800 viewer-sheet-border=slate-600 viewer-sheet-rule-1=slate-600 viewer-sheet-rule-2=grey-700 viewer-backdrop=black@70% viewer-pill-strong-bg=slate-600 viewer-pill-strong-fg=grey-100 viewer-btn-bg=slate-600 viewer-btn-fg=grey-100 viewer-btn-border=grey-600 viewer-radio-bg=grey-800 viewer-radio-border=slate-400 viewer-radio-on=grey-50 viewer-day-bg=grey-800 viewer-day-fg=grey-100 viewer-day-hover=grey-700 viewer-updated-bg=grey-800 viewer-updated-border=amber-400 viewer-band-bg=grey-800 viewer-fg-accent=teal-300 viewer-fg-muted=slate-400 viewer-bar-bg=grey-900 viewer-bar-border=grey-700 viewer-fab-bg=grey-200 viewer-fab-fg=grey-900 viewer-fab-shadow=black@60% viewer-nav-bg=grey-950@80% viewer-nav-current=grey-800";
+  --color-viewer-row-border: var(--palette-grey-800);
+  --color-viewer-done-veil: color-mix(in srgb, var(--palette-grey-950) 92%, transparent);
+  --color-viewer-done-reveal: var(--palette-grey-800);
+  --color-viewer-cover-dim: color-mix(in srgb, var(--palette-black) 60%, transparent);
+  --color-viewer-action-bg: var(--palette-grey-200);
+  --color-viewer-action-fg: var(--palette-grey-900);
+  --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-800 bg-selected-icon=grey-600 bg-hover-control=grey-700 bg-hover-cell=grey-700 bg-floating=grey-800 fg-primary=grey-200 fg-secondary=grey-400 fg-subtle=slate-500 fg-inverse=grey-950 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=slate-500 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-600 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-400 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% busy=accent-lightest accent=accent-lightest shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% sidebar-border=slate-700 topbar-border=slate-700 avatar-border=grey-600 breadcrumb-chevron=grey-100 btn-bg=grey-800 btn-fg=grey-200 btn-hover=grey-700 btn-cta-bg=slate-600 btn-cta-fg=grey-100 btn-cta-border=grey-600 btn-cta-hover=slate-600 menu-cta-hover=slate-500 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 btn-soft-bg=grey-700 btn-soft-hover=grey-600 select-bg=grey-800 select-border=grey-600 select-arrow=grey-100 field-bg=grey-800 field-border=grey-100 check-bg=grey-800 check-on=grey-50 check-mark=black switch-bg=grey-800 switch-border=grey-600 switch-knob=grey-100 switch-on=grey-100 switch-knob-on=grey-950 input-focus-bg=grey-800 pill-bg=grey-800@90% pill-strong-bg=slate-600 pill-strong-fg=grey-100 pill-static-bg=grey-700 float-tools-bg=grey-800 float-tools-border=slate-700 swatch-border=slate-600 swatch-ring=grey-100 swatch-ring-gap=grey-800 color-dot-border=slate-400 toolbar-divider=grey-600 editor-toolbar-border=grey-700 tabs-border=grey-600 tabs-fg=slate-500 tabs-indicator=grey-100 list-row-border=slate-700 list-banner-bg=grey-700 list-thumb-border=grey-600 list-warning-border=black@40% banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600 banner-scope-none=grey-100 banner-scope-all-bg=grey-100 banner-scope-all-fg=grey-800 stats-bg=grey-800@90% places-bg=grey-700@50% places-hover=grey-700@50% places-active=accent-lightest places-number-bg=grey-100 places-number-fg=grey-950 gallery-title-rule=grey-600 gallery-thumb-bg=grey-800 gallery-thumb-border=grey-600 gallery-caption-bg=grey-100 gallery-caption-fg=grey-950 dropzone-bg=grey-800 dropzone-border=slate-400 drawer-toolbar-border=grey-700 drawer-bg=grey-800 project-card-bg=grey-800@90% project-card-border=slate-700 project-pic-bg=grey-600 project-new-border=grey-600 modal-rule-1=slate-600 modal-rule-2=grey-700 modal-key=slate-500 viewer-bg=grey-950 viewer-tabbar-bg=grey-700 viewer-card-bg=grey-700@90% viewer-alert-bg=red-400@2.4% viewer-pill-bg=grey-800@90% viewer-hover=grey-700 viewer-fg-primary=grey-200 viewer-fg-secondary=grey-400 viewer-fg-subtle=slate-500 viewer-fg-on-image=grey-50 viewer-rule=slate-600 viewer-pill-border=slate-600 viewer-alert=red-400 viewer-focus=accent-lightest viewer-shadow=black@50% viewer-cover-shade=black@80% viewer-overlay-soft=black@25% viewer-tabbar-border=grey-800 viewer-tabbar-hover=grey-600@60% viewer-tab-current=grey-600 viewer-thumb-bg=grey-800 viewer-thumb-border=grey-600 viewer-thumb-caption-bg=grey-100 viewer-thumb-caption-fg=grey-950 viewer-places-number-bg=grey-100 viewer-places-number-fg=grey-950 viewer-banner-av=grey-700 viewer-banner-photo=green-600 viewer-banner-social=yellow-600 viewer-banner-alt-1=orange-600 viewer-banner-alt-2=blue-600 viewer-banner-alt-3=pink-600 viewer-banner-alt-4=violet-600 viewer-banner-alt-5=amber-600 viewer-sheet-bg=grey-800 viewer-sheet-border=slate-600 viewer-sheet-rule-1=slate-600 viewer-sheet-rule-2=grey-700 viewer-backdrop=black@70% viewer-pill-strong-bg=slate-600 viewer-pill-strong-fg=grey-100 viewer-btn-bg=slate-600 viewer-btn-fg=grey-100 viewer-btn-border=grey-600 viewer-radio-bg=grey-800 viewer-radio-border=slate-400 viewer-radio-on=grey-50 viewer-day-bg=grey-800 viewer-day-fg=grey-100 viewer-day-hover=grey-700 viewer-updated-bg=grey-800 viewer-updated-border=amber-400 viewer-band-bg=grey-800 viewer-fg-accent=teal-300 viewer-fg-muted=slate-400 viewer-bar-bg=grey-900 viewer-bar-border=grey-700 viewer-fab-bg=grey-200 viewer-fab-fg=grey-900 viewer-fab-shadow=black@60% viewer-nav-bg=grey-950@80% viewer-nav-current=grey-800 viewer-row-border=grey-800 viewer-done-veil=grey-950@92% viewer-done-reveal=grey-800 viewer-cover-dim=black@60% viewer-action-bg=grey-200 viewer-action-fg=grey-900";
   /* for themes.html */
   /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
   --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23000000' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -874,9 +898,11 @@
     color-scheme: dark;
     /* Icons of this theme (see $icons) */
     --icon-cast: url("icons/dark/cast.svg");
+    --icon-check-circle: url("icons/dark/check-circle.svg");
     --icon-chevron-right: url("icons/dark/chevron-right.svg");
     --icon-close-alt: url("icons/dark/close-alt.svg");
     --icon-crew: url("icons/dark/crew.svg");
+    --icon-download: url("icons/dark/download.svg");
     --icon-dropdown: url("icons/dark/dropdown.svg");
     --icon-filter: url("icons/dark/filter.svg");
     --icon-home: url("icons/dark/home.svg");
@@ -1072,7 +1098,13 @@
     --color-viewer-fab-shadow: color-mix(in srgb, var(--palette-black) 60%, transparent);
     --color-viewer-nav-bg: color-mix(in srgb, var(--palette-grey-950) 80%, transparent);
     --color-viewer-nav-current: var(--palette-grey-800);
-    --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-800 bg-selected-icon=grey-600 bg-hover-control=grey-700 bg-hover-cell=grey-700 bg-floating=grey-800 fg-primary=grey-200 fg-secondary=grey-400 fg-subtle=slate-500 fg-inverse=grey-950 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=slate-500 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-600 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-400 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% busy=accent-lightest accent=accent-lightest shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% sidebar-border=slate-700 topbar-border=slate-700 avatar-border=grey-600 breadcrumb-chevron=grey-100 btn-bg=grey-800 btn-fg=grey-200 btn-hover=grey-700 btn-cta-bg=slate-600 btn-cta-fg=grey-100 btn-cta-border=grey-600 btn-cta-hover=slate-600 menu-cta-hover=slate-500 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 btn-soft-bg=grey-700 btn-soft-hover=grey-600 select-bg=grey-800 select-border=grey-600 select-arrow=grey-100 field-bg=grey-800 field-border=grey-100 check-bg=grey-800 check-on=grey-50 check-mark=black switch-bg=grey-800 switch-border=grey-600 switch-knob=grey-100 switch-on=grey-100 switch-knob-on=grey-950 input-focus-bg=grey-800 pill-bg=grey-800@90% pill-strong-bg=slate-600 pill-strong-fg=grey-100 pill-static-bg=grey-700 float-tools-bg=grey-800 float-tools-border=slate-700 swatch-border=slate-600 swatch-ring=grey-100 swatch-ring-gap=grey-800 color-dot-border=slate-400 toolbar-divider=grey-600 editor-toolbar-border=grey-700 tabs-border=grey-600 tabs-fg=slate-500 tabs-indicator=grey-100 list-row-border=slate-700 list-banner-bg=grey-700 list-thumb-border=grey-600 list-warning-border=black@40% banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600 banner-scope-none=grey-100 banner-scope-all-bg=grey-100 banner-scope-all-fg=grey-800 stats-bg=grey-800@90% places-bg=grey-700@50% places-hover=grey-700@50% places-active=accent-lightest places-number-bg=grey-100 places-number-fg=grey-950 gallery-title-rule=grey-600 gallery-thumb-bg=grey-800 gallery-thumb-border=grey-600 gallery-caption-bg=grey-100 gallery-caption-fg=grey-950 dropzone-bg=grey-800 dropzone-border=slate-400 drawer-toolbar-border=grey-700 drawer-bg=grey-800 project-card-bg=grey-800@90% project-card-border=slate-700 project-pic-bg=grey-600 project-new-border=grey-600 modal-rule-1=slate-600 modal-rule-2=grey-700 modal-key=slate-500 viewer-bg=grey-950 viewer-tabbar-bg=grey-700 viewer-card-bg=grey-700@90% viewer-alert-bg=red-400@2.4% viewer-pill-bg=grey-800@90% viewer-hover=grey-700 viewer-fg-primary=grey-200 viewer-fg-secondary=grey-400 viewer-fg-subtle=slate-500 viewer-fg-on-image=grey-50 viewer-rule=slate-600 viewer-pill-border=slate-600 viewer-alert=red-400 viewer-focus=accent-lightest viewer-shadow=black@50% viewer-cover-shade=black@80% viewer-overlay-soft=black@25% viewer-tabbar-border=grey-800 viewer-tabbar-hover=grey-600@60% viewer-tab-current=grey-600 viewer-thumb-bg=grey-800 viewer-thumb-border=grey-600 viewer-thumb-caption-bg=grey-100 viewer-thumb-caption-fg=grey-950 viewer-places-number-bg=grey-100 viewer-places-number-fg=grey-950 viewer-banner-av=grey-700 viewer-banner-photo=green-600 viewer-banner-social=yellow-600 viewer-banner-alt-1=orange-600 viewer-banner-alt-2=blue-600 viewer-banner-alt-3=pink-600 viewer-banner-alt-4=violet-600 viewer-banner-alt-5=amber-600 viewer-sheet-bg=grey-800 viewer-sheet-border=slate-600 viewer-sheet-rule-1=slate-600 viewer-sheet-rule-2=grey-700 viewer-backdrop=black@70% viewer-pill-strong-bg=slate-600 viewer-pill-strong-fg=grey-100 viewer-btn-bg=slate-600 viewer-btn-fg=grey-100 viewer-btn-border=grey-600 viewer-radio-bg=grey-800 viewer-radio-border=slate-400 viewer-radio-on=grey-50 viewer-day-bg=grey-800 viewer-day-fg=grey-100 viewer-day-hover=grey-700 viewer-updated-bg=grey-800 viewer-updated-border=amber-400 viewer-band-bg=grey-800 viewer-fg-accent=teal-300 viewer-fg-muted=slate-400 viewer-bar-bg=grey-900 viewer-bar-border=grey-700 viewer-fab-bg=grey-200 viewer-fab-fg=grey-900 viewer-fab-shadow=black@60% viewer-nav-bg=grey-950@80% viewer-nav-current=grey-800";
+    --color-viewer-row-border: var(--palette-grey-800);
+    --color-viewer-done-veil: color-mix(in srgb, var(--palette-grey-950) 92%, transparent);
+    --color-viewer-done-reveal: var(--palette-grey-800);
+    --color-viewer-cover-dim: color-mix(in srgb, var(--palette-black) 60%, transparent);
+    --color-viewer-action-bg: var(--palette-grey-200);
+    --color-viewer-action-fg: var(--palette-grey-900);
+    --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-800 bg-selected-icon=grey-600 bg-hover-control=grey-700 bg-hover-cell=grey-700 bg-floating=grey-800 fg-primary=grey-200 fg-secondary=grey-400 fg-subtle=slate-500 fg-inverse=grey-950 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=slate-500 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-600 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-400 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% busy=accent-lightest accent=accent-lightest shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% sidebar-border=slate-700 topbar-border=slate-700 avatar-border=grey-600 breadcrumb-chevron=grey-100 btn-bg=grey-800 btn-fg=grey-200 btn-hover=grey-700 btn-cta-bg=slate-600 btn-cta-fg=grey-100 btn-cta-border=grey-600 btn-cta-hover=slate-600 menu-cta-hover=slate-500 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 btn-soft-bg=grey-700 btn-soft-hover=grey-600 select-bg=grey-800 select-border=grey-600 select-arrow=grey-100 field-bg=grey-800 field-border=grey-100 check-bg=grey-800 check-on=grey-50 check-mark=black switch-bg=grey-800 switch-border=grey-600 switch-knob=grey-100 switch-on=grey-100 switch-knob-on=grey-950 input-focus-bg=grey-800 pill-bg=grey-800@90% pill-strong-bg=slate-600 pill-strong-fg=grey-100 pill-static-bg=grey-700 float-tools-bg=grey-800 float-tools-border=slate-700 swatch-border=slate-600 swatch-ring=grey-100 swatch-ring-gap=grey-800 color-dot-border=slate-400 toolbar-divider=grey-600 editor-toolbar-border=grey-700 tabs-border=grey-600 tabs-fg=slate-500 tabs-indicator=grey-100 list-row-border=slate-700 list-banner-bg=grey-700 list-thumb-border=grey-600 list-warning-border=black@40% banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600 banner-scope-none=grey-100 banner-scope-all-bg=grey-100 banner-scope-all-fg=grey-800 stats-bg=grey-800@90% places-bg=grey-700@50% places-hover=grey-700@50% places-active=accent-lightest places-number-bg=grey-100 places-number-fg=grey-950 gallery-title-rule=grey-600 gallery-thumb-bg=grey-800 gallery-thumb-border=grey-600 gallery-caption-bg=grey-100 gallery-caption-fg=grey-950 dropzone-bg=grey-800 dropzone-border=slate-400 drawer-toolbar-border=grey-700 drawer-bg=grey-800 project-card-bg=grey-800@90% project-card-border=slate-700 project-pic-bg=grey-600 project-new-border=grey-600 modal-rule-1=slate-600 modal-rule-2=grey-700 modal-key=slate-500 viewer-bg=grey-950 viewer-tabbar-bg=grey-700 viewer-card-bg=grey-700@90% viewer-alert-bg=red-400@2.4% viewer-pill-bg=grey-800@90% viewer-hover=grey-700 viewer-fg-primary=grey-200 viewer-fg-secondary=grey-400 viewer-fg-subtle=slate-500 viewer-fg-on-image=grey-50 viewer-rule=slate-600 viewer-pill-border=slate-600 viewer-alert=red-400 viewer-focus=accent-lightest viewer-shadow=black@50% viewer-cover-shade=black@80% viewer-overlay-soft=black@25% viewer-tabbar-border=grey-800 viewer-tabbar-hover=grey-600@60% viewer-tab-current=grey-600 viewer-thumb-bg=grey-800 viewer-thumb-border=grey-600 viewer-thumb-caption-bg=grey-100 viewer-thumb-caption-fg=grey-950 viewer-places-number-bg=grey-100 viewer-places-number-fg=grey-950 viewer-banner-av=grey-700 viewer-banner-photo=green-600 viewer-banner-social=yellow-600 viewer-banner-alt-1=orange-600 viewer-banner-alt-2=blue-600 viewer-banner-alt-3=pink-600 viewer-banner-alt-4=violet-600 viewer-banner-alt-5=amber-600 viewer-sheet-bg=grey-800 viewer-sheet-border=slate-600 viewer-sheet-rule-1=slate-600 viewer-sheet-rule-2=grey-700 viewer-backdrop=black@70% viewer-pill-strong-bg=slate-600 viewer-pill-strong-fg=grey-100 viewer-btn-bg=slate-600 viewer-btn-fg=grey-100 viewer-btn-border=grey-600 viewer-radio-bg=grey-800 viewer-radio-border=slate-400 viewer-radio-on=grey-50 viewer-day-bg=grey-800 viewer-day-fg=grey-100 viewer-day-hover=grey-700 viewer-updated-bg=grey-800 viewer-updated-border=amber-400 viewer-band-bg=grey-800 viewer-fg-accent=teal-300 viewer-fg-muted=slate-400 viewer-bar-bg=grey-900 viewer-bar-border=grey-700 viewer-fab-bg=grey-200 viewer-fab-fg=grey-900 viewer-fab-shadow=black@60% viewer-nav-bg=grey-950@80% viewer-nav-current=grey-800 viewer-row-border=grey-800 viewer-done-veil=grey-950@92% viewer-done-reveal=grey-800 viewer-cover-dim=black@60% viewer-action-bg=grey-200 viewer-action-fg=grey-900";
     /* for themes.html */
     /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
     --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23000000' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -1293,6 +1325,10 @@ button {
   --icon: var(--icon-cast);
 }
 
+.icon__check-circle {
+  --icon: var(--icon-check-circle);
+}
+
 .icon__chevron-right {
   --icon: var(--icon-chevron-right);
 }
@@ -1303,6 +1339,10 @@ button {
 
 .icon__crew {
   --icon: var(--icon-crew);
+}
+
+.icon__download {
+  --icon: var(--icon-download);
 }
 
 .icon__dropdown {
@@ -1357,7 +1397,7 @@ button {
   Talent Calls, Crew Calls). It shows parts of the app's information with
   hardly any interaction and no editing, so it does not load the app's
   partials: this file holds every rule the viewer pages draw, taken from
-  the app's components (card, facts, weather, places, stats, list, thumb,
+  the app's components (card, facts, weather, places, list,
   pill, shot type) and already narrowed to what the viewer shows. Tokens,
   text styles, spacing and radii still come from _tokens.scss, so the
   viewer follows the app's design decisions; component sizes that differ
@@ -1441,7 +1481,6 @@ button {
 /* titles this much bigger: page titles, the project title, the menu */
 /* what counts as a title */
 /* styles that keep their size: the temperature (the unit type and place numbers keep theirs in their own rules) */
-/* shot description in Shoot Plan (instead of $vw-type-step; its style, text-m, is shared) */
 /* times in pills, everywhere (instead of $vw-type-step; its style, text-s, is shared) */
 /* card outline and lines between rows */
 /* card outline and lines between rows */
@@ -1456,14 +1495,24 @@ button {
 /* read-only time pill */
 /* in Calls */
 /* in Shoot Plan, and the shot type */
-/* Shoot Plan banner */
-/* shot row (minimum: it grows if the larger text needs it) */
-/* type + times */
-/* tablets: a little bigger (the app's is 200 × 112) */
-/* tablets: set and talent columns, as the app's $sp-set / $sp-talent */
-/* requirements: between paragraphs */
-/* set, talent, requirements: fade where they are cut */
-/* description lines before it is cut */
+/* Shoot Plan (Figma › Viewer › Shoot Plan; see SHOOT PLAN) */
+/* project image left above the day's figures */
+/* around them */
+/* each figure box */
+/* above and under a shot */
+/* type and times column */
+/* description lines before "…" */
+/* banners to the screen's sides */
+/* the check behind a swiped shot, from its left edge */
+/* "Done!" on a done shot, from its left edge */
+/* tablets: set, talent and requirements in the row */
+/* shot sheet: the page left above it (bar + a bit of image) */
+/* the page behind the shot sheet fades to this (the bar stays) */
+/* room under the last thing of every bottom sheet (its button), so no phone's browser bar covers it */
+/* its title and cross, fixed */
+/* talent sheet: the five time pills */
+/* sheet sliding in… */
+/* …and out (js/app.js waits this long before closing) */
 /* bottom sheet: header (title, close) */
 /* its first line: character · artist */
 /* time pills and the shot type: a little wider than in the lists, always the same */
@@ -1682,6 +1731,8 @@ button {
 }
 
 /* A text style $step bigger than its base size, only inside this element */
+/* Figma's size for a text, at any width: $style's look at $px (plus the
+   bump, $vw-text-bump) and its line height moved as much */
 /* Phones: larger text, and the cards use the whole width ----------------- */
 @media (max-width: 719px) {
   .viewer {
@@ -1702,10 +1753,6 @@ button {
     --type-display-m-line: 39px;
     /* Pieces with their own step, their style is shared with other places */
     /* Cards one on another, no gaps: a rule under each, a blank at its foot */
-  }
-  .viewer .list--shoot-plan .list__text {
-    --type-text-m-size: 14px;
-    --type-text-m-line: 17px;
   }
   .viewer .pill--time {
     --type-text-s-size: 11px;
@@ -2154,7 +2201,7 @@ html:has(.viewer-menu[open]) {
 /* Cover: the image and the title, in a layer that moves down as the cover leaves */
 .cover {
   position: relative;
-  height: clamp(320px, var(--vw-cover-h, 60svh), 640px);
+  height: clamp(320px, var(--vw-cover-h, 70svh), 720px);
   overflow: hidden;
   background: var(--color-viewer-band-bg);
   /* until the image arrives */
@@ -2770,85 +2817,6 @@ html:has(.viewer-menu[open]) {
   height: 180px;
 }
 
-/* STATS (Shoot Plan) ----------------------------------------------------------- */
-/* The day's figures: three cells in a row at any width, a short rule between
-   cells. They open the day's card (see DAYS), with a rule under them. */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 0;
-  /* Call → wrap: two time pills with a chevron between them */
-}
-.stats__item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 12px 16px;
-  /* Rule between cells, shorter than the cell */
-}
-.stats__item + .stats__item::before {
-  content: "";
-  position: absolute;
-  inset: 4px auto 4px 0;
-  border-left: none;
-}
-.stats dt {
-  font-size: var(--type-text-s-size);
-  font-weight: 400;
-  letter-spacing: var(--type-text-s-tracking);
-  line-height: var(--type-text-s-line);
-  text-transform: var(--type-text-s-case);
-  color: var(--color-viewer-fg-secondary);
-}
-.stats dd {
-  font-size: var(--type-text-l-size);
-  font-weight: var(--type-text-l-weight);
-  letter-spacing: var(--type-text-l-tracking);
-  line-height: var(--type-text-l-line);
-  text-transform: var(--type-text-l-case);
-  color: var(--color-viewer-fg-primary);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 24px;
-  margin: 0;
-}
-.stats__range {
-  position: relative;
-  display: inline-flex;
-  gap: 16px;
-}
-.stats__range::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--icon-chevron-right) center/24px no-repeat;
-  pointer-events: none;
-}
-
-/* DAYS (Shoot Plan) ---------------------------------------------------------- */
-/*
-  A card per day: its figures, then its shots. The day selector in the cover
-  (#day-sheet) shows the chosen one and hides the others (js/app.js, "Day
-  selector": the radio's value is the card's id).
-
-    <div class="days">
-      <section class="card days__panel" id="day-1" aria-label="Day 1 · Tue 29">
-        <dl class="stats">…</dl>
-        <ul class="list list--shoot-plan">…</ul>
-      </section>
-      <section class="card days__panel" id="day-2" … hidden>…</section>
-    </div>
-*/
-.days {
-  display: flex;
-  flex-direction: column;
-}
-.days__panel .stats {
-  border-bottom: none;
-}
-
 /* PILLS AND SHOT TYPE ------------------------------------------------------- */
 /* Read-only: no hover, the type has no arrow */
 .pill--time {
@@ -2978,194 +2946,830 @@ html:has(.viewer-menu[open]) {
 
 /* SHOOT PLAN ----------------------------------------------------------------- */
 /*
-  .list--shoot-plan, in one card: a row per shot, ruled, and full-width
-  banners (lunch, second unit…) coloured by data-color. A shot is a button:
-    slot (type, start, end) · shot (thumb) · desc (spot, text)
-    · set · talent · reqs   (tablets only, as in the app; phones show them in the sheet)
-  that opens its details in a bottom sheet (see SHOT DETAILS).
+  Figma › Viewer › Shoot Plan, one day per page (shoot-plan.kit).
+
+    body.viewer.viewer--plan
+     ├─ header.topbar.topbar--static   "Shoot Plan", always there (sticky)
+     ├─ section.figures                the day's figures over the project image: Call → Wrap,
+     │                                 Shooting, Shots, PDF
+     ├─ main.plan > ul.plan__list
+     │   ├─ li.shot (.is-done)         button.shot__body: slot (type, times) · thumb · info
+     │   │                             (title, slugline, description) · tablets: set, talent,
+     │   │                             reqs · .shot__done veil; <template> with the details
+     │   └─ li.banner[data-color]      times · title
+     └─ dialog#shot-sheet.shot-sheet   the details: fixed title + cross, the rest scrolls
+
+  Swipe: a shot slides right under the finger (or the mouse); a check waits
+  behind it, on viewer-done-reveal. Let go past the threshold (js/app.js
+  "Shoot plan", SWIPE_DONE) and it toggles .is-done: a light veil with
+  "Done!" over it. The sheet's button does the same.
+
+  Sheet (also Talent's details, #talent-sheet): from the bottom up to
+  $vw-sheet-top under the screen's top (the bar and a bit of the image
+  stay: a tap there, the cross, Esc or dragging its head down closes it;
+  the rest of the page fades to $vw-sheet-dim). Tablets: a modal in the
+  middle. js/app.js "Viewer sheets".
 */
-.list--shoot-plan {
-  /* A rule under each shot, as under the cards ($vw-card-border); not under
-     the last one (the card's own edge is there) */
-  /* Type on top, times at the bottom */
-  /* Spot on top, text under it (cut after $vw-desc-lines lines) */
-  /* Set, talent and requirements: only on tablets, from the top, cut at the thumbnail's height */
-  /* characters */
-  /* Banners: full width, time range on the left, title on the right */
+.viewer--plan .viewer__footer {
+  background: var(--color-viewer-bg);
 }
-.list--shoot-plan .list__row {
-  display: block;
-  min-height: 0;
+
+/* Bar with the page name: in the flow, stuck to the top */
+.topbar--static {
+  position: sticky;
+  transform: none;
+  visibility: visible;
+  transition: none;
 }
-.list--shoot-plan .list__row + .list__row {
-  border-top: none;
+
+/* The day's figures over the project image, darkened */
+.figures {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  gap: 8px;
+  padding: 80px 8px 16px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-viewer-row-border);
+  /* A figure: label over value, in a white box */
+  /* PDF: the label over a download arrow */
 }
-.list--shoot-plan .list__row:not(.list__row--banner):not(:last-child) {
-  border-bottom: 0.5px solid var(--color-viewer-rule);
+.figures::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-viewer-cover-dim);
 }
-.list--shoot-plan .list__summary {
-  align-items: stretch;
-  min-height: 88px;
-  padding: 8px 16px 8px 4px;
+.figures__img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.list--shoot-plan .pill--time {
-  height: 20px;
+.figures__list {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
 }
-.list--shoot-plan .list__cell--slot {
+.figures__item, .figures__pdf {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  width: 52px;
-  overflow: visible;
-}
-.list--shoot-plan .list__cell--slot .shot-type {
-  margin-bottom: auto;
-}
-.list--shoot-plan .list__cell--shot {
-  align-self: center;
-  width: 112px;
-  height: 64px;
+  justify-content: center;
+  min-width: 0;
+  height: 48px;
+  padding: 0 12px;
+  background: var(--color-viewer-card-bg);
+  border: 0.5px solid var(--color-viewer-rule);
   border-radius: 2px;
 }
-.list--shoot-plan .list__cell--desc {
-  display: flex;
+.figures__item {
   flex: 1 1 0;
-  flex-direction: column;
-  gap: 4px;
-  padding-left: 8px;
+  /* Call → Wrap: labels and times lined up at both edges, the arrow in the middle */
 }
-.list--shoot-plan .list__cell--desc strong {
-  font-size: var(--type-text-xs-size);
-  font-weight: var(--type-text-xs-weight);
-  letter-spacing: var(--type-text-xs-tracking);
-  line-height: var(--type-text-xs-line);
-  text-transform: var(--type-text-xs-case);
-  color: var(--color-viewer-fg-primary);
+.figures__item dt {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: -0.4px;
+  line-height: 16px;
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-secondary);
+  --type-text-s-size: 12px;
+  --type-text-s-line: 17px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  line-height: 16px;
 }
-.list--shoot-plan .list__text {
+.figures__item dt span {
+  margin: 0 2px;
+}
+.figures__item dd {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: var(--type-text-s-tracking);
+  line-height: 16px;
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-s-size: 13px;
+  --type-text-s-line: 18px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.figures__item--range {
+  flex: none;
+  /* the times set the width; the labels spread over it */
+}
+.figures__item--range dt,
+.figures__item--range dd {
+  display: flex;
+  justify-content: space-between;
+}
+.figures__item--range dt {
+  gap: 4px;
+}
+.figures__item--range dd {
+  gap: 24px;
+}
+.figures__item--range dt span {
+  margin: 0;
+}
+.figures__pdf {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: -0.4px;
+  line-height: 16px;
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-secondary);
+  --type-text-s-size: 12px;
+  --type-text-s-line: 17px;
+  flex: none;
+  align-items: center;
+  width: 48px;
+  padding: 0;
+  --icon-fit: 32px;
+  /* the 32px drawing, cropped to its 20px box */
+  /* the arrow under the label */
+}
+.figures__pdf::before {
+  order: 1;
+}
+@media (min-width: 720px) {
+  .figures {
+    width: calc(100% - 16px);
+    max-width: 944px;
+    margin: 8px auto 0;
+    border-radius: 2px;
+  }
+}
+
+/* The list: shots and banners */
+.plan {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.plan__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 720px) {
+  .plan {
+    padding: 8px 8px 0;
+  }
+}
+
+/* A shot: the row slides over a check (swipe) */
+.shot {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-viewer-done-reveal);
+  border-bottom: 1px solid var(--color-viewer-row-border);
+  /* The check waiting behind */
+  /* Type on top, start and end at the bottom */
+  /* Shot number, top right of the picture */
+  /* Title, slugline and description, cut at the picture's height */
+  /* Tablets: set, talent and requirements in the row */
+  /* Done: a light veil with the check and "Done!" over the row */
+}
+.shot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 24px;
+  width: 32px;
+  height: 32px;
+  background: var(--icon-check-circle) center/cover no-repeat;
+  opacity: var(--swipe, 0);
+  transform: translateY(-50%) scale(calc(.6 + var(--swipe, 0) * .4));
+}
+.shot__body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 0;
+  text-align: left;
+  background: var(--color-viewer-card-bg);
+  touch-action: pan-y;
+  /* the page scrolls; sideways is the swipe */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  cursor: pointer;
+  transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.shot__body.is-dragging {
+  transition: none;
+}
+.shot__slot {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  align-self: stretch;
+  width: 52px;
+  margin: 0;
+  padding: 0 6px;
+}
+.shot__slot .shot-type {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: -0.4px;
+  line-height: 20px;
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-s-size: 12px;
+  --type-text-s-line: 17px;
+  width: 40px;
+  height: 20px;
+  margin-bottom: auto;
+  text-transform: uppercase;
+}
+.shot__slot .pill--time {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: var(--type-text-s-tracking);
+  line-height: 14px;
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-s-size: 13px;
+  --type-text-s-line: 18px;
+  width: 40px;
+  height: 20px;
+  background: none;
+}
+.shot__thumb {
+  position: relative;
+  flex: none;
+  width: 156px;
+  height: 88px;
+  overflow: hidden;
+  background: var(--color-viewer-thumb-bg);
+  border: 0.8px solid var(--color-viewer-thumb-border);
+  border-radius: 1.6px;
+}
+.shot__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.shot__number {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: 0px;
+  line-height: 12px;
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-thumb-caption-fg);
+  --type-text-s-size: 12px;
+  --type-text-s-line: 17px;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  min-width: 19px;
+  padding: 2px 5px 3px;
+  text-align: center;
+  background: var(--color-viewer-thumb-caption-bg);
+  border: 0.4px solid var(--color-viewer-card-bg);
+  border-radius: 1.6px;
+}
+.shot__info {
+  font-size: var(--type-text-m-size);
+  font-weight: var(--type-text-m-weight);
+  letter-spacing: -0.4px;
+  line-height: 18px;
+  text-transform: var(--type-text-m-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-m-size: 14px;
+  --type-text-m-line: 17px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-self: stretch;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 8px;
+  text-transform: uppercase;
+}
+.shot__info > * {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.shot__info strong {
+  font-weight: inherit;
+}
+.shot__desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+  text-transform: none;
+}
+.shot__extra {
   font-size: var(--type-text-m-size);
   font-weight: var(--type-text-m-weight);
   letter-spacing: var(--type-text-m-tracking);
-  line-height: var(--type-text-m-line);
+  line-height: 18px;
   text-transform: var(--type-text-m-case);
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-  white-space: normal;
-}
-.list--shoot-plan .list__cell--set,
-.list--shoot-plan .list__cell--talent,
-.list--shoot-plan .list__cell--reqs {
+  color: var(--color-viewer-fg-primary);
+  --type-text-m-size: 14px;
+  --type-text-m-line: 17px;
   display: none;
   flex-direction: column;
-  max-height: 90px;
+  align-self: stretch;
+  max-height: 88px;
   padding-left: 16px;
   overflow: hidden;
-  white-space: normal;
   mask-image: linear-gradient(#000 calc(100% - 16px), transparent);
-  /* text cut at the bottom fades out */
 }
-.list--shoot-plan .list__cell--set > *,
-.list--shoot-plan .list__cell--talent > *,
-.list--shoot-plan .list__cell--reqs > * {
+.shot__extra > * {
   display: block;
 }
-.list--shoot-plan .list__cell--set {
+.shot__set {
   width: 120px;
 }
-.list--shoot-plan .list__cell--talent {
+.shot__talent {
   width: 150px;
   text-transform: uppercase;
 }
-.list--shoot-plan .list__cell--reqs {
-  font-size: var(--type-text-m-size);
+.shot__reqs {
+  flex: 1;
   font-weight: 400;
-  letter-spacing: var(--type-text-m-tracking);
-  line-height: var(--type-text-m-line);
-  text-transform: var(--type-text-m-case);
-  flex: 1 1 0;
+  padding-right: 16px;
 }
-.list--shoot-plan .list__cell--reqs > * + * {
-  margin-top: 4px;
-}
-.list--shoot-plan .list__cell--reqs b {
+.shot__reqs b {
   font-weight: 600;
 }
 @media (min-width: 720px) {
-  .list--shoot-plan .list__cell--set,
-.list--shoot-plan .list__cell--talent,
-.list--shoot-plan .list__cell--reqs {
+  .shot__extra {
     display: flex;
   }
-  .list--shoot-plan .list__cell--shot {
-    width: 160px;
-    height: 90px;
+  .shot__info {
+    flex: 0 1 280px;
   }
 }
-.list--shoot-plan .list__row--banner {
+.shot__done {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: -0.4px;
+  line-height: 16px;
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-s-size: 13px;
+  --type-text-s-line: 18px;
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding-left: 92px;
+  text-transform: uppercase;
+  background: var(--color-viewer-done-veil);
+}
+.shot__done::before {
+  content: "";
+  width: 32px;
+  height: 32px;
+  background: var(--icon-check-circle) center/cover no-repeat;
+}
+.shot.is-done .shot__done {
+  display: flex;
+  animation: vw-done-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .shot__body {
+    transition: none;
+  }
+  .shot.is-done .shot__done {
+    animation: none;
+  }
+}
+
+@keyframes vw-done-in {
+  from {
+    opacity: 0;
+  }
+}
+/* A banner: its times, then its title on the right, on its colour */
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 34px;
+  margin: 0 2px;
+  padding: 0 16px 0 8px;
+  background: var(--banner-bg, var(--color-viewer-banner-av));
+  border-block: 1px solid var(--color-viewer-card-bg);
+  background-clip: padding-box;
+}
+.banner .pill--time {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: var(--type-text-s-tracking);
+  line-height: 14px;
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-s-size: 13px;
+  --type-text-s-line: 18px;
+  flex: none;
+  width: 40px;
+  height: 20px;
+  background: none;
+  border-color: var(--color-viewer-rule);
+}
+.banner__title {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: 0.4px;
+  line-height: 16px;
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-xs-size: 11px;
+  --type-text-xs-line: 13px;
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* SHOT SHEET: the details of a shot --------------------------------------------- */
+.shot-sheet {
+  position: fixed;
+  inset: 112px 0 0;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color: var(--color-viewer-fg-primary);
+  background: var(--color-viewer-bg);
+  border: 0;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -2px 16px var(--color-viewer-shadow);
+  transform: translateY(100%);
+  transition: transform 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Title and cross: fixed; dragging here moves the sheet */
+  /* The rest scrolls under the head, with room at the bottom */
+  /* Mark as done / undone */
+  /* Tablets: a modal in the middle */
+}
+.shot-sheet[open] {
+  display: flex;
+  flex-direction: column;
+}
+.shot-sheet.is-open {
+  transform: translateY(var(--drag, 0px));
+  transition-duration: 0.38s;
+}
+.shot-sheet.is-dragging {
+  transition: none;
+}
+.shot-sheet::backdrop {
+  background: transparent;
+}
+.shot-sheet__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  height: 32px;
-  padding: 0 8px;
-  background: var(--banner-bg, var(--color-viewer-banner-av));
+  flex: none;
+  height: 88px;
+  padding: 0 16px;
+  touch-action: none;
+  cursor: grab;
 }
-.list--shoot-plan .list__row--banner h2 {
-  font-size: var(--type-text-xs-size);
-  font-weight: var(--type-text-xs-weight);
-  letter-spacing: var(--type-text-xs-tracking);
-  line-height: var(--type-text-xs-line);
-  text-transform: var(--type-text-xs-case);
+.shot-sheet__title {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: 0.95px;
+  line-height: 24px;
+  text-transform: uppercase;
   color: var(--color-viewer-fg-primary);
-  padding-right: 8px;
-  line-height: 16px;
-  text-align: right;
-}
-.list--shoot-plan .list__row--banner .list__cell--range {
-  display: flex;
-  gap: 4px;
-}
-
-/* Shot picture: its frames side by side, the shot number(s) on top */
-.thumb {
-  position: relative;
-  display: flex;
-  gap: 2px;
+  --type-text-l-size: 17px;
+  --type-text-l-line: 23px;
   margin: 0;
   overflow: hidden;
-  background: var(--color-viewer-thumb-bg);
-  border: 1px solid var(--color-viewer-thumb-border);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.thumb img {
+.shot-sheet__close {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 2px;
+}
+.shot-sheet__body {
+  flex: 1;
+  min-height: 0;
+  padding: 0 16px calc(80px + env(safe-area-inset-bottom));
+  /* clear of any browser bar */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.shot-sheet__toggle {
+  font-size: var(--type-text-m-size);
+  font-weight: var(--type-text-m-weight);
+  letter-spacing: 0.8px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-viewer-action-fg);
+  --type-text-m-size: 14px;
+  --type-text-m-line: 17px;
+  width: 100%;
+  height: 48px;
+  margin-top: 40px;
+  background: var(--color-viewer-action-bg);
+  border: 0.5px solid var(--color-viewer-rule);
+  border-radius: 2px;
+}
+.shot-sheet__unmark {
+  display: none;
+}
+.shot-sheet.is-done .shot-sheet__mark {
+  display: none;
+}
+.shot-sheet.is-done .shot-sheet__unmark {
+  display: inline;
+}
+@media (min-width: 720px) {
+  .shot-sheet {
+    inset: 0;
+    width: calc(100% - 48px);
+    max-width: 520px;
+    height: fit-content;
+    max-height: calc(100dvh - 80px);
+    margin: auto;
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: transform 0.26s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+    /* a modal: no browser bar under it */
+  }
+  .shot-sheet::backdrop {
+    background: var(--color-viewer-backdrop);
+  }
+  .shot-sheet.is-open {
+    opacity: 1;
+    transform: none;
+  }
+  .shot-sheet .shot-sheet__body {
+    padding-bottom: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shot-sheet {
+    transition: none !important;
+  }
+}
+
+html:has(.shot-sheet[open]) {
+  overflow: hidden;
+}
+
+/* While a sheet is open the page behind fades; the bar with the page name stays */
+.viewer .figures,
+.viewer .plan,
+.viewer .viewer__content,
+.viewer .viewer__footer {
+  transition: opacity 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.viewer:has(.shot-sheet.is-open) .figures,
+.viewer:has(.shot-sheet.is-open) .plan,
+.viewer:has(.shot-sheet.is-open) .viewer__content,
+.viewer:has(.shot-sheet.is-open) .viewer__footer {
+  opacity: 0.2;
+  transition-duration: 0.38s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .viewer .figures,
+.viewer .plan,
+.viewer .viewer__content,
+.viewer .viewer__footer {
+    transition: none;
+  }
+}
+
+/* A sheet as tall as its content (Talent), up to the same top */
+@media (max-width: 719px) {
+  .shot-sheet--fit {
+    inset: auto 0 0;
+    max-height: calc(100dvh - 112px);
+  }
+}
+
+/* Talent details in the same sheet: its sections inside the sheet's margins */
+.shot-sheet .talent {
+  /* The five times: bigger pills, more room under their labels */
+}
+.shot-sheet .talent .talent__name {
+  min-height: 0;
+  padding: 0 0 24px;
+}
+.shot-sheet .talent .talent__times {
+  padding: 0 0 24px;
+}
+.shot-sheet .talent .talent__times > * {
+  grid-template-columns: 56px;
+  gap: 8px;
+}
+.shot-sheet .talent .talent__times > * + * {
+  grid-template-columns: 1fr 56px;
+}
+.shot-sheet .talent .talent__times .pill--time {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: 0.2px;
+  line-height: 14px;
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-l-size: 15px;
+  --type-text-l-line: 21px;
+  width: 56px;
+  height: 28px;
+}
+.shot-sheet .talent .talent__times .pill--strong {
+  color: var(--color-viewer-pill-strong-fg);
+}
+.shot-sheet .talent .talent__shots,
+.shot-sheet .talent .talent__notes {
+  margin: 0;
+}
+.shot-sheet .talent .talent__shots {
+  padding: 24px 0;
+}
+
+/* Icon sizes of this page (over the viewer's one size, .viewer .icon) */
+.viewer .figures__pdf {
+  --icon-size: 20px;
+}
+
+.viewer .shot-sheet__close {
+  --icon-size: 32px;
+}
+
+/* Inside the sheet */
+.detail {
+  /* The picture; when done, faded under the check and "Done!" */
+}
+.detail__pic {
+  position: relative;
+  height: 200px;
+  margin: 0 0 8px;
+  overflow: hidden;
+  border: 2px solid var(--color-viewer-fg-primary);
+  border-radius: 4px;
+}
+.detail__pic img {
   display: block;
-  flex: 1 1 0;
-  min-width: 0;
+  width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.thumb figcaption, .thumb__count {
-  font-size: var(--type-text-m-size);
-  font-weight: var(--type-text-m-weight);
-  letter-spacing: var(--type-text-m-tracking);
-  line-height: var(--type-text-m-line);
-  text-transform: var(--type-text-m-case);
-  color: var(--color-viewer-thumb-caption-fg);
+.detail__done {
+  font-size: var(--type-text-xxl-size);
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: var(--color-viewer-fg-primary);
+  --type-text-xxl-size: 19px;
+  --type-text-xxl-line: 23px;
   position: absolute;
-  top: 3px;
-  right: 3px;
-  min-width: 24px;
-  padding: 2px 4px;
-  line-height: 12px;
-  text-align: center;
-  background: var(--color-viewer-thumb-caption-bg);
-  border-radius: 2px;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--color-viewer-done-veil);
+}
+.detail__done::before {
+  content: "";
+  width: 48px;
+  height: 48px;
+  background: var(--icon-check-circle) center/cover no-repeat;
+}
+.is-done .detail__done {
+  display: flex;
+}
+.detail__main {
+  display: flex;
+  gap: 16px;
+  padding-top: 8px;
+}
+.detail__main .shot__slot--lg {
+  flex: none;
+  justify-content: flex-start;
+  gap: 6px;
+  width: 52px;
+  padding: 0;
+}
+.detail__main .shot__slot--lg .shot-type {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: -0.4px;
+  line-height: 22px;
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-s-size: 13px;
+  --type-text-s-line: 18px;
+  width: 100%;
+  height: 22px;
+  margin: 0;
+}
+.detail__main .shot__slot--lg .pill--time {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: 0.2px;
+  line-height: 14px;
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-l-size: 15px;
+  --type-text-l-line: 21px;
+  width: 100%;
+  height: 22px;
+}
+.detail__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+.detail__scene {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: -0.4px;
+  line-height: 22px;
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-l-size: 16px;
+  --type-text-l-line: 22px;
+  margin: 0;
+}
+.detail__scene strong {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.detail__facts {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0;
+}
+.detail__facts dt {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: 0.95px;
+  line-height: 24px;
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-secondary);
+  --type-text-xs-size: 13px;
+  --type-text-xs-line: 15px;
+}
+.detail__facts dd {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: -0.4px;
+  line-height: 22px;
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-l-size: 17px;
+  --type-text-l-line: 23px;
+  margin: 0;
+}
+.detail__reqs {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: -0.4px;
+  line-height: 22px;
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-l-size: 16px;
+  --type-text-l-line: 22px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-viewer-rule);
+}
+.detail__reqs p {
+  margin: 0;
+}
+.detail__reqs b {
+  font-weight: 700;
 }
 
 /* CALLS ---------------------------------------------------------------------- */
@@ -3223,6 +3827,92 @@ html:has(.viewer-menu[open]) {
   content: none;
 }
 
+/* TALENT AND CREW CALLS ------------------------------------------------------ */
+/*
+  Figma › Viewer › Talent Calls, Crew Calls (body.viewer--calls): the bar
+  with the page name, the project image under it (.figures--plain, no
+  figures), then a card per group: title and call time, a row per person
+  (two text columns and the set call). Talent: character (strong) ·
+  artist, a row opens the details (bottom sheet); tablets show the five
+  times in the row (see CALLS). Crew: name · role (strong).
+*/
+/* call time pills */
+/* each card: 8 above, 40 under */
+/* The project image alone, as tall as the Shoot Plan's figures */
+.figures--plain {
+  height: 144px;
+  padding: 0;
+}
+
+.viewer--calls .viewer__content {
+  /* Call times: the card's and each person's */
+}
+.viewer--calls .viewer__content .card--widget {
+  padding: 8px 0 40px;
+}
+.viewer--calls .viewer__content .card__header {
+  min-height: 64px;
+  padding: 0 16px;
+}
+.viewer--calls .viewer__content .card__title {
+  letter-spacing: 0.95px;
+}
+.viewer--calls .viewer__content .card__header .pill--time,
+.viewer--calls .viewer__content .list__cell--call .pill--time {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: 0.2px;
+  line-height: 14px;
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-l-size: 15px;
+  --type-text-l-line: 21px;
+  width: 52px;
+  height: 24px;
+  background: none;
+}
+.viewer--calls .viewer__content .list--calls {
+  /* Talent: characters */
+}
+.viewer--calls .viewer__content .list--calls .list__row:not(:has(> .list__summary)),
+.viewer--calls .viewer__content .list--calls .list__summary {
+  gap: 0;
+  min-height: 48px;
+  padding: 0 16px;
+}
+.viewer--calls .viewer__content .list--calls .list__row + .list__row {
+  border-top: 0;
+}
+.viewer--calls .viewer__content .list--calls .list__cell--fill {
+  font-size: var(--type-text-m-size);
+  font-weight: 400;
+  letter-spacing: -0.24px;
+  line-height: 22px;
+  text-transform: var(--type-text-m-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-m-size: 16px;
+  --type-text-m-line: 19px;
+  padding-right: 8px;
+}
+.viewer--calls .viewer__content .list--calls .list__cell--strong {
+  font-size: var(--type-text-l-size);
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 22px;
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-l-size: 17px;
+  --type-text-l-line: 23px;
+  white-space: normal;
+  /* a long name takes two lines, as in Figma */
+}
+.viewer--calls .viewer__content .list--calls .list__cell--character {
+  text-transform: uppercase;
+}
+.viewer--calls .viewer__content .list--calls .list__cell--call {
+  flex: none;
+}
+
 /* BOTTOM SHEET --------------------------------------------------------------- */
 /*
   A <dialog> that rises from the bottom (Shoot Plan and Talent Calls › a row,
@@ -3277,7 +3967,8 @@ html:has(.viewer-menu[open]) {
   max-height: calc(100vh - 80px);
   max-height: calc(100dvh - 80px);
   overflow: hidden;
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  /* clear of any browser bar */
   background: var(--color-viewer-sheet-bg);
   border: 1px solid var(--color-viewer-sheet-border);
   border-radius: 2px;
@@ -3392,98 +4083,6 @@ html:has(.viewer-menu[open]) {
     transform: translateY(8px);
   }
 }
-/* SHOT DETAILS (in the bottom sheet) ----------------------------------------- */
-/*
-  The frames (wide), type and times, spot · shot number, the action, and
-  under a double rule the requirements, set and talent.
-
-    <figure class="shot__frames thumb"><img …><figcaption>24</figcaption></figure>
-    <p class="shot__when"><span class="shot-type">AV</span><span class="pill pill--time">9:30</span><span class="shot__arrow"></span><span class="pill pill--time">9:50</span></p>
-    <p class="shot__title">Spot 1 · 24</p>
-    <p class="shot__action">…</p>
-    <dl class="shot__facts"><div><dt>Requirements</dt><dd>…</dd></div> …</dl>
-*/
-.shot {
-  /* Small arrow between start and end, as in the talent times */
-}
-.shot__frames {
-  aspect-ratio: 16/9;
-  margin: 0 24px;
-  border-radius: 2px;
-}
-.shot__when {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 24px 0;
-  /* the same width for every type */
-}
-.shot__when .pill--time {
-  height: 20px;
-}
-.shot__when .shot-type {
-  width: 48px;
-}
-.shot__arrow {
-  content: "";
-  border-block: 2px solid transparent;
-  border-left: 3px solid var(--color-viewer-fg-primary);
-}
-.shot__title {
-  font-size: var(--type-text-xs-size);
-  font-weight: var(--type-text-xs-weight);
-  letter-spacing: var(--type-text-xs-tracking);
-  line-height: var(--type-text-xs-line);
-  text-transform: var(--type-text-xs-case);
-  color: var(--color-viewer-fg-primary);
-  padding: 16px 24px 4px;
-  line-height: 16px;
-}
-.shot__action {
-  font-size: var(--type-text-l-size);
-  font-weight: var(--type-text-l-weight);
-  letter-spacing: var(--type-text-l-tracking);
-  line-height: var(--type-text-l-line);
-  text-transform: var(--type-text-l-case);
-  color: var(--color-viewer-fg-primary);
-  padding: 0 24px 16px;
-}
-.shot__facts {
-  margin: 0 24px;
-  padding: 16px 0;
-  border-top: 0.5px solid var(--color-viewer-sheet-rule-1);
-  box-shadow: inset 0 0.5px var(--color-viewer-sheet-rule-2);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.shot__facts > div {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.shot__facts dt {
-  font-size: var(--type-text-xs-size);
-  font-weight: var(--type-text-xs-weight);
-  letter-spacing: var(--type-text-xs-tracking);
-  line-height: var(--type-text-xs-line);
-  text-transform: var(--type-text-xs-case);
-  color: var(--color-viewer-fg-secondary);
-  line-height: 16px;
-}
-.shot__facts dd {
-  font-size: var(--type-text-l-size);
-  font-weight: var(--type-text-l-weight);
-  letter-spacing: var(--type-text-l-tracking);
-  line-height: var(--type-text-l-line);
-  text-transform: var(--type-text-l-case);
-  color: var(--color-viewer-fg-primary);
-  margin: 0;
-}
-.shot__facts dd b {
-  font-weight: 700;
-}
-
 /* TALENT DETAILS (in the bottom sheet) --------------------------------------- */
 /*
   Character · artist (or how many extras), the day's times (Set → HMUP →
