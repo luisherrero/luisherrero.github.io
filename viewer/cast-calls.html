@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+      Shared head of the viewer pages; each page sets its title first (Kit
+      variable "title"). Same JS as the app: app-min.js, a copy of ../app-min.js (copy it again after changing js/app.js). No theme switch:
+      the viewer follows the system (light / dark).
+    -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+      <title>MOTOOOR · Call sheet - Talent Calls</title>
+      <meta name="theme-color" content="#f7f8f8" media="(prefers-color-scheme: light)">
+      <meta name="theme-color" content="#161b1e" media="(prefers-color-scheme: dark)">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+      <link rel="stylesheet" href="viewer.css">
+      <script src="app-min.js" defer></script>
+    
+</head>
+
+<body class="viewer">
+
+  <!--
+    Top of every page but Home: the project cover, short, with the page title and
+    the day selector (the menu is the round button of kit/_nav.kit). Each page sets the Kit variable title
+    first. A page with a button of its own (Crew Calls › Sort options) uses
+    kit/_bar-button.kit instead. CSS: PAGE › .viewer__head, viewer/_mobile.scss.
+  -->
+  <header class="viewer__head bg_08">
+    <div class="viewer__tools">
+      <h1 class="viewer__title">Talent Calls</h1>
+      <!--
+        Day selector, on the right of the menu button: the chosen day; it opens the
+        days sheet (kit/_day-sheet.kit). js/app.js "Day selector" writes the chosen
+        day here ([data-day-label]). CSS: PAGE › .viewer__day, viewer/_mobile.scss.
+      -->
+      <button class="viewer__day" type="button" aria-haspopup="dialog" data-sheet="day-sheet"><span data-day-label>Day 1</span></button>
+      
+    </div>
+  </header>
+  
+
+  <main class="viewer__content">
+    <!-- One card for cast and one for extras: character · artist (or how many) · set call; a row opens its details -->
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Cast</h2>
+        <span class="pill pill--time">13:00</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Principal</span>
+            <span class="list__cell list__cell--fill">Celia Muñoz</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">14:00</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">14:00</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">13:00</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">13:30</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">13:45</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">14:10</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Principal</span><span>Celia Muñoz</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">14:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">13:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">13:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">13:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">14:10</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 12</li>
+              <li>Spot 1 · 17</li>
+              <li>Spot 1 · 24 + 15 + 21</li>
+              <li>Spot 1 · 14 + 15</li>
+            </ul>
+            <p class="talent__notes">Este actor es vegetariano y tiene misofonía, con lo que ha de tener un espacio apartado a la hora de comer.</p>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
+            <span class="list__cell list__cell--fill">Sara Madoz</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">14:00</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">14:00</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">13:00</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">13:30</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">13:45</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">14:10</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Bailarinas RRSS</span><span>Sara Madoz</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">14:00</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">13:00</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">13:30</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">13:45</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">14:10</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 3</li>
+              <li>Spot 2 · 8 + 9</li>
+            </ul>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Fitness RRSS</span>
+            <span class="list__cell list__cell--fill">Hanna</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">14:30</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">14:30</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">13:30</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">14:00</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">14:15</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">14:40</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Fitness RRSS</span><span>Hanna</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">14:30</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">13:30</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">14:00</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">14:15</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">14:40</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 2 · 4</li>
+              <li>Spot 2 · 11</li>
+              <li>Spot 2 · 18</li>
+            </ul>
+            <p class="talent__notes">Trae su propio vestuario de entrenamiento.</p>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Salto de altura RRSS</span>
+            <span class="list__cell list__cell--fill">Fatuomata</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">14:30</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">14:30</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">13:30</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">14:00</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">14:15</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">14:40</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Salto de altura RRSS</span><span>Fatuomata</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">14:30</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">13:30</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">14:00</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">14:15</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">14:40</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 12</li>
+              <li>Spot 1 · 17</li>
+              <li>Spot 1 · 24 + 15 + 21</li>
+              <li>Spot 1 · 14 + 15</li>
+            </ul>
+            <p class="talent__notes">Este actor es vegetariano y tiene misofonía, con lo que ha de tener un espacio apartado a la hora de comer.</p>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
+            <span class="list__cell list__cell--fill">Berta Contijoch</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">15:30</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">14:30</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">15:00</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">15:15</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">15:40</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Bailarinas RRSS</span><span>Berta Contijoch</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">15:30</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">14:30</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">15:00</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">15:15</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">15:40</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 3</li>
+              <li>Spot 2 · 8 + 9</li>
+            </ul>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
+            <span class="list__cell list__cell--fill">Laura Bitca</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">15:30</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">14:30</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">15:00</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">15:15</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">15:40</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Bailarinas RRSS</span><span>Laura Bitca</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">15:30</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">14:30</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">15:00</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">15:15</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">15:40</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 2 · 4</li>
+              <li>Spot 2 · 11</li>
+              <li>Spot 2 · 18</li>
+            </ul>
+            <p class="talent__notes">Trae su propio vestuario de entrenamiento.</p>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
+            <span class="list__cell list__cell--fill">Samanta Dodu</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">15:30</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">14:30</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">15:00</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">15:15</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">15:40</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Bailarinas RRSS</span><span>Samanta Dodu</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">15:30</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">14:30</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">15:00</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">15:15</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">15:40</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 12</li>
+              <li>Spot 1 · 17</li>
+              <li>Spot 1 · 24 + 15 + 21</li>
+              <li>Spot 1 · 14 + 15</li>
+            </ul>
+            <p class="talent__notes">Este actor es vegetariano y tiene misofonía, con lo que ha de tener un espacio apartado a la hora de comer.</p>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Bailarinas RRSS</span>
+            <span class="list__cell list__cell--fill">Veronica Bosque</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">15:30</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">15:30</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">14:30</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">15:00</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">15:15</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">15:40</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Bailarinas RRSS</span><span>Veronica Bosque</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">15:30</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">14:30</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">15:00</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">15:15</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">15:40</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 3</li>
+              <li>Spot 2 · 8 + 9</li>
+            </ul>
+          </template>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card card--widget">
+      <header class="card__header">
+        <h2 class="card__title">Extras</h2>
+        <span class="pill pill--time">15:20</span>
+      </header>
+      <ul class="list list--calls">
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Gang Members</span>
+            <span class="list__cell list__cell--fill">12</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">16:20</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">16:20</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">15:20</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">15:50</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">16:05</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">16:30</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Gang Members</span><span>12</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">16:20</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">15:20</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">15:50</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">16:05</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">16:30</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 2 · 4</li>
+              <li>Spot 2 · 11</li>
+              <li>Spot 2 · 18</li>
+            </ul>
+            <p class="talent__notes">Trae su propio vestuario de entrenamiento.</p>
+          </template>
+        </li>
+        <li class="list__row">
+          <button class="list__summary" type="button" data-sheet="talent-sheet" aria-haspopup="dialog">
+            <span class="list__cell list__cell--fill list__cell--character">Passers-by</span>
+            <span class="list__cell list__cell--fill">5</span>
+            <span class="list__cell list__cell--call"><span class="pill pill--time">16:20</span></span>
+            <span class="list__cell list__cell--times talent__times"><span><span class="talent__label">Set</span><span class="pill pill--time">16:20</span></span><span><span class="talent__label">HMUP</span><span class="pill pill--time">15:20</span></span><span><span class="talent__label">Dress</span><span class="pill pill--time">15:50</span></span><span><span class="talent__label">Ready</span><span class="pill pill--time">16:05</span></span><span><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">16:30</span></span></span>
+          </button>
+          <template>
+            <p class="talent__name"><span class="talent__character">Passers-by</span><span>5</span></p>
+            <ol class="talent__times">
+              <li><span class="talent__label">Set</span><span class="pill pill--time">16:20</span></li>
+              <li><span class="talent__label">HMUP</span><span class="pill pill--time">15:20</span></li>
+              <li><span class="talent__label">Dress</span><span class="pill pill--time">15:50</span></li>
+              <li><span class="talent__label">Ready</span><span class="pill pill--time">16:05</span></li>
+              <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">16:30</span></li>
+            </ol>
+            <ul class="talent__shots">
+              <li>Spot 1 · 12</li>
+              <li>Spot 1 · 17</li>
+              <li>Spot 1 · 24 + 15 + 21</li>
+              <li>Spot 1 · 14 + 15</li>
+            </ul>
+            <p class="talent__notes">Este actor es vegetariano y tiene misofonía, con lo que ha de tener un espacio apartado a la hora de comer.</p>
+          </template>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <!--
+    Talent details, as a bottom sheet: a row's button (data-sheet) copies its
+    <template> into [data-sheet-body] and opens it (js/app.js, "Bottom sheet").
+    CSS: .sheet and .talent, viewer/_mobile.scss.
+  -->
+  <dialog class="sheet sheet--modal sheet--narrow" id="talent-sheet" aria-labelledby="talent-sheet-title">
+    <form class="sheet__panel" method="dialog">
+      <header class="sheet__header">
+        <h2 class="sheet__title" id="talent-sheet-title">Details</h2>
+        <button class="card__action icon icon__close-alt" value="close" aria-label="Close"></button>
+      </header>
+      <div class="sheet__body" data-sheet-body></div>
+      <footer class="sheet__footer">
+        <button class="sheet__button" value="done">Done</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!--
+    Days of the call sheet: a bottom sheet with a radio per day (as Sort
+    options, but no Done: choosing a day closes it), opened by the day selector (kit/_day.kit). The value is the id of
+    the day; on Shoot Plan it is also the id of that day's card, which
+    js/app.js "Day selector" shows.
+  -->
+  <dialog class="sheet" id="day-sheet" aria-labelledby="day-sheet-title">
+    <form class="sheet__panel" method="dialog">
+      <header class="sheet__header">
+        <h2 class="sheet__title" id="day-sheet-title">Shooting days</h2>
+        <button class="card__action icon icon__close-alt" value="close" aria-label="Close"></button>
+      </header>
+      <div class="sheet__options" role="radiogroup" aria-labelledby="day-sheet-title">
+        <label class="sheet__option"><input type="radio" name="day" value="day-1" data-label="Day 1" checked>Day 1 · Tue 29</label>
+        <label class="sheet__option"><input type="radio" name="day" value="day-2" data-label="Day 2">Day 2 · Wed 30</label>
+      </div>
+    </form>
+  </dialog>
+  
+  <footer class="viewer__footer">© Motooor 2026</footer>
+    
+  <!--
+        Navigation: a round button always on screen (bottom right by default; the
+        page sets data-menu on <body>) opens the sections full screen over a
+        blurred veil: the Motooor logo and a link per page. The dialog has its own
+        button in the very same place, whose three lines turn into a cross; the
+        logo, the sections and the © line come in one after another. js/app.js
+        "Viewer navigation" opens and closes it (Esc too) and marks the open page
+        (.is-current). CSS: NAVIGATION, viewer/_mobile.scss.
+      -->
+      <button class="fab" type="button" aria-label="Menu" aria-haspopup="dialog" aria-controls="viewer-menu" data-nav-open><span class="fab__lines" aria-hidden="true"></span></button>
+      <dialog class="viewer-menu" id="viewer-menu" aria-label="Menu">
+        <nav class="viewer-menu__nav" aria-label="Call sheet">
+          <span class="viewer-menu__logo" role="img" aria-label="Motooor"></span>
+          <a class="viewer-menu__item icon icon__home" href="index.html">Home</a>
+          <a class="viewer-menu__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+          <a class="viewer-menu__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+          <a class="viewer-menu__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+        </nav>
+        <p class="viewer-menu__footer">© Motooor 2026</p>
+        <button class="fab fab--close" type="button" aria-label="Close menu" data-nav-close autofocus><span class="fab__lines" aria-hidden="true"></span></button>
+      </dialog>
+      
+
+</body>
+</html>

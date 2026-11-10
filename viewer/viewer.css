@@ -1,0 +1,3567 @@
+@charset "UTF-8";
+/****************************************************************************
+
+  THEMES
+
+****************************************************************************/
+/*
+  Colours in two levels. Only $palette holds raw colours.
+
+  1. PALETTE (primitives): raw colours in families with a fixed set of
+     steps, shared by every theme:
+
+       50  100  200  300  400  500  600  700  800  900  950  (+ white, black)
+       light ──────────────── middle ──────────────── dark
+
+     Every family has all 11 steps and a step means about the same
+     lightness in every family (colour families keep a little more
+     saturation, so it is close, not identical).
+       grey, slate    neutrals (slate is bluer). Light themes use the
+                      light end for backgrounds and borders, dark themes
+                      the dark end; text and icons sit around the middle.
+       red, orange, amber, yellow, green, teal, blue, violet, pink
+                      one scale per hue, holding both the strong tones
+                      (states: 400–600) and the soft ones (unit types and
+                      banners: 100 light, 700 dark).
+     A colour that falls between two steps takes the step in between
+     (grey-750 between grey-700 and grey-800).
+       accent         special family: the brand colour (accent) with two
+                      lighter (accent-light, accent-lightest) and two
+                      darker versions (accent-dark, accent-darkest), each
+                      one edited on its own. Made from teal-600 and its
+                      neighbours.
+
+  2. SEMANTIC tokens (per theme): what a colour is for. Each points to a
+     palette colour, never to another token, so a token can change on its
+     own and editing a palette colour reaches every token that uses it.
+       bg-*, fg-*, border-*     surfaces, text and lines
+       alert, warning…          states: colour, -fill (soft background),
+                                -hover (soft background under the pointer)
+       accent                   brand and focus
+       shadow, overlay…         effects
+       sidebar-*, btn-*, tabs-*, one per use that needs tuning on its own
+       places-*, …              (component-property)
+
+  A value is written as:
+    name                  a palette colour
+    (name 6%)             that colour at 6% opacity
+
+  Themes: $theme-light defines every token. Other themes only list what
+  changes; the rest comes from $theme-light.
+
+  Activating a theme
+    <html>                     light (default)
+    <html data-theme="dark">   any theme registered in $themes
+    Without data-theme, a theme called "dark" is also used automatically
+    when the system asks for a dark appearance (prefers-color-scheme).
+
+  Both levels can be edited in themes.html: it reads this file through
+  the compiled CSS and exports it back (paste the export here, or paste
+  this file there to load it). Picking a colour for a token there never
+  changes the palette: it offers the closest palette colour or adds a new
+  step.
+  The checkbox tick, the select arrow and the breadcrumb chevron follow
+  check-mark, select-arrow and breadcrumb-chevron. Icons are SVG files
+  with their own colour.
+*/
+/* Dark: only what differs from $theme-light */
+/****************************************************************************
+
+  TOKENS
+
+****************************************************************************/
+/*
+  Design tokens (Figma names → SCSS), shared mixins, base reset and the
+  icon system. Every other partial loads this file with:
+
+    @use "tokens" as *;
+*/
+/* Colours ----------------------------------------------------------------
+  Palette and themes live in _themes.scss. The palette becomes --palette-*
+  custom properties; the active theme becomes --color-* (each pointing to
+  a palette colour with var(), or color-mix() for a %) plus its generated
+  images.
+  $color-name below points to --color-name, so the partials never hold a
+  raw colour.
+*/
+/* SVG data URI with its colour taken from a theme (checkbox tick, select arrow) */
+/* A palette name as text: white and black are read by Sass as colours */
+/* The palette with text keys */
+/* A theme's tokens: $theme-light plus the theme's own values */
+/* var() of a palette colour */
+/* CSS value of a token: name · (name 6%) */
+/* The same value as text for themes.html: name or name@6% */
+/* The palette colour of a token, without its % (for the generated images) */
+/*
+  Icons: one folder per theme, named like the theme in $themes.
+    icons/<theme>/<name>.svg       every icon
+    icons/<theme>/<name>-inv.svg   only the ones in $icons-inv: icons that
+                                   sit on a dark fill (CTA button, covers)
+  Each theme only uses its own folder. Every name in $icons becomes
+  --icon-<name> in each theme and .icon__<name>; names in $icons-inv also
+  get --icon-<name>-inv. To add an icon: drop its SVG in every theme
+  folder and add the name to $icons (and its -inv to $icons-inv if needed).
+*/
+/* relative to the compiled CSS (viewer: "../icons/") */
+/* same, for images (covers, login background) */
+/* Every token of a theme as --color-name, its colour scheme and images */
+:root {
+  --palette-white: #ffffff;
+  --palette-black: #000000;
+  --palette-accent-lightest: #4fb3c8;
+  --palette-accent-light: #1f869b;
+  --palette-accent: #0c5f71;
+  --palette-accent-dark: #0e4a57;
+  --palette-accent-darkest: #0e3943;
+  --palette-accent-muted: #395f68;
+  --palette-grey-50: #f7f8f8;
+  --palette-grey-100: #f0f2f3;
+  --palette-grey-150: #e5eaed;
+  --palette-grey-200: #d3dadf;
+  --palette-grey-300: #aebec7;
+  --palette-grey-400: #9aa7b0;
+  --palette-grey-500: #6e767d;
+  --palette-grey-600: #414d53;
+  --palette-grey-700: #2e373c;
+  --palette-grey-800: #232a2e;
+  --palette-grey-900: #1c2226;
+  --palette-grey-950: #161b1e;
+  --palette-slate-50: #fcfcfc;
+  --palette-slate-100: #f9fafa;
+  --palette-slate-200: #d4dce3;
+  --palette-slate-300: #c7d2d7;
+  --palette-slate-400: #a4bdcd;
+  --palette-slate-500: #657c8a;
+  --palette-slate-600: #3d505c;
+  --palette-slate-700: #2c3b44;
+  --palette-slate-800: #212e36;
+  --palette-slate-900: #19232a;
+  --palette-slate-950: #121b21;
+  --palette-red-50: #fef3f3;
+  --palette-red-100: #fee0e0;
+  --palette-red-200: #fdc4c4;
+  --palette-red-300: #fb9a9a;
+  --palette-red-400: #ff5c5c;
+  --palette-red-500: #dd1d1d;
+  --palette-red-600: #bd1919;
+  --palette-red-700: #731919;
+  --palette-red-800: #521515;
+  --palette-red-900: #3b1212;
+  --palette-red-950: #2a0e0e;
+  --palette-orange-50: #fef6f3;
+  --palette-orange-100: #fed7cb;
+  --palette-orange-200: #f9c3b3;
+  --palette-orange-300: #efa792;
+  --palette-orange-400: #dd846a;
+  --palette-orange-500: #b6563a;
+  --palette-orange-600: #804736;
+  --palette-orange-700: #5a3a31;
+  --palette-orange-800: #402c26;
+  --palette-orange-900: #2f221e;
+  --palette-orange-950: #211917;
+  --palette-amber-50: #fefcf3;
+  --palette-amber-100: #fdefc4;
+  --palette-amber-200: #fae1a8;
+  --palette-amber-300: #f9d38c;
+  --palette-amber-400: #fbbe64;
+  --palette-amber-500: #f5a110;
+  --palette-amber-600: #86692e;
+  --palette-amber-700: #55492b;
+  --palette-amber-800: #3e3623;
+  --palette-amber-900: #2e291c;
+  --palette-amber-950: #221f16;
+  --palette-yellow-50: #fdfdf4;
+  --palette-yellow-100: #f8f8bd;
+  --palette-yellow-200: #efefaf;
+  --palette-yellow-300: #e2e290;
+  --palette-yellow-400: #cece69;
+  --palette-yellow-500: #9e9e40;
+  --palette-yellow-600: #6d6d36;
+  --palette-yellow-700: #4a4a2c;
+  --palette-yellow-800: #373724;
+  --palette-yellow-900: #2a2a1d;
+  --palette-yellow-950: #212117;
+  --palette-green-50: #f5fcf5;
+  --palette-green-100: #d1f4d2;
+  --palette-green-200: #b0e8b9;
+  --palette-green-300: #85d89d;
+  --palette-green-400: #4cc27e;
+  --palette-green-500: #2e9e5b;
+  --palette-green-600: #306d45;
+  --palette-green-700: #2f4a37;
+  --palette-green-800: #25372b;
+  --palette-green-900: #1e2a22;
+  --palette-green-950: #18201a;
+  --palette-teal-50: #f5fbfc;
+  --palette-teal-100: #e0f2f5;
+  --palette-teal-200: #c0e4eb;
+  --palette-teal-300: #8fcfdc;
+  --palette-teal-400: #4fb3c8;
+  --palette-teal-500: #1f869b;
+  --palette-teal-600: #0c5f71;
+  --palette-teal-700: #0e4a57;
+  --palette-teal-800: #0e3943;
+  --palette-teal-900: #0f2e35;
+  --palette-teal-950: #0d262b;
+  --palette-blue-50: #f3f9fe;
+  --palette-blue-100: #c8e4fb;
+  --palette-blue-200: #afd7f7;
+  --palette-blue-300: #8ac2f0;
+  --palette-blue-400: #5aa7e6;
+  --palette-blue-500: #2f7fc1;
+  --palette-blue-600: #2f5d83;
+  --palette-blue-700: #2c4458;
+  --palette-blue-800: #233340;
+  --palette-blue-900: #1d262f;
+  --palette-blue-950: #161d22;
+  --palette-violet-50: #f8f3fe;
+  --palette-violet-100: #e9d8fd;
+  --palette-violet-200: #d1b2f7;
+  --palette-violet-300: #ba93ec;
+  --palette-violet-400: #9b6dda;
+  --palette-violet-500: #6e3fb3;
+  --palette-violet-600: #553a7f;
+  --palette-violet-700: #43355a;
+  --palette-violet-800: #322940;
+  --palette-violet-900: #25202e;
+  --palette-violet-950: #1b1721;
+  --palette-pink-50: #fef3f7;
+  --palette-pink-100: #faccdc;
+  --palette-pink-200: #f4b5cc;
+  --palette-pink-300: #e895b4;
+  --palette-pink-400: #d56e95;
+  --palette-pink-500: #ac4069;
+  --palette-pink-600: #793852;
+  --palette-pink-700: #55303f;
+  --palette-pink-800: #3e262f;
+  --palette-pink-900: #2d1e24;
+  --palette-pink-950: #21171b;
+  --palette-names: "white, black, accent-lightest, accent-light, accent, accent-dark, accent-darkest, accent-muted, grey-50, grey-100, grey-150, grey-200, grey-300, grey-400, grey-500, grey-600, grey-700, grey-800, grey-900, grey-950, slate-50, slate-100, slate-200, slate-300, slate-400, slate-500, slate-600, slate-700, slate-800, slate-900, slate-950, red-50, red-100, red-200, red-300, red-400, red-500, red-600, red-700, red-800, red-900, red-950, orange-50, orange-100, orange-200, orange-300, orange-400, orange-500, orange-600, orange-700, orange-800, orange-900, orange-950, amber-50, amber-100, amber-200, amber-300, amber-400, amber-500, amber-600, amber-700, amber-800, amber-900, amber-950, yellow-50, yellow-100, yellow-200, yellow-300, yellow-400, yellow-500, yellow-600, yellow-700, yellow-800, yellow-900, yellow-950, green-50, green-100, green-200, green-300, green-400, green-500, green-600, green-700, green-800, green-900, green-950, teal-50, teal-100, teal-200, teal-300, teal-400, teal-500, teal-600, teal-700, teal-800, teal-900, teal-950, blue-50, blue-100, blue-200, blue-300, blue-400, blue-500, blue-600, blue-700, blue-800, blue-900, blue-950, violet-50, violet-100, violet-200, violet-300, violet-400, violet-500, violet-600, violet-700, violet-800, violet-900, violet-950, pink-50, pink-100, pink-200, pink-300, pink-400, pink-500, pink-600, pink-700, pink-800, pink-900, pink-950";
+  /* for themes.html */
+  --color-tokens: "bg-app, bg-content, bg-card, bg-selected-icon, bg-hover-control, bg-hover-cell, bg-floating, fg-primary, fg-secondary, fg-subtle, fg-inverse, fg-on-image, fg-on-warning, fg-placeholder, border-button, border-form-item, border-pill, border-divider, border-floating, alert, alert-fill, alert-hover, warning, warning-fill, warning-hover, success, success-fill, success-hover, info, info-fill, info-hover, busy, accent, shadow, shadow-inset, overlay, overlay-soft, backdrop, sidebar-hover, sidebar-border, topbar-border, avatar-border, breadcrumb-chevron, btn-bg, btn-fg, btn-hover, btn-cta-bg, btn-cta-fg, btn-cta-border, btn-cta-hover, menu-cta-hover, btn-alert-bg, btn-alert-fg, btn-alert-border, btn-alert-hover, btn-soft-bg, btn-soft-hover, select-bg, select-border, select-arrow, field-bg, field-border, check-bg, check-on, check-mark, switch-bg, switch-border, switch-knob, switch-on, switch-knob-on, input-focus-bg, pill-bg, pill-strong-bg, pill-strong-fg, pill-static-bg, float-tools-bg, float-tools-border, swatch-border, swatch-ring, swatch-ring-gap, color-dot-border, toolbar-divider, editor-toolbar-border, tabs-border, tabs-fg, tabs-indicator, list-row-border, list-banner-bg, list-thumb-border, list-warning-border, banner-bg-av, banner-bg-photo, banner-bg-social, banner-bg-alt-1, banner-bg-alt-2, banner-bg-alt-3, banner-bg-alt-4, banner-bg-alt-5, banner-scope-none, banner-scope-all-bg, banner-scope-all-fg, stats-bg, places-bg, places-hover, places-active, places-number-bg, places-number-fg, gallery-title-rule, gallery-thumb-bg, gallery-thumb-border, gallery-caption-bg, gallery-caption-fg, dropzone-bg, dropzone-border, drawer-toolbar-border, drawer-bg, project-card-bg, project-card-border, project-pic-bg, project-new-border, modal-rule-1, modal-rule-2, modal-key, viewer-bg, viewer-tabbar-bg, viewer-card-bg, viewer-alert-bg, viewer-pill-bg, viewer-hover, viewer-fg-primary, viewer-fg-secondary, viewer-fg-subtle, viewer-fg-on-image, viewer-rule, viewer-pill-border, viewer-alert, viewer-focus, viewer-shadow, viewer-cover-shade, viewer-overlay-soft, viewer-tabbar-border, viewer-tabbar-hover, viewer-tab-current, viewer-thumb-bg, viewer-thumb-border, viewer-thumb-caption-bg, viewer-thumb-caption-fg, viewer-places-number-bg, viewer-places-number-fg, viewer-banner-av, viewer-banner-photo, viewer-banner-social, viewer-banner-alt-1, viewer-banner-alt-2, viewer-banner-alt-3, viewer-banner-alt-4, viewer-banner-alt-5, viewer-sheet-bg, viewer-sheet-border, viewer-sheet-rule-1, viewer-sheet-rule-2, viewer-backdrop, viewer-pill-strong-bg, viewer-pill-strong-fg, viewer-btn-bg, viewer-btn-fg, viewer-btn-border, viewer-radio-bg, viewer-radio-border, viewer-radio-on, viewer-day-bg, viewer-day-fg, viewer-day-hover, viewer-updated-bg, viewer-updated-border, viewer-band-bg, viewer-fg-accent, viewer-fg-muted, viewer-bar-bg, viewer-bar-border, viewer-fab-bg, viewer-fab-fg, viewer-fab-shadow, viewer-nav-bg, viewer-nav-current";
+  /* for themes.html */
+  color-scheme: light;
+  /* Icons of this theme (see $icons) */
+  --icon-cast: url("icons/light/cast.svg");
+  --icon-chevron-right: url("icons/light/chevron-right.svg");
+  --icon-close-alt: url("icons/light/close-alt.svg");
+  --icon-crew: url("icons/light/crew.svg");
+  --icon-dropdown: url("icons/light/dropdown.svg");
+  --icon-filter: url("icons/light/filter.svg");
+  --icon-home: url("icons/light/home.svg");
+  --icon-logo: url("icons/light/logo.svg");
+  --icon-menu: url("icons/light/menu.svg");
+  --icon-reload: url("icons/light/reload.svg");
+  --icon-shoot-plan: url("icons/light/shoot-plan.svg");
+  --icon-warning-alert: url("icons/light/warning-alert.svg");
+  --icon-filter-inv: url("icons/light/filter-inv.svg");
+  --icon-menu-inv: url("icons/light/menu-inv.svg");
+  --color-bg-app: var(--palette-grey-100);
+  --color-bg-content: var(--palette-slate-50);
+  --color-bg-card: var(--palette-slate-50);
+  --color-bg-selected-icon: var(--palette-grey-200);
+  --color-bg-hover-control: var(--palette-grey-100);
+  --color-bg-hover-cell: var(--palette-slate-100);
+  --color-bg-floating: var(--palette-white);
+  --color-fg-primary: var(--palette-grey-900);
+  --color-fg-secondary: var(--palette-slate-500);
+  --color-fg-subtle: var(--palette-grey-400);
+  --color-fg-inverse: var(--palette-slate-50);
+  --color-fg-on-image: var(--palette-grey-50);
+  --color-fg-on-warning: var(--palette-grey-900);
+  --color-fg-placeholder: var(--palette-grey-400);
+  --color-border-button: var(--palette-grey-300);
+  --color-border-form-item: var(--palette-accent);
+  --color-border-pill: var(--palette-grey-200);
+  --color-border-divider: var(--palette-slate-300);
+  --color-border-floating: var(--palette-grey-200);
+  --color-alert: var(--palette-red-500);
+  --color-alert-fill: color-mix(in srgb, var(--palette-red-500) 10%, transparent);
+  --color-alert-hover: color-mix(in srgb, var(--palette-red-500) 20%, transparent);
+  --color-warning: var(--palette-amber-500);
+  --color-warning-fill: var(--palette-amber-100);
+  --color-warning-hover: var(--palette-amber-200);
+  --color-success: var(--palette-green-500);
+  --color-success-fill: var(--palette-green-100);
+  --color-success-hover: var(--palette-green-200);
+  --color-info: var(--palette-blue-500);
+  --color-info-fill: color-mix(in srgb, var(--palette-blue-500) 8%, transparent);
+  --color-info-hover: color-mix(in srgb, var(--palette-blue-500) 14%, transparent);
+  --color-busy: var(--palette-accent);
+  --color-accent: var(--palette-accent);
+  --color-shadow: color-mix(in srgb, var(--palette-grey-950) 16%, transparent);
+  --color-shadow-inset: color-mix(in srgb, var(--palette-grey-600) 18%, transparent);
+  --color-overlay: color-mix(in srgb, var(--palette-black) 40%, transparent);
+  --color-overlay-soft: color-mix(in srgb, var(--palette-black) 15%, transparent);
+  --color-backdrop: color-mix(in srgb, var(--palette-grey-50) 60%, transparent);
+  --color-sidebar-hover: color-mix(in srgb, var(--palette-grey-200) 50%, transparent);
+  --color-sidebar-border: var(--palette-slate-200);
+  --color-topbar-border: var(--palette-slate-200);
+  --color-avatar-border: var(--palette-grey-300);
+  --color-breadcrumb-chevron: var(--palette-grey-800);
+  --color-btn-bg: var(--palette-white);
+  --color-btn-fg: var(--palette-grey-600);
+  --color-btn-hover: var(--palette-grey-50);
+  --color-btn-cta-bg: var(--palette-accent);
+  --color-btn-cta-fg: var(--palette-slate-50);
+  --color-btn-cta-border: var(--palette-slate-300);
+  --color-btn-cta-hover: var(--palette-accent-darkest);
+  --color-menu-cta-hover: var(--palette-accent-darkest);
+  --color-btn-alert-bg: var(--palette-red-500);
+  --color-btn-alert-fg: var(--palette-red-50);
+  --color-btn-alert-border: var(--palette-red-600);
+  --color-btn-alert-hover: var(--palette-red-600);
+  --color-btn-soft-bg: var(--palette-grey-100);
+  --color-btn-soft-hover: var(--palette-grey-200);
+  --color-select-bg: var(--palette-slate-50);
+  --color-select-border: var(--palette-grey-300);
+  --color-select-arrow: var(--palette-grey-800);
+  --color-field-bg: var(--palette-slate-50);
+  --color-field-border: var(--palette-grey-800);
+  --color-check-bg: var(--palette-slate-50);
+  --color-check-on: var(--palette-accent);
+  --color-check-mark: var(--palette-slate-50);
+  --color-switch-bg: var(--palette-slate-50);
+  --color-switch-border: var(--palette-accent);
+  --color-switch-knob: var(--palette-accent);
+  --color-switch-on: var(--palette-grey-800);
+  --color-switch-knob-on: var(--palette-slate-50);
+  --color-input-focus-bg: var(--palette-slate-50);
+  --color-pill-bg: var(--palette-white);
+  --color-pill-strong-bg: var(--palette-teal-700);
+  --color-pill-strong-fg: var(--palette-white);
+  --color-pill-static-bg: var(--palette-grey-100);
+  --color-float-tools-bg: var(--palette-slate-100);
+  --color-float-tools-border: var(--palette-grey-500);
+  --color-swatch-border: var(--palette-grey-200);
+  --color-swatch-ring: var(--palette-grey-800);
+  --color-swatch-ring-gap: var(--palette-slate-50);
+  --color-color-dot-border: var(--palette-slate-500);
+  --color-toolbar-divider: var(--palette-grey-200);
+  --color-editor-toolbar-border: var(--palette-grey-100);
+  --color-tabs-border: var(--palette-grey-300);
+  --color-tabs-fg: var(--palette-grey-400);
+  --color-tabs-indicator: var(--palette-grey-800);
+  --color-list-row-border: var(--palette-grey-200);
+  --color-list-banner-bg: var(--palette-grey-100);
+  --color-list-thumb-border: var(--palette-grey-300);
+  --color-list-warning-border: color-mix(in srgb, var(--palette-black) 40%, transparent);
+  --color-banner-bg-av: var(--palette-grey-200);
+  --color-banner-bg-photo: var(--palette-green-100);
+  --color-banner-bg-social: var(--palette-yellow-200);
+  --color-banner-bg-alt-1: var(--palette-teal-200);
+  --color-banner-bg-alt-2: var(--palette-orange-100);
+  --color-banner-bg-alt-3: var(--palette-violet-100);
+  --color-banner-bg-alt-4: var(--palette-yellow-200);
+  --color-banner-bg-alt-5: var(--palette-amber-200);
+  --color-banner-scope-none: var(--palette-grey-900);
+  --color-banner-scope-all-bg: var(--palette-grey-800);
+  --color-banner-scope-all-fg: var(--palette-slate-50);
+  --color-stats-bg: var(--palette-white);
+  --color-places-bg: var(--palette-grey-100);
+  --color-places-hover: var(--palette-slate-100);
+  --color-places-active: var(--palette-accent);
+  --color-places-number-bg: var(--palette-grey-800);
+  --color-places-number-fg: var(--palette-slate-50);
+  --color-gallery-title-rule: var(--palette-grey-300);
+  --color-gallery-thumb-bg: var(--palette-slate-50);
+  --color-gallery-thumb-border: var(--palette-grey-300);
+  --color-gallery-caption-bg: var(--palette-grey-800);
+  --color-gallery-caption-fg: var(--palette-slate-50);
+  --color-dropzone-bg: var(--palette-slate-50);
+  --color-dropzone-border: var(--palette-slate-500);
+  --color-drawer-toolbar-border: var(--palette-grey-100);
+  --color-drawer-bg: var(--palette-white);
+  --color-project-card-bg: var(--palette-white);
+  --color-project-card-border: var(--palette-grey-200);
+  --color-project-pic-bg: var(--palette-grey-200);
+  --color-project-new-border: var(--palette-grey-300);
+  --color-modal-rule-1: var(--palette-grey-200);
+  --color-modal-rule-2: var(--palette-grey-100);
+  --color-modal-key: var(--palette-slate-500);
+  --color-viewer-bg: var(--palette-grey-50);
+  --color-viewer-tabbar-bg: var(--palette-grey-50);
+  --color-viewer-card-bg: var(--palette-white);
+  --color-viewer-alert-bg: var(--palette-white);
+  --color-viewer-pill-bg: var(--palette-white);
+  --color-viewer-hover: var(--palette-grey-100);
+  --color-viewer-fg-primary: var(--palette-grey-600);
+  --color-viewer-fg-secondary: var(--palette-grey-500);
+  --color-viewer-fg-subtle: var(--palette-grey-400);
+  --color-viewer-fg-on-image: var(--palette-grey-50);
+  --color-viewer-rule: var(--palette-grey-300);
+  --color-viewer-pill-border: var(--palette-grey-200);
+  --color-viewer-alert: var(--palette-red-500);
+  --color-viewer-focus: var(--palette-accent);
+  --color-viewer-shadow: color-mix(in srgb, var(--palette-grey-950) 16%, transparent);
+  --color-viewer-cover-shade: color-mix(in srgb, var(--palette-black) 80%, transparent);
+  --color-viewer-overlay-soft: color-mix(in srgb, var(--palette-black) 15%, transparent);
+  --color-viewer-tabbar-border: var(--palette-slate-50);
+  --color-viewer-tabbar-hover: var(--palette-slate-200);
+  --color-viewer-tab-current: var(--palette-grey-50);
+  --color-viewer-thumb-bg: var(--palette-slate-50);
+  --color-viewer-thumb-border: var(--palette-grey-300);
+  --color-viewer-thumb-caption-bg: var(--palette-grey-800);
+  --color-viewer-thumb-caption-fg: var(--palette-slate-50);
+  --color-viewer-places-number-bg: var(--palette-grey-600);
+  --color-viewer-places-number-fg: var(--palette-slate-50);
+  --color-viewer-banner-av: var(--palette-grey-200);
+  --color-viewer-banner-photo: var(--palette-green-100);
+  --color-viewer-banner-social: var(--palette-yellow-200);
+  --color-viewer-banner-alt-1: var(--palette-teal-200);
+  --color-viewer-banner-alt-2: var(--palette-orange-100);
+  --color-viewer-banner-alt-3: var(--palette-violet-100);
+  --color-viewer-banner-alt-4: var(--palette-yellow-200);
+  --color-viewer-banner-alt-5: var(--palette-amber-200);
+  --color-viewer-sheet-bg: var(--palette-white);
+  --color-viewer-sheet-border: var(--palette-grey-200);
+  --color-viewer-sheet-rule-1: var(--palette-grey-200);
+  --color-viewer-sheet-rule-2: var(--palette-grey-100);
+  --color-viewer-backdrop: color-mix(in srgb, var(--palette-black) 70%, transparent);
+  --color-viewer-pill-strong-bg: var(--palette-teal-700);
+  --color-viewer-pill-strong-fg: var(--palette-white);
+  --color-viewer-btn-bg: var(--palette-accent);
+  --color-viewer-btn-fg: var(--palette-slate-50);
+  --color-viewer-btn-border: var(--palette-slate-300);
+  --color-viewer-radio-bg: var(--palette-slate-50);
+  --color-viewer-radio-border: var(--palette-accent);
+  --color-viewer-radio-on: var(--palette-accent);
+  --color-viewer-day-bg: var(--palette-grey-100);
+  --color-viewer-day-fg: var(--palette-grey-900);
+  --color-viewer-day-hover: var(--palette-white);
+  --color-viewer-updated-bg: var(--palette-amber-100);
+  --color-viewer-updated-border: var(--palette-amber-500);
+  --color-viewer-band-bg: var(--palette-grey-150);
+  --color-viewer-fg-accent: var(--palette-accent-muted);
+  --color-viewer-fg-muted: var(--palette-slate-500);
+  --color-viewer-bar-bg: var(--palette-white);
+  --color-viewer-bar-border: var(--palette-grey-200);
+  --color-viewer-fab-bg: var(--palette-grey-600);
+  --color-viewer-fab-fg: var(--palette-white);
+  --color-viewer-fab-shadow: color-mix(in srgb, var(--palette-black) 32%, transparent);
+  --color-viewer-nav-bg: color-mix(in srgb, var(--palette-grey-150) 80%, transparent);
+  --color-viewer-nav-current: var(--palette-white);
+  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent accent=accent shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest menu-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white pill-static-bg=grey-100 float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 modal-key=slate-500 viewer-bg=grey-50 viewer-tabbar-bg=grey-50 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-600 viewer-fg-secondary=grey-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=grey-300 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-shadow=grey-950@16% viewer-cover-shade=black@80% viewer-overlay-soft=black@15% viewer-tabbar-border=slate-50 viewer-tabbar-hover=slate-200 viewer-tab-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-800 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-600 viewer-places-number-fg=slate-50 viewer-banner-av=grey-200 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=orange-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-bg=grey-100 viewer-day-fg=grey-900 viewer-day-hover=white viewer-updated-bg=amber-100 viewer-updated-border=amber-500 viewer-band-bg=grey-150 viewer-fg-accent=accent-muted viewer-fg-muted=slate-500 viewer-bar-bg=white viewer-bar-border=grey-200 viewer-fab-bg=grey-600 viewer-fab-fg=white viewer-fab-shadow=black@32% viewer-nav-bg=grey-150@80% viewer-nav-current=white";
+  /* for themes.html */
+  /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
+  --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23fcfcfc' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23232a2e'/%3E%3C/svg%3E");
+  --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23232a2e' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+[data-theme=light] {
+  color-scheme: light;
+  /* Icons of this theme (see $icons) */
+  --icon-cast: url("icons/light/cast.svg");
+  --icon-chevron-right: url("icons/light/chevron-right.svg");
+  --icon-close-alt: url("icons/light/close-alt.svg");
+  --icon-crew: url("icons/light/crew.svg");
+  --icon-dropdown: url("icons/light/dropdown.svg");
+  --icon-filter: url("icons/light/filter.svg");
+  --icon-home: url("icons/light/home.svg");
+  --icon-logo: url("icons/light/logo.svg");
+  --icon-menu: url("icons/light/menu.svg");
+  --icon-reload: url("icons/light/reload.svg");
+  --icon-shoot-plan: url("icons/light/shoot-plan.svg");
+  --icon-warning-alert: url("icons/light/warning-alert.svg");
+  --icon-filter-inv: url("icons/light/filter-inv.svg");
+  --icon-menu-inv: url("icons/light/menu-inv.svg");
+  --color-bg-app: var(--palette-grey-100);
+  --color-bg-content: var(--palette-slate-50);
+  --color-bg-card: var(--palette-slate-50);
+  --color-bg-selected-icon: var(--palette-grey-200);
+  --color-bg-hover-control: var(--palette-grey-100);
+  --color-bg-hover-cell: var(--palette-slate-100);
+  --color-bg-floating: var(--palette-white);
+  --color-fg-primary: var(--palette-grey-900);
+  --color-fg-secondary: var(--palette-slate-500);
+  --color-fg-subtle: var(--palette-grey-400);
+  --color-fg-inverse: var(--palette-slate-50);
+  --color-fg-on-image: var(--palette-grey-50);
+  --color-fg-on-warning: var(--palette-grey-900);
+  --color-fg-placeholder: var(--palette-grey-400);
+  --color-border-button: var(--palette-grey-300);
+  --color-border-form-item: var(--palette-accent);
+  --color-border-pill: var(--palette-grey-200);
+  --color-border-divider: var(--palette-slate-300);
+  --color-border-floating: var(--palette-grey-200);
+  --color-alert: var(--palette-red-500);
+  --color-alert-fill: color-mix(in srgb, var(--palette-red-500) 10%, transparent);
+  --color-alert-hover: color-mix(in srgb, var(--palette-red-500) 20%, transparent);
+  --color-warning: var(--palette-amber-500);
+  --color-warning-fill: var(--palette-amber-100);
+  --color-warning-hover: var(--palette-amber-200);
+  --color-success: var(--palette-green-500);
+  --color-success-fill: var(--palette-green-100);
+  --color-success-hover: var(--palette-green-200);
+  --color-info: var(--palette-blue-500);
+  --color-info-fill: color-mix(in srgb, var(--palette-blue-500) 8%, transparent);
+  --color-info-hover: color-mix(in srgb, var(--palette-blue-500) 14%, transparent);
+  --color-busy: var(--palette-accent);
+  --color-accent: var(--palette-accent);
+  --color-shadow: color-mix(in srgb, var(--palette-grey-950) 16%, transparent);
+  --color-shadow-inset: color-mix(in srgb, var(--palette-grey-600) 18%, transparent);
+  --color-overlay: color-mix(in srgb, var(--palette-black) 40%, transparent);
+  --color-overlay-soft: color-mix(in srgb, var(--palette-black) 15%, transparent);
+  --color-backdrop: color-mix(in srgb, var(--palette-grey-50) 60%, transparent);
+  --color-sidebar-hover: color-mix(in srgb, var(--palette-grey-200) 50%, transparent);
+  --color-sidebar-border: var(--palette-slate-200);
+  --color-topbar-border: var(--palette-slate-200);
+  --color-avatar-border: var(--palette-grey-300);
+  --color-breadcrumb-chevron: var(--palette-grey-800);
+  --color-btn-bg: var(--palette-white);
+  --color-btn-fg: var(--palette-grey-600);
+  --color-btn-hover: var(--palette-grey-50);
+  --color-btn-cta-bg: var(--palette-accent);
+  --color-btn-cta-fg: var(--palette-slate-50);
+  --color-btn-cta-border: var(--palette-slate-300);
+  --color-btn-cta-hover: var(--palette-accent-darkest);
+  --color-menu-cta-hover: var(--palette-accent-darkest);
+  --color-btn-alert-bg: var(--palette-red-500);
+  --color-btn-alert-fg: var(--palette-red-50);
+  --color-btn-alert-border: var(--palette-red-600);
+  --color-btn-alert-hover: var(--palette-red-600);
+  --color-btn-soft-bg: var(--palette-grey-100);
+  --color-btn-soft-hover: var(--palette-grey-200);
+  --color-select-bg: var(--palette-slate-50);
+  --color-select-border: var(--palette-grey-300);
+  --color-select-arrow: var(--palette-grey-800);
+  --color-field-bg: var(--palette-slate-50);
+  --color-field-border: var(--palette-grey-800);
+  --color-check-bg: var(--palette-slate-50);
+  --color-check-on: var(--palette-accent);
+  --color-check-mark: var(--palette-slate-50);
+  --color-switch-bg: var(--palette-slate-50);
+  --color-switch-border: var(--palette-accent);
+  --color-switch-knob: var(--palette-accent);
+  --color-switch-on: var(--palette-grey-800);
+  --color-switch-knob-on: var(--palette-slate-50);
+  --color-input-focus-bg: var(--palette-slate-50);
+  --color-pill-bg: var(--palette-white);
+  --color-pill-strong-bg: var(--palette-teal-700);
+  --color-pill-strong-fg: var(--palette-white);
+  --color-pill-static-bg: var(--palette-grey-100);
+  --color-float-tools-bg: var(--palette-slate-100);
+  --color-float-tools-border: var(--palette-grey-500);
+  --color-swatch-border: var(--palette-grey-200);
+  --color-swatch-ring: var(--palette-grey-800);
+  --color-swatch-ring-gap: var(--palette-slate-50);
+  --color-color-dot-border: var(--palette-slate-500);
+  --color-toolbar-divider: var(--palette-grey-200);
+  --color-editor-toolbar-border: var(--palette-grey-100);
+  --color-tabs-border: var(--palette-grey-300);
+  --color-tabs-fg: var(--palette-grey-400);
+  --color-tabs-indicator: var(--palette-grey-800);
+  --color-list-row-border: var(--palette-grey-200);
+  --color-list-banner-bg: var(--palette-grey-100);
+  --color-list-thumb-border: var(--palette-grey-300);
+  --color-list-warning-border: color-mix(in srgb, var(--palette-black) 40%, transparent);
+  --color-banner-bg-av: var(--palette-grey-200);
+  --color-banner-bg-photo: var(--palette-green-100);
+  --color-banner-bg-social: var(--palette-yellow-200);
+  --color-banner-bg-alt-1: var(--palette-teal-200);
+  --color-banner-bg-alt-2: var(--palette-orange-100);
+  --color-banner-bg-alt-3: var(--palette-violet-100);
+  --color-banner-bg-alt-4: var(--palette-yellow-200);
+  --color-banner-bg-alt-5: var(--palette-amber-200);
+  --color-banner-scope-none: var(--palette-grey-900);
+  --color-banner-scope-all-bg: var(--palette-grey-800);
+  --color-banner-scope-all-fg: var(--palette-slate-50);
+  --color-stats-bg: var(--palette-white);
+  --color-places-bg: var(--palette-grey-100);
+  --color-places-hover: var(--palette-slate-100);
+  --color-places-active: var(--palette-accent);
+  --color-places-number-bg: var(--palette-grey-800);
+  --color-places-number-fg: var(--palette-slate-50);
+  --color-gallery-title-rule: var(--palette-grey-300);
+  --color-gallery-thumb-bg: var(--palette-slate-50);
+  --color-gallery-thumb-border: var(--palette-grey-300);
+  --color-gallery-caption-bg: var(--palette-grey-800);
+  --color-gallery-caption-fg: var(--palette-slate-50);
+  --color-dropzone-bg: var(--palette-slate-50);
+  --color-dropzone-border: var(--palette-slate-500);
+  --color-drawer-toolbar-border: var(--palette-grey-100);
+  --color-drawer-bg: var(--palette-white);
+  --color-project-card-bg: var(--palette-white);
+  --color-project-card-border: var(--palette-grey-200);
+  --color-project-pic-bg: var(--palette-grey-200);
+  --color-project-new-border: var(--palette-grey-300);
+  --color-modal-rule-1: var(--palette-grey-200);
+  --color-modal-rule-2: var(--palette-grey-100);
+  --color-modal-key: var(--palette-slate-500);
+  --color-viewer-bg: var(--palette-grey-50);
+  --color-viewer-tabbar-bg: var(--palette-grey-50);
+  --color-viewer-card-bg: var(--palette-white);
+  --color-viewer-alert-bg: var(--palette-white);
+  --color-viewer-pill-bg: var(--palette-white);
+  --color-viewer-hover: var(--palette-grey-100);
+  --color-viewer-fg-primary: var(--palette-grey-600);
+  --color-viewer-fg-secondary: var(--palette-grey-500);
+  --color-viewer-fg-subtle: var(--palette-grey-400);
+  --color-viewer-fg-on-image: var(--palette-grey-50);
+  --color-viewer-rule: var(--palette-grey-300);
+  --color-viewer-pill-border: var(--palette-grey-200);
+  --color-viewer-alert: var(--palette-red-500);
+  --color-viewer-focus: var(--palette-accent);
+  --color-viewer-shadow: color-mix(in srgb, var(--palette-grey-950) 16%, transparent);
+  --color-viewer-cover-shade: color-mix(in srgb, var(--palette-black) 80%, transparent);
+  --color-viewer-overlay-soft: color-mix(in srgb, var(--palette-black) 15%, transparent);
+  --color-viewer-tabbar-border: var(--palette-slate-50);
+  --color-viewer-tabbar-hover: var(--palette-slate-200);
+  --color-viewer-tab-current: var(--palette-grey-50);
+  --color-viewer-thumb-bg: var(--palette-slate-50);
+  --color-viewer-thumb-border: var(--palette-grey-300);
+  --color-viewer-thumb-caption-bg: var(--palette-grey-800);
+  --color-viewer-thumb-caption-fg: var(--palette-slate-50);
+  --color-viewer-places-number-bg: var(--palette-grey-600);
+  --color-viewer-places-number-fg: var(--palette-slate-50);
+  --color-viewer-banner-av: var(--palette-grey-200);
+  --color-viewer-banner-photo: var(--palette-green-100);
+  --color-viewer-banner-social: var(--palette-yellow-200);
+  --color-viewer-banner-alt-1: var(--palette-teal-200);
+  --color-viewer-banner-alt-2: var(--palette-orange-100);
+  --color-viewer-banner-alt-3: var(--palette-violet-100);
+  --color-viewer-banner-alt-4: var(--palette-yellow-200);
+  --color-viewer-banner-alt-5: var(--palette-amber-200);
+  --color-viewer-sheet-bg: var(--palette-white);
+  --color-viewer-sheet-border: var(--palette-grey-200);
+  --color-viewer-sheet-rule-1: var(--palette-grey-200);
+  --color-viewer-sheet-rule-2: var(--palette-grey-100);
+  --color-viewer-backdrop: color-mix(in srgb, var(--palette-black) 70%, transparent);
+  --color-viewer-pill-strong-bg: var(--palette-teal-700);
+  --color-viewer-pill-strong-fg: var(--palette-white);
+  --color-viewer-btn-bg: var(--palette-accent);
+  --color-viewer-btn-fg: var(--palette-slate-50);
+  --color-viewer-btn-border: var(--palette-slate-300);
+  --color-viewer-radio-bg: var(--palette-slate-50);
+  --color-viewer-radio-border: var(--palette-accent);
+  --color-viewer-radio-on: var(--palette-accent);
+  --color-viewer-day-bg: var(--palette-grey-100);
+  --color-viewer-day-fg: var(--palette-grey-900);
+  --color-viewer-day-hover: var(--palette-white);
+  --color-viewer-updated-bg: var(--palette-amber-100);
+  --color-viewer-updated-border: var(--palette-amber-500);
+  --color-viewer-band-bg: var(--palette-grey-150);
+  --color-viewer-fg-accent: var(--palette-accent-muted);
+  --color-viewer-fg-muted: var(--palette-slate-500);
+  --color-viewer-bar-bg: var(--palette-white);
+  --color-viewer-bar-border: var(--palette-grey-200);
+  --color-viewer-fab-bg: var(--palette-grey-600);
+  --color-viewer-fab-fg: var(--palette-white);
+  --color-viewer-fab-shadow: color-mix(in srgb, var(--palette-black) 32%, transparent);
+  --color-viewer-nav-bg: color-mix(in srgb, var(--palette-grey-150) 80%, transparent);
+  --color-viewer-nav-current: var(--palette-white);
+  --color-defs: " bg-app=grey-100 bg-content=slate-50 bg-card=slate-50 bg-selected-icon=grey-200 bg-hover-control=grey-100 bg-hover-cell=slate-100 bg-floating=white fg-primary=grey-900 fg-secondary=slate-500 fg-subtle=grey-400 fg-inverse=slate-50 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=grey-400 border-button=grey-300 border-form-item=accent border-pill=grey-200 border-divider=slate-300 border-floating=grey-200 alert=red-500 alert-fill=red-500@10% alert-hover=red-500@20% warning=amber-500 warning-fill=amber-100 warning-hover=amber-200 success=green-500 success-fill=green-100 success-hover=green-200 info=blue-500 info-fill=blue-500@8% info-hover=blue-500@14% busy=accent accent=accent shadow=grey-950@16% shadow-inset=grey-600@18% overlay=black@40% overlay-soft=black@15% backdrop=grey-50@60% sidebar-hover=grey-200@50% sidebar-border=slate-200 topbar-border=slate-200 avatar-border=grey-300 breadcrumb-chevron=grey-800 btn-bg=white btn-fg=grey-600 btn-hover=grey-50 btn-cta-bg=accent btn-cta-fg=slate-50 btn-cta-border=slate-300 btn-cta-hover=accent-darkest menu-cta-hover=accent-darkest btn-alert-bg=red-500 btn-alert-fg=red-50 btn-alert-border=red-600 btn-alert-hover=red-600 btn-soft-bg=grey-100 btn-soft-hover=grey-200 select-bg=slate-50 select-border=grey-300 select-arrow=grey-800 field-bg=slate-50 field-border=grey-800 check-bg=slate-50 check-on=accent check-mark=slate-50 switch-bg=slate-50 switch-border=accent switch-knob=accent switch-on=grey-800 switch-knob-on=slate-50 input-focus-bg=slate-50 pill-bg=white pill-strong-bg=teal-700 pill-strong-fg=white pill-static-bg=grey-100 float-tools-bg=slate-100 float-tools-border=grey-500 swatch-border=grey-200 swatch-ring=grey-800 swatch-ring-gap=slate-50 color-dot-border=slate-500 toolbar-divider=grey-200 editor-toolbar-border=grey-100 tabs-border=grey-300 tabs-fg=grey-400 tabs-indicator=grey-800 list-row-border=grey-200 list-banner-bg=grey-100 list-thumb-border=grey-300 list-warning-border=black@40% banner-bg-av=grey-200 banner-bg-photo=green-100 banner-bg-social=yellow-200 banner-bg-alt-1=teal-200 banner-bg-alt-2=orange-100 banner-bg-alt-3=violet-100 banner-bg-alt-4=yellow-200 banner-bg-alt-5=amber-200 banner-scope-none=grey-900 banner-scope-all-bg=grey-800 banner-scope-all-fg=slate-50 stats-bg=white places-bg=grey-100 places-hover=slate-100 places-active=accent places-number-bg=grey-800 places-number-fg=slate-50 gallery-title-rule=grey-300 gallery-thumb-bg=slate-50 gallery-thumb-border=grey-300 gallery-caption-bg=grey-800 gallery-caption-fg=slate-50 dropzone-bg=slate-50 dropzone-border=slate-500 drawer-toolbar-border=grey-100 drawer-bg=white project-card-bg=white project-card-border=grey-200 project-pic-bg=grey-200 project-new-border=grey-300 modal-rule-1=grey-200 modal-rule-2=grey-100 modal-key=slate-500 viewer-bg=grey-50 viewer-tabbar-bg=grey-50 viewer-card-bg=white viewer-alert-bg=white viewer-pill-bg=white viewer-hover=grey-100 viewer-fg-primary=grey-600 viewer-fg-secondary=grey-500 viewer-fg-subtle=grey-400 viewer-fg-on-image=grey-50 viewer-rule=grey-300 viewer-pill-border=grey-200 viewer-alert=red-500 viewer-focus=accent viewer-shadow=grey-950@16% viewer-cover-shade=black@80% viewer-overlay-soft=black@15% viewer-tabbar-border=slate-50 viewer-tabbar-hover=slate-200 viewer-tab-current=grey-50 viewer-thumb-bg=slate-50 viewer-thumb-border=grey-300 viewer-thumb-caption-bg=grey-800 viewer-thumb-caption-fg=slate-50 viewer-places-number-bg=grey-600 viewer-places-number-fg=slate-50 viewer-banner-av=grey-200 viewer-banner-photo=green-100 viewer-banner-social=yellow-200 viewer-banner-alt-1=teal-200 viewer-banner-alt-2=orange-100 viewer-banner-alt-3=violet-100 viewer-banner-alt-4=yellow-200 viewer-banner-alt-5=amber-200 viewer-sheet-bg=white viewer-sheet-border=grey-200 viewer-sheet-rule-1=grey-200 viewer-sheet-rule-2=grey-100 viewer-backdrop=black@70% viewer-pill-strong-bg=teal-700 viewer-pill-strong-fg=white viewer-btn-bg=accent viewer-btn-fg=slate-50 viewer-btn-border=slate-300 viewer-radio-bg=slate-50 viewer-radio-border=accent viewer-radio-on=accent viewer-day-bg=grey-100 viewer-day-fg=grey-900 viewer-day-hover=white viewer-updated-bg=amber-100 viewer-updated-border=amber-500 viewer-band-bg=grey-150 viewer-fg-accent=accent-muted viewer-fg-muted=slate-500 viewer-bar-bg=white viewer-bar-border=grey-200 viewer-fab-bg=grey-600 viewer-fab-fg=white viewer-fab-shadow=black@32% viewer-nav-bg=grey-150@80% viewer-nav-current=white";
+  /* for themes.html */
+  /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
+  --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23fcfcfc' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23232a2e'/%3E%3C/svg%3E");
+  --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23232a2e' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+[data-theme=dark] {
+  color-scheme: dark;
+  /* Icons of this theme (see $icons) */
+  --icon-cast: url("icons/dark/cast.svg");
+  --icon-chevron-right: url("icons/dark/chevron-right.svg");
+  --icon-close-alt: url("icons/dark/close-alt.svg");
+  --icon-crew: url("icons/dark/crew.svg");
+  --icon-dropdown: url("icons/dark/dropdown.svg");
+  --icon-filter: url("icons/dark/filter.svg");
+  --icon-home: url("icons/dark/home.svg");
+  --icon-logo: url("icons/dark/logo.svg");
+  --icon-menu: url("icons/dark/menu.svg");
+  --icon-reload: url("icons/dark/reload.svg");
+  --icon-shoot-plan: url("icons/dark/shoot-plan.svg");
+  --icon-warning-alert: url("icons/dark/warning-alert.svg");
+  --icon-filter-inv: url("icons/dark/filter-inv.svg");
+  --icon-menu-inv: url("icons/dark/menu-inv.svg");
+  --color-bg-app: var(--palette-grey-700);
+  --color-bg-content: var(--palette-grey-800);
+  --color-bg-card: var(--palette-grey-800);
+  --color-bg-selected-icon: var(--palette-grey-600);
+  --color-bg-hover-control: var(--palette-grey-700);
+  --color-bg-hover-cell: var(--palette-grey-700);
+  --color-bg-floating: var(--palette-grey-800);
+  --color-fg-primary: var(--palette-grey-200);
+  --color-fg-secondary: var(--palette-grey-400);
+  --color-fg-subtle: var(--palette-slate-500);
+  --color-fg-inverse: var(--palette-grey-950);
+  --color-fg-on-image: var(--palette-grey-50);
+  --color-fg-on-warning: var(--palette-grey-900);
+  --color-fg-placeholder: var(--palette-slate-500);
+  --color-border-button: var(--palette-grey-600);
+  --color-border-form-item: var(--palette-slate-400);
+  --color-border-pill: var(--palette-slate-600);
+  --color-border-divider: var(--palette-slate-600);
+  --color-border-floating: var(--palette-slate-700);
+  --color-alert: var(--palette-red-400);
+  --color-alert-fill: color-mix(in srgb, var(--palette-red-400) 10%, transparent);
+  --color-alert-hover: color-mix(in srgb, var(--palette-red-400) 20%, transparent);
+  --color-warning: var(--palette-amber-400);
+  --color-warning-fill: color-mix(in srgb, var(--palette-amber-300) 10%, transparent);
+  --color-warning-hover: color-mix(in srgb, var(--palette-amber-300) 20%, transparent);
+  --color-success: var(--palette-green-300);
+  --color-success-fill: color-mix(in srgb, var(--palette-green-400) 10%, transparent);
+  --color-success-hover: color-mix(in srgb, var(--palette-green-400) 20%, transparent);
+  --color-info: var(--palette-blue-400);
+  --color-info-fill: color-mix(in srgb, var(--palette-blue-400) 12%, transparent);
+  --color-info-hover: color-mix(in srgb, var(--palette-blue-400) 20%, transparent);
+  --color-busy: var(--palette-accent-lightest);
+  --color-accent: var(--palette-accent-lightest);
+  --color-shadow: color-mix(in srgb, var(--palette-black) 50%, transparent);
+  --color-shadow-inset: color-mix(in srgb, var(--palette-black) 40%, transparent);
+  --color-overlay: color-mix(in srgb, var(--palette-black) 40%, transparent);
+  --color-overlay-soft: color-mix(in srgb, var(--palette-black) 25%, transparent);
+  --color-backdrop: color-mix(in srgb, var(--palette-grey-900) 60%, transparent);
+  --color-sidebar-hover: color-mix(in srgb, var(--palette-grey-600) 60%, transparent);
+  --color-sidebar-border: var(--palette-slate-700);
+  --color-topbar-border: var(--palette-slate-700);
+  --color-avatar-border: var(--palette-grey-600);
+  --color-breadcrumb-chevron: var(--palette-grey-100);
+  --color-btn-bg: var(--palette-grey-800);
+  --color-btn-fg: var(--palette-grey-200);
+  --color-btn-hover: var(--palette-grey-700);
+  --color-btn-cta-bg: var(--palette-slate-600);
+  --color-btn-cta-fg: var(--palette-grey-100);
+  --color-btn-cta-border: var(--palette-grey-600);
+  --color-btn-cta-hover: var(--palette-slate-600);
+  --color-menu-cta-hover: var(--palette-slate-500);
+  --color-btn-alert-bg: var(--palette-red-800);
+  --color-btn-alert-fg: var(--palette-red-50);
+  --color-btn-alert-border: var(--palette-red-500);
+  --color-btn-alert-hover: var(--palette-red-700);
+  --color-btn-soft-bg: var(--palette-grey-700);
+  --color-btn-soft-hover: var(--palette-grey-600);
+  --color-select-bg: var(--palette-grey-800);
+  --color-select-border: var(--palette-grey-600);
+  --color-select-arrow: var(--palette-grey-100);
+  --color-field-bg: var(--palette-grey-800);
+  --color-field-border: var(--palette-grey-100);
+  --color-check-bg: var(--palette-grey-800);
+  --color-check-on: var(--palette-grey-50);
+  --color-check-mark: var(--palette-black);
+  --color-switch-bg: var(--palette-grey-800);
+  --color-switch-border: var(--palette-grey-600);
+  --color-switch-knob: var(--palette-grey-100);
+  --color-switch-on: var(--palette-grey-100);
+  --color-switch-knob-on: var(--palette-grey-950);
+  --color-input-focus-bg: var(--palette-grey-800);
+  --color-pill-bg: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
+  --color-pill-strong-bg: var(--palette-slate-600);
+  --color-pill-strong-fg: var(--palette-grey-100);
+  --color-pill-static-bg: var(--palette-grey-700);
+  --color-float-tools-bg: var(--palette-grey-800);
+  --color-float-tools-border: var(--palette-slate-700);
+  --color-swatch-border: var(--palette-slate-600);
+  --color-swatch-ring: var(--palette-grey-100);
+  --color-swatch-ring-gap: var(--palette-grey-800);
+  --color-color-dot-border: var(--palette-slate-400);
+  --color-toolbar-divider: var(--palette-grey-600);
+  --color-editor-toolbar-border: var(--palette-grey-700);
+  --color-tabs-border: var(--palette-grey-600);
+  --color-tabs-fg: var(--palette-slate-500);
+  --color-tabs-indicator: var(--palette-grey-100);
+  --color-list-row-border: var(--palette-slate-700);
+  --color-list-banner-bg: var(--palette-grey-700);
+  --color-list-thumb-border: var(--palette-grey-600);
+  --color-list-warning-border: color-mix(in srgb, var(--palette-black) 40%, transparent);
+  --color-banner-bg-av: var(--palette-grey-700);
+  --color-banner-bg-photo: var(--palette-green-600);
+  --color-banner-bg-social: var(--palette-yellow-600);
+  --color-banner-bg-alt-1: var(--palette-orange-600);
+  --color-banner-bg-alt-2: var(--palette-blue-600);
+  --color-banner-bg-alt-3: var(--palette-pink-600);
+  --color-banner-bg-alt-4: var(--palette-violet-600);
+  --color-banner-bg-alt-5: var(--palette-amber-600);
+  --color-banner-scope-none: var(--palette-grey-100);
+  --color-banner-scope-all-bg: var(--palette-grey-100);
+  --color-banner-scope-all-fg: var(--palette-grey-800);
+  --color-stats-bg: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
+  --color-places-bg: color-mix(in srgb, var(--palette-grey-700) 50%, transparent);
+  --color-places-hover: color-mix(in srgb, var(--palette-grey-700) 50%, transparent);
+  --color-places-active: var(--palette-accent-lightest);
+  --color-places-number-bg: var(--palette-grey-100);
+  --color-places-number-fg: var(--palette-grey-950);
+  --color-gallery-title-rule: var(--palette-grey-600);
+  --color-gallery-thumb-bg: var(--palette-grey-800);
+  --color-gallery-thumb-border: var(--palette-grey-600);
+  --color-gallery-caption-bg: var(--palette-grey-100);
+  --color-gallery-caption-fg: var(--palette-grey-950);
+  --color-dropzone-bg: var(--palette-grey-800);
+  --color-dropzone-border: var(--palette-slate-400);
+  --color-drawer-toolbar-border: var(--palette-grey-700);
+  --color-drawer-bg: var(--palette-grey-800);
+  --color-project-card-bg: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
+  --color-project-card-border: var(--palette-slate-700);
+  --color-project-pic-bg: var(--palette-grey-600);
+  --color-project-new-border: var(--palette-grey-600);
+  --color-modal-rule-1: var(--palette-slate-600);
+  --color-modal-rule-2: var(--palette-grey-700);
+  --color-modal-key: var(--palette-slate-500);
+  --color-viewer-bg: var(--palette-grey-950);
+  --color-viewer-tabbar-bg: var(--palette-grey-700);
+  --color-viewer-card-bg: color-mix(in srgb, var(--palette-grey-700) 90%, transparent);
+  --color-viewer-alert-bg: color-mix(in srgb, var(--palette-red-400) 2.4%, transparent);
+  --color-viewer-pill-bg: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
+  --color-viewer-hover: var(--palette-grey-700);
+  --color-viewer-fg-primary: var(--palette-grey-200);
+  --color-viewer-fg-secondary: var(--palette-grey-400);
+  --color-viewer-fg-subtle: var(--palette-slate-500);
+  --color-viewer-fg-on-image: var(--palette-grey-50);
+  --color-viewer-rule: var(--palette-slate-600);
+  --color-viewer-pill-border: var(--palette-slate-600);
+  --color-viewer-alert: var(--palette-red-400);
+  --color-viewer-focus: var(--palette-accent-lightest);
+  --color-viewer-shadow: color-mix(in srgb, var(--palette-black) 50%, transparent);
+  --color-viewer-cover-shade: color-mix(in srgb, var(--palette-black) 80%, transparent);
+  --color-viewer-overlay-soft: color-mix(in srgb, var(--palette-black) 25%, transparent);
+  --color-viewer-tabbar-border: var(--palette-grey-800);
+  --color-viewer-tabbar-hover: color-mix(in srgb, var(--palette-grey-600) 60%, transparent);
+  --color-viewer-tab-current: var(--palette-grey-600);
+  --color-viewer-thumb-bg: var(--palette-grey-800);
+  --color-viewer-thumb-border: var(--palette-grey-600);
+  --color-viewer-thumb-caption-bg: var(--palette-grey-100);
+  --color-viewer-thumb-caption-fg: var(--palette-grey-950);
+  --color-viewer-places-number-bg: var(--palette-grey-100);
+  --color-viewer-places-number-fg: var(--palette-grey-950);
+  --color-viewer-banner-av: var(--palette-grey-700);
+  --color-viewer-banner-photo: var(--palette-green-600);
+  --color-viewer-banner-social: var(--palette-yellow-600);
+  --color-viewer-banner-alt-1: var(--palette-orange-600);
+  --color-viewer-banner-alt-2: var(--palette-blue-600);
+  --color-viewer-banner-alt-3: var(--palette-pink-600);
+  --color-viewer-banner-alt-4: var(--palette-violet-600);
+  --color-viewer-banner-alt-5: var(--palette-amber-600);
+  --color-viewer-sheet-bg: var(--palette-grey-800);
+  --color-viewer-sheet-border: var(--palette-slate-600);
+  --color-viewer-sheet-rule-1: var(--palette-slate-600);
+  --color-viewer-sheet-rule-2: var(--palette-grey-700);
+  --color-viewer-backdrop: color-mix(in srgb, var(--palette-black) 70%, transparent);
+  --color-viewer-pill-strong-bg: var(--palette-slate-600);
+  --color-viewer-pill-strong-fg: var(--palette-grey-100);
+  --color-viewer-btn-bg: var(--palette-slate-600);
+  --color-viewer-btn-fg: var(--palette-grey-100);
+  --color-viewer-btn-border: var(--palette-grey-600);
+  --color-viewer-radio-bg: var(--palette-grey-800);
+  --color-viewer-radio-border: var(--palette-slate-400);
+  --color-viewer-radio-on: var(--palette-grey-50);
+  --color-viewer-day-bg: var(--palette-grey-800);
+  --color-viewer-day-fg: var(--palette-grey-100);
+  --color-viewer-day-hover: var(--palette-grey-700);
+  --color-viewer-updated-bg: var(--palette-grey-800);
+  --color-viewer-updated-border: var(--palette-amber-400);
+  --color-viewer-band-bg: var(--palette-grey-800);
+  --color-viewer-fg-accent: var(--palette-teal-300);
+  --color-viewer-fg-muted: var(--palette-slate-400);
+  --color-viewer-bar-bg: var(--palette-grey-900);
+  --color-viewer-bar-border: var(--palette-grey-700);
+  --color-viewer-fab-bg: var(--palette-grey-200);
+  --color-viewer-fab-fg: var(--palette-grey-900);
+  --color-viewer-fab-shadow: color-mix(in srgb, var(--palette-black) 60%, transparent);
+  --color-viewer-nav-bg: color-mix(in srgb, var(--palette-grey-950) 80%, transparent);
+  --color-viewer-nav-current: var(--palette-grey-800);
+  --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-800 bg-selected-icon=grey-600 bg-hover-control=grey-700 bg-hover-cell=grey-700 bg-floating=grey-800 fg-primary=grey-200 fg-secondary=grey-400 fg-subtle=slate-500 fg-inverse=grey-950 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=slate-500 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-600 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-400 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% busy=accent-lightest accent=accent-lightest shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% sidebar-border=slate-700 topbar-border=slate-700 avatar-border=grey-600 breadcrumb-chevron=grey-100 btn-bg=grey-800 btn-fg=grey-200 btn-hover=grey-700 btn-cta-bg=slate-600 btn-cta-fg=grey-100 btn-cta-border=grey-600 btn-cta-hover=slate-600 menu-cta-hover=slate-500 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 btn-soft-bg=grey-700 btn-soft-hover=grey-600 select-bg=grey-800 select-border=grey-600 select-arrow=grey-100 field-bg=grey-800 field-border=grey-100 check-bg=grey-800 check-on=grey-50 check-mark=black switch-bg=grey-800 switch-border=grey-600 switch-knob=grey-100 switch-on=grey-100 switch-knob-on=grey-950 input-focus-bg=grey-800 pill-bg=grey-800@90% pill-strong-bg=slate-600 pill-strong-fg=grey-100 pill-static-bg=grey-700 float-tools-bg=grey-800 float-tools-border=slate-700 swatch-border=slate-600 swatch-ring=grey-100 swatch-ring-gap=grey-800 color-dot-border=slate-400 toolbar-divider=grey-600 editor-toolbar-border=grey-700 tabs-border=grey-600 tabs-fg=slate-500 tabs-indicator=grey-100 list-row-border=slate-700 list-banner-bg=grey-700 list-thumb-border=grey-600 list-warning-border=black@40% banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600 banner-scope-none=grey-100 banner-scope-all-bg=grey-100 banner-scope-all-fg=grey-800 stats-bg=grey-800@90% places-bg=grey-700@50% places-hover=grey-700@50% places-active=accent-lightest places-number-bg=grey-100 places-number-fg=grey-950 gallery-title-rule=grey-600 gallery-thumb-bg=grey-800 gallery-thumb-border=grey-600 gallery-caption-bg=grey-100 gallery-caption-fg=grey-950 dropzone-bg=grey-800 dropzone-border=slate-400 drawer-toolbar-border=grey-700 drawer-bg=grey-800 project-card-bg=grey-800@90% project-card-border=slate-700 project-pic-bg=grey-600 project-new-border=grey-600 modal-rule-1=slate-600 modal-rule-2=grey-700 modal-key=slate-500 viewer-bg=grey-950 viewer-tabbar-bg=grey-700 viewer-card-bg=grey-700@90% viewer-alert-bg=red-400@2.4% viewer-pill-bg=grey-800@90% viewer-hover=grey-700 viewer-fg-primary=grey-200 viewer-fg-secondary=grey-400 viewer-fg-subtle=slate-500 viewer-fg-on-image=grey-50 viewer-rule=slate-600 viewer-pill-border=slate-600 viewer-alert=red-400 viewer-focus=accent-lightest viewer-shadow=black@50% viewer-cover-shade=black@80% viewer-overlay-soft=black@25% viewer-tabbar-border=grey-800 viewer-tabbar-hover=grey-600@60% viewer-tab-current=grey-600 viewer-thumb-bg=grey-800 viewer-thumb-border=grey-600 viewer-thumb-caption-bg=grey-100 viewer-thumb-caption-fg=grey-950 viewer-places-number-bg=grey-100 viewer-places-number-fg=grey-950 viewer-banner-av=grey-700 viewer-banner-photo=green-600 viewer-banner-social=yellow-600 viewer-banner-alt-1=orange-600 viewer-banner-alt-2=blue-600 viewer-banner-alt-3=pink-600 viewer-banner-alt-4=violet-600 viewer-banner-alt-5=amber-600 viewer-sheet-bg=grey-800 viewer-sheet-border=slate-600 viewer-sheet-rule-1=slate-600 viewer-sheet-rule-2=grey-700 viewer-backdrop=black@70% viewer-pill-strong-bg=slate-600 viewer-pill-strong-fg=grey-100 viewer-btn-bg=slate-600 viewer-btn-fg=grey-100 viewer-btn-border=grey-600 viewer-radio-bg=grey-800 viewer-radio-border=slate-400 viewer-radio-on=grey-50 viewer-day-bg=grey-800 viewer-day-fg=grey-100 viewer-day-hover=grey-700 viewer-updated-bg=grey-800 viewer-updated-border=amber-400 viewer-band-bg=grey-800 viewer-fg-accent=teal-300 viewer-fg-muted=slate-400 viewer-bar-bg=grey-900 viewer-bar-border=grey-700 viewer-fab-bg=grey-200 viewer-fab-fg=grey-900 viewer-fab-shadow=black@60% viewer-nav-bg=grey-950@80% viewer-nav-current=grey-800";
+  /* for themes.html */
+  /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
+  --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23000000' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23f0f2f3'/%3E%3C/svg%3E");
+  --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23f0f2f3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    /* Icons of this theme (see $icons) */
+    --icon-cast: url("icons/dark/cast.svg");
+    --icon-chevron-right: url("icons/dark/chevron-right.svg");
+    --icon-close-alt: url("icons/dark/close-alt.svg");
+    --icon-crew: url("icons/dark/crew.svg");
+    --icon-dropdown: url("icons/dark/dropdown.svg");
+    --icon-filter: url("icons/dark/filter.svg");
+    --icon-home: url("icons/dark/home.svg");
+    --icon-logo: url("icons/dark/logo.svg");
+    --icon-menu: url("icons/dark/menu.svg");
+    --icon-reload: url("icons/dark/reload.svg");
+    --icon-shoot-plan: url("icons/dark/shoot-plan.svg");
+    --icon-warning-alert: url("icons/dark/warning-alert.svg");
+    --icon-filter-inv: url("icons/dark/filter-inv.svg");
+    --icon-menu-inv: url("icons/dark/menu-inv.svg");
+    --color-bg-app: var(--palette-grey-700);
+    --color-bg-content: var(--palette-grey-800);
+    --color-bg-card: var(--palette-grey-800);
+    --color-bg-selected-icon: var(--palette-grey-600);
+    --color-bg-hover-control: var(--palette-grey-700);
+    --color-bg-hover-cell: var(--palette-grey-700);
+    --color-bg-floating: var(--palette-grey-800);
+    --color-fg-primary: var(--palette-grey-200);
+    --color-fg-secondary: var(--palette-grey-400);
+    --color-fg-subtle: var(--palette-slate-500);
+    --color-fg-inverse: var(--palette-grey-950);
+    --color-fg-on-image: var(--palette-grey-50);
+    --color-fg-on-warning: var(--palette-grey-900);
+    --color-fg-placeholder: var(--palette-slate-500);
+    --color-border-button: var(--palette-grey-600);
+    --color-border-form-item: var(--palette-slate-400);
+    --color-border-pill: var(--palette-slate-600);
+    --color-border-divider: var(--palette-slate-600);
+    --color-border-floating: var(--palette-slate-700);
+    --color-alert: var(--palette-red-400);
+    --color-alert-fill: color-mix(in srgb, var(--palette-red-400) 10%, transparent);
+    --color-alert-hover: color-mix(in srgb, var(--palette-red-400) 20%, transparent);
+    --color-warning: var(--palette-amber-400);
+    --color-warning-fill: color-mix(in srgb, var(--palette-amber-300) 10%, transparent);
+    --color-warning-hover: color-mix(in srgb, var(--palette-amber-300) 20%, transparent);
+    --color-success: var(--palette-green-300);
+    --color-success-fill: color-mix(in srgb, var(--palette-green-400) 10%, transparent);
+    --color-success-hover: color-mix(in srgb, var(--palette-green-400) 20%, transparent);
+    --color-info: var(--palette-blue-400);
+    --color-info-fill: color-mix(in srgb, var(--palette-blue-400) 12%, transparent);
+    --color-info-hover: color-mix(in srgb, var(--palette-blue-400) 20%, transparent);
+    --color-busy: var(--palette-accent-lightest);
+    --color-accent: var(--palette-accent-lightest);
+    --color-shadow: color-mix(in srgb, var(--palette-black) 50%, transparent);
+    --color-shadow-inset: color-mix(in srgb, var(--palette-black) 40%, transparent);
+    --color-overlay: color-mix(in srgb, var(--palette-black) 40%, transparent);
+    --color-overlay-soft: color-mix(in srgb, var(--palette-black) 25%, transparent);
+    --color-backdrop: color-mix(in srgb, var(--palette-grey-900) 60%, transparent);
+    --color-sidebar-hover: color-mix(in srgb, var(--palette-grey-600) 60%, transparent);
+    --color-sidebar-border: var(--palette-slate-700);
+    --color-topbar-border: var(--palette-slate-700);
+    --color-avatar-border: var(--palette-grey-600);
+    --color-breadcrumb-chevron: var(--palette-grey-100);
+    --color-btn-bg: var(--palette-grey-800);
+    --color-btn-fg: var(--palette-grey-200);
+    --color-btn-hover: var(--palette-grey-700);
+    --color-btn-cta-bg: var(--palette-slate-600);
+    --color-btn-cta-fg: var(--palette-grey-100);
+    --color-btn-cta-border: var(--palette-grey-600);
+    --color-btn-cta-hover: var(--palette-slate-600);
+    --color-menu-cta-hover: var(--palette-slate-500);
+    --color-btn-alert-bg: var(--palette-red-800);
+    --color-btn-alert-fg: var(--palette-red-50);
+    --color-btn-alert-border: var(--palette-red-500);
+    --color-btn-alert-hover: var(--palette-red-700);
+    --color-btn-soft-bg: var(--palette-grey-700);
+    --color-btn-soft-hover: var(--palette-grey-600);
+    --color-select-bg: var(--palette-grey-800);
+    --color-select-border: var(--palette-grey-600);
+    --color-select-arrow: var(--palette-grey-100);
+    --color-field-bg: var(--palette-grey-800);
+    --color-field-border: var(--palette-grey-100);
+    --color-check-bg: var(--palette-grey-800);
+    --color-check-on: var(--palette-grey-50);
+    --color-check-mark: var(--palette-black);
+    --color-switch-bg: var(--palette-grey-800);
+    --color-switch-border: var(--palette-grey-600);
+    --color-switch-knob: var(--palette-grey-100);
+    --color-switch-on: var(--palette-grey-100);
+    --color-switch-knob-on: var(--palette-grey-950);
+    --color-input-focus-bg: var(--palette-grey-800);
+    --color-pill-bg: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
+    --color-pill-strong-bg: var(--palette-slate-600);
+    --color-pill-strong-fg: var(--palette-grey-100);
+    --color-pill-static-bg: var(--palette-grey-700);
+    --color-float-tools-bg: var(--palette-grey-800);
+    --color-float-tools-border: var(--palette-slate-700);
+    --color-swatch-border: var(--palette-slate-600);
+    --color-swatch-ring: var(--palette-grey-100);
+    --color-swatch-ring-gap: var(--palette-grey-800);
+    --color-color-dot-border: var(--palette-slate-400);
+    --color-toolbar-divider: var(--palette-grey-600);
+    --color-editor-toolbar-border: var(--palette-grey-700);
+    --color-tabs-border: var(--palette-grey-600);
+    --color-tabs-fg: var(--palette-slate-500);
+    --color-tabs-indicator: var(--palette-grey-100);
+    --color-list-row-border: var(--palette-slate-700);
+    --color-list-banner-bg: var(--palette-grey-700);
+    --color-list-thumb-border: var(--palette-grey-600);
+    --color-list-warning-border: color-mix(in srgb, var(--palette-black) 40%, transparent);
+    --color-banner-bg-av: var(--palette-grey-700);
+    --color-banner-bg-photo: var(--palette-green-600);
+    --color-banner-bg-social: var(--palette-yellow-600);
+    --color-banner-bg-alt-1: var(--palette-orange-600);
+    --color-banner-bg-alt-2: var(--palette-blue-600);
+    --color-banner-bg-alt-3: var(--palette-pink-600);
+    --color-banner-bg-alt-4: var(--palette-violet-600);
+    --color-banner-bg-alt-5: var(--palette-amber-600);
+    --color-banner-scope-none: var(--palette-grey-100);
+    --color-banner-scope-all-bg: var(--palette-grey-100);
+    --color-banner-scope-all-fg: var(--palette-grey-800);
+    --color-stats-bg: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
+    --color-places-bg: color-mix(in srgb, var(--palette-grey-700) 50%, transparent);
+    --color-places-hover: color-mix(in srgb, var(--palette-grey-700) 50%, transparent);
+    --color-places-active: var(--palette-accent-lightest);
+    --color-places-number-bg: var(--palette-grey-100);
+    --color-places-number-fg: var(--palette-grey-950);
+    --color-gallery-title-rule: var(--palette-grey-600);
+    --color-gallery-thumb-bg: var(--palette-grey-800);
+    --color-gallery-thumb-border: var(--palette-grey-600);
+    --color-gallery-caption-bg: var(--palette-grey-100);
+    --color-gallery-caption-fg: var(--palette-grey-950);
+    --color-dropzone-bg: var(--palette-grey-800);
+    --color-dropzone-border: var(--palette-slate-400);
+    --color-drawer-toolbar-border: var(--palette-grey-700);
+    --color-drawer-bg: var(--palette-grey-800);
+    --color-project-card-bg: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
+    --color-project-card-border: var(--palette-slate-700);
+    --color-project-pic-bg: var(--palette-grey-600);
+    --color-project-new-border: var(--palette-grey-600);
+    --color-modal-rule-1: var(--palette-slate-600);
+    --color-modal-rule-2: var(--palette-grey-700);
+    --color-modal-key: var(--palette-slate-500);
+    --color-viewer-bg: var(--palette-grey-950);
+    --color-viewer-tabbar-bg: var(--palette-grey-700);
+    --color-viewer-card-bg: color-mix(in srgb, var(--palette-grey-700) 90%, transparent);
+    --color-viewer-alert-bg: color-mix(in srgb, var(--palette-red-400) 2.4%, transparent);
+    --color-viewer-pill-bg: color-mix(in srgb, var(--palette-grey-800) 90%, transparent);
+    --color-viewer-hover: var(--palette-grey-700);
+    --color-viewer-fg-primary: var(--palette-grey-200);
+    --color-viewer-fg-secondary: var(--palette-grey-400);
+    --color-viewer-fg-subtle: var(--palette-slate-500);
+    --color-viewer-fg-on-image: var(--palette-grey-50);
+    --color-viewer-rule: var(--palette-slate-600);
+    --color-viewer-pill-border: var(--palette-slate-600);
+    --color-viewer-alert: var(--palette-red-400);
+    --color-viewer-focus: var(--palette-accent-lightest);
+    --color-viewer-shadow: color-mix(in srgb, var(--palette-black) 50%, transparent);
+    --color-viewer-cover-shade: color-mix(in srgb, var(--palette-black) 80%, transparent);
+    --color-viewer-overlay-soft: color-mix(in srgb, var(--palette-black) 25%, transparent);
+    --color-viewer-tabbar-border: var(--palette-grey-800);
+    --color-viewer-tabbar-hover: color-mix(in srgb, var(--palette-grey-600) 60%, transparent);
+    --color-viewer-tab-current: var(--palette-grey-600);
+    --color-viewer-thumb-bg: var(--palette-grey-800);
+    --color-viewer-thumb-border: var(--palette-grey-600);
+    --color-viewer-thumb-caption-bg: var(--palette-grey-100);
+    --color-viewer-thumb-caption-fg: var(--palette-grey-950);
+    --color-viewer-places-number-bg: var(--palette-grey-100);
+    --color-viewer-places-number-fg: var(--palette-grey-950);
+    --color-viewer-banner-av: var(--palette-grey-700);
+    --color-viewer-banner-photo: var(--palette-green-600);
+    --color-viewer-banner-social: var(--palette-yellow-600);
+    --color-viewer-banner-alt-1: var(--palette-orange-600);
+    --color-viewer-banner-alt-2: var(--palette-blue-600);
+    --color-viewer-banner-alt-3: var(--palette-pink-600);
+    --color-viewer-banner-alt-4: var(--palette-violet-600);
+    --color-viewer-banner-alt-5: var(--palette-amber-600);
+    --color-viewer-sheet-bg: var(--palette-grey-800);
+    --color-viewer-sheet-border: var(--palette-slate-600);
+    --color-viewer-sheet-rule-1: var(--palette-slate-600);
+    --color-viewer-sheet-rule-2: var(--palette-grey-700);
+    --color-viewer-backdrop: color-mix(in srgb, var(--palette-black) 70%, transparent);
+    --color-viewer-pill-strong-bg: var(--palette-slate-600);
+    --color-viewer-pill-strong-fg: var(--palette-grey-100);
+    --color-viewer-btn-bg: var(--palette-slate-600);
+    --color-viewer-btn-fg: var(--palette-grey-100);
+    --color-viewer-btn-border: var(--palette-grey-600);
+    --color-viewer-radio-bg: var(--palette-grey-800);
+    --color-viewer-radio-border: var(--palette-slate-400);
+    --color-viewer-radio-on: var(--palette-grey-50);
+    --color-viewer-day-bg: var(--palette-grey-800);
+    --color-viewer-day-fg: var(--palette-grey-100);
+    --color-viewer-day-hover: var(--palette-grey-700);
+    --color-viewer-updated-bg: var(--palette-grey-800);
+    --color-viewer-updated-border: var(--palette-amber-400);
+    --color-viewer-band-bg: var(--palette-grey-800);
+    --color-viewer-fg-accent: var(--palette-teal-300);
+    --color-viewer-fg-muted: var(--palette-slate-400);
+    --color-viewer-bar-bg: var(--palette-grey-900);
+    --color-viewer-bar-border: var(--palette-grey-700);
+    --color-viewer-fab-bg: var(--palette-grey-200);
+    --color-viewer-fab-fg: var(--palette-grey-900);
+    --color-viewer-fab-shadow: color-mix(in srgb, var(--palette-black) 60%, transparent);
+    --color-viewer-nav-bg: color-mix(in srgb, var(--palette-grey-950) 80%, transparent);
+    --color-viewer-nav-current: var(--palette-grey-800);
+    --color-defs: " bg-app=grey-700 bg-content=grey-800 bg-card=grey-800 bg-selected-icon=grey-600 bg-hover-control=grey-700 bg-hover-cell=grey-700 bg-floating=grey-800 fg-primary=grey-200 fg-secondary=grey-400 fg-subtle=slate-500 fg-inverse=grey-950 fg-on-image=grey-50 fg-on-warning=grey-900 fg-placeholder=slate-500 border-button=grey-600 border-form-item=slate-400 border-pill=slate-600 border-divider=slate-600 border-floating=slate-700 alert=red-400 alert-fill=red-400@10% alert-hover=red-400@20% warning=amber-400 warning-fill=amber-300@10% warning-hover=amber-300@20% success=green-300 success-fill=green-400@10% success-hover=green-400@20% info=blue-400 info-fill=blue-400@12% info-hover=blue-400@20% busy=accent-lightest accent=accent-lightest shadow=black@50% shadow-inset=black@40% overlay=black@40% overlay-soft=black@25% backdrop=grey-900@60% sidebar-hover=grey-600@60% sidebar-border=slate-700 topbar-border=slate-700 avatar-border=grey-600 breadcrumb-chevron=grey-100 btn-bg=grey-800 btn-fg=grey-200 btn-hover=grey-700 btn-cta-bg=slate-600 btn-cta-fg=grey-100 btn-cta-border=grey-600 btn-cta-hover=slate-600 menu-cta-hover=slate-500 btn-alert-bg=red-800 btn-alert-fg=red-50 btn-alert-border=red-500 btn-alert-hover=red-700 btn-soft-bg=grey-700 btn-soft-hover=grey-600 select-bg=grey-800 select-border=grey-600 select-arrow=grey-100 field-bg=grey-800 field-border=grey-100 check-bg=grey-800 check-on=grey-50 check-mark=black switch-bg=grey-800 switch-border=grey-600 switch-knob=grey-100 switch-on=grey-100 switch-knob-on=grey-950 input-focus-bg=grey-800 pill-bg=grey-800@90% pill-strong-bg=slate-600 pill-strong-fg=grey-100 pill-static-bg=grey-700 float-tools-bg=grey-800 float-tools-border=slate-700 swatch-border=slate-600 swatch-ring=grey-100 swatch-ring-gap=grey-800 color-dot-border=slate-400 toolbar-divider=grey-600 editor-toolbar-border=grey-700 tabs-border=grey-600 tabs-fg=slate-500 tabs-indicator=grey-100 list-row-border=slate-700 list-banner-bg=grey-700 list-thumb-border=grey-600 list-warning-border=black@40% banner-bg-av=grey-700 banner-bg-photo=green-600 banner-bg-social=yellow-600 banner-bg-alt-1=orange-600 banner-bg-alt-2=blue-600 banner-bg-alt-3=pink-600 banner-bg-alt-4=violet-600 banner-bg-alt-5=amber-600 banner-scope-none=grey-100 banner-scope-all-bg=grey-100 banner-scope-all-fg=grey-800 stats-bg=grey-800@90% places-bg=grey-700@50% places-hover=grey-700@50% places-active=accent-lightest places-number-bg=grey-100 places-number-fg=grey-950 gallery-title-rule=grey-600 gallery-thumb-bg=grey-800 gallery-thumb-border=grey-600 gallery-caption-bg=grey-100 gallery-caption-fg=grey-950 dropzone-bg=grey-800 dropzone-border=slate-400 drawer-toolbar-border=grey-700 drawer-bg=grey-800 project-card-bg=grey-800@90% project-card-border=slate-700 project-pic-bg=grey-600 project-new-border=grey-600 modal-rule-1=slate-600 modal-rule-2=grey-700 modal-key=slate-500 viewer-bg=grey-950 viewer-tabbar-bg=grey-700 viewer-card-bg=grey-700@90% viewer-alert-bg=red-400@2.4% viewer-pill-bg=grey-800@90% viewer-hover=grey-700 viewer-fg-primary=grey-200 viewer-fg-secondary=grey-400 viewer-fg-subtle=slate-500 viewer-fg-on-image=grey-50 viewer-rule=slate-600 viewer-pill-border=slate-600 viewer-alert=red-400 viewer-focus=accent-lightest viewer-shadow=black@50% viewer-cover-shade=black@80% viewer-overlay-soft=black@25% viewer-tabbar-border=grey-800 viewer-tabbar-hover=grey-600@60% viewer-tab-current=grey-600 viewer-thumb-bg=grey-800 viewer-thumb-border=grey-600 viewer-thumb-caption-bg=grey-100 viewer-thumb-caption-fg=grey-950 viewer-places-number-bg=grey-100 viewer-places-number-fg=grey-950 viewer-banner-av=grey-700 viewer-banner-photo=green-600 viewer-banner-social=yellow-600 viewer-banner-alt-1=orange-600 viewer-banner-alt-2=blue-600 viewer-banner-alt-3=pink-600 viewer-banner-alt-4=violet-600 viewer-banner-alt-5=amber-600 viewer-sheet-bg=grey-800 viewer-sheet-border=slate-600 viewer-sheet-rule-1=slate-600 viewer-sheet-rule-2=grey-700 viewer-backdrop=black@70% viewer-pill-strong-bg=slate-600 viewer-pill-strong-fg=grey-100 viewer-btn-bg=slate-600 viewer-btn-fg=grey-100 viewer-btn-border=grey-600 viewer-radio-bg=grey-800 viewer-radio-border=slate-400 viewer-radio-on=grey-50 viewer-day-bg=grey-800 viewer-day-fg=grey-100 viewer-day-hover=grey-700 viewer-updated-bg=grey-800 viewer-updated-border=amber-400 viewer-band-bg=grey-800 viewer-fg-accent=teal-300 viewer-fg-muted=slate-400 viewer-bar-bg=grey-900 viewer-bar-border=grey-700 viewer-fab-bg=grey-200 viewer-fab-fg=grey-900 viewer-fab-shadow=black@60% viewer-nav-bg=grey-950@80% viewer-nav-current=grey-800";
+    /* for themes.html */
+    /* Checkbox tick (check-mark), native select arrow (select-arrow) and breadcrumb chevron (breadcrumb-chevron) */
+    --image-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.2 4.1 7l3.7-4' fill='none' stroke='%23000000' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    --image-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 14l4 5 4-5z' fill='%23f0f2f3'/%3E%3C/svg%3E");
+    --image-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 8'%3E%3Cpath d='M.6.6 4 4 .6 7.4' fill='none' stroke='%23f0f2f3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+}
+/* What the partials use */
+/* Component tokens: one per use, so each can be tuned on its own */
+/*
+  Fixed unit types (Settings modal and shot-type tags). The key is the
+  data-type value and the .shot-type--key modifier.
+*/
+/*
+  Banner scope (Shoot Plan): which shots a banner moves. The key is the
+  option's value, in the order of OPTIONS.scopes in app.js; a unit type
+  takes its colour from $type-colors.
+*/
+/*
+  Colour picker palette, in menu order. The key is the banner's data-color
+  value; keep the list in sync with BANNER_COLORS in js/app.js.
+*/
+/* Radii ------------------------------------------------------------------ */
+/* layout/radius-container */
+/* layout/radius-card */
+/* layout/radius-button */
+/* Borders and shadows ---------------------------------------------------- */
+/* anything that floats: menus, popovers, modal, drawer, sidebar */
+/* Spacing ---------------------------------------------------------------- */
+/* Typography -------------------------------------------------------------- */
+/* Text styles ($type-styles) live in _themes.scss, next to the colours. */
+/* Text styles as custom properties (--type-text-xs-size…): the mixin type()
+   reads them, so themes.html can edit them live. -use is only for themes.html */
+:root {
+  --type-text-xs-size: 10px;
+  --type-text-xs-weight: 600;
+  --type-text-xs-tracking: 0.8px;
+  --type-text-xs-line: 12px;
+  --type-text-xs-case: uppercase;
+  --type-text-xs-use: "labels, column heads, buttons; unit type, Flow and small toggles (tracking .2, line 16)";
+  --type-text-s-size: 11px;
+  --type-text-s-weight: 600;
+  --type-text-s-tracking: 0.2px;
+  --type-text-s-line: 16px;
+  --type-text-s-case: uppercase;
+  --type-text-s-use: "pills, tabs, time values, card and modal titles";
+  --type-text-m-size: 13px;
+  --type-text-m-weight: 600;
+  --type-text-m-tracking: -0.2px;
+  --type-text-m-line: 16px;
+  --type-text-m-case: none;
+  --type-text-m-use: "list cells, Shoot Plan text, menu options, sidebar, notes (regular: page info, breadcrumb, place names)";
+  --type-text-l-size: 14px;
+  --type-text-l-weight: 600;
+  --type-text-l-tracking: -0.2px;
+  --type-text-l-line: 20px;
+  --type-text-l-case: none;
+  --type-text-l-use: "facts values, modal text, card titles (regular: facts labels, login texts)";
+  --type-text-xxl-size: 20px;
+  --type-text-xxl-weight: 400;
+  --type-text-xxl-tracking: 0.8px;
+  --type-text-xxl-line: 24px;
+  --type-text-xxl-case: uppercase;
+  --type-text-xxl-use: "viewer page titles";
+  --type-display-s-size: 24px;
+  --type-display-s-weight: 600;
+  --type-display-s-tracking: -0.8px;
+  --type-display-s-line: 24px;
+  --type-display-s-case: none;
+  --type-display-s-use: "page titles";
+  --type-display-m-size: 28px;
+  --type-display-m-weight: 300;
+  --type-display-m-tracking: -0.2px;
+  --type-display-m-line: 36px;
+  --type-display-m-case: none;
+  --type-display-m-use: "cover title";
+  --type-display-xxl-size: 40px;
+  --type-display-xxl-weight: 300;
+  --type-display-xxl-tracking: -1.5px;
+  --type-display-xxl-line: 40px;
+  --type-display-xxl-case: none;
+  --type-display-xxl-use: "weather temperature";
+  --type-styles: "text-xs, text-s, text-m, text-l, text-xxl, display-s, display-m, display-xxl";
+  /* for themes.html */
+}
+
+/* Layout ----------------------------------------------------------------- */
+/* sidebar items and every 32px icon button */
+/* top bar */
+/* list rows */
+/* default .btn */
+/* .btn--lg */
+/* logo box (production_co SVGs are 80x40): Credits, project cards */
+/* .pill */
+/* editable text (.inline-input) */
+/* editable time pill inside lists */
+/* shot / image thumbnail */
+/* card header and tabs */
+/* line under the selected tab */
+/* Motion ----------------------------------------------------------------- */
+/****************************************************************************
+
+  MIXINS
+
+****************************************************************************/
+/*
+  Text style from $type-styles. Optional: $color, a different $weight
+  (e.g. regular for a quieter variant) or $case (none for values in a caps
+  style).
+*/
+/* Viewport narrower than $bp */
+/* Honour the OS "reduce motion" setting */
+/* Flex row with vertically centred items; justify, gap and display are optional */
+/* Fixed-width list cell with its content centred */
+/* Single line cut with "…" */
+/* Numbered circle of a location (.places: list numbers and map pins) */
+/* Square box */
+/* Icon of the current theme as a centred background */
+/* Another icon in the same place (e.g. arrow up while open) */
+/* Icon drawn in a pseudo-element (dropdown arrows, "+"…) */
+/* Fill under the pointer (buttons, menu items, pills, tabs…) */
+/* Red text and border of destructive actions and warnings */
+/* White panel with the hairline border of the buttons (menus, popovers) */
+/* Native [popover] placed by js/app.js next to the element that opens it */
+/* Shared reset of the custom checkbox and radio (16px box, 10px control) */
+/****************************************************************************
+
+  BASE
+
+****************************************************************************/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-viewer-fg-primary);
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+h1, h2, h3, p, ol, ul {
+  margin: 0;
+}
+
+ol, ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-viewer-focus);
+  outline-offset: 1px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* hidden always wins over a component's display */
+/****************************************************************************
+
+  ICONS
+
+****************************************************************************/
+/*
+  Standalone SVGs in production/icons/<theme>/ (see $icons in the colour
+  section), drawn as a background in ::before so the icon can sit next to
+  the element's text. The SVGs carry their own colour (red ones end in
+  -alert); on dark fills the -inv version is used when there is one:
+
+    <a class="sidebar__item icon icon__crew" href="crew.html">Crew</a>
+
+  Each .icon__name only sets --icon (and --icon-inv). Per-component settings:
+    --icon-size  icon box (32px by default)
+    --icon-fit   background size: cover (scales the SVG to the box) or a
+                 fixed value, e.g. 32px, to crop the SVG's built-in margin
+                 when the box is smaller than the drawing
+*/
+.icon {
+  --icon-size: 32px;
+  --icon-fit: cover;
+  display: inline-flex;
+  align-items: center;
+}
+.icon::before {
+  content: "";
+  flex: none;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  background: var(--icon) center/var(--icon-fit) no-repeat;
+}
+
+.icon__cast {
+  --icon: var(--icon-cast);
+}
+
+.icon__chevron-right {
+  --icon: var(--icon-chevron-right);
+}
+
+.icon__close-alt {
+  --icon: var(--icon-close-alt);
+}
+
+.icon__crew {
+  --icon: var(--icon-crew);
+}
+
+.icon__dropdown {
+  --icon: var(--icon-dropdown);
+}
+
+.icon__filter {
+  --icon: var(--icon-filter);
+}
+
+.icon__home {
+  --icon: var(--icon-home);
+}
+
+.icon__logo {
+  --icon: var(--icon-logo);
+}
+
+.icon__menu {
+  --icon: var(--icon-menu);
+}
+
+.icon__reload {
+  --icon: var(--icon-reload);
+}
+
+.icon__shoot-plan {
+  --icon: var(--icon-shoot-plan);
+}
+
+.icon__warning-alert {
+  --icon: var(--icon-warning-alert);
+}
+
+/* Icons with an -inv version (on dark fills, see $icons-inv) */
+.icon__filter {
+  --icon-inv: var(--icon-filter-inv);
+}
+
+.icon__menu {
+  --icon-inv: var(--icon-menu-inv);
+}
+
+/* $type-styles, for the larger text on phones */
+/****************************************************************************
+
+  CALL SHEET VIEWER (phone / tablet)
+
+****************************************************************************/
+/*
+  Read-only call sheet for the phone (Figma › Viewer: Home, Shoot Plan,
+  Talent Calls, Crew Calls). It shows parts of the app's information with
+  hardly any interaction and no editing, so it does not load the app's
+  partials: this file holds every rule the viewer pages draw, taken from
+  the app's components (card, facts, weather, places, stats, list, thumb,
+  pill, shot type) and already narrowed to what the viewer shows. Tokens,
+  text styles, spacing and radii still come from _tokens.scss, so the
+  viewer follows the app's design decisions; component sizes that differ
+  live in the $vw-* variables below.
+
+    body.viewer (Home: .viewer--home, see HOME)
+     ├─ header.viewer__head    other pages: the project cover, short
+     │   └─ .viewer__tools     page title · page button · day selector
+     ├─ main.viewer__content   the cards (Home: --columns on tablets)
+     ├─ dialog#day-sheet       the days (bottom sheet; not on Home)
+     ├─ .viewer__footer        © line
+     └─ button.fab + dialog.viewer-menu   the menu, always on screen (NAVIGATION)
+
+  Not here on purpose: hover fills of rows and pills, list headers,
+  checkboxes, menus, inputs, the location ↔ pin hover pairing.
+*/
+/* Sizes (Figma › Viewer) */
+/* content (and the cover) to the screen edges (tablets; phones: see $vw-full-bleed) */
+/* every page on tablets, as wide as the app's Overview (Home: two columns) */
+/* bottom sheets on tablets */
+/* Icons: every icon and icon button of the viewer (bar, menu, sheets, cards) */
+/* blank margin inside the icon drawings at $vw-icon-size (a quarter: 8 of their 32): lines up the drawing, not its box. 40px → 10px; change it with the size (no math.div: CodeKit's Dart Sass lacks it) */
+/* Where the icons and titles line up at the sides */
+/* the menu button's drawing: with the text inside the cards */
+/* Cover (header.viewer__head): in the flow, full width on phones, as wide as the cards on tablets */
+/* Home: whole cover (menu row on top, project title at the foot) */
+/* other pages: cover left under the menu row */
+/* Home: its foot darkens (viewer-cover-shade) under the title */
+/* other pages: the whole cover darkens this much (of viewer-cover-shade) under the title */
+/* row: menu button · page title · page button · day selector */
+/* that row from the top of the cover (plus the notch, safe area) */
+/* page title to the cover's left edge */
+/* day selector to the cover's right edge */
+/* Home: project title block */
+/* day selector */
+/* text 12px from the left; the arrow carries its own blank */
+/* its arrow (dropdown) */
+/* "14h ago" pill (Figma 4 8 5) */
+/* © line; the room under it keeps it clear of the menu button */
+/* Home (Figma › Viewer › Home; see HOME) */
+/* cover height, a share of the screen; a project sets its own with --vw-cover-h on <body> */
+/* …never shorter */
+/* …nor taller (tablets) */
+/* while the cover scrolls away its image moves down this much of its height: it seems to move at 30 % of the page's speed */
+/* …and the title goes up this much of its own height on top of the page's scroll (faster than the page)… */
+/* …and is gone when the cover has scrolled this much */
+/* title (Figma 80 16 40) */
+/* dark gradient at the cover's foot, under the title */
+/* bar with the project title (Figma 24 12 8; plus the notch) */
+/* it slides in / out */
+/* last update band */
+/* client · agency · production logos (plus the card's 16 above: 24) */
+/* each card: 16 above, 40 under */
+/* facts rows */
+/* place number in the list */
+/* Navigation (kit/_nav.kit; see NAVIGATION) */
+/* round menu button */
+/* to the side of the screen */
+/* to the bottom of the screen */
+/* its three lines */
+/* veil over the page */
+/* logo → first section */
+/* the sections' column */
+/* height of a section */
+/* veil, cross and sections coming in… */
+/* …and going out (js/app.js waits this long before closing) */
+/* one section after another */
+/* they rise this much as they come in */
+/* fast start, long soft landing */
+/* Phones (narrower than $breakpoint-md) */
+/* cards from edge to edge: no side margin, side borders or corners */
+/* …except the notice (card--alert): this margin at the sides, red frame all round */
+/* …and this above and under it (the other cards touch) */
+/* card header on phones */
+/* facts row on phones */
+/* blank at the foot of each card on phones */
+/* text styles this much bigger (size and line height); 0 = as on tablets */
+/* titles this much bigger: page titles, the project title, the menu */
+/* what counts as a title */
+/* styles that keep their size: the temperature (the unit type and place numbers keep theirs in their own rules) */
+/* shot description in Shoot Plan (instead of $vw-type-step; its style, text-m, is shared) */
+/* times in pills, everywhere (instead of $vw-type-step; its style, text-s, is shared) */
+/* card outline and lines between rows */
+/* card outline and lines between rows */
+/* card outline: all round on tablets, only under each card on phones */
+/* card header: label title, as the Overview widgets */
+/* facts row */
+/* General Call time */
+/* width height */
+/* ºC after the temperature */
+/* map height with few locations */
+/* number circle (list and pins) */
+/* read-only time pill */
+/* in Calls */
+/* in Shoot Plan, and the shot type */
+/* Shoot Plan banner */
+/* shot row (minimum: it grows if the larger text needs it) */
+/* type + times */
+/* tablets: a little bigger (the app's is 200 × 112) */
+/* tablets: set and talent columns, as the app's $sp-set / $sp-talent */
+/* requirements: between paragraphs */
+/* set, talent, requirements: fade where they are cut */
+/* description lines before it is cut */
+/* bottom sheet: header (title, close) */
+/* its first line: character · artist */
+/* time pills and the shot type: a little wider than in the lists, always the same */
+/* space always kept above the sheet (backdrop); taller content scrolls inside */
+/* choice row (Sort options) */
+/* Talent Calls on tablets: the five times in a row */
+/* .sheet--narrow (Talent details) */
+/* .sheet--modal on tablets: floating in the middle */
+/* Viewer colours: only viewer-* tokens (_themes.scss, group Viewer), so the
+   viewer can change without touching the app; they share the palette. */
+/* floating: open shot, map pins */
+/* Helpers ------------------------------------------------------------------ */
+/* Small arrow pointing right (between times: talent, shot) */
+/* Numbered circle of a location (list and map pins) */
+/* A section of a bottom sheet under a double rule, inside the side margins */
+/* PAGE --------------------------------------------------------------------- */
+.viewer {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--color-viewer-bg);
+  /*
+    Cover: the project image (a .bg_NN class) in the flow, on top of the
+    page. Phones: full width; tablets: as wide as the cards, with their
+    corners. Its row of tools on top; Home is taller and has the project
+    title at the foot, on a dark gradient; on the other pages the whole
+    image darkens a little under the page title.
+  */
+  /* Menu button · page title · page button · day selector */
+  /* Other pages: the page title, between the menu and the buttons */
+  /* Day selector: the chosen day and an arrow; opens #day-sheet */
+  /* Home: project title on the left, last update on the right, at the cover's foot */
+  /* "Last update" over a pill with the moment (as the app's Published pill) */
+  /* Cards, one under the other */
+  /* © line, clear of the menu button */
+}
+.viewer__head {
+  position: relative;
+  isolation: isolate;
+  /* the shade stays under the tools */
+  display: flex;
+  flex-direction: column;
+  padding: calc(80px + env(safe-area-inset-top)) 0 24px;
+  background-position: center;
+  background-size: cover;
+}
+.viewer__head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-viewer-cover-shade);
+  opacity: 0.5;
+}
+.viewer__head--home {
+  min-height: 280px;
+  padding-bottom: 0;
+}
+.viewer__head--home::before {
+  top: auto;
+  height: 160px;
+  background: linear-gradient(transparent, var(--color-viewer-cover-shade));
+  opacity: 1;
+}
+@media (min-width: 720px) {
+  .viewer__head {
+    width: calc(100% - 16px);
+    max-width: 944px;
+    margin: 8px auto 0;
+    padding-top: 80px;
+    border-radius: 2px;
+  }
+  .viewer__head::before {
+    border-radius: inherit;
+  }
+}
+.viewer__tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 80px;
+  padding: 0 16px 0 16px;
+  /* Icon buttons over the image: -inv drawing, a soft fill on hover */
+}
+.viewer__tools > .card__action::before {
+  background-image: var(--icon-inv, var(--icon));
+}
+.viewer__tools > .card__action:hover {
+  background-color: var(--color-viewer-overlay-soft);
+}
+.viewer__title {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-on-image);
+  text-transform: uppercase;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.viewer__day {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: 0.4px;
+  line-height: var(--type-text-xs-line);
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-day-fg);
+  display: flex;
+  align-items: center;
+  flex: none;
+  height: 28px;
+  margin-left: auto;
+  padding: 0 4px 0 12px;
+  background: var(--color-viewer-day-bg);
+  border-radius: 2px;
+  transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+.viewer__day:hover {
+  background-color: var(--color-viewer-day-hover);
+}
+.viewer__day::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: var(--icon-dropdown) center/cover no-repeat;
+}
+@media (prefers-reduced-motion: reduce) {
+  .viewer__day {
+    transition: none;
+  }
+}
+.viewer__hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+  padding: 24px 16px;
+}
+.viewer__hero h1 {
+  font-size: var(--type-display-m-size);
+  font-weight: var(--type-display-m-weight);
+  letter-spacing: var(--type-display-m-tracking);
+  line-height: var(--type-display-m-line);
+  text-transform: var(--type-display-m-case);
+  color: var(--color-viewer-fg-on-image);
+  /* as the Overview cover */
+  min-width: 0;
+}
+.viewer__updated {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: 0.4px;
+  line-height: var(--type-text-xs-line);
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-on-image);
+  font-size: 10px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.viewer__ago {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: var(--type-text-s-tracking);
+  line-height: var(--type-text-s-line);
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-primary);
+  font-size: 12px;
+  padding: 4px 8px 5px;
+  background: var(--color-viewer-updated-bg);
+  border: 1px solid var(--color-viewer-updated-border);
+  border-radius: 40px;
+}
+.viewer__content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 8px 8px 0;
+  /* Home on tablets: two columns, the cards flow without gaps */
+}
+@media (min-width: 720px) {
+  .viewer__content--columns {
+    display: block;
+    columns: 2;
+    column-gap: 16px;
+  }
+  .viewer__content--columns > * {
+    margin-bottom: 16px;
+    break-inside: avoid;
+  }
+}
+.viewer__footer {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: 0.95px;
+  line-height: var(--type-text-xs-line);
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-subtle);
+  padding: 16px 0 80px;
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  text-align: center;
+}
+
+/* Icons: one size for the whole viewer ($vw-icon-size); the notice sets its own */
+.viewer .icon {
+  --icon-size: 40px;
+}
+
+/* A text style $step bigger than its base size, only inside this element */
+/* Phones: larger text, and the cards use the whole width ----------------- */
+@media (max-width: 719px) {
+  .viewer {
+    /* Text styles $vw-type-step bigger, titles $vw-title-step (the dialogs live in <body>, so they follow) */
+    --type-text-xs-size: 12px;
+    --type-text-xs-line: 14px;
+    --type-text-s-size: 13px;
+    --type-text-s-line: 18px;
+    --type-text-m-size: 15px;
+    --type-text-m-line: 18px;
+    --type-text-l-size: 16px;
+    --type-text-l-line: 22px;
+    --type-text-xxl-size: 22px;
+    --type-text-xxl-line: 26px;
+    --type-display-s-size: 26px;
+    --type-display-s-line: 26px;
+    --type-display-m-size: 30px;
+    --type-display-m-line: 38px;
+    /* Pieces with their own step, their style is shared with other places */
+    /* Cards one on another, no gaps: a rule under each, a blank at its foot */
+  }
+  .viewer .list--shoot-plan .list__text {
+    --type-text-m-size: 14px;
+    --type-text-m-line: 17px;
+  }
+  .viewer .pill--time {
+    --type-text-s-size: 11px;
+    --type-text-s-line: 16px;
+  }
+  .viewer__content {
+    gap: 0;
+    padding: 0;
+    /* The notice keeps a margin and its red frame all round */
+  }
+  .viewer__content .card {
+    border-width: 0 0 0.5px;
+    /* only the rule under it ($vw-card-border) */
+    border-radius: 0;
+  }
+  .viewer__content .card--widget {
+    padding-bottom: 24px;
+  }
+  .viewer__content .card__header {
+    min-height: 64px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .viewer__content .facts > div {
+    min-height: 40px;
+  }
+  .viewer__content .card--alert {
+    margin: 16px 8px;
+    border: 2px solid var(--color-viewer-alert);
+    border-radius: 2px;
+  }
+}
+/* Project covers: .bg_01 … .bg_24 → img/bg/bg_01.png … (any project can use any) */
+.bg_01 {
+  background-image: url("images/bg/bg_01.png");
+}
+
+.bg_02 {
+  background-image: url("images/bg/bg_02.png");
+}
+
+.bg_03 {
+  background-image: url("images/bg/bg_03.png");
+}
+
+.bg_04 {
+  background-image: url("images/bg/bg_04.png");
+}
+
+.bg_05 {
+  background-image: url("images/bg/bg_05.png");
+}
+
+.bg_06 {
+  background-image: url("images/bg/bg_06.png");
+}
+
+.bg_07 {
+  background-image: url("images/bg/bg_07.png");
+}
+
+.bg_08 {
+  background-image: url("images/bg/bg_08.png");
+}
+
+.bg_09 {
+  background-image: url("images/bg/bg_09.png");
+}
+
+.bg_10 {
+  background-image: url("images/bg/bg_10.png");
+}
+
+.bg_11 {
+  background-image: url("images/bg/bg_11.png");
+}
+
+.bg_12 {
+  background-image: url("images/bg/bg_12.png");
+}
+
+.bg_13 {
+  background-image: url("images/bg/bg_13.png");
+}
+
+.bg_14 {
+  background-image: url("images/bg/bg_14.png");
+}
+
+.bg_15 {
+  background-image: url("images/bg/bg_15.png");
+}
+
+.bg_16 {
+  background-image: url("images/bg/bg_16.png");
+}
+
+.bg_17 {
+  background-image: url("images/bg/bg_17.png");
+}
+
+.bg_18 {
+  background-image: url("images/bg/bg_18.png");
+}
+
+.bg_19 {
+  background-image: url("images/bg/bg_19.png");
+}
+
+.bg_20 {
+  background-image: url("images/bg/bg_20.png");
+}
+
+.bg_21 {
+  background-image: url("images/bg/bg_21.png");
+}
+
+.bg_22 {
+  background-image: url("images/bg/bg_22.png");
+}
+
+.bg_23 {
+  background-image: url("images/bg/bg_23.png");
+}
+
+.bg_24 {
+  background-image: url("images/bg/bg_24.png");
+}
+
+/* NAVIGATION ----------------------------------------------------------------- */
+/*
+  The menu is always on screen: a round button, bottom right by default
+  (data-menu on <body>: bottom-right, bottom-left, bottom-center). It opens
+  the sections full screen over a blurred veil: the Motooor logo, a link per
+  page (the open one on a light fill; js/app.js marks .is-current) and the ©
+  line. The dialog has its own round button in the very same place, whose
+  three lines turn into a cross. kit/_nav.kit.
+
+  js/app.js "Viewer navigation" opens it with showModal() and then adds
+  .is-open, so everything transitions in: the veil fades, the lines cross,
+  the logo and the sections rise one after another ($vw-nav-stagger).
+  Closing removes .is-open (quicker, all at once) and closes the dialog
+  $vw-nav-out later. Esc and the cross close it.
+
+    <button class="fab" data-nav-open><span class="fab__lines"></span></button>
+    <dialog class="viewer-menu" id="viewer-menu">
+      <nav class="viewer-menu__nav">
+        <span class="viewer-menu__logo" role="img" aria-label="Motooor"></span>
+        <a class="viewer-menu__item icon icon__home" href="index.html">Home</a> …
+      </nav>
+      <p class="viewer-menu__footer">© Motooor 2026</p>
+      <button class="fab fab--close" data-nav-close><span class="fab__lines"></span></button>
+    </dialog>
+*/
+/* centre to centre of two lines */
+.fab {
+  position: fixed;
+  right: calc(16px + env(safe-area-inset-right));
+  bottom: calc(48px + env(safe-area-inset-bottom));
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  color: var(--color-viewer-fab-fg);
+  background: var(--color-viewer-fab-bg);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 2px 2px 8px var(--color-viewer-fab-shadow);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: scale 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Three lines: the middle one is the span, the others its pseudo-elements */
+}
+.fab:active {
+  scale: 0.92;
+}
+.fab__lines, .fab__lines::before, .fab__lines::after {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 1.5px;
+}
+.fab__lines {
+  position: relative;
+  transition: background-color 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.fab__lines::before, .fab__lines::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.fab__lines::before {
+  transform: translateY(-6.5px);
+}
+.fab__lines::after {
+  transform: translateY(6.5px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .fab {
+    transition: none;
+  }
+}
+
+/* Where the button sits (and so the dialog's cross) */
+[data-menu=bottom-left] .fab {
+  right: auto;
+  left: calc(16px + env(safe-area-inset-left));
+}
+
+[data-menu=bottom-center] .fab {
+  right: auto;
+  left: 50%;
+  translate: -50% 0;
+}
+
+/* Full-screen menu over a blurred veil */
+.viewer-menu {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: calc(24px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom));
+  color: var(--color-viewer-fg-primary);
+  background: var(--color-viewer-nav-bg);
+  border: 0;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* A section: icon and name, the open one on a light fill */
+  /* © line, level with the button */
+  /* Button centred at the bottom: the © line goes above it */
+  /* What comes in one after another: logo, sections, © line */
+  /* Open */
+  /* Their order (--i) */
+}
+.viewer-menu[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.viewer-menu::backdrop {
+  background: none;
+}
+.viewer-menu__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 310px;
+}
+.viewer-menu__logo {
+  width: 227px;
+  height: 48px;
+  margin-bottom: 72px;
+  background: var(--icon-logo) center/contain no-repeat;
+  /* ../icons/<theme>/logo.svg */
+}
+.viewer-menu__item {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: -0.4px;
+  line-height: var(--type-text-l-line);
+  text-transform: uppercase;
+  color: var(--color-viewer-fg-primary);
+  gap: 12px;
+  align-self: stretch;
+  height: 56px;
+  padding: 0 16px;
+  border-radius: 2px;
+  transition: background-color 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.viewer-menu__item.is-current {
+  background: var(--color-viewer-nav-current);
+}
+@media (hover: hover) {
+  .viewer-menu__item:hover {
+    background: var(--color-viewer-nav-current);
+  }
+}
+.viewer-menu__footer {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: 0.95px;
+  line-height: var(--type-text-xs-line);
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-subtle);
+  position: absolute;
+  bottom: calc(60px + env(safe-area-inset-bottom));
+  left: 0;
+  right: 0;
+  margin: 0;
+  line-height: 24px;
+  text-align: center;
+}
+[data-menu=bottom-center] .viewer-menu__footer {
+  bottom: calc(112px + env(safe-area-inset-bottom));
+}
+.viewer-menu__logo, .viewer-menu__item, .viewer-menu__footer {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.viewer-menu.is-open {
+  opacity: 1;
+  transition-duration: 0.3s;
+  /* The cross */
+}
+.viewer-menu.is-open .viewer-menu__logo,
+.viewer-menu.is-open .viewer-menu__item,
+.viewer-menu.is-open .viewer-menu__footer {
+  opacity: 1;
+  transform: none;
+  transition-duration: 0.3s, 0.3s, 0.2s;
+  transition-delay: calc(var(--i, 0) * 25ms), calc(var(--i, 0) * 25ms), 0s;
+}
+.viewer-menu.is-open .fab__lines {
+  background-color: transparent;
+}
+.viewer-menu.is-open .fab__lines::before {
+  transform: rotate(45deg);
+}
+.viewer-menu.is-open .fab__lines::after {
+  transform: rotate(-45deg);
+}
+.viewer-menu.is-open .fab__lines,
+.viewer-menu.is-open .fab__lines::before,
+.viewer-menu.is-open .fab__lines::after {
+  transition-duration: 0.3s;
+}
+.viewer-menu__nav > :nth-child(1) {
+  --i: 0;
+}
+.viewer-menu__nav > :nth-child(2) {
+  --i: 1;
+}
+.viewer-menu__nav > :nth-child(3) {
+  --i: 2;
+}
+.viewer-menu__nav > :nth-child(4) {
+  --i: 3;
+}
+.viewer-menu__nav > :nth-child(5) {
+  --i: 4;
+}
+.viewer-menu__nav > :nth-child(6) {
+  --i: 5;
+}
+.viewer-menu__footer {
+  --i: 6;
+}
+@media (prefers-reduced-motion: reduce) {
+  .viewer-menu, .viewer-menu__logo, .viewer-menu__item, .viewer-menu__footer,
+.viewer-menu .fab__lines,
+.viewer-menu .fab__lines::before,
+.viewer-menu .fab__lines::after {
+    transition: none !important;
+  }
+}
+
+/* The page under the menu does not scroll */
+html:has(.viewer-menu[open]) {
+  overflow: hidden;
+}
+
+/* HOME ----------------------------------------------------------------------- */
+/*
+  Figma › Viewer › Home. The cover takes a good part of the screen
+  (--vw-cover-h on <body>, $vw-cover-h by default); as the page scrolls, its
+  image moves slower than the page (parallax, $vw-parallax) while the
+  title goes up a little faster than the page and fades. Once the cover is gone, a bar with the project title
+  slides in at the top. Then a band with the last update and the cards,
+  edge to edge on phones, in two columns of cards on tablets.
+
+    body.viewer.viewer--home  (style="--vw-cover-h: 60svh", data-menu)
+     ├─ .topbar                 project title (aria-hidden: the h1 says it); .is-shown
+     ├─ header.cover            view timeline --vw-cover
+     │   ├─ picture.cover__layer  the project image (WebP, PNG fallback), parallax
+     │   └─ h1.cover__title       rises and fades, over the gradient (::after)
+     ├─ p.updated               Last update · <time>
+     └─ main.viewer__content--columns   cards (Credits: ul.logos + .facts)
+
+  Parallax: only where the browser has scroll-driven animations (Chrome,
+  Safari 26): pure CSS, run off the main thread, so it never lags behind
+  the scroll. Elsewhere, and with reduced motion, the cover stays still
+  (a script following the scroll always trails it a frame: it judders).
+*/
+/* Hidden but read by screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Bar with the project title, once the cover has scrolled away */
+.topbar {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: 0.95px;
+  line-height: var(--type-text-l-line);
+  text-transform: uppercase;
+  color: var(--color-viewer-fg-secondary);
+  --type-text-l-size: 14px;
+  --type-text-l-line: 20px;
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 20;
+  padding: 24px 16px 8px;
+  padding-top: calc(24px + env(safe-area-inset-top));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  background: var(--color-viewer-bar-bg);
+  border-bottom: 1px solid var(--color-viewer-bar-border);
+  transform: translateY(-100%);
+  visibility: hidden;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.35s;
+}
+.topbar.is-shown {
+  transform: none;
+  visibility: visible;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .topbar {
+    transition: none;
+  }
+}
+
+/* Cover: the image and the title, in a layer that moves down as the cover leaves */
+.cover {
+  position: relative;
+  height: clamp(320px, var(--vw-cover-h, 52svh), 560px);
+  overflow: hidden;
+  background: var(--color-viewer-band-bg);
+  /* until the image arrives */
+  view-timeline: --vw-cover block;
+  /* Dark gradient at the foot, under the title; it stays while the title rises */
+  /* Tablets: as wide as the cards, its top corners rounded */
+}
+.cover__layer {
+  position: absolute;
+  inset: 0;
+}
+.cover__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cover__title {
+  font-size: var(--type-display-m-size);
+  font-weight: var(--type-display-m-weight);
+  letter-spacing: var(--type-display-m-tracking);
+  line-height: var(--type-display-m-line);
+  text-transform: var(--type-display-m-case);
+  color: var(--color-viewer-fg-on-image);
+  z-index: 1;
+  --type-display-m-size: 28px;
+  --type-display-m-line: 36px;
+  /* 28px on phones too */
+  position: absolute;
+  inset: auto 0 0;
+  margin: 0;
+  padding: 80px 16px 40px;
+  text-wrap: balance;
+}
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 160px;
+  background: linear-gradient(transparent, var(--color-viewer-cover-shade));
+  pointer-events: none;
+}
+@media (min-width: 720px) {
+  .cover {
+    width: calc(100% - 16px);
+    max-width: 944px;
+    margin: 8px auto 0;
+    border-radius: 2px 2px 0 0;
+  }
+}
+
+/* Scroll-driven parallax where the browser has it */
+@supports (animation-timeline: view()) {
+  .cover__layer,
+.cover__title {
+    will-change: transform;
+  }
+
+  .cover__layer {
+    animation: vw-cover-parallax linear both;
+    animation-timeline: --vw-cover;
+    animation-range: exit 0% exit 100%;
+  }
+
+  .cover__title {
+    animation: vw-cover-title linear both;
+    animation-timeline: --vw-cover;
+    animation-range: exit 0% exit 60%;
+  }
+}
+@keyframes vw-cover-parallax {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 70%, 0);
+  }
+}
+@keyframes vw-cover-title {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, -50%, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cover__layer,
+.cover__title {
+    animation: none;
+  }
+}
+/* Last update band, under the cover */
+.updated {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: 0.95px;
+  line-height: var(--type-text-xs-line);
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 64px;
+  margin: 0;
+  padding: 0 16px;
+  background: var(--color-viewer-band-bg);
+}
+.updated time {
+  font-size: var(--type-text-s-size);
+  font-weight: 700;
+  letter-spacing: 0.95px;
+  line-height: var(--type-text-s-line);
+  text-transform: var(--type-text-s-case);
+}
+@media (min-width: 720px) {
+  .updated {
+    width: calc(100% - 16px);
+    max-width: 944px;
+    margin: 0 auto;
+    border-radius: 0 0 2px 2px;
+  }
+}
+
+/* Client · agency · production company, spread across the card */
+.logos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 8px 12px;
+  list-style: none;
+}
+.logos img {
+  display: block;
+  width: 80px;
+  height: 40px;
+  object-fit: contain;
+}
+.logos + .facts {
+  margin-top: 16px;
+}
+
+/* Home cards: roomier, Figma's sizes (on phones the text styles are already 2px bigger) */
+.viewer--home .viewer__content {
+  /* Locations: number, then the place and its nearest hospital */
+  /* Notice: a red frame with round corners, inside the page's margins */
+}
+.viewer--home .viewer__content .card--widget {
+  padding: 16px 0 40px;
+}
+.viewer--home .viewer__content .card__header {
+  min-height: 64px;
+  padding: 0 16px;
+}
+.viewer--home .viewer__content .card__header time {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: 0.95px;
+  line-height: var(--type-text-l-line);
+  text-transform: uppercase;
+  color: var(--color-viewer-fg-secondary);
+  --type-text-l-size: 14px;
+  --type-text-l-line: 20px;
+}
+.viewer--home .viewer__content .card__title {
+  letter-spacing: 0.95px;
+}
+.viewer--home .viewer__content .card__display {
+  color: var(--color-viewer-fg-accent);
+}
+.viewer--home .viewer__content .facts > div {
+  min-height: 48px;
+  padding: 0 16px;
+}
+.viewer--home .viewer__content .facts dt {
+  font-size: var(--type-text-m-size);
+  font-weight: 400;
+  letter-spacing: var(--type-text-m-tracking);
+  line-height: var(--type-text-m-line);
+  text-transform: var(--type-text-m-case);
+}
+.viewer--home .viewer__content .facts dd {
+  letter-spacing: -0.4px;
+}
+.viewer--home .viewer__content .prose {
+  font-size: var(--type-text-l-size);
+  font-weight: 400;
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  padding: 0 16px;
+}
+.viewer--home .viewer__content .prose p {
+  margin: 0;
+}
+.viewer--home .viewer__content .weather {
+  padding: 16px 24px 0;
+}
+.viewer--home .viewer__content .weather__temp small {
+  color: var(--color-viewer-fg-muted);
+}
+.viewer--home .viewer__content .weather__stats {
+  --type-text-l-size: 14px;
+  --type-text-l-line: 20px;
+  align-items: center;
+  min-height: 48px;
+  margin-top: 0;
+  color: var(--color-viewer-fg-accent);
+}
+.viewer--home .viewer__content .places__item {
+  gap: 12px;
+  padding: 24px 16px 0;
+}
+.viewer--home .viewer__content .places__item::before {
+  font-size: var(--type-text-l-size);
+  font-weight: 400;
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: 24px;
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-places-number-fg);
+  --type-text-l-size: 14px;
+  --type-text-l-line: 20px;
+  width: 24px;
+  height: 24px;
+}
+.viewer--home .viewer__content .places__item address {
+  font-size: var(--type-text-l-size);
+  font-weight: 400;
+  letter-spacing: -0.4px;
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+}
+.viewer--home .viewer__content .places__item address strong {
+  font-weight: 700;
+}
+.viewer--home .viewer__content .places__item address a {
+  color: inherit;
+  text-decoration: none;
+}
+.viewer--home .viewer__content .card--alert {
+  padding: 0 0 8px;
+  /* tablets: the columns' spacing */
+  border: 2px solid var(--color-viewer-alert);
+  border-radius: 8px;
+}
+@media (max-width: 719px) {
+  .viewer--home .viewer__content .card--alert {
+    margin: 16px;
+  }
+}
+.viewer--home .viewer__content .card--alert .card__header {
+  min-height: 48px;
+}
+.viewer--home .viewer__content .card--alert .icon {
+  --icon-size: 48px;
+}
+.viewer--home .viewer__content .card--alert .prose {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: 20px;
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-alert);
+  --type-text-l-size: 14px;
+  --type-text-l-line: 20px;
+  padding: 8px 16px 8px;
+}
+
+/* CARDS -------------------------------------------------------------------- */
+/*
+  Every card is a widget: white (viewer-card-bg) with a hairline outline,
+  a short header with a label title (as the Overview widgets).
+
+    <section class="card card--widget">
+      <header class="card__header"><h2 class="card__title">Credits</h2></header>
+      …
+    </section>
+*/
+.card {
+  background: var(--color-viewer-card-bg);
+  border: 0.5px solid var(--color-viewer-rule);
+  border-radius: 2px;
+  /* Title on the left; anything after it is pushed to the right */
+  /* Icon button in a header (Weather › reload) */
+  /* Big value under the header (General Call time) */
+  /* Alert: red frame, big icon above the text (notice) */
+}
+.card--widget {
+  overflow: hidden;
+}
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  padding: 24px 16px;
+  /* Second value in a header (General Call date), styled as the title */
+}
+.card__header time {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: var(--type-text-s-tracking);
+  line-height: var(--type-text-s-line);
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-secondary);
+  line-height: 24px;
+}
+.card__title {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: var(--type-text-xs-tracking);
+  line-height: var(--type-text-xs-line);
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-secondary);
+  margin-right: auto;
+}
+.card__action {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+}
+.card__action:hover {
+  background-color: var(--color-viewer-hover);
+}
+.card__display {
+  padding: 16px 24px;
+  font-size: 60px;
+  font-weight: 300;
+  /* as the display text styles */
+  line-height: 64px;
+  letter-spacing: -1.2px;
+  text-align: center;
+  color: var(--color-viewer-fg-primary);
+}
+.card--alert {
+  padding-bottom: 24px;
+  background: var(--color-viewer-alert-bg);
+  border: 2px solid var(--color-viewer-alert);
+}
+.card--alert .card__header {
+  justify-content: center;
+  min-height: 64px;
+  padding: 0;
+}
+.card--alert .icon {
+  --icon-size: 64px;
+}
+
+/* Text of a card (the notice) */
+.prose {
+  font-size: var(--type-text-l-size);
+  font-weight: 400;
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  padding: 8px 24px 0;
+}
+
+/* FACTS AND WEATHER ---------------------------------------------------------- */
+/* Label / value rows (Credits, General Call, Approved By), ruled */
+.facts {
+  margin: 0;
+}
+.facts > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-bottom: none;
+}
+.facts dt {
+  font-size: var(--type-text-l-size);
+  font-weight: 400;
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+}
+.facts dd {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  margin: 0;
+  text-align: right;
+  /* production company logo */
+}
+.facts dd img {
+  display: block;
+}
+
+/* Weather: icon and temperature, sunrise and sunset under them */
+.weather {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px 24px;
+}
+.weather__icon {
+  width: 140px;
+  height: 80px;
+  object-fit: cover;
+}
+.weather__temp {
+  font-size: var(--type-display-xxl-size);
+  font-weight: var(--type-display-xxl-weight);
+  letter-spacing: var(--type-display-xxl-tracking);
+  line-height: var(--type-display-xxl-line);
+  text-transform: var(--type-display-xxl-case);
+  color: var(--color-viewer-fg-primary);
+}
+.weather__temp small {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--color-viewer-fg-secondary);
+}
+.weather__stats {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: space-between;
+  margin: 24px 0 0;
+  padding: 0 8px;
+  color: var(--color-viewer-fg-primary);
+}
+.weather__stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.weather__stats dt {
+  font-size: var(--type-text-l-size);
+  font-weight: 400;
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  line-height: 16px;
+}
+.weather__stats dd {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  margin: 0;
+  line-height: 16px;
+}
+
+/* PLACES --------------------------------------------------------------------- */
+/*
+  Locations: numbered list next to a map with numbered pins (item n ↔ pin
+  n). Below $breakpoint-md the map goes on top. --x / --y place a pin.
+*/
+.places {
+  display: flex;
+  min-height: 180px;
+  /* Pin: the number, its bottom tip on the point (--x, --y) */
+  /* A place's text: the address, then its nearest hospital */
+  /* Map on top: on phones, and always with --stack (Home) */
+}
+.places__list {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  counter-reset: place;
+}
+.places__item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px;
+  counter-increment: place;
+}
+.places__item + .places__item {
+  border-top: none;
+}
+.places__item::before {
+  content: counter(place);
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  text-transform: none;
+  color: var(--color-viewer-places-number-fg);
+  --type-text-xs-size: 10px;
+  --type-text-xs-line: 12px;
+  /* keeps its size on phones */
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  background: var(--color-viewer-places-number-bg);
+  border-radius: 50%;
+}
+.places__item address {
+  font-size: var(--type-text-m-size);
+  font-weight: var(--type-text-m-weight);
+  letter-spacing: var(--type-text-m-tracking);
+  line-height: var(--type-text-m-line);
+  text-transform: var(--type-text-m-case);
+  color: var(--color-viewer-fg-primary);
+  font-style: normal;
+}
+.places__item address strong {
+  display: block;
+  font-weight: 600;
+}
+.places__map {
+  position: relative;
+  flex: none;
+  width: 50%;
+  overflow: hidden;
+}
+.places__map img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.places__pin {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  text-transform: none;
+  color: var(--color-viewer-places-number-fg);
+  --type-text-xs-size: 10px;
+  --type-text-xs-line: 12px;
+  /* keeps its size on phones */
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  background: var(--color-viewer-places-number-bg);
+  border-radius: 50%;
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  box-shadow: 1px 3px 8px var(--color-viewer-shadow);
+  transform: translate(-50%, -100%);
+}
+.places__text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.places__hospital {
+  font-size: var(--type-text-l-size);
+  font-weight: 400;
+  letter-spacing: -0.4px;
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  margin: 0;
+}
+.places__hospital span {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: 0.4px;
+  line-height: 16px;
+  text-transform: var(--type-text-xs-case);
+  --type-text-xs-size: 10px;
+  --type-text-xs-line: 12px;
+  /* 10px on phones too */
+  display: block;
+  margin-bottom: 8px;
+}
+@media (max-width: 719px) {
+  .places {
+    flex-direction: column-reverse;
+  }
+  .places .places__map {
+    width: 100%;
+    height: 180px;
+  }
+}
+.places--stack {
+  flex-direction: column-reverse;
+}
+.places--stack .places__map {
+  width: 100%;
+  height: 180px;
+}
+
+/* STATS (Shoot Plan) ----------------------------------------------------------- */
+/* The day's figures: three cells in a row at any width, a short rule between
+   cells. They open the day's card (see DAYS), with a rule under them. */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  /* Call → wrap: two time pills with a chevron between them */
+}
+.stats__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px;
+  /* Rule between cells, shorter than the cell */
+}
+.stats__item + .stats__item::before {
+  content: "";
+  position: absolute;
+  inset: 4px auto 4px 0;
+  border-left: none;
+}
+.stats dt {
+  font-size: var(--type-text-s-size);
+  font-weight: 400;
+  letter-spacing: var(--type-text-s-tracking);
+  line-height: var(--type-text-s-line);
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-secondary);
+}
+.stats dd {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+  margin: 0;
+}
+.stats__range {
+  position: relative;
+  display: inline-flex;
+  gap: 16px;
+}
+.stats__range::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--icon-chevron-right) center/24px no-repeat;
+  pointer-events: none;
+}
+
+/* DAYS (Shoot Plan) ---------------------------------------------------------- */
+/*
+  A card per day: its figures, then its shots. The day selector in the cover
+  (#day-sheet) shows the chosen one and hides the others (js/app.js, "Day
+  selector": the radio's value is the card's id).
+
+    <div class="days">
+      <section class="card days__panel" id="day-1" aria-label="Day 1 · Tue 29">
+        <dl class="stats">…</dl>
+        <ul class="list list--shoot-plan">…</ul>
+      </section>
+      <section class="card days__panel" id="day-2" … hidden>…</section>
+    </div>
+*/
+.days {
+  display: flex;
+  flex-direction: column;
+}
+.days__panel .stats {
+  border-bottom: none;
+}
+
+/* PILLS AND SHOT TYPE ------------------------------------------------------- */
+/* Read-only: no hover, the type has no arrow */
+.pill--time {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: var(--type-text-s-tracking);
+  line-height: var(--type-text-s-line);
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 22px;
+  background: var(--color-viewer-pill-bg);
+  border: 1px solid var(--color-viewer-pill-border);
+  border-radius: 2px;
+}
+
+/* Highlighted time (Talent › Motor) */
+.pill--strong {
+  color: var(--color-viewer-pill-strong-fg);
+  background: var(--color-viewer-pill-strong-bg);
+}
+
+/* Unit type of a shot: AV (no modifier) or one modifier per key of $vw-type-colors */
+.shot-type {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-primary);
+  --type-text-xs-size: 10px;
+  --type-text-xs-line: 12px;
+  /* keeps its size on phones (fixed-width pill) */
+  flex: none;
+  width: 40px;
+  height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 20px;
+  text-align: center;
+  background: var(--color-viewer-banner-av);
+  border-radius: 2px;
+}
+.shot-type--av {
+  background: var(--color-viewer-banner-av);
+}
+.shot-type--photo {
+  background: var(--color-viewer-banner-photo);
+}
+.shot-type--social {
+  background: var(--color-viewer-banner-social);
+}
+.shot-type--banner {
+  background: var(--color-viewer-banner-alt-1);
+}
+
+/* Banner colour chosen in the app: data-color="n" → colour n of $vw-banner-colors */
+[data-color="0"] {
+  --banner-bg: var(--color-viewer-banner-alt-1);
+}
+
+[data-color="1"] {
+  --banner-bg: var(--color-viewer-banner-alt-2);
+}
+
+[data-color="2"] {
+  --banner-bg: var(--color-viewer-banner-alt-3);
+}
+
+[data-color="3"] {
+  --banner-bg: var(--color-viewer-banner-alt-4);
+}
+
+[data-color="4"] {
+  --banner-bg: var(--color-viewer-banner-alt-5);
+}
+
+/* LISTS ---------------------------------------------------------------------- */
+/*
+  .list of .list__row with .list__cell (one line, cut with "…"); --fill
+  cells share the free width. A row whose details open in a bottom sheet
+  (Shoot Plan, Talent Calls) holds a button with its cells and, next to
+  it, a <template> with the details (see BOTTOM SHEET).
+
+    <li class="list__row">
+      <button class="list__summary" type="button" data-sheet="shot-sheet">…cells…</button>
+      <template>…details…</template>
+    </li>
+*/
+.list {
+  min-width: 0;
+}
+.list__row {
+  font-size: var(--type-text-m-size);
+  font-weight: var(--type-text-m-weight);
+  letter-spacing: var(--type-text-m-tracking);
+  line-height: var(--type-text-m-line);
+  text-transform: var(--type-text-m-case);
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+}
+.list__cell {
+  flex: none;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.list__cell--fill {
+  flex: 1 1 0;
+}
+.list__cell--character {
+  text-transform: uppercase;
+}
+.list__summary {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* SHOOT PLAN ----------------------------------------------------------------- */
+/*
+  .list--shoot-plan, in one card: a row per shot, ruled, and full-width
+  banners (lunch, second unit…) coloured by data-color. A shot is a button:
+    slot (type, start, end) · shot (thumb) · desc (spot, text)
+    · set · talent · reqs   (tablets only, as in the app; phones show them in the sheet)
+  that opens its details in a bottom sheet (see SHOT DETAILS).
+*/
+.list--shoot-plan {
+  /* A rule under each shot, as under the cards ($vw-card-border); not under
+     the last one (the card's own edge is there) */
+  /* Type on top, times at the bottom */
+  /* Spot on top, text under it (cut after $vw-desc-lines lines) */
+  /* Set, talent and requirements: only on tablets, from the top, cut at the thumbnail's height */
+  /* characters */
+  /* Banners: full width, time range on the left, title on the right */
+}
+.list--shoot-plan .list__row {
+  display: block;
+  min-height: 0;
+}
+.list--shoot-plan .list__row + .list__row {
+  border-top: none;
+}
+.list--shoot-plan .list__row:not(.list__row--banner):not(:last-child) {
+  border-bottom: 0.5px solid var(--color-viewer-rule);
+}
+.list--shoot-plan .list__summary {
+  align-items: stretch;
+  min-height: 88px;
+  padding: 8px 16px 8px 4px;
+}
+.list--shoot-plan .pill--time {
+  height: 20px;
+}
+.list--shoot-plan .list__cell--slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 52px;
+  overflow: visible;
+}
+.list--shoot-plan .list__cell--slot .shot-type {
+  margin-bottom: auto;
+}
+.list--shoot-plan .list__cell--shot {
+  align-self: center;
+  width: 112px;
+  height: 64px;
+  border-radius: 2px;
+}
+.list--shoot-plan .list__cell--desc {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 8px;
+}
+.list--shoot-plan .list__cell--desc strong {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: var(--type-text-xs-tracking);
+  line-height: var(--type-text-xs-line);
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 16px;
+}
+.list--shoot-plan .list__text {
+  font-size: var(--type-text-m-size);
+  font-weight: var(--type-text-m-weight);
+  letter-spacing: var(--type-text-m-tracking);
+  line-height: var(--type-text-m-line);
+  text-transform: var(--type-text-m-case);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  white-space: normal;
+}
+.list--shoot-plan .list__cell--set,
+.list--shoot-plan .list__cell--talent,
+.list--shoot-plan .list__cell--reqs {
+  display: none;
+  flex-direction: column;
+  max-height: 90px;
+  padding-left: 16px;
+  overflow: hidden;
+  white-space: normal;
+  mask-image: linear-gradient(#000 calc(100% - 16px), transparent);
+  /* text cut at the bottom fades out */
+}
+.list--shoot-plan .list__cell--set > *,
+.list--shoot-plan .list__cell--talent > *,
+.list--shoot-plan .list__cell--reqs > * {
+  display: block;
+}
+.list--shoot-plan .list__cell--set {
+  width: 120px;
+}
+.list--shoot-plan .list__cell--talent {
+  width: 150px;
+  text-transform: uppercase;
+}
+.list--shoot-plan .list__cell--reqs {
+  font-size: var(--type-text-m-size);
+  font-weight: 400;
+  letter-spacing: var(--type-text-m-tracking);
+  line-height: var(--type-text-m-line);
+  text-transform: var(--type-text-m-case);
+  flex: 1 1 0;
+}
+.list--shoot-plan .list__cell--reqs > * + * {
+  margin-top: 4px;
+}
+.list--shoot-plan .list__cell--reqs b {
+  font-weight: 600;
+}
+@media (min-width: 720px) {
+  .list--shoot-plan .list__cell--set,
+.list--shoot-plan .list__cell--talent,
+.list--shoot-plan .list__cell--reqs {
+    display: flex;
+  }
+  .list--shoot-plan .list__cell--shot {
+    width: 160px;
+    height: 90px;
+  }
+}
+.list--shoot-plan .list__row--banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 32px;
+  padding: 0 8px;
+  background: var(--banner-bg, var(--color-viewer-banner-av));
+}
+.list--shoot-plan .list__row--banner h2 {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: var(--type-text-xs-tracking);
+  line-height: var(--type-text-xs-line);
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-primary);
+  padding-right: 8px;
+  line-height: 16px;
+  text-align: right;
+}
+.list--shoot-plan .list__row--banner .list__cell--range {
+  display: flex;
+  gap: 4px;
+}
+
+/* Shot picture: its frames side by side, the shot number(s) on top */
+.thumb {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-viewer-thumb-bg);
+  border: 1px solid var(--color-viewer-thumb-border);
+}
+.thumb img {
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  object-fit: cover;
+}
+.thumb figcaption, .thumb__count {
+  font-size: var(--type-text-m-size);
+  font-weight: var(--type-text-m-weight);
+  letter-spacing: var(--type-text-m-tracking);
+  line-height: var(--type-text-m-line);
+  text-transform: var(--type-text-m-case);
+  color: var(--color-viewer-thumb-caption-fg);
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  min-width: 24px;
+  padding: 2px 4px;
+  line-height: 12px;
+  text-align: center;
+  background: var(--color-viewer-thumb-caption-bg);
+  border-radius: 2px;
+}
+
+/* CALLS ---------------------------------------------------------------------- */
+/*
+  .list--calls inside a card per group (department, call time):
+  name · role · time, ruled. Talent rows open their details in a bottom sheet;
+  on tablets they show the five times of the details (.list__cell--times
+  .talent__times) instead of the set call.
+*/
+.list--calls {
+  /* Rows that open their details in a bottom sheet (Talent): the row is a button */
+  /* Talent on tablets: the five times of the details (Set → Motor) instead of the set call */
+  /* No arrows between the times in the row (the details keep them) */
+}
+.list--calls .list__row {
+  font-size: var(--type-text-m-size);
+  font-weight: var(--type-text-m-weight);
+  letter-spacing: var(--type-text-m-tracking);
+  line-height: var(--type-text-m-line);
+  text-transform: var(--type-text-m-case);
+  gap: 4px;
+  padding: 0 16px;
+}
+.list--calls .list__row + .list__row {
+  border-top: none;
+}
+.list--calls .list__cell--call {
+  display: flex;
+  justify-content: center;
+}
+.list--calls .list__row:has(> .list__summary) {
+  display: block;
+  padding: 0;
+}
+.list--calls .list__summary {
+  gap: 4px;
+  min-height: 48px;
+  padding: 0 16px;
+}
+.list--calls .list__cell--times {
+  display: none;
+  width: 304px;
+  padding: 8px 0;
+  overflow: visible;
+}
+@media (min-width: 720px) {
+  .list--calls .list__summary:has(.list__cell--times) .list__cell--call {
+    display: none;
+  }
+  .list--calls .list__cell--times {
+    display: flex;
+  }
+}
+.list--calls .list__cell--times > * + *::before {
+  content: none;
+}
+
+/* BOTTOM SHEET --------------------------------------------------------------- */
+/*
+  A <dialog> that rises from the bottom (Shoot Plan and Talent Calls › a row,
+  Crew Calls › Sort options). A button with
+  data-sheet="id" opens it, first copying the <template> of its row (if
+  any) into [data-sheet-body]; Close, Done, Esc or a tap on the backdrop close it
+  (js/app.js, "Bottom sheet"). On tablets it keeps $vw-sheet-width.
+  .sheet--modal (the details: shot, talent) floats in the middle of the
+  screen on tablets instead, as a modal ($vw-modal-width); the choices
+  (Sort options, days) stay at the bottom.
+
+    <dialog class="sheet" id="talent-sheet" aria-labelledby="…">
+      <form class="sheet__panel" method="dialog">
+        <header class="sheet__header"><h2 class="sheet__title">Details</h2> close button</header>
+        <div class="sheet__body" data-sheet-body></div>
+        <footer class="sheet__footer"><button class="sheet__button" value="done">Done</button></footer>
+      </form>
+    </dialog>
+*/
+.sheet {
+  width: 100%;
+  max-width: 600px;
+  max-height: calc(100% - 80px);
+  margin: auto auto 0;
+  /* at the bottom, centred on wide screens */
+  padding: 0;
+  overflow: visible;
+  color: var(--color-viewer-fg-primary);
+  background: none;
+  border: 0;
+  /* As tall as its content, up to the screen minus $vw-sheet-gap: then the
+     header and footer stay and only the middle scrolls */
+  /* The part that scrolls (details, or the choices of Sort options) */
+  /* Done: full width, as the app's CTA */
+  /* Choices (Sort options): rows with a radio before each label */
+  /* Details on tablets: a modal in the middle of the screen */
+}
+.sheet::backdrop {
+  background: var(--color-viewer-backdrop);
+}
+.sheet[open] {
+  animation: sheet-in 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sheet[open] {
+    animation: none;
+  }
+}
+.sheet__panel {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 80px);
+  max-height: calc(100dvh - 80px);
+  overflow: hidden;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--color-viewer-sheet-bg);
+  border: 1px solid var(--color-viewer-sheet-border);
+  border-radius: 2px;
+  box-shadow: 1px 3px 8px var(--color-viewer-shadow);
+}
+.sheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+  min-height: 80px;
+  padding: 0 24px;
+}
+.sheet__title {
+  font-size: var(--type-text-s-size);
+  font-weight: var(--type-text-s-weight);
+  letter-spacing: var(--type-text-s-tracking);
+  line-height: var(--type-text-s-line);
+  text-transform: var(--type-text-s-case);
+  color: var(--color-viewer-fg-secondary);
+}
+.sheet__body, .sheet__options {
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* scrolling the sheet does not scroll the page behind */
+}
+.sheet__footer {
+  flex: none;
+  padding: 20px 24px;
+}
+.sheet__button {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: var(--type-text-xs-tracking);
+  line-height: var(--type-text-xs-line);
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-btn-fg);
+  width: 100%;
+  height: 40px;
+  background: var(--color-viewer-btn-bg);
+  border: 0.5px solid var(--color-viewer-btn-border);
+  border-radius: 2px;
+}
+.sheet__options {
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+  /* Last in the sheet (no Done: the days): room at the bottom, above the home bar */
+}
+.sheet__options:last-child {
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+}
+.sheet__option {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 48px;
+  cursor: pointer;
+}
+.sheet__option input {
+  appearance: none;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  background: var(--color-viewer-radio-bg);
+  border: 1px solid var(--color-viewer-radio-border);
+  border-radius: 50%;
+  cursor: pointer;
+  /* a thick ring leaves a dot in the centre */
+}
+.sheet__option input:checked {
+  border: 5px solid var(--color-viewer-radio-on);
+}
+@media (min-width: 720px) {
+  .sheet--modal {
+    max-width: 520px;
+    margin: auto;
+  }
+  .sheet--modal[open] {
+    animation: sheet-modal-in 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .sheet--modal .sheet__panel {
+    padding-bottom: 0;
+  }
+  .sheet--modal.sheet--narrow {
+    max-width: 440px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sheet--modal[open] {
+    animation: none;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+@keyframes sheet-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+/* SHOT DETAILS (in the bottom sheet) ----------------------------------------- */
+/*
+  The frames (wide), type and times, spot · shot number, the action, and
+  under a double rule the requirements, set and talent.
+
+    <figure class="shot__frames thumb"><img …><figcaption>24</figcaption></figure>
+    <p class="shot__when"><span class="shot-type">AV</span><span class="pill pill--time">9:30</span><span class="shot__arrow"></span><span class="pill pill--time">9:50</span></p>
+    <p class="shot__title">Spot 1 · 24</p>
+    <p class="shot__action">…</p>
+    <dl class="shot__facts"><div><dt>Requirements</dt><dd>…</dd></div> …</dl>
+*/
+.shot {
+  /* Small arrow between start and end, as in the talent times */
+}
+.shot__frames {
+  aspect-ratio: 16/9;
+  margin: 0 24px;
+  border-radius: 2px;
+}
+.shot__when {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px 0;
+  /* the same width for every type */
+}
+.shot__when .pill--time {
+  height: 20px;
+}
+.shot__when .shot-type {
+  width: 48px;
+}
+.shot__arrow {
+  content: "";
+  border-block: 2px solid transparent;
+  border-left: 3px solid var(--color-viewer-fg-primary);
+}
+.shot__title {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: var(--type-text-xs-tracking);
+  line-height: var(--type-text-xs-line);
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-primary);
+  padding: 16px 24px 4px;
+  line-height: 16px;
+}
+.shot__action {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  padding: 0 24px 16px;
+}
+.shot__facts {
+  margin: 0 24px;
+  padding: 16px 0;
+  border-top: 0.5px solid var(--color-viewer-sheet-rule-1);
+  box-shadow: inset 0 0.5px var(--color-viewer-sheet-rule-2);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.shot__facts > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.shot__facts dt {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: var(--type-text-xs-tracking);
+  line-height: var(--type-text-xs-line);
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-secondary);
+  line-height: 16px;
+}
+.shot__facts dd {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  margin: 0;
+}
+.shot__facts dd b {
+  font-weight: 700;
+}
+
+/* TALENT DETAILS (in the bottom sheet) --------------------------------------- */
+/*
+  Character · artist (or how many extras), the day's times (Set → HMUP →
+  Dress → Ready → Motor, Motor highlighted), the shots they are in and the
+  notes, if any. Shots and notes sit under a double rule.
+
+    <p class="talent__name"><span class="talent__character">Policeman</span><span>Liam Brown</span></p>
+    <ol class="talent__times">
+      <li><span class="talent__label">Set</span><span class="pill pill--time">07:50</span></li> …
+      <li><span class="talent__label">Motor</span><span class="pill pill--time pill--strong">09:00</span></li>
+    </ol>
+    <ul class="talent__shots"><li>Spot 1 · 12</li> …</ul>
+    <p class="talent__notes">…</p>
+*/
+.talent {
+  /* Times in a row, a small arrow between each two (also in the rows on tablets, see CALLS) */
+  /* Shots and notes: under a double rule, inside the side margins */
+}
+.talent__name {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 64px;
+  padding: 0 24px;
+}
+.talent__character {
+  text-transform: uppercase;
+}
+.talent__times {
+  display: flex;
+  padding: 0 24px 16px;
+}
+.talent__times > * {
+  display: grid;
+  grid-template-columns: 48px;
+  justify-items: center;
+  gap: 0;
+}
+.talent__times > * + * {
+  flex: 1;
+  grid-template-columns: 1fr 48px;
+}
+.talent__times > * + * > * {
+  grid-column: 2;
+}
+.talent__times > * + *::before {
+  content: "";
+  border-block: 2px solid transparent;
+  border-left: 3px solid var(--color-viewer-fg-primary);
+  grid-area: 2/1;
+  align-self: center;
+}
+.talent__times .pill--time {
+  width: 48px;
+}
+.talent__label {
+  font-size: var(--type-text-xs-size);
+  font-weight: var(--type-text-xs-weight);
+  letter-spacing: var(--type-text-xs-tracking);
+  line-height: var(--type-text-xs-line);
+  text-transform: var(--type-text-xs-case);
+  color: var(--color-viewer-fg-secondary);
+  line-height: 16px;
+}
+.talent__shots, .talent__notes {
+  margin: 0 24px;
+  padding: 16px 0;
+  border-top: 0.5px solid var(--color-viewer-sheet-rule-1);
+  box-shadow: inset 0 0.5px var(--color-viewer-sheet-rule-2);
+}
+.talent__shots {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+  line-height: 24px;
+}
+.talent__notes {
+  font-size: var(--type-text-l-size);
+  font-weight: var(--type-text-l-weight);
+  letter-spacing: var(--type-text-l-tracking);
+  line-height: var(--type-text-l-line);
+  text-transform: var(--type-text-l-case);
+  color: var(--color-viewer-fg-primary);
+}
