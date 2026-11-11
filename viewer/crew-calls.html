@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
   <!--
-  Shared head of the viewer pages; each page sets its title first (Kit
-  variable "title"). JS: viewer-min.js (CodeKit builds it from viewer.js;
-  the viewer does not load the app's app.js). No theme switch:
-  the viewer follows the system (light / dark).
--->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>MOTOOOR · Call sheet - Crew Calls</title>
-  <meta name="theme-color" content="#f7f8f8" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#161b1e" media="(prefers-color-scheme: dark)">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
-  <link rel="stylesheet" href="viewer.css">
-  <script src="viewer-min.js" defer></script>
-
+      Shared head of the viewer pages; each page sets its title first (Kit
+      variable "title"). JS: viewer-min.js (CodeKit builds it from viewer.js;
+      the viewer does not load the app's app.js). No theme switch:
+      the viewer follows the system (light / dark).
+    -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+      <title>MOTOOOR · Call sheet - Crew Calls</title>
+      <meta name="theme-color" content="#f7f8f8" media="(prefers-color-scheme: light)">
+      <meta name="theme-color" content="#161b1e" media="(prefers-color-scheme: dark)">
+      <!--
+        Favicons and home-screen icons (masters: MOTOOOR/Assets, from _isotipo.svg).
+        Files in production/viewer/images/favicon/ (the viewer folder stays self-contained). Android / Chrome read site.webmanifest (192 and 512);
+        old Windows tiles read the msapplication-* meta tags.
+      -->
+        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="128x128" href="images/favicon/favicon-128x128.png">
+        <link rel="icon" type="image/png" sizes="196x196" href="images/favicon/favicon-196x196.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-touch-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="167x167" href="images/favicon/apple-touch-icon-167x167.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon-180x180.png">
+        <link rel="manifest" href="images/favicon/site.webmanifest">
+        <meta name="msapplication-TileColor" content="#F1F1F1">
+        <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+        <meta name="msapplication-square70x70logo" content="images/favicon/mstile-70x70.png">
+        <meta name="msapplication-square150x150logo" content="images/favicon/mstile-150x150.png">
+        <meta name="msapplication-wide310x150logo" content="images/favicon/mstile-310x150.png">
+        <meta name="msapplication-square310x310logo" content="images/favicon/mstile-310x310.png">
+      
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+      <link rel="stylesheet" href="viewer.css">
+      <script src="viewer-min.js" defer></script>
+    
 </head>
 
 <!--
@@ -27,9 +54,12 @@
   (name · role · set call). Read-only: no sheet. CSS: _calls.scss,
   _lists.scss (CALLS).
 -->
-<body class="viewer viewer--calls viewer--crew" data-menu="bottom-right">
+<body class="viewer viewer--calls viewer--crew">
 
-  <header class="topbar topbar--static">Crew Calls</header>
+  <header class="topbar topbar--static">
+    <button class="menu-button" type="button" aria-label="Menu" aria-haspopup="dialog" aria-controls="viewer-menu" data-nav-open><span class="menu-button__lines" aria-hidden="true"></span></button>
+    <span class="topbar__title">Crew Calls</span>
+  </header>
 
   <!-- The project image under the bar, darkened (as Shoot Plan, without figures) -->
   <div class="figures figures--plain" aria-hidden="true">
@@ -126,29 +156,28 @@
   </main>
 
   <footer class="viewer__footer">© Motooor 2026</footer>
-
+  
   <!--
-  Navigation: a round button always on screen (bottom right by default; the
-  page sets data-menu on <body>) opens the sections full screen over a
-  blurred veil: the Motooor logo and a link per page. The dialog has its own
-  button in the very same place, whose three lines turn into a cross; the
-  logo, the sections and the © line come in one after another. viewer.js
-  "Navigation" opens and closes it (Esc too) and marks the open page
-  (.is-current). CSS: _nav.scss.
--->
-<button class="fab" type="button" aria-label="Menu" aria-haspopup="dialog" aria-controls="viewer-menu" data-nav-open><span class="fab__lines" aria-hidden="true"></span></button>
-<dialog class="viewer-menu" id="viewer-menu" aria-label="Menu">
-  <nav class="viewer-menu__nav" aria-label="Call sheet">
-    <span class="viewer-menu__logo" role="img" aria-label="Motooor"></span>
-    <a class="viewer-menu__item icon icon__home" href="index.html">Home</a>
-    <a class="viewer-menu__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
-    <a class="viewer-menu__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
-    <a class="viewer-menu__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
-  </nav>
-  <p class="viewer-menu__footer">© Motooor 2026</p>
-  <button class="fab fab--close" type="button" aria-label="Close menu" data-nav-close autofocus><span class="fab__lines" aria-hidden="true"></span></button>
-</dialog>
-
+      Navigation: the menu buttons ([data-nav-open]) live in each page's top
+      bar (and, on Home, on the cover); they open the sections full screen over
+      a blurred veil: the Motooor logo and a link per page. The dialog has its
+      own button top left, where the bar's is, whose three lines turn into a
+      cross; the logo, the sections and the © line come in one after another.
+      viewer.js "Navigation" opens and closes it (Esc too) and marks the open
+      page (.is-current). CSS: _nav.scss.
+    -->
+    <dialog class="viewer-menu" id="viewer-menu" aria-label="Menu">
+      <nav class="viewer-menu__nav" aria-label="Call sheet">
+        <span class="viewer-menu__logo" role="img" aria-label="Motooor"></span>
+        <a class="viewer-menu__item icon icon__home" href="index.html">Home</a>
+        <a class="viewer-menu__item icon icon__shoot-plan" href="shoot-plan.html">Shoot Plan</a>
+        <a class="viewer-menu__item icon icon__cast" href="cast-calls.html">Talent Calls</a>
+        <a class="viewer-menu__item icon icon__crew" href="crew-calls.html">Crew Calls</a>
+      </nav>
+      <p class="viewer-menu__footer">© Motooor 2026</p>
+      <button class="menu-button viewer-menu__close" type="button" aria-label="Close menu" data-nav-close autofocus><span class="menu-button__lines" aria-hidden="true"></span></button>
+    </dialog>
+    
 
 </body>
 </html>

@@ -1,0 +1,19 @@
+{
+  "name": "Motooor \u00b7 Call sheet",
+  "short_name": "Call sheet",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#F1F1F1",
+  "background_color": "#F1F1F1",
+  "display": "browser"
+}
